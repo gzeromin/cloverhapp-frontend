@@ -1,0 +1,14 @@
+{
+  "statusCode": 1000,
+  "message": [
+      {
+          "field": "email",
+          "message": "Eメールの形式で入力して下さい。"
+      },
+      {
+          "field": "password",
+          "message": "最小6文字以上入力して下さい。"
+      }
+  ],
+  "error": "formError"
+}

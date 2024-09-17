@@ -1,0 +1,118 @@
+{
+  "Logo": "三葉クローバー",
+  "Button": {
+    "Yes": "はい",
+    "Ok": "分りました",
+    "No": "いいえ",
+    "Close": "閉じる",
+    "Cancel": "キャンセル",
+    "RequestCancel": "要請取消",
+    "Edit": "編集する",
+    "Delete": "削除する",
+    "Save": "保存する",
+    "Return": "戻る",
+    "Signin": "ログイン",
+    "Logout": "ログアウト",
+    "Signup": "会員登録",
+    "Complete": "完了する",
+    "Confirm": "確認する",
+    "Next": "次へ進む",
+    "Prev": "前へ戻る",
+    "Update": "更新",
+    "Upload": "登録",
+    "Download": "ダウンロード",
+    "ChangePassword": "パスワード変更",
+    "ChangePhoto": "写真変更",
+    "Request": "要請",
+    "Accept": "受諾",
+    "Deny": "拒否",
+    "Pending": "保留"
+  },
+  "Input": {
+    "Email": "Eメール",
+    "Nickname": "ニックネーム",
+    "Password": "パスワード",
+    "NewPassword": "新しいパスワード",
+    "PasswordConfirm": "パスワード確認",
+    "StampName": "スタンプネーム",
+    "Description": "説明",
+    "Droplet": "水滴",
+    "Title": "題名",
+    "Alias": "愛称",
+    "MyAlias": "自分の愛称",
+    "FriendAlias": "友達の愛称",
+    "Memo": "メモ",
+    "RequestMessage": "友達要請メッセージ",
+    "ChangeAliasMessage": "愛称変更メッセージ"
+  },
+  "StampStatus": {
+    "Private": "非公開",
+    "Protected": "友達公開",
+    "Public": "公開"
+  },
+  "Form": {
+    "Select": "選択してっください",
+    "Required": "必須"
+  },
+  "Date": {
+    "Year": "年",
+    "Month": "月",
+    "Week": "週",
+    "Day": "日"
+  },
+  "SideBar": {
+    "Profile": "プロフィール",
+    "Home": "ホーム",
+    "Stamp": "スタンプ",
+    "Memo": "メモ",
+    "Visitor": "訪問者"
+  },
+  "Weeks": ["月", "火", "水", "木", "金", "土", "日"],
+  "Months": [
+    "1月",
+    "2月",
+    "3月",
+    "4月",
+    "5月",
+    "6月",
+    "7月",
+    "8月",
+    "9月",
+    "10月",
+    "11月",
+    "12月"
+  ],
+  "UserMenu": {
+    "ProfilePhoto": "プロフィール写真",
+    "ChangePassword": "パスワード変更",
+    "Droplet": "水滴",
+    "EnrollSaler": "販売者登録",
+    "Withdrawal": "会員脱退"
+  },
+  "Dialog": {
+    "Success": "成功",
+    "Danger": "エラー",
+    "Warning": "警告",
+    "Info": "情報",
+    "Confirm": "確認",
+    "Input": "入力"
+  },
+  "Modal": {
+    "IconDownload": "アイコンダウンロード",
+    "StampDetail": "スタンプ詳細情報",
+    "MyStampSetting": "自分のスタンプ設定",
+    "RequestFriend": "友達要請",
+    "AcceptFriend": "友達受諾",
+    "ChangeAlias": "愛称変更"
+  },
+  "Meridiem": {
+    "AM": "午前",
+    "PM": "午後"
+  },
+  "Friend": {
+    "list": "友達一覧",
+    "requested": "受け取った要請",
+    "requesting": "自分の友達要請",
+    "search": "友達探し"
+  }
+}

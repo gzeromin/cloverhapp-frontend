@@ -1,0 +1,58 @@
+{
+  "NotHaveId": "아직 등록되지 않은 회원이라면...",
+  "HaveId": "이미 등록된 회원이라면...",
+  "Placeholder": {
+    "Email": "이메일을 입력해주세요.",
+    "Memo": "메모",
+    "Nickname": "닉네임을 입력해주세요.",
+    "Password": "패스워드를 입력해주세요.",
+    "NewPassword": "새 패스워드를 입력해주세요.",
+    "PasswordConfirm": "패스워드를 확인해주세요.",
+    "StampName": "스탬프 이름을 입력해주세요.",
+    "Description": "설명을 입력해주세요.",
+    "Droplet": "물방울",
+    "Title": "제목을 입력해주세요.",
+    "SearchFriend": "친구 찾기: 별명이나 이메일로 검색해주세요.",
+    "AddFriend": "누구와 함께하고 있나요?",
+    "AddTag": "태그를 추가해보세요."
+  },
+  "Success": {
+    "ChangePassword": "패스워드가 성공적으로 변경되었습니다.",
+    "ChangeBackground": "배경이 성공적으로 변경되었습니다.",
+    "UploadIcon": "스탬프가 성공적으로 등록되었습니다.",
+    "StampEdit": "스탬프가 성공적으로 수정되었습니다",
+    "StampDelete": "스탬프가 성공적으로 삭제되었습니다",
+    "RequestFriend": "성공적으로 친구요청 되었습니다.",
+    "RequestCancel": "친구요청이 정상적으로 취소되었습니다.",
+    "Accept": "수락되었습니다.",
+    "Deny": "거부되었습니다.",
+    "Delete": "삭제되었습니다."
+  },
+  "Fail": {
+    "ChangeBackground": "배경이 변경되지 않았습니다.",
+    "StampEdit": "스탬프가 수정되지 않았습니다.",
+    "StampDelete": "스탬프가 삭제되지 않았습니다.",
+    "RequestFriend": "친구요청에 실패했습니다.",
+    "RequestCancel": "친구요청이 취소되지 않았습니다.",
+    "Accept": "수락되지 않았습니다.",
+    "Deny": "거부되지 않았습니다.",
+    "Delete": "삭제되지 않았습니다."
+  },
+  "UploadIconImage": "이미지 파일을 업로드해주세요.",
+  "Variable1": {
+    "RequestFriend": "{value}에게 친구요청을 보내시겠습니까?",
+    "AcceptFriend": "{value}의 친구요청을 수락하시겠습니까?",
+    "DeleteFriend": "친구 {value}를 삭제하시겠습니까?"
+  },
+  "HappyStamp": {
+    "Message1": "네잎클로버의 꽃말은 `행운`,",
+    "Message2": "세잎클로버의 꽃말은 `행복`이래",
+    "Message3": "우리는 언제나 행운만 바라며",
+    "Message4": "무수한 행복은 그냥 지나쳐가고 있는건 아닐까?",
+    "Message5": "이제부터는 일상속 소소한 행복들을",
+    "Message6": "하나하나씩 모아나가보자"
+  },
+  "ErrorMessage": {
+    "SystemError": "시스템 에러가 발생했습니다."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "NotHaveId": "If you don't have ID...",
+  "HaveId": "If you have already ID...",
+  "Placeholder": {
+    "Email": "input email",
+    "Memo": "memo",
+    "Nickname": "input nickname",
+    "Password": "input password",
+    "NewPassword": "input new password",
+    "PasswordConfirm": "confirm password",
+    "StampName": "input stamp name",
+    "Description": "input description",
+    "Droplet": "droplet",
+    "Title": "input title",
+    "SearchFriend": "search friend: search by nickname or email",
+    "AddFriend": "who are you with?",
+    "AddTag": "add tags, please."
+  },
+  "Success": {
+    "ChangePassword": "Password was successfully changed.",
+    "ChangeBackground": "Background skin was successfully changed.",
+    "UploadIcon": "Stamp was successfully uploaded.",
+    "StampEdit": "Stamp was successfully edited.",
+    "StampDelete": "Stamp was successfully deleted.",
+    "RequestFriend": "Friend was Successfully requested.",
+    "RequestCancel": "Friend Request was Successfully canceled.",
+    "Accept": "Successfully accepted.",
+    "Deny": "Successfully denied.",
+    "Delete": "Successfully deleted."
+  },
+  "Fail": {
+    "ChangeBackground": "Background skin can not be changed.",
+    "StampEdit": "Stamp can not be edited.",
+    "StampDelete": "Stamp can not be deleted.",
+    "RequestFriend": "Friend can not be requested.",
+    "RequestCancel": "Friend Request can not be canceled.",
+    "Accept": "Not accepted.",
+    "Deny": "Not denied.",
+    "Delete": "Not deleted."
+  },
+  "UploadIconImage": "Please upload image file.",
+  "Variable1": {
+    "RequestFriend": "Do you want to request friend to {value}?",
+    "AcceptFriend": "Do you accept friend request from {value}?",
+    "DeleteFriend": "Do you want to delete friend '{value}'?"
+  },
+  "HappyStamp": {
+    "Message1": "The four-leaf clover means 'luck',",
+    "Message2": "the three-leaf clover means 'happiness'.",
+    "Message3": "while we seek only good luck,",
+    "Message4": "isn't it passing by countless happiness?",
+    "Message5": "From now on, let's go to gathering",
+    "Message6": "every single happiness in life"
+  },
+  "ErrorMessage": {
+    "SystemError": "A system error has occurred."
+  }
+}

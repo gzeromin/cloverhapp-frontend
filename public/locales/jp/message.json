@@ -1,0 +1,58 @@
+{
+  "NotHaveId": "まだIDを持ってない方は。。。",
+  "HaveId": "すでにIDを持っている方は。。。",
+  "Placeholder": {
+    "Email": "Eメールを入力してください。",
+    "Memo": "メモ",
+    "Nickname": "ニックネームを入力してください。",
+    "Password": "パスワードを入力してください。",
+    "NewPassword": "新しいパスワードを入力してください。",
+    "PasswordConfirm": "パスワードを確認してください。",
+    "StampName": "スタンプネームを入力して下さい。",
+    "Description": "説明を入力して下さい。",
+    "Droplet": "水滴",
+    "Title": "題名を入力して下さい。",
+    "SearchFriend": "友達探し：ニックネームまたはメールアドレスで検索してください。",
+    "AddFriend": "だれと一緒ですか？",
+    "AddTag": "タグを追加してください。"
+  },
+  "Success": {
+    "ChangePassword": "パスワードが成功的に変更されました。",
+    "ChangeBackground": "背景が成功的に変更されました。",
+    "UploadIcon": "スタンプが成功的に登録されました。",
+    "StampEdit": "スタンプが成功的に修正されました。",
+    "StampDelete": "スタンプが成功的に削除されました。",
+    "RequestFriend": "成功的に友達要請されました。",
+    "RequestCancel": "成功的に友達要請がキャンセルされました。",
+    "Accept": "受諾されました。",
+    "Deny": "拒否されました。",
+    "Delete": "削除されました。"
+  },
+  "Fail": {
+    "ChangeBackground": "背景が変更されませんでした。",
+    "StampEdit": "スタンプが修正されませんでした。",
+    "StampDelete": "スタンプが削除されませんでした。",
+    "RequestFriend": "友達要請に失敗しました。",
+    "RequestCancel": "友達要請がキャンセルされませんでした。",
+    "Accept": "受諾されませんでした。",
+    "Deny": "拒否されませんでした。",
+    "Delete": "削除されませんでした。"
+  },
+  "UploadIconImage": "イメージファイルをアップロードして下さい。",
+  "Variable1": {
+    "RequestFriend": "{value}に友達要請しましょうか?",
+    "AcceptFriend": "{value}の友達要請を受け入れましょうか?",
+    "DeleteFriend": "{value}さんを友達リストから削除しますか？?"
+  },
+  "HappyStamp": {
+    "Message1": "四つ葉のクローバーの花言葉は`幸運`、",
+    "Message2": "三つ葉のクローバーの花言葉は`幸せ`だ。",
+    "Message3": "私たちはいつも幸運だけ願いながら",
+    "Message4": "無数の幸せはただ通り過ぎているのではないか？",
+    "Message5": "これからは日常の中こまごましい幸せを",
+    "Message6": "一つ一つずつ集めて行きましょう"
+  },
+  "ErrorMessage": {
+    "SystemError": "システムエラーが発生しました。"
+  }
+}

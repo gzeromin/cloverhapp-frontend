@@ -1,0 +1,17 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    // 줄 너비 제한 (최대 80자)
+    // "max-len": ["error", { "code": 80 }],
+    // 싱글 쿼트 강제
+    "quotes": ["error", "single"],
+    // 마지막에 항상 콤마 추가
+    "comma-dangle": ["error", "always-multiline"],
+    // 들여쓰기를 탭 너비 2칸으로 설정
+    "indent": ["error", 2],
+    // 세미콜론 강제
+    "semi": ["error", "always"],
+    // any 타입 사용 허용
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+}

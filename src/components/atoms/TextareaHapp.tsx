@@ -1,0 +1,88 @@
+'use client';
+import cls from 'classnames';
+import { TextareaHTMLAttributes, useEffect, useRef } from 'react';
+
+interface TextareaHappProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  labelName?: string;
+  placeholder?: string;
+  error?: string;
+  rows?: number;
+  border?: boolean;
+  marginBottom?: string;
+  className?: string;
+  textAreaClassName?: string;
+  disable?: boolean;
+  autoHeight?: boolean;
+  resizable?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+const TextareaHapp: React.FC<TextareaHappProps> = ({
+  labelName = '',
+  placeholder = '',
+  error,
+  rows,
+  border = true,
+  marginBottom = 'mb-3',
+  className,
+  textAreaClassName,
+  disable = false,
+  autoHeight = false,
+  resizable = true,
+  value = '',
+  onChange,
+}) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null!);
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const currentTextarea = textareaRef.current;
+    if (currentTextarea) {
+      currentTextarea.style.height = 'auto';
+      currentTextarea.style.height = `${currentTextarea.scrollHeight}px`;
+    }
+    if (onChange) {
+      onChange(e);
+    }
+  };
+
+  useEffect(() => {
+    if (autoHeight && textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [value, autoHeight]);
+
+  return (
+    <div className={`${error ? 'mb-1' : marginBottom} ${className}`}>
+      {labelName && (
+        <label className="font-extralight text-sm text-gray">{labelName}</label>
+      )}
+      <textarea
+        style={{ minWidth: 300 }}
+        className={cls(
+          'w-full p-2 mt-1 rounded focus:outline-none',
+          { 'border-red-500': error },
+          {
+            'transition duration-200 border-2 border-dashed border-gray-300 bg-gray-50 focus:bg-white hover:bg-white focus:border-happ-focus focus:ring-happ-focus focus:ring-4':
+              border,
+          },
+          { 'resize-none': !resizable },
+          textAreaClassName,
+        )}
+        rows={rows ? rows : 2}
+        placeholder={placeholder ? placeholder : labelName}
+        disabled={disable}
+        value={value}
+        ref={textareaRef}
+        onChange={handleChange}
+      />
+      {error && (
+        <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>
+      )}
+    </div>
+  );
+};
+
+export default TextareaHapp;

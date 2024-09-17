@@ -1,0 +1,118 @@
+{
+  "Logo": "세잎 클로버",
+  "Button": {
+    "Yes": "네",
+    "Ok": "좋아요",
+    "No": "아니요",
+    "Close": "닫기",
+    "Cancel": "취소",
+    "RequestCancel": "요청 취소",
+    "Edit": "수정",
+    "Delete": "삭제",
+    "Save": "저장",
+    "Return": "뒤로",
+    "Signin": "로그인",
+    "Logout": "로그아웃",
+    "Signup": "회원가입",
+    "Complete": "완료",
+    "Confirm": "확인",
+    "Next": "다음",
+    "Prev": "이전",
+    "Update": "갱신",
+    "Upload": "등록",
+    "Download": "다운로드",
+    "ChangePassword": "비밀번호 변경",
+    "ChangePhoto": "사진 변경",
+    "Request": "요청",
+    "Accept": "수락",
+    "Deny": "거부",
+    "Pending": "보류"
+  },
+  "Input": {
+    "Email": "이메일",
+    "Nickname": "별명",
+    "Password": "비밀번호",
+    "NewPassword": "새 비밀번호",
+    "PasswordConfirm": "비밀번호 확인",
+    "StampName": "스탬프 이름",
+    "Description": "설명",
+    "Droplet": "물방울",
+    "Title": "제목",
+    "Alias": "애칭",
+    "MyAlias": "내 애칭",
+    "FriendAlias": "친구 애칭",
+    "Memo": "메모",
+    "RequestMessage": "친구요청 메세지",
+    "ChangeAliasMessage": "애칭 변경 메세지"
+  },
+  "StampStatus": {
+    "Private": "비공개",
+    "Protected": "친구공개",
+    "Public": "공개"
+  },
+  "Form": {
+    "Select": "선택해주세요",
+    "Required": "필수"
+  },
+  "Date": {
+    "Year": "년",
+    "Month": "월",
+    "Week": "주",
+    "Day": "일"
+  },
+  "SideBar": {
+    "Profile": "프로필",
+    "Home": "홈",
+    "Stamp": "스탬프",
+    "Memo": "메모",
+    "Visitor": "방문객"
+  },
+  "Weeks": ["월", "화", "수", "목", "금", "토", "일"],
+  "Months": [
+    "1월",
+    "2월",
+    "3월",
+    "4월",
+    "5월",
+    "6월",
+    "7월",
+    "8월",
+    "9월",
+    "10월",
+    "11월",
+    "12월"
+  ],
+  "UserMenu": {
+    "ProfilePhoto": "프로필 사진",
+    "ChangePassword": "비밀번호 변경",
+    "Droplet": "물방울",
+    "EnrollSaler": "판매자 등록",
+    "Withdrawal": "회원탈퇴"
+  },
+  "Dialog": {
+    "Success": "성공",
+    "Danger": "에러",
+    "Warning": "경고",
+    "Info": "정보",
+    "Confirm": "확인",
+    "Input": "입력"
+  },
+  "Modal": {
+    "IconDownload": "아이콘 다운로드",
+    "StampDetail": "스탬프 상세 정보",
+    "MyStampSetting": "내 스탬프 설정",
+    "RequestFriend": "친구 요청",
+    "AcceptFriend": "친구 수락",
+    "ChangeAlias": "애칭 변경"
+  },
+  "Meridiem": {
+    "AM": "오전",
+    "PM": "오후"
+  },
+  "Friend": {
+    "list": "친구 목록",
+    "requested": "내가 받은 요청",
+    "requesting": "나의 친구 요청",
+    "search": "친구 찾기"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "Logo": "Three Clover",
+  "Button": {
+    "Yes": "Yes",
+    "Ok": "OK",
+    "No": "No",
+    "Close": "Close",
+    "Cancel": "Cancel",
+    "RequestCancel": "Cancel",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Save": "Save",
+    "Return": "Return",
+    "Signin": "sign in",
+    "Logout": "logout",
+    "Signup": "sign up",
+    "Complete": "Complete",
+    "Confirm": "Confirm",
+    "Next": "Next",
+    "Prev": "Prev",
+    "Update": "Update",
+    "Upload": "Upload",
+    "Download": "Download",
+    "ChangePassword": "Change Password",
+    "ChangePhoto": "Change Photo",
+    "Request": "Request",
+    "Accept": "Accept",
+    "Deny": "Deny",
+    "Pending": "Pending"
+  },
+  "Input": {
+    "Email": "Email",
+    "Nickname": "Nickname",
+    "Password": "Password",
+    "NewPassword": "New Password",
+    "PasswordConfirm": "Password Confirm",
+    "StampName": "Stamp Name",
+    "Description": "Description",
+    "Droplet": "Droplet",
+    "Title": "Title",
+    "Alias": "Alias",
+    "MyAlias": "My Alias",
+    "FriendAlias": "Friend's Alias",
+    "Memo": "Memo",
+    "RequestMessage": "Request Friend Message",
+    "ChangeAliasMessage": "Change Alias Message"
+  },
+  "StampStatus": {
+    "Private": "Private",
+    "Protected": "Friends",
+    "Public": "Public"
+  },
+  "Form": {
+    "Select": "Select",
+    "Required": "Required"
+  },
+  "Date": {
+    "Year": "Y",
+    "Month": "M",
+    "Week": "W",
+    "Day": "D"
+  },
+  "SideBar": {
+    "Profile": "Profile",
+    "Home": "Home",
+    "Stamp": "Stamp",
+    "Memo": "Memo",
+    "Visitor": "Visitor"
+  },
+  "Weeks": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  "Months": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ],
+  "UserMenu": {
+    "ProfilePhoto": "Profile Photo",
+    "ChangePassword": "Change Password",
+    "Droplet": "Droplet",
+    "EnrollSaler": "Enroll Saler",
+    "Withdrawal": "Withdrawal"
+  },
+  "Dialog": {
+    "Success": "Success",
+    "Danger": "Error",
+    "Warning": "Warning",
+    "Info": "Info",
+    "Confirm": "Confirm",
+    "Input": "Input"
+  },
+  "Modal": {
+    "IconDownload": "Icon Download",
+    "StampDetail": "Stamp Detail Info",
+    "MyStampSetting": "My Stamp Setting",
+    "RequestFriend": "Request Friend",
+    "AcceptFriend": "Accept Friend",
+    "ChangeAlias": "Change Alias"
+  },
+  "Meridiem": {
+    "AM": "AM",
+    "PM": "PM"
+  },
+  "Friend": {
+    "list": "Friend List",
+    "requested": "Received Request",
+    "requesting": "My Request",
+    "search": "Friend Search"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "user": {
+      "id": "6bb8f197-432d-4521-9eca-dd1a57a3eb14",
+      "createdAt": "2024-09-10T10:47:44.384Z",
+      "updatedAt": "2024-09-10T10:47:44.384Z",
+      "nickname": "aaa",
+      "email": "aaa@aaa.aaa",
+      "photoUrl": null,
+      "role": 99,
+      "locale": 0,
+      "droplet": 1000,
+      "notifNum": 0
+  }
+}
