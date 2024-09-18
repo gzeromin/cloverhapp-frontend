@@ -8,6 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import api, { BUCKET_URL } from '@/utils/api.util';
 import UserProrile from '@/components/molecules/UserProrile';
+import cls from 'classnames';
 
 const options = [
   { value: Locale.Kr, image: { src: Language.flagKr } },
@@ -65,7 +66,12 @@ const NavBar: React.FC = () => {
           />
 
           <p
-            className={`text-2xl font-thin text-white tracking-normal ml-1 ${Language.logoFont} hidden sm:block`}
+            className={cls(
+              'hidden sm:block ml-1',
+              'text-2xl font-thin text-white tracking-normal',
+              Language.logoFont
+            )}
+            test-id='navBarLogo'
           >
             {Language.$t.Logo}
           </p>

@@ -11,6 +11,7 @@ interface Props {}
 
 const Profile: React.FC<Props> = () => {
   const { user } = useAuthState();
+
   const dispatch = useAuthDispatch();
   const inputOpenImageRef = useRef<HTMLInputElement>(null);
   const buttonStyle = 'w-full ' +
@@ -93,19 +94,19 @@ const Profile: React.FC<Props> = () => {
     <div className=''>
       {/* profile Area */}
       <div className="pt-3 flex flex-col grow">
-        <div className={cls('p-4 flex gap-4 items-center justify-around')}>
+        <div className={cls('p-4 flex gap-4 items-center justify-around flex-wrap')}>
           {/* Photo */}
           <div className={cls('w-1/2')}>
             <div className={cls(
               'p-1 flex flex-col items-center justify-center', 
-              'border-dashed border-primary border-4', 
+              'border-dashed border-primary border', 
               'rounded-full'
             )}>
               {user && (
                 <UserProrile
                   user={user}
                   alt={'User Profile'}
-                  size={120}
+                  size={150}
                   className="rounded-full object-cover aspect-square"
                 />
               )}
@@ -120,7 +121,7 @@ const Profile: React.FC<Props> = () => {
             />
           </div>
           {/* Info & */}
-          <div className="flex items-center justify-center text-2xl font-bold">
+          <div className="flex items-center justify-center text-2xl font-bold break-all">
             {user && user.nickname}
             <AiOutlineEdit
               className="ml-1 hover:bg-gray-200 hover:text-primary cursor-pointer rounded-md"
@@ -156,18 +157,65 @@ const Profile: React.FC<Props> = () => {
             <div className="font-bold text-lg">{user && thousandComma(user.droplet)}</div>
           </div>
           <button
-            className={cls(buttonStyle, 'py-3')}
+            className={cls('w-full py-3 cursor-not-allowed',
+              'text-s tracking-wider font-bold uppercase ',
+              'bg-black bg-opacity-40 border')}
           >
             {Language.$t.Button.ChargeDroplet}
           </button>
         </div>
         {/* change password */}
+        {/* <form onSubmit={onSubmit}>
+          <InputHapp
+            labelName={Language.$t.Input.Password}
+            placeholder={Language.$t.Placeholder.Password}
+            type="password"
+            value={oldPassword}
+            onChange={(e) => setOldPassword(e.target.value)}
+            error={errors.oldPassword}
+          />
+          <InputHapp
+            labelName={Language.$t.Input.NewPassword}
+            placeholder={Language.$t.Placeholder.NewPassword}
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            error={errors.password}
+          />
+          <InputHapp
+            labelName={Language.$t.Input.PasswordConfirm}
+            placeholder={Language.$t.Placeholder.PasswordConfirm}
+            type="password"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            error={errors.passwordConfirm}
+          />
+        </form> */}
         <button
-          className={cls(buttonStyle, 'py-3')}
+          className={cls('w-full py-3 cursor-not-allowed',
+            'text-s tracking-wider font-bold uppercase ',
+            'bg-black bg-opacity-40 border')}
         >
           {Language.$t.Button.ChangePassword}
         </button>
-        {/* Google AdSence */}
+        
+        {/* Google AdSense */}
+        <div className="my-4">
+          <ins
+            className="adsbygoogle"
+            style={{ display: 'block' }}
+            data-ad-client="ca-pub-8265068064055309"
+            data-ad-slot="YOUR_AD_SLOT_ID"
+            data-ad-format="auto"
+          ></ins>
+        </div>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            `,
+          }}
+        />
         {/* withdrawal */}
         <button
           className={cls(buttonStyle, 

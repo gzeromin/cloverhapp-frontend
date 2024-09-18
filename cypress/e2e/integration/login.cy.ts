@@ -85,7 +85,7 @@ describe('로그인 페이지', () => {
     cy.get('[test-id=passwordInput]').as('passwordInput');
     cy.get('[test-id=loginButton]').as('loginButton');
     cy.get('[test-id=commonDialog]').as('commonDialog').should('exist');
-    cy.get('[test-id=localeSelect]').as('localeSelect').should('exist');
+    cy.get('[test-id=navBarLogo]').as('navBarLogo').should('exist');
     // when 영어 사용자 로그인 정보 입력
     cy.get('@emailInput').type('aaa@aaa.aaa');
     cy.get('@passwordInput').type('aaaaaa');
@@ -100,7 +100,7 @@ describe('로그인 페이지', () => {
     cy.get('@loginButton').click();
     // then
     cy.url().should('include', '/');
-    cy.get('@localeSelect').find('img').should('have.attr', 'src', '/flags/united-states.svg');
+    cy.get('@navBarLogo').should('have.text','Three Clover');
   });
 
   it('회원가입 페이지로 이동', () => {
