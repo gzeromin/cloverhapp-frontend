@@ -49,6 +49,7 @@ const CalendarStamp: React.FC<CalendarStampProps> = ({ stamp }) => {
           width={33}
           height={33}
           onClick={setShow}
+          priority
         />
         <div className={cls(
           'ml-3 hidden group-hover:block', 

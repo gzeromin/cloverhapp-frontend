@@ -32,6 +32,7 @@ const StampButton: React.FC<Props> = ({
         className="rounded-full object-contain aspect-square"
         width={size}
         height={size}
+        priority
       />
     </div>
   );

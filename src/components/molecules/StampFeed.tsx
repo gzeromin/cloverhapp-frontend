@@ -75,6 +75,7 @@ const StampFeed: React.FC<Props> = ({
             className="h-auto object-contain aspect-square lg:w-1/2"
             width={70}
             height={70}
+            priority
           />
           <p className={cls('break-all grow',
             'underline decoration-green-400 decoration-dotted decoration-3 underline-offset-4'

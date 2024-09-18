@@ -42,7 +42,7 @@ const SideBar: React.FC<Props> = ({ className }) => {
     case Menu.Profile:
       return <Profile />;
     default:
-      return <Profile />;
+      return <Memo />;
     }
   };
 
@@ -118,8 +118,8 @@ const SideBar: React.FC<Props> = ({ className }) => {
         </div>
         {/* 스탬프 팔레트 */}
         <div className="relative w-full h-[540px]">
-          <div className="absolute top-0 left-0 right-0 bottom-0 pattern-boxes pattern-gray-300 pattern-size-4" />
-          <div className="relative z-10 mt-4">
+          <div className="absolute inset-0 pattern-boxes pattern-gray-300 pattern-size-4" />
+          <div className="relative z-10 mt-4 h-[540px]">
             {showMenu()}
           </div>
         </div>

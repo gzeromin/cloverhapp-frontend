@@ -26,7 +26,8 @@
     "Request": "要請",
     "Accept": "受諾",
     "Deny": "拒否",
-    "Pending": "保留"
+    "Pending": "保留",
+    "ChargeDroplet": "チャージ水滴"
   },
   "Input": {
     "Email": "Eメール",

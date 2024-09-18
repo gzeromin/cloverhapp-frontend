@@ -26,7 +26,8 @@
     "Request": "요청",
     "Accept": "수락",
     "Deny": "거부",
-    "Pending": "보류"
+    "Pending": "보류",
+    "ChargeDroplet": "물방울 충전"
   },
   "Input": {
     "Email": "이메일",

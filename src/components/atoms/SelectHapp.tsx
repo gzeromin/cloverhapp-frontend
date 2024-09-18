@@ -86,9 +86,10 @@ const SelectHapp: React.FC<SelectHappProps> = ({
                 ? selectedOption.image.alt
                 : selectedOption.image.src
             }
+            priority
             width={selectedOption.image.width ?? defaultImageSize}
             height={selectedOption.image.height ?? defaultImageSize}
-          ></Image>
+          />
         )}
         {selectedOption.icon}
         {selectedOption.labelLevel1 &&
@@ -118,7 +119,8 @@ const SelectHapp: React.FC<SelectHappProps> = ({
                   alt={option.image.alt ? option.image.alt : option.image.src}
                   width={option.image.width ?? defaultImageSize}
                   height={option.image.height ?? defaultImageSize}
-                ></Image>
+                  priority
+                />
               )}
               {option.icon}
               {option.labelLevel1 &&

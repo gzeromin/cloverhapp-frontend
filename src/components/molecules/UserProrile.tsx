@@ -19,15 +19,15 @@ const UserProfile: React.FC<Props> = ({
   className,
   onClickProfile,
 }) => {
-  const BASE_URL = process.env.BASE_URL;
   return user.photoUrl ? (
     <Image
-      src={BASE_URL + '/' + user.photoUrl}
+      src={user.photoUrl}
       alt={alt}
       className={className}
       width={size}
       height={size}
       onClick={onClickProfile}
+      priority
     />
   ) : (
     <Image
@@ -37,6 +37,7 @@ const UserProfile: React.FC<Props> = ({
       width={size}
       height={size}
       onClick={onClickProfile}
+      priority
     />
   );
 };

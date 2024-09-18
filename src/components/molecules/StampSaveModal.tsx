@@ -89,6 +89,7 @@ const StampSaveModal: React.FC<StampSaveModalProps> = ({
             className="h-auto object-contain aspect-square lg:w-1/2"
             width={90}
             height={90}
+            priority
           />
           <TextareaHapp
             className='text-lg'

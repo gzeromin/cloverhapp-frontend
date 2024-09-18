@@ -61,6 +61,7 @@ const NavBar: React.FC = () => {
             alt="Happtamp Logo Outline"
             width={45}
             height={45}
+            priority
           />
 
           <p

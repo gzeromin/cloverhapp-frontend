@@ -5,6 +5,7 @@ import NavBar from '@/components/templates/NavBar';
 import LoadingHapp from '@/components/organisms/LoadingHapp';
 import DialogHapp from '@/components/organisms/DialogHapp';
 import { AuthProvider } from '@/context/auth';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Clover Stamp',
@@ -19,6 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={'antialiased'}>
+        <Script
+          id="adsense-script"
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8265068064055309"
+          crossOrigin="anonymous"
+        />
         <AuthProvider>
           <NavBar />
           {children}

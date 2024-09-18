@@ -26,7 +26,8 @@
     "Request": "Request",
     "Accept": "Accept",
     "Deny": "Deny",
-    "Pending": "Pending"
+    "Pending": "Pending",
+    "ChargeDroplet": "Charge Droplet"
   },
   "Input": {
     "Email": "Email",
