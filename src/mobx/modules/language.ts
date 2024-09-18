@@ -9,15 +9,16 @@ import labelJp from '@public/locales/jp/label.json';
 import messageJp from '@public/locales/jp/message.json';
 import { dancingScript, singleDay, slacksideOne } from '@/styles/fonts';
 import { Locale } from '@/types/User';
+import { BUCKET_URL } from '@/utils/api.util';
 
 const kr = merge(labelKr, messageKr) as any;
 const en = merge(labelEn, messageEn) as any;
 const jp = merge(labelJp, messageJp) as any;
 
 class language {
-  flagKr = '/flags/south-korea.svg';
-  flagEn = '/flags/united-states.svg';
-  flagJp = '/flags/japan.svg';
+  flagKr = BUCKET_URL + '/public/flags/south-korea.png';
+  flagEn = BUCKET_URL + '/public/flags/united-states.png';
+  flagJp = BUCKET_URL + '/public/flags/japan.png';
 
   type: Locale = Locale.Kr;
 

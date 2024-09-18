@@ -54,5 +54,8 @@
   },
   "ErrorMessage": {
     "SystemError": "A system error has occurred."
+  },
+  "SideBar": {
+    "RequestLogin": "Please login."
   }
 }

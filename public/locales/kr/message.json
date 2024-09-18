@@ -54,5 +54,8 @@
   },
   "ErrorMessage": {
     "SystemError": "시스템 에러가 발생했습니다."
+  },
+  "SideBar": {
+    "RequestLogin": "로그인 해주세요."
   }
 }

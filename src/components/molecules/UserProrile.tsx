@@ -1,5 +1,6 @@
 'use client';
 import { User } from '@/types/User';
+import { BUCKET_URL } from '@/utils/api.util';
 import Image from 'next/image';
 import { memo } from 'react';
 
@@ -30,7 +31,7 @@ const UserProfile: React.FC<Props> = ({
     />
   ) : (
     <Image
-      src="/icons/user-profile.png"
+      src={`${BUCKET_URL}/public/icons/user-profile.png`}
       alt={alt}
       className={className}
       width={size}
