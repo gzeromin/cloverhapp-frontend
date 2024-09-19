@@ -6,8 +6,8 @@ import { Language } from '@/mobx/index';
 
 interface MiniClockProps extends InputHTMLAttributes<HTMLInputElement> {
   className: string;
-  stampedAt: Date;
-  setStampedAt: (newDate: Date) => void;
+  happedAt: Date;
+  setHappedAt: (newDate: Date) => void;
 }
 
 enum MeridiemEnum {
@@ -17,18 +17,18 @@ enum MeridiemEnum {
 
 const MiniClock: React.FC<MiniClockProps> = ({
   className,
-  stampedAt,
-  setStampedAt,
+  happedAt,
+  setHappedAt,
 }) => {
-  const stampedHour = stampedAt.getHours();
+  const happedHour = happedAt.getHours();
   const [meridiem, setMeridiem] = useState(MeridiemEnum.AM);
-  const [hour, setHour] = useState(stampedHour);
+  const [hour, setHour] = useState(happedHour);
 
   useEffect(() => {
-    if (stampedHour > 12) {
+    if (happedHour > 12) {
       setMeridiem(MeridiemEnum.PM);
-      setHour(stampedHour - 12);
-    } else if (stampedHour == 12) {
+      setHour(happedHour - 12);
+    } else if (happedHour == 12) {
       setMeridiem(MeridiemEnum.PM);
     }
   }, []);
@@ -44,40 +44,40 @@ const MiniClock: React.FC<MiniClockProps> = ({
   });
 
   const setAM = () => {
-    const newStampedAt = new Date(stampedAt);
-    if (stampedHour > 12) {
-      newStampedAt.setHours(stampedHour - 12);
-    } else if (stampedHour == 12) {
-      newStampedAt.setHours(0);
+    const newHappedAt = new Date(happedAt);
+    if (happedHour > 12) {
+      newHappedAt.setHours(happedHour - 12);
+    } else if (happedHour == 12) {
+      newHappedAt.setHours(0);
     }
-    setStampedAt(newStampedAt);
+    setHappedAt(newHappedAt);
     setMeridiem(MeridiemEnum.AM);
   };
 
   const setPM = () => {
-    const newStampedAt = new Date(stampedAt);
-    if (stampedHour < 12) {
-      newStampedAt.setHours(stampedHour + 12);
-    } else if (stampedHour == 12) {
-      newStampedAt.setHours(stampedHour);
+    const newHappedAt = new Date(happedAt);
+    if (happedHour < 12) {
+      newHappedAt.setHours(happedHour + 12);
+    } else if (happedHour == 12) {
+      newHappedAt.setHours(happedHour);
     }
-    setStampedAt(newStampedAt);
+    setHappedAt(newHappedAt);
     setMeridiem(MeridiemEnum.PM);
   };
 
   const changeHour = (hour: number) => {
-    const newStampedAt = new Date(stampedAt);
-    newStampedAt.setHours(hour);
+    const newHappedAt = new Date(happedAt);
+    newHappedAt.setHours(hour);
     if (meridiem == MeridiemEnum.AM) {
       if (hour == 12) {
-        newStampedAt.setHours(0);
+        newHappedAt.setHours(0);
       }
     } else {
       if (hour < 12) {
-        newStampedAt.setHours(hour + 12);
+        newHappedAt.setHours(hour + 12);
       }
     }
-    setStampedAt(newStampedAt);
+    setHappedAt(newHappedAt);
     setHour(hour);
   };
 

@@ -155,7 +155,7 @@ const Profile: React.FC<Props> = () => {
         <div className={cls('w-full flex flex-col items-end -translate-y-6')}>
           <div className="flex items-center translate-y-6">
             <Image
-              src={`${BUCKET_URL}/water.png`}
+              src={`${BUCKET_URL}/public/icons/droplet.png`}
               alt="droplet"
               className=""
               width={55}

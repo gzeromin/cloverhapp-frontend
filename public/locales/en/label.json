@@ -1,5 +1,5 @@
 {
-  "Logo": "Three Clover",
+  "Logo": "CloverHapp",
   "Button": {
     "Yes": "Yes",
     "Ok": "OK",
@@ -45,12 +45,27 @@
     "FriendAlias": "Friend's Alias",
     "Memo": "Memo",
     "RequestMessage": "Request Friend Message",
-    "ChangeAliasMessage": "Change Alias Message"
+    "ChangeAliasMessage": "Change Alias Message",
+    "Type": "Type"
   },
   "StampStatus": {
     "Private": "Private",
     "Protected": "Friends",
     "Public": "Public"
+  },
+  "StampType": {
+    "WakeUp": "Wake Up",
+    "GoToBed": "Go To Bed",
+    "Happy": "Happy",
+    "Water": "Water",
+    "Meditation": "Meditation",
+    "Medicine": "Medicine",
+    "Meal": "Meal",
+    "Exercise": "Exercise",
+    "Account": "Account",
+    "Book": "Book",
+    "Study": "Study",
+    "Work": "Work"
   },
   "Form": {
     "Select": "Select",

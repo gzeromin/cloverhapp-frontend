@@ -1,5 +1,5 @@
 {
-  "Logo": "三葉クローバー",
+  "Logo": "クローバーハップ",
   "Button": {
     "Yes": "はい",
     "Ok": "分りました",
@@ -45,12 +45,27 @@
     "FriendAlias": "友達の愛称",
     "Memo": "メモ",
     "RequestMessage": "友達要請メッセージ",
-    "ChangeAliasMessage": "愛称変更メッセージ"
+    "ChangeAliasMessage": "愛称変更メッセージ",
+    "Type": "タイプ"
   },
   "StampStatus": {
     "Private": "非公開",
     "Protected": "友達公開",
     "Public": "公開"
+  },
+  "StampType": {
+    "WakeUp": "起きる",
+    "GoToBed": "寝る",
+    "Happy": "幸せ",
+    "Water": "お水",
+    "Meditation": "瞑想",
+    "Medicine": "ドラッグ",
+    "Meal": "食事",
+    "Exercise": "運動",
+    "Account": "家計簿",
+    "Book": "本",
+    "Study": "勉強",
+    "Work": "仕事"
   },
   "Form": {
     "Select": "選択してっください",

@@ -65,7 +65,7 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
           'w-full p-2 mt-1 rounded focus:outline-none',
           { 'border-red-500': error },
           {
-            'transition duration-200 border-2 border-dashed border-gray-300 bg-gray-50 focus:bg-white hover:bg-white focus:border-happ-focus focus:ring-happ-focus focus:ring-4':
+            'transition duration-200 border border-gray-400 bg-gray-50 focus:bg-white hover:bg-white focus:border-happ-focus focus:ring-happ-focus focus:ring-4':
               border,
           },
           { 'resize-none': !resizable },

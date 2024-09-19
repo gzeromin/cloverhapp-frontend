@@ -7,22 +7,22 @@ import dateUtil from '@/utils/date.util';
 
 interface MiniCalendarProps extends InputHTMLAttributes<HTMLInputElement> {
   className: string;
-  stampedAt: Date;
-  setStampedAt: (newDate: Date) => void;
+  happedAt: Date;
+  setHappedAt: (newDate: Date) => void;
 }
 
 const MiniCalendar: React.FC<MiniCalendarProps> = ({
   className,
-  stampedAt,
-  setStampedAt,
+  happedAt,
+  setHappedAt,
 }) => {
-  const month = stampedAt.getMonth();
+  const month = happedAt.getMonth();
 
-  const changeStampedAt = (newDate: Date | boolean) => {
+  const changeHappedAt = (newDate: Date | boolean) => {
     if (newDate instanceof Date) {
-      const newStampedAt = new Date(stampedAt);
-      newStampedAt.setDate(newDate.getDate());
-      setStampedAt(newStampedAt);
+      const newHappedAt = new Date(happedAt);
+      newHappedAt.setDate(newDate.getDate());
+      setHappedAt(newHappedAt);
     }
   };
 
@@ -43,13 +43,13 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
             ${date && dateUtil.isSaturday(date) && 'text-saturday'}
             ${date && dateUtil.isSunday(date) && 'text-red-500'}
           `}
-          onClick={() => changeStampedAt(date)}
+          onClick={() => changeHappedAt(date)}
         >
           {date && (
             <span
               className={cls('rounded cursor-pointer hover:bg-gray-100 p-1', {
                 'bg-primary text-white hover:bg-primary-hover':
-                  dateUtil.isTargetDate(date, stampedAt),
+                  dateUtil.isTargetDate(date, happedAt),
               })}
             >
               {date.getDate()}

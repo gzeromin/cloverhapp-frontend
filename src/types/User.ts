@@ -1,4 +1,4 @@
-import { UserIcon } from './UserIcon';
+import { UserStamp } from './UserStamp';
 
 export interface User {
   id: string;
@@ -8,7 +8,7 @@ export interface User {
   photoUrl?: string;
   droplet: number;
   notifNum: number;
-  UserIcons: UserIcon[];
+  UserStamp: UserStamp[];
 }
 
 export enum Locale {

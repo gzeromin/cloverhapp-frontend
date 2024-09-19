@@ -8,14 +8,14 @@ import MiniClock from './MiniClockHapp';
 
 interface DateTimeHappProps extends InputHTMLAttributes<HTMLInputElement> {
   className: string;
-  stampedAt: Date | undefined;
-  setStampedAt: (newDate: Date) => void;
+  happedAt: Date | undefined;
+  setHappedAt: (newDate: Date) => void;
 }
 
 const DateTimeHapp: React.FC<DateTimeHappProps> = ({
   className,
-  stampedAt,
-  setStampedAt,
+  happedAt,
+  setHappedAt,
 }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showClock, setShowClock] = useState(false);
@@ -24,7 +24,7 @@ const DateTimeHapp: React.FC<DateTimeHappProps> = ({
     <div className={`flex py-1 gap-1 ${className}`}>
       <div className="w-1/2 px-3 border rounded flex justify-end items-center text-gray-400 gap-3">
         <span className="text-lg text-gray-600">
-          {stampedAt && stampedAt.toDateString()}
+          {happedAt && happedAt.toDateString()}
         </span>
         <IoCalendarNumberSharp
           onClick={() => setShowCalendar(!showCalendar)}
@@ -32,17 +32,17 @@ const DateTimeHapp: React.FC<DateTimeHappProps> = ({
             'text-primary hover:bg-primary-hover': showCalendar,
           })}
         />
-        {showCalendar && stampedAt && (
+        {showCalendar && happedAt && (
           <MiniCalendar
             className="absolute shadow-md p-1 -translate-y-24 bg-white border border-1 border-gray-transparent rounded-md delay-0 duration-150 transition-colors ease-in-out"
-            stampedAt={stampedAt}
-            setStampedAt={setStampedAt}
+            happedAt={happedAt}
+            setHappedAt={setHappedAt}
           />
         )}
       </div>
       <div className="w-1/2 px-3 border rounded flex justify-end items-center text-gray-400 gap-3">
         <span className="text-lg text-gray-600">
-          {stampedAt && stampedAt.getHours()}
+          {happedAt && happedAt.getHours()}
         </span>
         <LuClock10
           onClick={() => setShowClock(!showClock)}
@@ -50,11 +50,11 @@ const DateTimeHapp: React.FC<DateTimeHappProps> = ({
             'text-primary hover:bg-primary-hover': showClock,
           })}
         />
-        {showClock && stampedAt && (
+        {showClock && happedAt && (
           <MiniClock
             className="-translate-y-20 -translate-x-8"
-            stampedAt={stampedAt}
-            setStampedAt={setStampedAt}
+            happedAt={happedAt}
+            setHappedAt={setHappedAt}
           />
         )}
       </div>

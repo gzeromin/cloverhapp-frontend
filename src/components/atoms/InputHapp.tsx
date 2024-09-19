@@ -17,6 +17,8 @@ interface InputHappProps extends InputHTMLAttributes<HTMLInputElement> {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   testId?: string;
+  min?: string;
+  max?: string;
 }
 
 const InputHapp: React.FC<InputHappProps> = ({
@@ -33,6 +35,8 @@ const InputHapp: React.FC<InputHappProps> = ({
   value = '',
   onChange,
   testId,
+  min,
+  max,
 }) => {
   return (
     <div
@@ -47,7 +51,9 @@ const InputHapp: React.FC<InputHappProps> = ({
       )}
       <input
         type={type}
-        style={{ minWidth: 300 }}
+        min={min}
+        max={max}
+        style={{ minWidth: 200 }}
         className={cls(
           'w-full p-2 focus:bg-white focus:outline-none rounded',
           { 'border-red-500': error },

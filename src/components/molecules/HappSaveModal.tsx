@@ -15,16 +15,16 @@ import AddTagsHapp from '../atoms/AddTagsHapp';
 import { GoPeople, GoTag } from 'react-icons/go';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 
-interface StampSaveModalProps {
-  stampName: string | undefined;
+interface HappSaveModalProps {
+  happName: string | undefined;
   closeModal: () => void;
-  mutateStamp?: () => void;
+  mutateHapp?: () => void;
 }
 
-const StampSaveModal: React.FC<StampSaveModalProps> = ({
-  stampName,
+const HappSaveModal: React.FC<HappSaveModalProps> = ({
+  happName,
   closeModal,
-  mutateStamp,
+  mutateHapp,
 }) => {
   const [openUploadPhoto, setOpenUploadPhoto] = useState(false);
   const [uploadedImages, setUploadedImages] = useState<File[] | null>(null);
@@ -36,33 +36,33 @@ const StampSaveModal: React.FC<StampSaveModalProps> = ({
   const [tagList, setTagList] = useState<Tag[]>([]);
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
-  const createStamp = async () => {
+  const createHapp = async () => {
     Loading.setIsLoading(true);
     try {
       if (user) {
-        const createStampDto = {
+        const createHappDto = {
           userId: user.id,
-          stampName,
+          happName,
           memo,
         };
         const formData = new FormData();
         if (uploadedImages != null) {
           uploadedImages.forEach((file) => {
-            formData.append('stamp-images', file);
+            formData.append('happ-images', file);
           });
         }
-        formData.append('stamp-data', JSON.stringify(createStampDto));
-        const res = await api.post('/stamp', formData, {
+        formData.append('happ-data', JSON.stringify(createHappDto));
+        const res = await api.post('/happ', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-        if (mutateStamp) {
+        if (mutateHapp) {
           // DayLog
-          mutateStamp();
+          mutateHapp();
         } else {
           // HappCalendar
-          dispatch(AuthActionEnum.SET_STAMP, res.data);
+          dispatch(AuthActionEnum.SET_HAPP, res.data);
         }
       }
       closeModal();
@@ -84,8 +84,8 @@ const StampSaveModal: React.FC<StampSaveModalProps> = ({
         {/* header */}
         <div className="flex flex-col gap-2 items-center p-3 pb-0 lg:flex-row">
           <Image
-            src={`https://elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com/cloverhapp/${stampName}.png`}
-            alt={`stamp modify modal ${stampName}`}
+            src={`https://elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com/cloverhapp/${happName}.png`}
+            alt={`happ modify modal ${happName}`}
             className="h-auto object-contain aspect-square lg:w-1/2"
             width={90}
             height={90}
@@ -171,7 +171,7 @@ const StampSaveModal: React.FC<StampSaveModalProps> = ({
           </button>
           <button
             className="m-1 border rounded-lg bg-primary hover:bg-primary-hover py-1.5 px-3 text-white font-extralight text-lg"
-            onClick={createStamp}
+            onClick={createHapp}
           >
             {Language.$t.Button.Save}
           </button>
@@ -181,4 +181,4 @@ const StampSaveModal: React.FC<StampSaveModalProps> = ({
   );
 };
 
-export default observer(StampSaveModal);
+export default observer(HappSaveModal);

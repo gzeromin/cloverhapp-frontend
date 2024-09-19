@@ -1,14 +1,14 @@
 'use client';
 import cls from 'classnames';
-import { UserIcon } from '@/types/UserIcon';
+import { UserStamp } from '@/types/UserStamp';
 
-interface SideBarStampIconProps {
-  userIcon: UserIcon;
+interface SideBarStampProps {
+  userStamp: UserStamp;
   onClickStamp: () => void;
 }
 
-const SideBarStampIcon: React.FC<SideBarStampIconProps> = ({
-  userIcon,
+const SideBarStamp: React.FC<SideBarStampProps> = ({
+  userStamp,
   onClickStamp,
 }) => {
   return (
@@ -18,18 +18,18 @@ const SideBarStampIcon: React.FC<SideBarStampIconProps> = ({
         'hover:bg-primary-hover overflow-hidden text-ellipsis  whitespace-nowrap',
         'hover:text-wrap',
       )}
-      id={userIcon.id}
+      id={userStamp.id}
       onClick={onClickStamp}
     >
-      {/* <UserIconHapp
+      {/* <UserStampHapp
         className=""
-        userIcon={userIcon}
+        userStamp={userStamp}
         onClick={onClickStamp}
         size={100}
       /> */}
-      <span className={cls('text-xs')}>{userIcon.alias}</span>
+      <span className={cls('text-xs')}>{userStamp.alias}</span>
     </div>
   );
 };
 
-export default SideBarStampIcon;
+export default SideBarStamp;

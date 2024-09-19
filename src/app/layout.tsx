@@ -8,7 +8,7 @@ import { AuthProvider } from '@/context/auth';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: 'Clover Stamp',
+  title: 'CloverHapp',
   description: 'Gathering every single happiness',
 };
 

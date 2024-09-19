@@ -1,25 +1,28 @@
-import { Comment } from './Comment';
-import { Friend } from './Friend';
-import { Tag } from './Tag';
 import { User } from './User';
 
 export interface Stamp {
-  stampedAt: string;
-  createdAt: string;
-  memo: string;
-  stampName: string;
   id: string;
-  imageUrls: string[];
-  status: StampStatus;
+  name: string;
+  description: string;
+  url: string;
+  droplet: number;
+  type: StampType;
   userId: string;
-  User: User;
-  Comments: Comment[];
-  Friends: Friend[];
-  Tags: Tag[];
+  Register: User;
 }
 
-export enum StampStatus {
-  PUBLIC = 'PUBLIC',
-  PROTECTED = 'PROTECTED',
-  PRIVATE = 'PRIVATE',
+export enum StampType {
+  WAKE_UP = 'WakeUp',
+  GO_TO_BED = 'GoToBed',
+  HAPPY = 'Happy',
+  WATER = 'Water',
+  MEDITATION = 'Meditation',
+  MEDICINE = 'Medicine',
+  MEAL = 'Meal',
+  EXERCISE = 'Exercise',
+  ACCOUNT = 'Account',
+  BOOK = 'Book',
+  STUDY = 'Study',
+  WORK = 'Work',
 }
+

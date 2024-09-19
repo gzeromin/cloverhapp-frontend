@@ -19,9 +19,9 @@ const HappCalendar: React.FC<Props> = ({ className }) => {
   useEffect(() => {
     if(user)
       api
-        .get(`/stamp/list/${TimeCtrllor.selectedYear}/${user.id}`)
+        .get(`/happ/list/${TimeCtrllor.selectedYear}/${user.id}`)
         .then((res) => {
-          dispatch(AuthActionEnum.SET_STAMPLIST, res.data);
+          dispatch(AuthActionEnum.SET_HAPPLIST, res.data);
         })
         .catch((err) => {
           console.log(err);

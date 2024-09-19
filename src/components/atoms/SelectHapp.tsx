@@ -30,6 +30,7 @@ interface SelectHappProps {
   border?: boolean;
   labelName?: string;
   testId?: string;
+  wide?: boolean;
 }
 
 const SelectHapp: React.FC<SelectHappProps> = ({
@@ -41,6 +42,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
   border = false,
   labelName,
   testId,
+  wide = false,
 }) => {
   const [selectedOption, setSelectedOption] = useState({
     value: '',
@@ -54,10 +56,13 @@ const SelectHapp: React.FC<SelectHappProps> = ({
     setSelectedOption(option);
   }, [selected]);
 
+  const selectValue = (value: string | number) => {
+    onSelected(value);
+    setShow(false);
+  };
   return (
     <div
       className={cls('relative cursor-pointer', className)}
-      onClick={() => setShow((prev) => !prev)}
       test-id={testId}
     >
       {labelName && (
@@ -76,7 +81,11 @@ const SelectHapp: React.FC<SelectHappProps> = ({
             'outline-none border-happ-focus ring-happ-focus ring-4':
               show && border,
           },
+          {
+            'py-2': wide,
+          }
         )}
+        onClick={() => setShow((prev) => !prev)}
       >
         {selectedOption.image && (
           <Image
@@ -96,40 +105,63 @@ const SelectHapp: React.FC<SelectHappProps> = ({
           selectedOption.labelLevel2 &&
           Language.$t[selectedOption.labelLevel1][selectedOption.labelLevel2]}
 
+        {/* Open Simbol */}
         <div className="ml-1">
           <div
             className={cls(
               'h-0 border-white-transparent border-x-transparent border-[5px] border-b-0',
-              { 'border-gray-500': dark },
+              { 'border-gray-600': dark },
             )}
           ></div>
         </div>
       </div>
       {show && (
-        <ul className="absolute w-full right-0 shadow-sm p-1 bg-white border border-1 border-gray-transparent rounded-md delay-0 duration-150 transition-colors ease-in-out">
-          {options.map((option) => (
-            <li
-              className="flex justify-between gap-1 hover:bg-gray-100 rounded px-2"
-              key={option.id ?? option.value}
-              onClick={() => onSelected(option.value)}
-            >
-              {option.image && (
-                <Image
-                  src={option.image.src}
-                  alt={option.image.alt ? option.image.alt : option.image.src}
-                  width={option.image.width ?? defaultImageSize}
-                  height={option.image.height ?? defaultImageSize}
-                  priority
-                />
-              )}
-              {option.icon}
-              {option.labelLevel1 &&
+        <div className=''>
+          {/* Background opacity */}
+          <div
+            className="fixed inset-0 w-full h-full z-40 cursor-default"
+            onClick={() => setShow(false)}
+          />
+          <ul className={cls(
+            'absolute w-full right-0 shadow-md p-1 z-50 max-h-[180px] overflow-y-auto',
+            'bg-white border border-1 border-gray-transparent rounded-md',
+            'delay-0 duration-150 transition-colors ease-in-out'
+          )}>
+            {options.map((option) => (
+              <li
+                className={cls(
+                  'relative px-2 flex gap-1 items-center justify-between',
+                  'hover:bg-gray-100 rounded',
+                  {'py-2': wide}
+                )}
+                key={option.id ?? option.value}
+                onClick={() => selectValue(option.value)}
+              >
+                {option.image && (
+                  <Image
+                    src={option.image.src}
+                    alt={option.image.alt ? option.image.alt : option.image.src}
+                    width={option.image.width ?? defaultImageSize}
+                    height={option.image.height ?? defaultImageSize}
+                    priority
+                  />
+                )}
+                {option.icon}
+                {option.labelLevel1 &&
                 option.labelLevel2 &&
                 Language.$t[option.labelLevel1][option.labelLevel2]}
-              <div></div>
-            </li>
-          ))}
-        </ul>
+                {/* Empty Div For Layout */}
+                <div className="ml-1">
+                  <div
+                    className={cls(
+                      'h-0 border-white border-x-transparent border-[5px] border-b-0',
+                    )}
+                  ></div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

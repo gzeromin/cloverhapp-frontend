@@ -1,4 +1,4 @@
-import { Stamp } from '@/types/Stamp';
+import { Happ } from '@/types/Happ';
 import { useState } from 'react';
 import cls from 'classnames';
 import dateUtil from '@/utils/date.util';
@@ -8,50 +8,50 @@ import api from '@/utils/api.util';
 import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { observer } from 'mobx-react-lite';
 import { Dialog, Language, Loading } from '@/mobx';
-import StampSaveModal from './StampSaveModal';
-import StampDisplayModal from './StampDisplayModal';
+import HappSaveModal from './HappSaveModal';
+import HappDisplayModal from './HappDisplayModal';
 import Image from 'next/image';
 
 interface Props {
-  stamp: Stamp;
-  setSelectedCtrlStampId: (stampId: string) => void;
-  selectedCtrlStampId: string;
-  mutateStamp: () => void;
+  happ: Happ;
+  setSelectedCtrlHappId: (happId: string) => void;
+  selectedCtrlHappId: string;
+  mutateHapp: () => void;
 }
 
-const StampFeed: React.FC<Props> = ({
-  stamp,
-  setSelectedCtrlStampId,
-  selectedCtrlStampId,
-  mutateStamp,
+const HappFeed: React.FC<Props> = ({
+  happ,
+  setSelectedCtrlHappId,
+  selectedCtrlHappId,
+  mutateHapp,
 }) => {
   const { user } = useAuthState();
-  const [showStampSaveModal, setShowStampSaveModal] = useState<boolean>(false);
+  const [showHappSaveModal, setShowHappSaveModal] = useState<boolean>(false);
   const [showDisplayModal, setShowDisplayModal] = useState<boolean>(false);
 
-  const showCtrlModal = (newStampId: string) => {
-    if (selectedCtrlStampId === newStampId) {
-      setSelectedCtrlStampId('');
+  const showCtrlModal = (newHappId: string) => {
+    if (selectedCtrlHappId === newHappId) {
+      setSelectedCtrlHappId('');
     } else {
-      setSelectedCtrlStampId(newStampId);
+      setSelectedCtrlHappId(newHappId);
     }
   };
 
-  // const onSaveStamp = () => {
-  //   mutateStamp();
+  // const onSaveHapp = () => {
+  //   mutateHapp();
   // };
 
-  const deleteStamp = () => {
+  const deleteHapp = () => {
     Loading.setIsLoading(true);
     api
-      .delete('/stamp/' + stamp.id)
+      .delete('/happ/' + happ.id)
       .then(() => {
-        Dialog.openDialog(Dialog.SUCCESS, Language.$t.Success.StampDelete);
-        mutateStamp();
+        Dialog.openDialog(Dialog.SUCCESS, Language.$t.Success.HappDelete);
+        mutateHapp();
       })
       .catch(() => {
         // TODO
-        // handleError({ message: Language.$t.Fail.StampDelete });
+        // handleError({ message: Language.$t.Fail.HappDelete });
       })
       .finally(() => {
         Loading.setIsLoading(false);
@@ -59,7 +59,7 @@ const StampFeed: React.FC<Props> = ({
   };
 
   return (
-    <div id={stamp.id} className={cls('w-5/6')}>
+    <div id={happ.id} className={cls('w-5/6')}>
       <div
         className={cls('flex items-end px-2 py-1 m-2 gap-1')}
       >
@@ -70,8 +70,8 @@ const StampFeed: React.FC<Props> = ({
         )}>
           {/* 스탬프 */}
           <Image
-            src={`https://elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com/cloverhapp/${stamp.stampName}.png`}
-            alt={`stamp feed ${stamp.id}`}
+            src={`https://elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com/cloverhapp/${happ.id}.png`}
+            alt={`happ feed ${happ.id}`}
             className="h-auto object-contain aspect-square lg:w-1/2"
             width={70}
             height={70}
@@ -80,23 +80,23 @@ const StampFeed: React.FC<Props> = ({
           <p className={cls('break-all grow',
             'underline decoration-green-400 decoration-dotted decoration-3 underline-offset-4'
           )}>
-            {stamp.memo}
+            {happ.memo}
           </p>
           {/* 편집 버튼 */}
           <div className="">
-            {user && user.id === stamp.User.id ? (
+            {user && user.id === happ.User.id ? (
               <BsThreeDotsVertical
                 className="z-40 text-gray-600 hover:bg-gray-100 rounded-full mt-2 text-2xl p-1 cursor-pointer"
-                onClick={() => showCtrlModal(stamp.id)}
+                onClick={() => showCtrlModal(happ.id)}
               />
             ) : (
               <BsThreeDotsVertical className="z-40 text-white rounded-full mt-2 text-2xl p-1" />
             )}
-            {stamp.id === selectedCtrlStampId && (
+            {happ.id === selectedCtrlHappId && (
               <div className="">
                 <div
                   className="fixed z-30 inset-0 w-full h-full"
-                  onClick={() => setSelectedCtrlStampId('')}
+                  onClick={() => setSelectedCtrlHappId('')}
                 >
                   {/* Background opacity */}
                 </div>
@@ -105,7 +105,7 @@ const StampFeed: React.FC<Props> = ({
                   <ul className="absolute bg-white shadow-lg rounded -translate-y-7 translate-x-7">
                     <li
                       className="flex items-center gap-1 text-gray-600 m-1 px-2 break-keep rounded cursor-pointer hover:bg-gray-100 hover:font-semi-bold"
-                      onClick={() => setShowStampSaveModal(true)}
+                      onClick={() => setShowHappSaveModal(true)}
                     >
                       <FaEdit />
                       {Language.$t.Button.Edit}
@@ -113,7 +113,7 @@ const StampFeed: React.FC<Props> = ({
                     <hr />
                     <li
                       className="flex items-center gap-1 text-gray-600 m-1 px-2 break-keep rounded cursor-pointer hover:bg-gray-100 hover:font-semi-bold"
-                      onClick={deleteStamp}
+                      onClick={deleteHapp}
                     >
                       <FaRegTrashAlt />
                       {Language.$t.Button.Delete}
@@ -127,22 +127,22 @@ const StampFeed: React.FC<Props> = ({
 
         {/* 시간 */}
         <span className="text-xs text-gray-500">
-          {dateUtil.getFormatHour(new Date(stamp.createdAt))}
+          {dateUtil.getFormatHour(new Date(happ.createdAt))}
         </span>
       </div>
 
-      {/* Stamp Save Modal */}
-      {showStampSaveModal && (
-        <StampSaveModal
-          stampName={stamp.stampName}
-          closeModal={() => setShowStampSaveModal(false)}
+      {/* Happ Save Modal */}
+      {showHappSaveModal && (
+        <HappSaveModal
+          happName={happ.id}
+          closeModal={() => setShowHappSaveModal(false)}
         />
       )}
 
-      {/* Stamp Display Modal */}
+      {/* Happ Display Modal */}
       {showDisplayModal && (
-        <StampDisplayModal
-          stampId={stamp.id}
+        <HappDisplayModal
+          happId={happ.id}
           closeModal={() => setShowDisplayModal(false)}
         />
       )}
@@ -150,4 +150,4 @@ const StampFeed: React.FC<Props> = ({
   );
 };
 
-export default observer(StampFeed);
+export default observer(HappFeed);

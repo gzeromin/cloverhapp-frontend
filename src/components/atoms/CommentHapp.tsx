@@ -14,14 +14,14 @@ import UserProrile from '../molecules/UserProrile';
 
 interface Props {
   className?: string;
-  stampId: string;
+  happId: string;
   user: User | undefined;
   Comments: Comment[] | undefined;
 }
 
 const CommentHapp: React.FC<Props> = ({
   className,
-  stampId,
+  happId,
   user,
   Comments,
 }) => {
@@ -38,10 +38,10 @@ const CommentHapp: React.FC<Props> = ({
   const onCreateComment = async () => {
     Loading.setIsLoading(true);
     try {
-      const res = await api.post('/comment/stamp', {
+      const res = await api.post('/comment/happ', {
         User: user,
         body: comment,
-        stampId,
+        happId,
       });
       if (commentList) {
         setCommentList([res.data, ...commentList]);
@@ -69,7 +69,7 @@ const CommentHapp: React.FC<Props> = ({
             <div className="flex items-start justify-between gap-1 pr-1 bg-gray-100 rounded-md">
               <UserProrile
                 user={user}
-                alt={`comment ${stampId} ${user.id}`}
+                alt={`comment ${happId} ${user.id}`}
                 size={40}
                 className="rounded-full mt-3 ml-1"
               />
@@ -99,7 +99,7 @@ const CommentHapp: React.FC<Props> = ({
               commentList.map((comment, i) => (
                 <div
                   className="flex items-start gap-3 my-2"
-                  key={`${stampId} ${comment.id} ${i}`}
+                  key={`${happId} ${comment.id} ${i}`}
                 >
                   <UserProrile
                     user={comment.User}

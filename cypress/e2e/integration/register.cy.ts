@@ -10,15 +10,15 @@ describe('회원가입 페이지', () => {
     cy.get('[test-id=registLogo]').as('registLogo').should('exist');
     cy.get('[test-id=localeSelect]').as('localeSelect').should('exist');
     // 처음 표시 언어 확인하기(한국어)
-    cy.get('@registLogo').should('have.text','세잎 클로버');
+    cy.get('@registLogo').should('have.text','클로버햅');
     // 영어로 변경 확인
     cy.get('@localeSelect').click();
     cy.get('@localeSelect').find('li').eq(1).click();
-    cy.get('@registLogo').should('have.text','Three Clover');
+    cy.get('@registLogo').should('have.text','CloverHapp');
     // 일본어로 변경 확인
     cy.get('@localeSelect').click();
     cy.get('@localeSelect').find('li').eq(2).click();
-    cy.get('@registLogo').should('have.text','三葉クローバー');
+    cy.get('@registLogo').should('have.text','クローバーハップ');
   });
 
   it('폼 에러 발생, 한국어 버전', () => {
@@ -73,7 +73,7 @@ describe('회원가입 페이지', () => {
       url: '**/auth/signup',
     }, {
       statusCode: 500,
-      fixture: 'integration/register/system-error.json',
+      fixture: 'common/system-error.json',
     });
     cy.get('@signupButton').click();
     // then

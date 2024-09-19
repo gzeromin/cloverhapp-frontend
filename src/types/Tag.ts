@@ -1,4 +1,4 @@
-import { Stamp } from './Stamp';
+import { Stamp } from './Happ';
 
 export interface Tag {
   id: string;

@@ -1,15 +1,15 @@
-import { Stamp } from '@/types/Stamp';
+import { Happ } from '@/types/Happ';
 import dateUtil from './date.util';
 
-export default function makeSection(stamps: Stamp[]) {
-  const sections: { [key: string]: Stamp[] } = {};
-  stamps.forEach((stamp: Stamp) => {
-    if (stamp.id) {
-      const monthDate = dateUtil.getFormatDate(new Date(stamp.createdAt));
+export default function makeSection(happs: Happ[]) {
+  const sections: { [key: string]: Happ[] } = {};
+  happs.forEach((happ: Happ) => {
+    if (happ.id) {
+      const monthDate = dateUtil.getFormatDate(new Date(happ.createdAt));
       if (Array.isArray(sections[monthDate])) {
-        sections[monthDate].push(stamp);
+        sections[monthDate].push(happ);
       } else {
-        sections[monthDate] = [stamp];
+        sections[monthDate] = [happ];
       }
     }
   });

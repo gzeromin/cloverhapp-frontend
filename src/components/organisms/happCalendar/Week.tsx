@@ -3,13 +3,13 @@ import dateUtil from '@/utils/date.util';
 import { observer } from 'mobx-react-lite';
 import { memo } from 'react';
 import { useAuthState } from '@/context/auth';
-import { Stamp } from '@/types/Stamp';
+import { Happ } from '@/types/Happ';
 import cls from 'classnames';
 import CellW from '@/components/molecules/week/CellW';
-import CalendarStamp from '@/components/molecules/CalendarStamp';
+import CalendarHapp from '@/components/molecules/CalendarHapp';
 
 const Week: React.FC = () => {
-  const { stampList } = useAuthState();
+  const { happList } = useAuthState();
   
   const selectedDate = TimeCtrllor.selectedDate;
   const firstDate =
@@ -26,9 +26,9 @@ const Week: React.FC = () => {
           dateNum,
         );
 
-        // filter stamp
-        const stamps = stampList.filter((v: Stamp) =>
-          dateUtil.getFiveToFourHour(date, new Date(v.stampedAt)),
+        // filter happ
+        const happs = happList.filter((v: Happ) =>
+          dateUtil.getFiveToFourHour(date, new Date(v.happedAt)),
         );
 
         return (
@@ -40,8 +40,8 @@ const Week: React.FC = () => {
               weekStr={w}
               date={date}
             />
-            {stamps.map(stamp => 
-              <CalendarStamp key={`calendar weekly stamp ${stamp.id}`} stamp={stamp} />
+            {happs.map(happ => 
+              <CalendarHapp key={`calendar weekly happ ${happ.id}`} happ={happ} />
             )}
           </div>
         );

@@ -1,5 +1,5 @@
 'use client';
-import { Stamp, StampStatus } from '@/types/Stamp';
+import { Happ } from '@/types/Happ';
 import api from '@/utils/api.util';
 import { useEffect, useState } from 'react';
 import { AiFillCloseSquare } from 'react-icons/ai';
@@ -21,98 +21,69 @@ import { LuCopyPlus } from 'react-icons/lu';
 import { Friend } from '@/types/Friend';
 import { Tag } from '@/types/Tag';
 
-const options = [
-  {
-    value: StampStatus.PRIVATE,
-    labelLevel1: 'StampStatus',
-    labelLevel2: 'Private',
-    icon: <RxLockClosed />,
-  },
-  {
-    value: StampStatus.PROTECTED,
-    labelLevel1: 'StampStatus',
-    labelLevel2: 'Protected',
-    icon: <RxLockOpen1 />,
-  },
-  {
-    value: StampStatus.PUBLIC,
-    labelLevel1: 'StampStatus',
-    labelLevel2: 'Public',
-    icon: <RxLockOpen2 />,
-  },
-];
-
-interface StampModifyModalProps {
-  stampId: string;
+interface HappModifyModalProps {
+  happId: string;
   closeModal: () => void;
 }
 
-const StampModifyModal: React.FC<StampModifyModalProps> = ({
-  stampId,
+const HappModifyModal: React.FC<HappModifyModalProps> = ({
+  happId,
   closeModal,
 }) => {
   const [openUploadPhoto, setOpenUploadPhoto] = useState(false);
   const [openTimeMover, setOpenTimeMover] = useState(false);
   const [openAddFriends, setOpenAddFriends] = useState(false);
   const [openAddTags, setOpenAddTags] = useState(false);
-  const [stampStatus, setStampStatus] = useState(StampStatus.PRIVATE);
-  const [stampedAt, setStampedAt] = useState<Date>();
+  const [happedAt, setHappedAt] = useState<Date>();
   const [uploadedImages, setUploadedImages] = useState<File[] | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>();
   const [friendList, setFriendList] = useState<Friend[]>([]);
   const [tagList, setTagList] = useState<Tag[]>([]);
   const [memo, setMemo] = useState('');
 
-  // const userIcon = stamp.UserIcon;
   const dispatch = useAuthDispatch();
 
   useEffect(() => {
-    api.get('/stamp/' + stampId).then((res) => {
-      const stamp: Stamp = res.data;
-      setStampedAt(new Date(stamp.stampedAt));
-      setMemo(stamp.memo);
-      setStampStatus(stamp.status);
-      if (stamp.imageUrls && stamp.imageUrls.length !== 0) {
-        setImageUrls(stamp.imageUrls);
+    api.get('/happ/' + happId).then((res) => {
+      const happ: Happ = res.data;
+      setHappedAt(new Date(happ.happedAt));
+      setMemo(happ.memo);
+      if (happ.imageUrls && happ.imageUrls.length !== 0) {
+        setImageUrls(happ.imageUrls);
         setOpenUploadPhoto(true);
       }
-      if (stamp.Friends && stamp.Friends.length !== 0) {
-        setFriendList(stamp.Friends);
-        setOpenAddFriends(true);
-      }
-      if (stamp.Tags && stamp.Tags.length !== 0) {
-        setTagList(stamp.Tags);
+      if (happ.Tags && happ.Tags.length !== 0) {
+        setTagList(happ.Tags);
         setOpenAddTags(true);
       }
     });
-  }, [stampId]);
+  }, [happId]);
 
-  const updateStamp = async () => {
+  const updateHapp = async () => {
     Loading.setIsLoading(true);
     try {
-      const updateStampDto = {
-        id: stampId,
-        stampedAt: stampedAt,
+      const updateHappDto = {
+        id: happId,
+        happedAt: happedAt,
         memo,
         imageUrls: imageUrls,
         friends: friendList,
         tags: tagList,
-        status: stampStatus,
       };
       const formData = new FormData();
       if (uploadedImages != null) {
         uploadedImages.forEach((file) => {
-          formData.append('stamp-images', file);
+          formData.append('happ-images', file);
         });
       }
-      formData.append('stamp-data', JSON.stringify(updateStampDto));
+      formData.append('happ-data', JSON.stringify(updateHappDto));
 
-      const res = await api.patch('/stamp', formData, {
+      const res = await api.patch('/happ', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      dispatch(AuthActionEnum.UPDATE_STAMP, res.data);
+      dispatch(AuthActionEnum.UPDATE_HAPP, res.data);
       closeModal();
     } catch (error: any) {
       console.log(error);
@@ -132,7 +103,7 @@ const StampModifyModal: React.FC<StampModifyModalProps> = ({
 
           {/* <Image
               src={BASE_URL + '/' + userIcon.Icon.url}
-              alt={`stamp modify modal ${userIcon.Icon.id}`}
+              alt={`happ modify modal ${userIcon.Icon.id}`}
               className="h-auto object-contain aspect-square"
               priority
               width={50}
@@ -168,8 +139,8 @@ const StampModifyModal: React.FC<StampModifyModalProps> = ({
             />
             <DateTimeHapp
               className={`${openTimeMover ? 'block' : 'hidden'}`}
-              stampedAt={stampedAt}
-              setStampedAt={setStampedAt}
+              happedAt={happedAt}
+              setHappedAt={setHappedAt}
             />
             <AddFriendsHapp
               className={`${openAddFriends ? 'block' : 'hidden'}`}
@@ -182,13 +153,6 @@ const StampModifyModal: React.FC<StampModifyModalProps> = ({
               setTagList={setTagList}
             />
             <div className="flex items-center bg-primary-hover rounded p-2 justify-between">
-              <div>
-                <SelectHapp
-                  options={options}
-                  selected={stampStatus}
-                  onSelected={setStampStatus}
-                ></SelectHapp>
-              </div>
               <div className="flex gap-3">
                 <TbPhoto
                   className={cls(
@@ -242,7 +206,7 @@ const StampModifyModal: React.FC<StampModifyModalProps> = ({
           </button>
           <button
             className="m-1 border rounded-lg bg-primary hover:bg-primary-hover py-1.5 px-3 text-white font-extralight text-lg"
-            onClick={updateStamp}
+            onClick={updateHapp}
           >
             {Language.$t.Button.Save}
           </button>
@@ -252,4 +216,4 @@ const StampModifyModal: React.FC<StampModifyModalProps> = ({
   );
 };
 
-export default observer(StampModifyModal);
+export default observer(HappModifyModal);

@@ -69,7 +69,7 @@ const SideBar: React.FC<Props> = ({ className }) => {
                 'text-3xl text-gray-500', 
                 Language.logoFont,
                 'hover:underline cursor-pointer', 
-                'decoration-primary underline-offset-2 decoration-2 decoration-dashed',
+                'decoration-green-500 underline-offset-2 decoration-2 decoration-dashed',
               )}
             href="/login"
             test-id="loginLink"

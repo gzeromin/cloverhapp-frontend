@@ -1,5 +1,5 @@
 {
-  "Logo": "세잎 클로버",
+  "Logo": "클로버햅",
   "Button": {
     "Yes": "네",
     "Ok": "좋아요",
@@ -45,12 +45,27 @@
     "FriendAlias": "친구 애칭",
     "Memo": "메모",
     "RequestMessage": "친구요청 메세지",
-    "ChangeAliasMessage": "애칭 변경 메세지"
+    "ChangeAliasMessage": "애칭 변경 메세지",
+    "Type": "타입"
   },
   "StampStatus": {
     "Private": "비공개",
     "Protected": "친구공개",
     "Public": "공개"
+  },
+  "StampType": {
+    "WakeUp": "기상",
+    "GoToBed": "취침",
+    "Happy": "행복",
+    "Water": "물",
+    "Meditation": "명상",
+    "Medicine": "약",
+    "Meal": "식사",
+    "Exercise": "운동",
+    "Account": "가계부",
+    "Book": "책",
+    "Study": "공부",
+    "Work": "일"
   },
   "Form": {
     "Select": "선택해주세요",

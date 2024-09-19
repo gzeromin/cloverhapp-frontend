@@ -1,41 +1,37 @@
+'use client';
+import { useAuthState } from '@/context/auth';
 import { memo, useEffect, useState } from 'react';
+import { fetcher } from '@/utils/api.util';
 import useSWRInfinite from 'swr/infinite';
 import { UserStamp } from '@/types/UserStamp';
-import { fetcher } from '@/utils/api.util';
-import api from '@/utils/api.util';
-import { AuthActionEnum, useAuthDispatch } from '@/context/auth';
-import { useParams } from 'next/navigation';
-import SideBarStamp from '@/components/molecules/SideBarStamp';
-import { Stamp } from '@/types/Stamp';
+import UserStampIcon from '@/components/organisms/market/UserStampIcon';
+import UserStampModifyModal from '@/components/organisms/market/UserStampModifyModal';
 
 interface Props {}
 
-const StampComp: React.FC<Props> = () => {
+const UserStamps: React.FC<Props> = () => {
+  const { user } = useAuthState();
   const [observedStamp, setObservedStamp] = useState('');
-  const dispatch = useAuthDispatch();
-  const { userId } = useParams();
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUserStamp, setSelectedUserStamp] = useState<UserStamp>();
 
   const getKey = (pageIndex: number, previousPageData: UserStamp[]) => {
     if (previousPageData && !previousPageData.length) return null;
-    return `/user-stamp/${userId}?page=${pageIndex}`;
+    return `/user-stamp?page=${pageIndex}`;
   };
 
   const {
     data,
     size: page,
     setSize: setPage,
+    mutate,
   } = useSWRInfinite<UserStamp[]>(getKey, fetcher);
 
-  const userStamps: UserStamp[] = data
-    ? ([] as UserStamp[]).concat(
-      ...data.map((e) => {
-        if (e.length == 11) {
-          return e.slice(0, 9);
-        }
-        return e;
-      }),
-    )
-    : [];
+  const userStamps: UserStamp[] = data ? ([] as UserStamp[]).concat(...data) : [];
+
+  useEffect(() => {
+    mutate();
+  }, [user]);
 
   useEffect(() => {
     if (!userStamps || userStamps.length === 0) return;
@@ -61,28 +57,31 @@ const StampComp: React.FC<Props> = () => {
     observer.observe(element);
   };
 
-  const onClickStamp = async (stamp: Stamp) => {
-    try {
-      const res = await api.post('/happ', { stampId: stamp.id, url: stamp.url });
-      dispatch(AuthActionEnum.SET_HAPP, res.data);
-    } catch (error) {
-      console.log(error);
-    }
+  const selectUserStamp = (userStamp: UserStamp) => {
+    setSelectedUserStamp(userStamp);
+    setShowModal(true);
   };
 
   return (
-    <div className="h-[590px] overflow-y-auto" test-id="stampComponent">
-      <div className="grid grid-cols-3 gap-3 p-2">
+    <div>
+      <div className="max-h-[75vh] overflow-y-auto grid grid-cols-3">
         {userStamps?.map((userStamp, index) => (
-          <SideBarStamp
+          <UserStampIcon
             key={`${userStamp.id} ${index}`}
             userStamp={userStamp}
-            onClickStamp={() => onClickStamp(userStamp.Stamp)}
+            selectUserStamp={selectUserStamp}
           />
         ))}
       </div>
+      {showModal && (
+        <UserStampModifyModal
+          userStamp={selectedUserStamp}
+          closeModal={() => setShowModal(false)}
+          mutateUserStamp={mutate}
+        />
+      )}
     </div>
   );
 };
 
-export default memo(StampComp);
+export default memo(UserStamps);

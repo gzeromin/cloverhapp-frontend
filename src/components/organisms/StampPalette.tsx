@@ -2,7 +2,7 @@
 import { memo, useState } from 'react';
 import cls from 'classnames';
 import StampButton from '../molecules/StampButton';
-import StampSaveModal from '../molecules/StampSaveModal';
+import HappSaveModal from '../molecules/HappSaveModal';
 interface StampPaletteProps {
   className?: string;
   size?: number;
@@ -50,10 +50,10 @@ const StampPalette: React.FC<StampPaletteProps> = ({
       )}
       {showStampSaveModal && (
 
-        <StampSaveModal 
-          stampName={selectedStamp}
+        <HappSaveModal 
+          happName={selectedStamp}
           closeModal={() => setShowStampSaveModal(false)}
-          mutateStamp={mutateStamp}
+          mutateHapp={mutateStamp}
         />
       )}
     </div>

@@ -3,18 +3,18 @@ import { User } from '@/types/User';
 import api from '@/utils/api.util';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { Language } from '@/mobx';
-import { Stamp } from '@/types/Stamp';
+import { Happ } from '@/types/Happ';
 
 interface State {
   authenticated: boolean;
   user: User | undefined;
-  stampList: Stamp[];
+  happList: Happ[];
 }
 
 const StateContext = createContext<State>({
   authenticated: false,
   user: undefined,
-  stampList: [] as Stamp[],
+  happList: [] as Happ[],
 });
 
 const DispatchContext = createContext<any>(null);
@@ -31,9 +31,9 @@ export enum AuthActionEnum {
   SET_LOCALE = 'SET_LOCALE',
   SET_NICKNAME = 'SET_NICKNAME',
   SET_DROPLET = 'SET_DROPLET',
-  SET_STAMPLIST = 'SET_STAMPLIST',
-  SET_STAMP = 'SET_STAMP',
-  UPDATE_STAMP = 'UPDATE_STAMP',
+  SET_HAPPLIST = 'SET_HAPPLIST',
+  SET_HAPP = 'SET_HAPP',
+  UPDATE_HAPP = 'UPDATE_HAPP',
 }
 
 const reducer = (state: State, { type, payload }: Action) => {
@@ -70,27 +70,25 @@ const reducer = (state: State, { type, payload }: Action) => {
       ...state,
       user: { ...state.user, droplet: payload },
     };
-  case AuthActionEnum.SET_STAMPLIST:
+  case AuthActionEnum.SET_HAPPLIST:
     return {
       ...state,
-      stampList: payload,
+      happList: payload,
     };
-  case AuthActionEnum.SET_STAMP:
+  case AuthActionEnum.SET_HAPP:
     return {
       ...state,
-      stampList: state.stampList ? state.stampList.concat(payload) : [],
+      happList: state.happList ? state.happList.concat(payload) : [],
     };
-  case AuthActionEnum.UPDATE_STAMP:
+  case AuthActionEnum.UPDATE_HAPP:
     return {
       ...state,
-      stampList: state.stampList
-        ? state.stampList.map((v) => {
+      happList: state.happList
+        ? state.happList.map((v) => {
           if (v.id == payload.id) {
-            v.stampedAt = payload.stampedAt;
+            v.happedAt = payload.happedAt;
             v.memo = payload.memo;
-            v.status = payload.status;
             v.imageUrls = payload.imageUrls;
-            v.Friends = payload.Friends;
             v.Tags = payload.Tags;
           }
           return v;
@@ -106,7 +104,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, defaultDispatch] = useReducer(reducer, {
     user: null,
     authenticated: false,
-    stampList: [],
+    happList: [],
   });
 
   const dispatch = (type: AuthActionEnum, payload?: any) => {

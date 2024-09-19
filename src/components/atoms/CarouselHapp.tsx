@@ -44,7 +44,7 @@ const CarouselHapp: React.FC<CarouselProps> = ({
                 <div className="p-3">
                   <Image
                     src={imageUrl}
-                    alt={`Uploaded Stamp image ${index}`}
+                    alt={`Uploaded Happ image ${index}`}
                     className="w-auto h-auto max-w-full object-contain aspect-square"
                     priority
                     width={size}
