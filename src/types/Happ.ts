@@ -1,5 +1,4 @@
 import { Comment } from './Comment';
-import { Friend } from './Friend';
 import { Tag } from './Tag';
 import { User } from './User';
 

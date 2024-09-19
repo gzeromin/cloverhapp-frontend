@@ -1,7 +1,7 @@
-import { Stamp } from './Happ';
+import { Happ } from './Happ';
 
 export interface Tag {
   id: string;
   name: string;
-  TagsStamps: Stamp[];
+  Happs: Happ[];
 }

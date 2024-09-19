@@ -7,8 +7,6 @@ import { TbPhoto, TbArrowsMove } from 'react-icons/tb';
 import { TfiCheckBox } from 'react-icons/tfi';
 import { Language, Loading } from '@/mobx/index';
 import TextareaHapp from '../atoms/TextareaHapp';
-import SelectHapp from '../atoms/SelectHapp';
-import { RxLockClosed, RxLockOpen1, RxLockOpen2 } from 'react-icons/rx';
 import { observer } from 'mobx-react-lite';
 import cls from 'classnames';
 import FileUploadHapp from '../atoms/FileUploadHapp';
