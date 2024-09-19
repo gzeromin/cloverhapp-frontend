@@ -22,7 +22,8 @@
       "@/*": ["./src/*"],
       "@public/*": ["./public/*"],
       "@fonts": ["./src/styles/fonts"]
-    }
+    },
+    "types": ["cypress"]
   },
   "include": [
     "next-env.d.ts", 
@@ -30,6 +31,8 @@
     "**/*.tsx", 
     ".next/types/**/*.ts", 
     "src/utils/patterns.util.ts",
+    "cypress/**/*.ts",
+    "cypress/**/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }

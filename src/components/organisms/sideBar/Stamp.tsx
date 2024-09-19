@@ -2,11 +2,11 @@ import { memo, useEffect, useState } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import { UserIcon } from '@/types/UserIcon';
 import { fetcher } from '@/utils/api.util';
-import SideBarStampIcon from './SideBarStampIcon';
 import api from '@/utils/api.util';
 import { AuthActionEnum, useAuthDispatch } from '@/context/auth';
 import { Icon } from '@/types/Icon';
 import { useParams } from 'next/navigation';
+import SideBarStampIcon from '@/components/molecules/SideBarStampIcon';
 
 interface Props {}
 
@@ -71,7 +71,7 @@ const Stamp: React.FC<Props> = () => {
   };
 
   return (
-    <div className="h-[590px] overflow-y-auto">
+    <div className="h-[590px] overflow-y-auto" test-id="stampComponent">
       <div className="grid grid-cols-3 gap-3 p-2">
         {userIcons?.map((userIcon, index) => (
           <SideBarStampIcon

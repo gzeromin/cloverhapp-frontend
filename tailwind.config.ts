@@ -8,11 +8,11 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      sm: '480px',
-      nm: '574px',
-      md: '768px',
-      lg: '960px',
-      xl: '1440px',
+      sm: '480px', // 480px x 800px (세로 화면을 감안한 일반적인 스마트폰 사이즈)
+      nm: '574px', // 574px x 800px (스마트폰 중 큰 사이즈, 또는 작은 태블릿 사이즈)
+      md: '768px', // 768px x 1024px (태블릿 화면 사이즈)
+      lg: '960px', // 960px x 1024px (작은 노트북 화면 사이즈)
+      xl: '1440px', // 1440px x 900px (큰 데스크탑 화면 사이즈)
     },
     extend: {
       colors: {

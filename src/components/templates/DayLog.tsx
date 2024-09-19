@@ -60,7 +60,7 @@ const DayLog: React.FC<DayLogProps> = ({
   };
 
   return (
-    <div className={cls(className)}>
+    <div className={cls(className)} test-id='dayLogComponent'>
       <div className="flex h-[90vh] pb-14 flex-col overflow-y-auto">
         {Object.entries(stamps).map(
           ([monthDate, stampSection]: [string, Stamp[]]) => {

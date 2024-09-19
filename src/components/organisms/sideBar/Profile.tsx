@@ -1,5 +1,5 @@
 import { memo, useRef } from 'react';
-import UserProrile from './UserProrile';
+import UserProrile from '../../molecules/UserProrile';
 import { Dialog, Language, Loading } from '@/mobx';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import api, { BUCKET_URL } from '@/utils/api.util';
@@ -23,12 +23,12 @@ const Profile: React.FC<Props> = () => {
       Language.$t.Placeholder.Nickname,
       Language.$t.Input.Nickname,
       Language.$t.Placeholder.Nickname,
-      onSubmit,
+      onSubmitChangeName,
       user?.nickname,
     );
   };
 
-  const onSubmit = async (input: string): Promise<void> => {
+  const onSubmitChangeName = async (input: string): Promise<void> => {
     const res = await api.post('/auth/change-nickname', {
       nickname: input,
     });
@@ -91,7 +91,7 @@ const Profile: React.FC<Props> = () => {
   };
 
   return (
-    <div className=''>
+    <div className='' test-id="profileComponent">
       {/* profile Area */}
       <div className="pt-3 flex flex-col grow">
         <div className={cls('p-4 flex gap-4 items-center justify-around flex-wrap')}>
@@ -134,12 +134,20 @@ const Profile: React.FC<Props> = () => {
           </div>
         </div>
         {/* change photo */}
-        <button
-          className={cls(buttonStyle, 'py-3')}
-          onClick={handleOpenImageRef}
-        >
-          {Language.$t.Button.ChangePhoto}
-        </button>
+        <div className={cls('flex gap-1 p-1')}>
+          <button
+            className={cls(buttonStyle, 'py-1')}
+            onClick={handleOpenImageRef}
+          >
+            {Language.$t.Button.DeletePhoto}
+          </button>
+          <button
+            className={cls(buttonStyle, 'py-1')}
+            onClick={handleOpenImageRef}
+          >
+            {Language.$t.Button.ChangePhoto}
+          </button>
+        </div>
       </div>
       {/* Button Area */}
       <div className={cls('flex flex-col gap-0')}>

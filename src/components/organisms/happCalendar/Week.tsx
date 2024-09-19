@@ -2,11 +2,11 @@ import { Language, TimeCtrllor } from '@/mobx';
 import dateUtil from '@/utils/date.util';
 import { observer } from 'mobx-react-lite';
 import { memo } from 'react';
-import CellW from '../molecules/CellW';
 import { useAuthState } from '@/context/auth';
 import { Stamp } from '@/types/Stamp';
 import cls from 'classnames';
-import CalendarStamp from '../molecules/CalendarStamp';
+import CellW from '@/components/molecules/week/CellW';
+import CalendarStamp from '@/components/molecules/CalendarStamp';
 
 const Week: React.FC = () => {
   const { stampList } = useAuthState();

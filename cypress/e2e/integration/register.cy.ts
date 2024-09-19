@@ -1,4 +1,3 @@
-
 describe('회원가입 페이지', () => {
 
   beforeEach(() => {
@@ -44,7 +43,7 @@ describe('회원가입 페이지', () => {
       url: '**/auth/signup',
     }, {
       statusCode: 400,
-      fixture: 'register/form-error.json',
+      fixture: 'integration/register/form-error.json',
     });
     cy.get('@signupButton').click();
     // then
@@ -74,7 +73,7 @@ describe('회원가입 페이지', () => {
       url: '**/auth/signup',
     }, {
       statusCode: 500,
-      fixture: 'register/system-error.json',
+      fixture: 'integration/register/system-error.json',
     });
     cy.get('@signupButton').click();
     // then
@@ -103,7 +102,7 @@ describe('회원가입 페이지', () => {
       url: '**/auth/signup',
     }, {
       statusCode: 201,
-      fixture: 'register/success.json',
+      fixture: 'integration/register/success.json',
     });
     cy.get('@signupButton').click();
     // then

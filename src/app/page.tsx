@@ -17,18 +17,18 @@ function Home() {
       />
       <div className="relative basis-10/12 m-auto">
         {/* Web */}
-        <div className="hidden lg:block p-2 rounded-lg bg-primary">
+        <div className="hidden md:block p-2 rounded-lg bg-primary">
           <div className="p-2 border border-white border-dashed rounded-lg bg-primary">
             <div className="h-[600px] border-2 rounded-lg bg-white">
               <div className="flex h-full">
-                <HappCalendar className="w-full lg:mr-1 lg:w-9/12" />
-                <SideBar className="hidden w-3/12 ml-1 lg:block" />
+                <HappCalendar className="w-full lg:mr-1 lg:w-9/12"/>
+                <SideBar className="hidden w-3/12 ml-1 lg:block"/>
               </div>
             </div>
           </div>
         </div>
         {/* Mobile */}
-        <DayLog className="block lg:hidden pt-14 h-screen"/>
+        <DayLog className="block md:hidden pt-14 h-screen"/>
       </div>
     </div>
   );

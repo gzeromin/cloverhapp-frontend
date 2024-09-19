@@ -2,15 +2,15 @@
 import { Language } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { memo, useState } from 'react';
-import Profile from '../molecules/Profile';
-import Home from '../molecules/Home';
-import Stamp from '../molecules/Stamp';
-import Memo from '../molecules/Memo';
-import Visitor from '../molecules/Visitor';
+import Profile from '../organisms/sideBar/Profile';
+import Home from '../organisms/sideBar/Home';
+import Stamp from '../organisms/sideBar/Stamp';
+import Memo from '../organisms/sideBar/Memo';
+import Visitor from '../organisms/sideBar/Visitor';
 import { useAuthState } from '@/context/auth';
 import { RiLock2Line } from 'react-icons/ri';
-import { useRouter } from 'next/navigation';
 import cls from 'classnames';
+import Link from 'next/link';
 
 interface Props {
   className: string;
@@ -26,8 +26,7 @@ enum Menu {
 
 const SideBar: React.FC<Props> = ({ className }) => {
   const { user } = useAuthState();
-  const [selectedMenu, setSelectedMenu] = useState('Profile');
-  const router = useRouter();
+  const [selectedMenu, setSelectedMenu] = useState(Menu.Memo);
 
   const showMenu = () => {
     switch (selectedMenu) {
@@ -46,28 +45,25 @@ const SideBar: React.FC<Props> = ({ className }) => {
     }
   };
 
-  const loginHandler = () => {
-    router.push('/login');
-  };
-
   const tabStyle = (menu: string) => {
     if (selectedMenu === menu) {
-      return '-rotate-45 inline-block text-primary bg-gray-100 rounded-t-lg';
+      return '-rotate-45 inline-block rounded-t-lg bg-gray-100 text-primary';
     }
     return '-rotate-45 inline-block rounded-t-lg hover:bg-gray-100 bg-gray-50 hover:text-gray-600 text-xs';
   };
 
   return (
-    <div className={className}>
+    <div className={className} test-id='sideBarComponent'>
       {/*  로그인 안했을 때 */}
       { !user &&
         <div 
           className={cls('flex flex-col h-full items-center justify-center relative',
             'bg-gray-200'
-          )}  
+          )}
+          test-id="SideBarloginRequest"
         >
           <RiLock2Line className={cls('text-5xl text-green-500')}/>
-          <div 
+          <Link 
             className={
               cls( 
                 'text-3xl text-gray-500', 
@@ -75,43 +71,49 @@ const SideBar: React.FC<Props> = ({ className }) => {
                 'hover:underline cursor-pointer', 
                 'decoration-primary underline-offset-2 decoration-2 decoration-dashed',
               )}
-            onClick={() => loginHandler()}
+            href="/login"
+            test-id="loginLink"
           >
             {Language.$t.SideBar.RequestLogin}
-          </div>
+          </Link>
         </div>
       }
       {/* 로그인 했을 때 */}
       { user &&
-      <div>
+      <div test-id="SideBarMenu">
         <div className="h-[40px] flex items-end justify-around text-sm font-medium text-gray-500">
           <button
             className={tabStyle(Menu.Memo)}
             onClick={() => setSelectedMenu(Menu.Memo)}
+            test-id="memoButton"
           >
             {Language.$t.SideBar.Memo}
           </button>
           <button
             className={tabStyle(Menu.Home)}
             onClick={() => setSelectedMenu(Menu.Home)}
+            test-id="homeButton"
           >
             {Language.$t.SideBar.Home}
           </button>
           <button
             className={tabStyle(Menu.Stamp)}
             onClick={() => setSelectedMenu(Menu.Stamp)}
+            test-id="stampButton"
           >
             {Language.$t.SideBar.Stamp}
           </button>
           <button
             className={tabStyle(Menu.Visitor)}
             onClick={() => setSelectedMenu(Menu.Visitor)}
+            test-id="visitorButton"
           >
             {Language.$t.SideBar.Visitor}
           </button>
           <button
             className={tabStyle(Menu.Profile)}
             onClick={() => setSelectedMenu(Menu.Profile)}
+            test-id="profileButton"
           >
             {Language.$t.SideBar.Profile}
           </button>

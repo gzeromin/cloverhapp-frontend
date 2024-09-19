@@ -4,7 +4,8 @@ interface Props {}
 
 const Home: React.FC<Props> = () => {
   return (
-    <div className="flex flex-col p-3">
+    <div className="flex flex-col p-3"
+      test-id="homeComponent">
       오늘 목표로 하는 스탬프
       <div>1</div>
       <div>2</div>

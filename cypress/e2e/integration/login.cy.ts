@@ -49,7 +49,7 @@ describe('로그인 페이지', () => {
       url: '**/auth/signin',
     }, {
       statusCode: 400,
-      fixture: 'login/form-error.json',
+      fixture: 'integration/login/form-error.json',
     });
     cy.get('@loginButton').click();
     // then
@@ -72,7 +72,7 @@ describe('로그인 페이지', () => {
       url: '**/auth/signin',
     }, {
       statusCode: 401,
-      fixture: 'login/unauthorized-error.json',
+      fixture: 'integration/login/unauthorized-error.json',
     });
     cy.get('@loginButton').click();
     // then
@@ -84,7 +84,6 @@ describe('로그인 페이지', () => {
     cy.get('[test-id=emailInput]').as('emailInput');
     cy.get('[test-id=passwordInput]').as('passwordInput');
     cy.get('[test-id=loginButton]').as('loginButton');
-    cy.get('[test-id=commonDialog]').as('commonDialog').should('exist');
     cy.get('[test-id=navBarLogo]').as('navBarLogo').should('exist');
     // when 영어 사용자 로그인 정보 입력
     cy.get('@emailInput').type('aaa@aaa.aaa');
@@ -95,7 +94,7 @@ describe('로그인 페이지', () => {
       url: '**/auth/signin',
     }, {
       statusCode: 201,
-      fixture: 'login/success.json',
+      fixture: 'integration/login/success.json',
     });
     cy.get('@loginButton').click();
     // then

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 import Footer from '@/components/templates/Footer';
 import NavBar from '@/components/templates/NavBar';
-import LoadingHapp from '@/components/organisms/LoadingHapp';
-import DialogHapp from '@/components/organisms/DialogHapp';
+import LoadingHapp from '@/components/templates/LoadingHapp';
+import DialogHapp from '@/components/templates/DialogHapp';
 import { AuthProvider } from '@/context/auth';
 import Script from 'next/script';
 
