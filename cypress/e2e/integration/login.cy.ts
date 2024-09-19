@@ -99,7 +99,7 @@ describe('로그인 페이지', () => {
     cy.get('@loginButton').click();
     // then
     cy.url().should('include', '/');
-    cy.get('@navBarLogo').should('have.text','Three Clover');
+    cy.get('@navBarLogo').should('have.text','CloverHapp');
   });
 
   it('회원가입 페이지로 이동', () => {
