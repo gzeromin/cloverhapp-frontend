@@ -7,6 +7,8 @@ import api from '@/utils/api.util';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import Week from '@/components/organisms/happCalendar/Week';
 import StampPalette from '@/components/organisms/StampPalette';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 interface Props {
   className: string;
@@ -33,7 +35,9 @@ const HappCalendar: React.FC<Props> = ({ className }) => {
 
   return (
     <div className={className}>
-      <div className="flex justify-between whitespace-nowrap">
+      <div
+        className="flex justify-between whitespace-nowrap"
+      >
         <div className="flex">
           {/* < */}
           <span className={goBtnStyle}>
@@ -68,7 +72,9 @@ const HappCalendar: React.FC<Props> = ({ className }) => {
         </div>
         <StampPalette size={40}/>
       </div>
-      <Week />
+      <DndProvider backend={HTML5Backend}>
+        <Week />
+      </DndProvider>
     </div>
   );
 };

@@ -76,14 +76,14 @@ const getFiveToFourHour = (date: Date, targetDate: Date) => {
   if (
     targetDateYear === thatDateYear &&
     targetDateMonth === thatDateMonth &&
-    targetDateDate == thatDate &&
-    targetDateHour > 4
+    targetDateDate === thatDate &&
+    targetDateHour >= 5
   ) {
     return true;
   } else if (
     targetDateYear === thatDateYear &&
     targetDateMonth === thatDateMonth &&
-    targetDateDate == nextDate &&
+    targetDateDate === nextDate &&
     targetDateHour < 5
   ) {
     return true;
@@ -112,28 +112,22 @@ const getFormatHour = (date: Date) => {
   return `${hour}:${minute}`;
 };
 
-export default {
+const dateUtils = {
   weeksEn,
   weeksJp,
   weeksJp2,
   isTargetDate: (date: Date, targetDate: Date) => {
-    if (
+    return (
       date.getFullYear() === targetDate.getFullYear() &&
       date.getMonth() === targetDate.getMonth() &&
       date.getDate() === targetDate.getDate()
-    )
-      return true;
-
-    return false;
+    );
   },
   isTargetMonth: (date: Date, targetDate: Date) => {
-    if (
+    return (
       date.getFullYear() === targetDate.getFullYear() &&
       date.getMonth() === targetDate.getMonth()
-    )
-      return true;
-
-    return false;
+    );
   },
   getMonthStr: (month: number) => {
     return months[month];
@@ -157,3 +151,5 @@ export default {
     return date.getDay() === 0;
   },
 };
+
+export default dateUtils;

@@ -4,6 +4,8 @@ import { GrAdd } from 'react-icons/gr';
 import { useDropzone } from 'react-dropzone';
 import { useCallback } from 'react';
 import CarouselHapp from './CarouselHapp';
+import { observer } from 'mobx-react-lite';
+import { Language } from '@/mobx';
 
 interface FileUploadHappProps extends InputHTMLAttributes<HTMLInputElement> {
   uploadedImages: File[] | null;
@@ -76,10 +78,10 @@ const FileUploadHapp: React.FC<FileUploadHappProps> = ({
         }`}
       >
         <GrAdd size="50px" />
-        Drag & drop or click to upload an image
+        {Language.$t.Placeholder.FileUpload}
       </p>
     </div>
   );
 };
 
-export default FileUploadHapp;
+export default observer(FileUploadHapp);

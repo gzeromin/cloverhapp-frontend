@@ -22,7 +22,7 @@ const Home: React.FC = () => {
       <Link 
         className={cls(
           'z-50',
-          'text-5xl font-semibold text-gray-700',
+          'text-3xl text-gray-700 text-center',
           Language.logoFont,
           'hover:underline underline-offset-8',
           'decoration-8 decoration-dotted decoration-green-700'

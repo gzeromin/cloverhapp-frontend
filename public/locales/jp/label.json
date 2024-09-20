@@ -28,7 +28,8 @@
     "Accept": "受諾",
     "Deny": "拒否",
     "Pending": "保留",
-    "ChargeDroplet": "チャージ水滴"
+    "ChargeDroplet": "チャージ水滴",
+    "Stamping": "スタンプ押し"
   },
   "Input": {
     "Email": "Eメール",

@@ -14,18 +14,24 @@ import AddFriendsHapp from '../atoms/AddFriendsHapp';
 import AddTagsHapp from '../atoms/AddTagsHapp';
 import { GoPeople, GoTag } from 'react-icons/go';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
+import { UserStamp } from '@/types/UserStamp';
+import { handleError } from '@/utils/error.util';
+import { TfiPencilAlt } from 'react-icons/tfi';
+import { FaExclamation } from 'react-icons/fa';
+import { AiFillCloseSquare } from 'react-icons/ai';
 
 interface HappSaveModalProps {
-  happName: string | undefined;
+  userStamp: UserStamp | undefined;
   closeModal: () => void;
   mutateHapp?: () => void;
 }
 
 const HappSaveModal: React.FC<HappSaveModalProps> = ({
-  happName,
+  userStamp,
   closeModal,
   mutateHapp,
 }) => {
+  const [openMemoSpace, setOpenMemoSpace] = useState(false);
   const [openUploadPhoto, setOpenUploadPhoto] = useState(false);
   const [uploadedImages, setUploadedImages] = useState<File[] | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>();
@@ -42,7 +48,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
       if (user) {
         const createHappDto = {
           userId: user.id,
-          happName,
+          UserStamp: userStamp,
           memo,
         };
         const formData = new FormData();
@@ -68,6 +74,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
       closeModal();
     } catch (error: any) {
       console.log(error);
+      handleError(error);
     } finally {
       Loading.setIsLoading(false);
     }
@@ -82,30 +89,61 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
       </div>
       <div className="z-50 box-border shadow-lg lg:min-w-[400px] bg-white border border-light-black rounded-lg text-2xl">
         {/* header */}
-        <div className="flex flex-col gap-2 items-center p-3 pb-0 lg:flex-row">
-          <Image
-            src={`https://elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com/cloverhapp/${happName}.png`}
-            alt={`happ modify modal ${happName}`}
-            className="h-auto object-contain aspect-square lg:w-1/2"
-            width={90}
-            height={90}
-            priority
+        <div className="relative flex flex-col gap-2 items-stretch p-3 pb-0 lg:flex-row">
+          <AiFillCloseSquare
+            className={cls(
+              'text-primary cursor-pointer text-3xl', 
+              'mr-2 hover:text-primary-hover',
+              'absolute right-0'
+            )}
+            onClick={closeModal}
           />
-          <TextareaHapp
-            className='text-lg'
-            placeholder={Language.$t.Placeholder.Memo}
-            rows={2}
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-            autoHeight={true}
-            border={true}
-            marginBottom=""
-          />
+          {userStamp &&
+            <Image
+              src={userStamp.Stamp.url}
+              alt={`happ modify modal ${userStamp.alias}`}
+              className="h-auto object-contain aspect-square lg:w-1/2"
+              width={90}
+              height={90}
+              priority
+            />
+          }
+          <div
+            className={cls('w-full flex flex-col justify-around items-center')}
+          >
+            <p className={cls(
+              Language.logoFont,
+              'text-4xl'
+            )}>
+              {userStamp?.alias}
+            </p>
+            <button
+              className={cls(
+                'w-full rounded-lg border-primary',
+                'border-2 border-dashed', 
+                'hover:bg-primary hover:text-white py-1.5 px-3',
+                'text-primary font-normal text-lg',
+                'flex items-center justify-center'
+              )}
+              onClick={createHapp}
+            >
+              {Language.$t.Button.Stamping} <FaExclamation />
+            </button>
+          </div>
         </div>
         {/* body */}
         <div className="pt-0 p-2">
           {/* Mini Navigation */}
           <div className="flex gap-3 justify-end items-center bg-primary-hover rounded p-2 mb-2">
+            <TfiPencilAlt 
+              className={cls(
+                'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
+                {
+                  'text-primary': openMemoSpace,
+                },
+              )}
+              onClick={() => setOpenMemoSpace(!openMemoSpace)}
+            />
             <TbPhoto
               className={cls(
                 'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
@@ -136,6 +174,16 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             />
           </div>
           <div className="flex flex-col gap-3">
+            <TextareaHapp
+              className={`${openMemoSpace ? 'block' : 'hidden'} text-lg`}
+              placeholder={Language.$t.Placeholder.Memo}
+              value={memo}
+              onChange={(e) => setMemo(e.target.value)}
+              autoHeight={true}
+              border={true}
+              marginBottom=""
+              textAreaClassName='border-dashed border-2 border-gray-100 min-h-[50px]'
+            />
             {/* Drop Zone */}
             <FileUploadHapp
               className={`${openUploadPhoto ? 'block' : 'hidden'}`}
@@ -160,21 +208,6 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             />
             
           </div>
-        </div>
-        {/* footer */}
-        <div className="grid grid-flow-col justify-center p-1 border-t border-light-gray">
-          <button
-            className="m-1 border rounded-lg bg-cancel hover:bg-gray-100 py-1.5 px-3 text-white font-extralight text-lg"
-            onClick={closeModal}
-          >
-            {Language.$t.Button.Cancel}
-          </button>
-          <button
-            className="m-1 border rounded-lg bg-primary hover:bg-primary-hover py-1.5 px-3 text-white font-extralight text-lg"
-            onClick={createHapp}
-          >
-            {Language.$t.Button.Save}
-          </button>
         </div>
       </div>
     </div>

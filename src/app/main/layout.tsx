@@ -12,7 +12,7 @@ export default function DashboardLayout(props: {
 
   const pattern = 'pattern-cross';
   const color = 'pattern-green-700';
-  const size = 'pattern-size-6';
+  const size = 'pattern-size-8';
   const opacity = 'pattern-opacity-40';
 
   return (

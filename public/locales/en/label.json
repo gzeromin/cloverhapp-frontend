@@ -28,7 +28,8 @@
     "Accept": "Accept",
     "Deny": "Deny",
     "Pending": "Pending",
-    "ChargeDroplet": "Charge Droplet"
+    "ChargeDroplet": "Charge Droplet",
+    "Stamping": "Stamping"
   },
   "Input": {
     "Email": "Email",

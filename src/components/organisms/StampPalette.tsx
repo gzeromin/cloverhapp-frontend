@@ -3,36 +3,28 @@ import { memo, useState } from 'react';
 import cls from 'classnames';
 import StampButton from '../molecules/StampButton';
 import HappSaveModal from '../molecules/HappSaveModal';
+import { fetcher } from '@/utils/api.util';
+import { UserStamp } from '@/types/UserStamp';
+import useSWR from 'swr';
 
 interface StampPaletteProps {
   className?: string;
   size?: number;
   mutateStamp?: () => void;
 }
-const stamps = [
-  'happystamp',
-  'morning',
-  'drug',
-  'meal',
-  'meditation',
-  'exercise',
-  'english',
-  'book',
-  'savings',
-  'water',
-  'dream',
-];
 const StampPalette: React.FC<StampPaletteProps> = ({
   className,
   size = 45,
   mutateStamp,
 }) => {
   const [showStampSaveModal, setShowStampSaveModal] = useState<boolean>(false);
-  const [selectedStamp, setSelectedStamp] = useState<string>();
+  const [selectedUserStamp, setSelectedUserStamp] = useState<UserStamp>();
+  const { data: userStamps } = useSWR<UserStamp[]>('/user-stamp', fetcher);
 
-  const onClickStamp = (stamp: string) => {
+
+  const onClickStamp = (userStamp: UserStamp) => {
     setShowStampSaveModal(true);
-    setSelectedStamp(stamp);
+    setSelectedUserStamp(userStamp);
   };
   
   return (
@@ -41,19 +33,18 @@ const StampPalette: React.FC<StampPaletteProps> = ({
       'flex items-center justify-start gap-3',
       'overflow-x-auto whitespace-nowrap'
     )}>
-      {stamps.map((stamp) => 
+      {userStamps && userStamps.map((userStamp) => 
         <StampButton
-          src={`https://elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com/cloverhapp/${stamp}.png`}
-          key={`stampPalette-${stamp}`}
-          alt={stamp}
-          onClickStamp={() => onClickStamp(stamp)}
+          src={userStamp.Stamp.url}
+          key={`stampPalette-${userStamp.id}`}
+          alt={userStamp.alias}
+          onClickStamp={() => onClickStamp(userStamp)}
           size={size}
         />
       )}
       {showStampSaveModal && (
-
         <HappSaveModal 
-          happName={selectedStamp}
+          userStamp={selectedUserStamp}
           closeModal={() => setShowStampSaveModal(false)}
           mutateHapp={mutateStamp}
         />

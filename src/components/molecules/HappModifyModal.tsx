@@ -18,6 +18,7 @@ import AddTagsHapp from '../atoms/AddTagsHapp';
 import { LuCopyPlus } from 'react-icons/lu';
 import { Friend } from '@/types/Friend';
 import { Tag } from '@/types/Tag';
+import Image from 'next/image';
 
 interface HappModifyModalProps {
   happId: string;
@@ -38,7 +39,7 @@ const HappModifyModal: React.FC<HappModifyModalProps> = ({
   const [friendList, setFriendList] = useState<Friend[]>([]);
   const [tagList, setTagList] = useState<Tag[]>([]);
   const [memo, setMemo] = useState('');
-
+  const [stampUrl, setStampUrl] = useState<string | undefined>();
   const dispatch = useAuthDispatch();
 
   useEffect(() => {
@@ -46,6 +47,7 @@ const HappModifyModal: React.FC<HappModifyModalProps> = ({
       const happ: Happ = res.data;
       setHappedAt(new Date(happ.happedAt));
       setMemo(happ.memo);
+      setStampUrl(happ.UserStamp.Stamp.url);
       if (happ.imageUrls && happ.imageUrls.length !== 0) {
         setImageUrls(happ.imageUrls);
         setOpenUploadPhoto(true);
@@ -98,15 +100,16 @@ const HappModifyModal: React.FC<HappModifyModalProps> = ({
       <div className="z-50 box-border shadow-lg min-w-[500px] max-w-[600px] bg-white border border-light-black rounded-lg text-2xl">
         {/* header */}
         <div className="flex justify-between items-center border-b border-light-gray p-3">
-
-          {/* <Image
-              src={BASE_URL + '/' + userIcon.Icon.url}
-              alt={`happ modify modal ${userIcon.Icon.id}`}
-              className="h-auto object-contain aspect-square"
+          {stampUrl && (
+            <Image
+              src={stampUrl}
+              alt={`happ modify modal ${happId}`}
+              className="object-contain aspect-square"
               priority
               width={50}
               height={50}
-            /> */}
+            />
+          )}
           <AiFillCloseSquare
             className="text-primary cursor-pointer text-3xl mr-2 hover:text-primary-hover"
             onClick={closeModal}

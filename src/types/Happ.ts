@@ -1,6 +1,7 @@
 import { Comment } from './Comment';
 import { Tag } from './Tag';
 import { User } from './User';
+import { UserStamp } from './UserStamp';
 
 export interface Happ {
   happedAt: string;
@@ -12,4 +13,5 @@ export interface Happ {
   User: User;
   Comments: Comment[];
   Tags: Tag[];
+  UserStamp: UserStamp;
 }

@@ -1,7 +1,7 @@
 import { Stamp } from './Stamp';
 import { User } from './User';
 
-export interface UserStamp{
+export interface UserStamp {
   id: string;
   Stamp: Stamp;
   Friend: User;

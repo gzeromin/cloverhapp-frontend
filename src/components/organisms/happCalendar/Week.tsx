@@ -10,7 +10,7 @@ import CalendarHapp from '@/components/molecules/CalendarHapp';
 
 const Week: React.FC = () => {
   const { happList } = useAuthState();
-  
+
   const selectedDate = TimeCtrllor.selectedDate;
   const firstDate =
     selectedDate.getDate() -
@@ -32,7 +32,7 @@ const Week: React.FC = () => {
         );
 
         return (
-          <div 
+          <div
             key={`calendarW week-${i}`}
             className={cls('relative')}
           >

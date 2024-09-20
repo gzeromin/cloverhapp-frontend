@@ -28,7 +28,8 @@
     "Accept": "수락",
     "Deny": "거부",
     "Pending": "보류",
-    "ChargeDroplet": "물방울 충전"
+    "ChargeDroplet": "물방울 충전",
+    "Stamping": "스탬프 찍기"
   },
   "Input": {
     "Email": "이메일",

@@ -15,7 +15,8 @@
     "Title": "input title",
     "SearchFriend": "search friend: search by nickname or email",
     "AddFriend": "who are you with?",
-    "AddTag": "add tags, please."
+    "AddTag": "add tags, please.",
+    "FileUpload": "Drag & drop or click to upload an image"
   },
   "Success": {
     "ChangePassword": "Password was successfully changed.",

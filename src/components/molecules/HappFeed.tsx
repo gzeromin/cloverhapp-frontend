@@ -68,9 +68,9 @@ const HappFeed: React.FC<Props> = ({
           'flex items-center grow gap-4 p-3', 
           'rounded-full bg-white border-2 border-dashed border-gray-300',
         )}>
-          {/* 스탬프 */}
+          {/* Happ */}
           <Image
-            src={`https://elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com/cloverhapp/${happ.id}.png`}
+            src={happ.UserStamp.Stamp.url}
             alt={`happ feed ${happ.id}`}
             className="h-auto object-contain aspect-square lg:w-1/2"
             width={70}
@@ -134,7 +134,7 @@ const HappFeed: React.FC<Props> = ({
       {/* Happ Save Modal */}
       {showHappSaveModal && (
         <HappSaveModal
-          happName={happ.id}
+          userStamp={happ.UserStamp}
           closeModal={() => setShowHappSaveModal(false)}
         />
       )}
