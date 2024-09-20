@@ -1,8 +1,7 @@
 'use client';
-
-import LoginRequest from "@/components/templates/LoginRequest";
-import SideBarLinks from "@/components/templates/SideBarLinks";
-import { useAuthState } from "@/context/auth";
+import LoginRequest from '@/components/templates/LoginRequest';
+import SideBarLinks from '@/components/templates/SideBarLinks';
+import { useAuthState } from '@/context/auth';
 
 export default function DashboardLayout(props: {
   children: React.ReactNode;

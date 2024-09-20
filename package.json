@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "cicd": "next build && next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "test": "cypress open"
   },
   "dependencies": {
