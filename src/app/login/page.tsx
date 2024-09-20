@@ -24,7 +24,7 @@ const Login = () => {
   const router = useRouter();
   useEffect(() => {
     if (user) {
-      router.push('/');
+      router.push('/main');
     }
   }, [user, router]);
 

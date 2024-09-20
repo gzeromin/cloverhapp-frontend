@@ -1,12 +1,13 @@
+'use client';
 import { memo, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import cls from 'classnames';
-import StampPalette from '../organisms/StampPalette';
+import StampPalette from '@/components/organisms/StampPalette';
 import { Happ } from '@/types/Happ';
 import useSWRInfinite from 'swr/infinite';
 import { fetcher } from '@/utils/api.util';
 import makeSection from '@/utils/makeSection.util';
-import HappFeed from '../molecules/HappFeed';
+import HappFeed from '@/components/molecules/HappFeed';
 interface DayLogProps {
   className: string;
 }
@@ -60,7 +61,7 @@ const DayLog: React.FC<DayLogProps> = ({
   };
 
   return (
-    <div className={cls(className)} test-id='dayLogComponent'>
+    <div className={cls(className)}>
       <div className="flex h-[90vh] pb-14 flex-col overflow-y-auto">
         {Object.entries(happs).map(
           ([monthDate, happSection]: [string, Happ[]]) => {

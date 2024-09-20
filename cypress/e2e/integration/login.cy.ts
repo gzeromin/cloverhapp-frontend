@@ -98,7 +98,7 @@ describe('로그인 페이지', () => {
     });
     cy.get('@loginButton').click();
     // then
-    cy.url().should('include', '/');
+    cy.url().should('include', '/main');
     cy.get('@navBarLogo').should('have.text','CloverHapp');
   });
 

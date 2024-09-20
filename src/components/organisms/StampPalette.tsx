@@ -3,6 +3,7 @@ import { memo, useState } from 'react';
 import cls from 'classnames';
 import StampButton from '../molecules/StampButton';
 import HappSaveModal from '../molecules/HappSaveModal';
+
 interface StampPaletteProps {
   className?: string;
   size?: number;
@@ -33,6 +34,7 @@ const StampPalette: React.FC<StampPaletteProps> = ({
     setShowStampSaveModal(true);
     setSelectedStamp(stamp);
   };
+  
   return (
     <div className={cls(
       className, 

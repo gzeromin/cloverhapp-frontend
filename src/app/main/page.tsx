@@ -2,10 +2,10 @@ import { memo } from 'react';
 
 interface Props {}
 
-const Home: React.FC<Props> = () => {
+const Main: React.FC<Props> = () => {
   return (
     <div className="flex flex-col p-3"
-      test-id="homeComponent">
+      test-id="homePage">
       오늘 목표로 하는 스탬프
       <div>1</div>
       <div>2</div>
@@ -15,4 +15,4 @@ const Home: React.FC<Props> = () => {
   );
 };
 
-export default memo(Home);
+export default memo(Main);

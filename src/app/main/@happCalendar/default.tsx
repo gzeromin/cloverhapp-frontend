@@ -5,8 +5,8 @@ import { memo, useEffect } from 'react';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import api from '@/utils/api.util';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
-import Week from '../organisms/happCalendar/Week';
-import StampPalette from '../organisms/StampPalette';
+import Week from '@/components/organisms/happCalendar/Week';
+import StampPalette from '@/components/organisms/StampPalette';
 
 interface Props {
   className: string;
@@ -32,7 +32,7 @@ const HappCalendar: React.FC<Props> = ({ className }) => {
   const iconStyle = 'scale-150';
 
   return (
-    <div className={className} test-id='happCalendarComponent'>
+    <div className={className}>
       <div className="flex justify-between whitespace-nowrap">
         <div className="flex">
           {/* < */}

@@ -41,7 +41,7 @@ const Sale: React.FC<Props> = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting === true) {
-          console.log('[sale]마지막 포스트에 왔습니다.');
+          console.log('[market]마지막 포스트에 왔습니다.');
           setPage(page + 1);
           observer.unobserve(element);
         }

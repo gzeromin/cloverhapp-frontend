@@ -1,5 +1,6 @@
+'use client';
 import { memo, useRef } from 'react';
-import UserProrile from '../../molecules/UserProrile';
+import UserProrile from '@/components/molecules/UserProrile';
 import { Dialog, Language, Loading } from '@/mobx';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import api, { BUCKET_URL } from '@/utils/api.util';
@@ -91,7 +92,7 @@ const Profile: React.FC<Props> = () => {
   };
 
   return (
-    <div className='' test-id="profileComponent">
+    <div className='' test-id="profilePage">
       {/* profile Area */}
       <div className="pt-3 flex flex-col grow">
         <div className={cls('p-4 flex gap-4 items-center justify-around flex-wrap')}>

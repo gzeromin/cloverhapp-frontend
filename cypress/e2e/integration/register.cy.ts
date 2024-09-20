@@ -106,7 +106,7 @@ describe('회원가입 페이지', () => {
     });
     cy.get('@signupButton').click();
     // then
-    cy.url().should('include', '/');
+    cy.url().should('include', '/main');
   });
   
 });
