@@ -45,7 +45,7 @@ const Shop: React.FC<Props> = () => {
           />
         </div>
         {user && user.nickname == 'aaa' &&
-          <Link href="/s/market/upload">
+          <Link href="/market/upload">
             <PiUploadDuotone className={cls(
               'w-[40px] h-[40px] text-light-gray',
               'hover:text-primary cursor-pointer')}

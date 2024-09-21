@@ -49,6 +49,9 @@
     "ChangeAliasMessage": "애칭 변경 메세지",
     "Type": "타입"
   },
+  "Link": {
+    "GetStarted": "시작하기"
+  },
   "StampStatus": {
     "Private": "비공개",
     "Protected": "친구공개",
@@ -63,10 +66,10 @@
     "Medicine": "약",
     "Meal": "식사",
     "Exercise": "운동",
-    "Account": "가계부",
+    "Income": "수입",
+    "Expense": "지출",
     "Book": "책",
-    "Study": "공부",
-    "Work": "일"
+    "Study": "공부"
   },
   "Form": {
     "Select": "선택해주세요",

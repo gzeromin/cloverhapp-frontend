@@ -1,11 +1,13 @@
 'use client';
 import { memo, useState } from 'react';
 import cls from 'classnames';
-import StampButton from '../molecules/StampButton';
-import HappSaveModal from '../molecules/HappSaveModal';
+import StampButton from '@/components/molecules/StampButton';
+import HappSaveModal from '@/components/molecules/HappSaveModal';
 import { fetcher } from '@/utils/api.util';
 import { UserStamp } from '@/types/UserStamp';
 import useSWR from 'swr';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 interface StampPaletteProps {
   className?: string;
@@ -33,15 +35,16 @@ const StampPalette: React.FC<StampPaletteProps> = ({
       'flex items-center justify-start gap-3',
       'overflow-x-auto whitespace-nowrap'
     )}>
-      {userStamps && userStamps.map((userStamp) => 
-        <StampButton
-          src={userStamp.Stamp.url}
-          key={`stampPalette-${userStamp.id}`}
-          alt={userStamp.alias}
-          onClickStamp={() => onClickStamp(userStamp)}
-          size={size}
-        />
-      )}
+      <DndProvider backend={HTML5Backend}>
+        {userStamps && userStamps.map((userStamp) => 
+          <StampButton
+            userStamp={userStamp}
+            key={`stampPalette-${userStamp.id}`}
+            onClickStamp={() => onClickStamp(userStamp)}
+            size={size}
+          />
+        )}
+      </DndProvider>
       {showStampSaveModal && (
         <HappSaveModal 
           userStamp={selectedUserStamp}

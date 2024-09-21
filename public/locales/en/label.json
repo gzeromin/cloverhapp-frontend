@@ -49,6 +49,9 @@
     "ChangeAliasMessage": "Change Alias Message",
     "Type": "Type"
   },
+  "Link": {
+    "GetStarted": "Get Started"
+  },
   "StampStatus": {
     "Private": "Private",
     "Protected": "Friends",
@@ -63,10 +66,10 @@
     "Medicine": "Medicine",
     "Meal": "Meal",
     "Exercise": "Exercise",
-    "Account": "Account",
+    "Income": "Income",
+    "Expense": "Expense",
     "Book": "Book",
-    "Study": "Study",
-    "Work": "Work"
+    "Study": "Study"
   },
   "Form": {
     "Select": "Select",

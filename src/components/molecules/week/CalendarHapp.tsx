@@ -1,13 +1,13 @@
 'use client';
 import cls from 'classnames';
-import { Happ } from '@/types/Happ';
+import { Dnd, Happ } from '@/types/Happ';
 import { useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import HappModifyModal from './HappModifyModal';
-import HappDisplayModal from './HappDisplayModal';
-import Image from 'next/image';
 import { useAuthState } from '@/context/auth';
+import Image from 'next/image';
 import { useDrag } from 'react-dnd';
+import HappModifyModal from '../HappModifyModal';
+import HappDisplayModal from '../HappDisplayModal';
 
 interface CalendarHappProps {
   happ: Happ;
@@ -34,16 +34,15 @@ const CalendarHapp: React.FC<CalendarHappProps> = ({ happ }) => {
   const positionX = (minutes / 60) * 50;
 
   const [{ isDragging }, dragRef] = useDrag({
-    type: 'HAPP',
+    type: Dnd.MODIFIED,
     item: { id: happ.id, happedAt },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
   
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLImageElement>(null);
   dragRef(ref);
-
 
   const setShow = () => {
     if (user && user.id == happ.userId) {
@@ -54,24 +53,28 @@ const CalendarHapp: React.FC<CalendarHappProps> = ({ happ }) => {
   };
   return (
     <div 
-      className={cls('hover:cursor-pointer bg-transparent', { 'opacity-50': isDragging })}
+      className={cls('hover:cursor-pointer bg-transparent')}
     >
       <div
         key={`happ ${happ.id}`}
         className={cls('absolute flex items-start', 'group', 'bg-transparent')}
         style={{ top: `${positionY}%`, left: `${positionX}%` }} // top 값을 계산한 퍼센트로 설정
       >
-        <div ref={ref}>
-          <Image
-            src={happ.UserStamp.Stamp.url}
-            alt={`happedAt ${happ.happedAt}`}
-            className={cls('translate-x-3', 'rounded-full object-contain aspect-square hover:bg-primary-hover')}
-            width={33}
-            height={33}
-            onClick={setShow}
-            priority
-          />
-        </div>
+        <Image
+          ref={ref}
+          src={happ.UserStamp.Stamp.url}
+          alt={`happedAt ${happ.happedAt}`}
+          className={cls(
+            'translate-x-3',
+            'rounded-full object-contain aspect-square',
+            'hover:bg-primary-hover',
+            { 'opacity-50': isDragging }
+          )}
+          width={33}
+          height={33}
+          onClick={setShow}
+            
+        />
         <div className={cls(
           'ml-3 hidden group-hover:block', 
           'text-xs text-center text-gray-700',

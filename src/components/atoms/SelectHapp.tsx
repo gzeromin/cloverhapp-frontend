@@ -54,7 +54,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
     const option =
       options.find((option) => option.value == selected) ?? options[0];
     setSelectedOption(option);
-  }, [selected]);
+  }, [selected, options]);
 
   const selectValue = (value: string | number) => {
     onSelected(value);

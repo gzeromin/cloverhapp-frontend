@@ -6,9 +6,9 @@ import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import api from '@/utils/api.util';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import Week from '@/components/organisms/happCalendar/Week';
-import StampPalette from '@/components/organisms/StampPalette';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import StampPalette from '@/components/organisms/happCalendar/StampPalette';
 
 interface Props {
   className: string;

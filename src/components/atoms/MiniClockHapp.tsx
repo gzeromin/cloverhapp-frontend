@@ -31,7 +31,7 @@ const MiniClock: React.FC<MiniClockProps> = ({
     } else if (happedHour == 12) {
       setMeridiem(MeridiemEnum.PM);
     }
-  }, []);
+  }, [happedHour]);
 
   const center = { x: 67, y: 67 }; // 시계 중심 위치
   const radius = 67; // 시계 숫자의 원형 배치 반지름

@@ -17,7 +17,7 @@ const UserStamps: React.FC<Props> = () => {
 
   const getKey = (pageIndex: number, previousPageData: UserStamp[]) => {
     if (previousPageData && !previousPageData.length) return null;
-    return `/user-stamp?page=${pageIndex}`;
+    return `/user-stamp/page?page=${pageIndex}`;
   };
 
   const {

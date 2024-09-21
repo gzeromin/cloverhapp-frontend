@@ -15,3 +15,8 @@ export interface Happ {
   Tags: Tag[];
   UserStamp: UserStamp;
 }
+
+export enum Dnd {
+  MODIFIED = 'MODIFIED',
+  CREATED = 'CREATED'
+}

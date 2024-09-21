@@ -49,6 +49,9 @@
     "ChangeAliasMessage": "愛称変更メッセージ",
     "Type": "タイプ"
   },
+  "Link": {
+    "GetStarted": "始める"
+  },
   "StampStatus": {
     "Private": "非公開",
     "Protected": "友達公開",
@@ -63,10 +66,10 @@
     "Medicine": "ドラッグ",
     "Meal": "食事",
     "Exercise": "運動",
-    "Account": "家計簿",
+    "Income": "収入",
+    "Expense": "支出",
     "Book": "本",
-    "Study": "勉強",
-    "Work": "仕事"
+    "Study": "勉強"
   },
   "Form": {
     "Select": "選択してっください",

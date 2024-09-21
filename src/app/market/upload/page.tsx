@@ -90,7 +90,7 @@ const Upload: React.FC = () => {
     )}>
       <IoArrowUndoCircleOutline
         className="absolute top-[30px] left-[30px] text-6xl text-primary hover:text-primary-hover cursor-pointer"
-        onClick={() => router.push('/s/market')}
+        onClick={() => router.push('/market')}
       />
       <div className={cls('flex items-center justify-center gap-2')}>
         {/* Drop Zone */}

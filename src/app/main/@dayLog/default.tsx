@@ -2,12 +2,12 @@
 import { memo, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import cls from 'classnames';
-import StampPalette from '@/components/organisms/StampPalette';
 import { Happ } from '@/types/Happ';
 import useSWRInfinite from 'swr/infinite';
 import { fetcher } from '@/utils/api.util';
 import makeSection from '@/utils/makeSection.util';
 import HappFeed from '@/components/molecules/HappFeed';
+import StampPalette from '@/components/organisms/happCalendar/StampPalette';
 interface DayLogProps {
   className: string;
 }

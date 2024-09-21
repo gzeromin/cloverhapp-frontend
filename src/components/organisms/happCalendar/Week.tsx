@@ -6,7 +6,7 @@ import { useAuthState } from '@/context/auth';
 import { Happ } from '@/types/Happ';
 import cls from 'classnames';
 import CellW from '@/components/molecules/week/CellW';
-import CalendarHapp from '@/components/molecules/CalendarHapp';
+import CalendarHapp from '@/components/molecules/week/CalendarHapp';
 
 const Week: React.FC = () => {
   const { happList } = useAuthState();

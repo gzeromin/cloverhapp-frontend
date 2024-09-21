@@ -9,8 +9,8 @@ import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { observer } from 'mobx-react-lite';
 import { Dialog, Language, Loading } from '@/mobx';
 import HappSaveModal from './HappSaveModal';
-import HappDisplayModal from './HappDisplayModal';
 import Image from 'next/image';
+import HappDisplayModal from './HappDisplayModal';
 
 interface Props {
   happ: Happ;

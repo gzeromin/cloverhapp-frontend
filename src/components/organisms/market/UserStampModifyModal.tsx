@@ -24,13 +24,12 @@ const UserStampModifyModal: React.FC<UserStampModifyModalProps> = ({
   const [alias, setAlias] = useState<string | undefined>('');
   const [memo, setMemo] = useState('');
 
-  // const dispatch = useAuthDispatch();
   useEffect(() => {
     if (userStamp) {
       setAlias(userStamp.alias);
       setMemo(userStamp.memo);
     }
-  }, []);
+  }, [userStamp]);
 
   const updateUserStamp = async () => {
     Loading.setIsLoading(true);

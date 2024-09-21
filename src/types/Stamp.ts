@@ -20,9 +20,16 @@ export enum StampType {
   MEDICINE = 'Medicine',
   MEAL = 'Meal',
   EXERCISE = 'Exercise',
-  ACCOUNT = 'Account',
+  INCOME = 'Income',
+  EXPENSE = 'Expense',
   BOOK = 'Book',
   STUDY = 'Study',
-  WORK = 'Work',
 }
 
+export const WEEK_TOTAL = [
+  StampType.HAPPY,
+  StampType.STUDY,
+  StampType.EXERCISE,
+  StampType.MEDITATION,
+  StampType.BOOK,
+];

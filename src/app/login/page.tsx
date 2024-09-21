@@ -1,5 +1,4 @@
 'use client';
-import cls from 'classnames';
 import InputHapp from '@/components/atoms/InputHapp';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -46,19 +45,6 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <div
-        className={cls('absolute right-14 top-24 tracking-widest text-xl',
-          'leading-loose -z-50 text-primary-100 text-end',
-          Language.logoFont
-        )}
-      >
-        <div>{Language.$t.HappyStamp.Message1}</div>
-        <div>{Language.$t.HappyStamp.Message2}</div>
-        <div>{Language.$t.HappyStamp.Message3}</div>
-        <div>{Language.$t.HappyStamp.Message4}</div>
-        <div>{Language.$t.HappyStamp.Message5}</div>
-        <div>{Language.$t.HappyStamp.Message6}</div>
-      </div>
       <Image
         className="mb-3"
         src={`${BUCKET_URL}/public/icons/happystamp.png`}

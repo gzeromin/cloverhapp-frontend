@@ -1,21 +1,34 @@
 import Image from 'next/image';
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import cls from 'classnames';
+import { UserStamp } from '@/types/UserStamp';
+import { useDrag } from 'react-dnd';
+import { Dnd } from '@/types/Happ';
 
 interface Props {
   className?: string;
-  src: string;
-  alt: string;
+  userStamp: UserStamp | undefined;
   size: number;
   onClickStamp: () => void;
 }
 
 const StampButton: React.FC<Props> = ({
-  src,
-  alt,
+  userStamp,
   size,
   onClickStamp,
 }) => {
+
+  const [{ isDragging }, dragRef] = useDrag({
+    type: Dnd.CREATED,
+    item: userStamp ? userStamp : null,
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+  
+  const ref = useRef<HTMLImageElement>(null);
+  dragRef(ref);
+
   return (
     <div
       className={cls(
@@ -26,14 +39,20 @@ const StampButton: React.FC<Props> = ({
       )}
       onClick={onClickStamp}
     >
-      <Image
-        src={src}
-        alt={alt}
-        className="rounded-full object-contain aspect-square"
-        width={size}
-        height={size}
-        priority
-      />
+      { userStamp && (
+        <Image
+          src={userStamp.Stamp.url}
+          alt={userStamp.alias}
+          className={cls(
+            'rounded-full object-contain aspect-square',
+            { 'opacity-50': isDragging }
+          )}
+          width={size}
+          height={size}
+          priority
+          ref={ref}
+        />
+      )}
     </div>
   );
 };

@@ -23,7 +23,7 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
   labelName = '',
   placeholder = '',
   error,
-  rows,
+  rows = 2,
   border = true,
   marginBottom = 'mb-3',
   className,
@@ -71,7 +71,7 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
           { 'resize-none': !resizable },
           textAreaClassName,
         )}
-        rows={rows ? rows : 2}
+        rows={rows}
         placeholder={placeholder ? placeholder : labelName}
         disabled={disable}
         value={value}

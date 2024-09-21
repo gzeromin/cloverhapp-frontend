@@ -10,8 +10,8 @@ import cls from 'classnames';
 import { useAuthState } from '@/context/auth';
 import UserProrile from './UserProrile';
 import { useRouter } from 'next/navigation';
-import CarouselHapp from '../atoms/CarouselHapp';
-import CommentHapp from '../atoms/CommentHapp';
+import CarouselHapp from '@/components/atoms/CarouselHapp';
+import CommentHapp from '@/components/atoms/CommentHapp';
 
 interface HappDisplayModalProps {
   happId: string;
