@@ -1,7 +1,7 @@
-import { Loading, TimeCtrllor } from '@/mobx';
+import { TimeCtrllor } from '@/mobx';
 import dateUtil from '@/utils/date.util';
 import { observer } from 'mobx-react-lite';
-import { memo, RefObject, useRef } from 'react';
+import { memo, useRef } from 'react';
 import cls from 'classnames';
 import { useDrop } from 'react-dnd';
 import { getCreatedDate, getModifiedDate, getModifiedXY } from '@/utils/drop.util';
@@ -34,7 +34,7 @@ const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
             id: item.id, 
             happedAt: modifiedDate,
             positionX: position.x,
-            positionY: position.y
+            positionY: position.y,
           }
         );
         dispatch(AuthActionEnum.UPDATE_HAPP, res.data);
@@ -56,7 +56,7 @@ const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
           UserStamp, 
           happedAt: createdDate,
           positionX: position.x,
-          positionY: position.y
+          positionY: position.y,
         });
         dispatch(AuthActionEnum.SET_HAPP, res.data);
       } catch (error) {

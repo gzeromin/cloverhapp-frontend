@@ -36,7 +36,7 @@ const Week: React.FC = () => {
           <div
             key={`calendarW week-${i}`}
             className={cls('relative')}
-            ref={(el) => {weekRefs.current[i] = el}}
+            ref={(el) => {weekRefs.current[i] = el;}}
           >
             <CellW
               weekStr={w}
