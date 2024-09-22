@@ -1,7 +1,7 @@
 import { Language, TimeCtrllor } from '@/mobx';
 import dateUtil from '@/utils/date.util';
 import { observer } from 'mobx-react-lite';
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import { useAuthState } from '@/context/auth';
 import { Happ } from '@/types/Happ';
 import cls from 'classnames';
@@ -10,7 +10,8 @@ import CalendarHapp from '@/components/molecules/week/CalendarHapp';
 
 const Week: React.FC = () => {
   const { happList } = useAuthState();
-
+  const weekRefs = useRef<(HTMLDivElement | null)[]>([]); 
+  
   const selectedDate = TimeCtrllor.selectedDate;
   const firstDate =
     selectedDate.getDate() -
@@ -35,10 +36,12 @@ const Week: React.FC = () => {
           <div
             key={`calendarW week-${i}`}
             className={cls('relative')}
+            ref={(el) => {weekRefs.current[i] = el}}
           >
             <CellW
               weekStr={w}
               date={date}
+              weekRef={{ current: weekRefs.current[i]}}
             />
             {happs.map(happ => 
               <CalendarHapp key={`calendar weekly happ ${happ.id}`} happ={happ} />

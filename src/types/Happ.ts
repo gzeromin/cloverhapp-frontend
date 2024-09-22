@@ -5,6 +5,8 @@ import { UserStamp } from './UserStamp';
 
 export interface Happ {
   happedAt: string;
+  positionX: string;
+  positionY: string;
   createdAt: string;
   memo: string;
   id: string;

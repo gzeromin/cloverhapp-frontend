@@ -9,13 +9,13 @@ import { observer } from 'mobx-react-lite';
 const Main: React.FC = () => {
   const { happList } = useAuthState();
 
-  const [thisWeekWakeUp, setThisWeekWakeUp] = useState<string | null>(null);
-  const [thisWeekGoToBed, setThisWeekGoToBed] = useState<string | null>(null);
-  const [thisWeekSleeping, setThisWeekSleeping] = useState<string | null>(null);
+  const [thisWeekWakeUp, setThisWeekWakeUp] = useState<string | null>('');
+  const [thisWeekGoToBed, setThisWeekGoToBed] = useState<string | null>('');
+  const [thisWeekSleeping, setThisWeekSleeping] = useState<string | null>('');
   
-  const [thisMonthWakeUp, setThisMonthWakeUp] = useState<string | null>(null);
-  const [thisMonthGoToBed, setThisMonthGoToBed] = useState<string | null>(null);
-  const [thisMonthSleeping, setThisMonthSleeping] = useState<string | null>(null);
+  const [thisMonthWakeUp, setThisMonthWakeUp] = useState<string | null>('');
+  const [thisMonthGoToBed, setThisMonthGoToBed] = useState<string | null>('');
+  const [thisMonthSleeping, setThisMonthSleeping] = useState<string | null>('');
 
   const [thisWeekHappyStamp, setThisWeekHappyStamp] = useState<number>(0);
   const [thisWeekStudyStamp, setThisWeekStudyStamp] = useState<number>(0);
@@ -57,13 +57,13 @@ const Main: React.FC = () => {
         happ => happ.UserStamp.Stamp.type === StampType.MEDITATION
       );
 
-      setThisWeekWakeUp(weekWakeUp);
-      setThisWeekGoToBed(weekGoToBed);
-      setThisWeekSleeping(weekSleepingTime);
+      setThisWeekWakeUp(weekWakeUp || '');
+      setThisWeekGoToBed(weekGoToBed || '');
+      setThisWeekSleeping(weekSleepingTime || '');
       
-      setThisMonthWakeUp(monthWakeUp);
-      setThisMonthGoToBed(monthGoToBed);
-      setThisMonthSleeping(monthSleepingTime);
+      setThisMonthWakeUp(monthWakeUp || '');
+      setThisMonthGoToBed(monthGoToBed || '');
+      setThisMonthSleeping(monthSleepingTime || '');
       
       setThisWeekHappyStamp(happyStamps.length);
       setThisWeekStudyStamp(studyStamps.length);

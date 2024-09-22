@@ -20,22 +20,9 @@ const CalendarHapp: React.FC<CalendarHappProps> = ({ happ }) => {
   const [showModifyModal, setShowModifyModal] = useState(false);
   // const size = 38;
 
-  const happedAt = new Date(happ.happedAt);
-  const hours = happedAt.getHours();
-  const minutes = happedAt.getMinutes();
-
-  // 시간 비율을 계산 (하루 24시간 기준)
-  let positionY = hours - 4;
-  if (positionY <= 0) {
-    positionY = positionY + 24;
-  }
-  positionY = (positionY / 24) * 94;
-  // 시간 비율을 계산 (한시간 60분 기준)
-  const positionX = (minutes / 60) * 50;
-
   const [{ isDragging }, dragRef] = useDrag({
     type: Dnd.MODIFIED,
-    item: { id: happ.id, happedAt },
+    item: { id: happ.id, happedAt: happ.happedAt },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -53,12 +40,12 @@ const CalendarHapp: React.FC<CalendarHappProps> = ({ happ }) => {
   };
   return (
     <div 
-      className={cls('hover:cursor-pointer bg-transparent')}
+      className={cls('hover:cursor-pointer')}
     >
       <div
         key={`happ ${happ.id}`}
-        className={cls('absolute flex items-start', 'group', 'bg-transparent')}
-        style={{ top: `${positionY}%`, left: `${positionX}%` }} // top 값을 계산한 퍼센트로 설정
+        className={cls('absolute flex items-start', 'group')}
+        style={{ top: `${happ.positionY}%`, left: `${happ.positionX}%` }} // top 값을 계산한 퍼센트로 설정
       >
         <Image
           ref={ref}

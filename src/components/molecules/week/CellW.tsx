@@ -1,10 +1,10 @@
 import { Loading, TimeCtrllor } from '@/mobx';
 import dateUtil from '@/utils/date.util';
 import { observer } from 'mobx-react-lite';
-import { memo, useRef } from 'react';
+import { memo, RefObject, useRef } from 'react';
 import cls from 'classnames';
 import { useDrop } from 'react-dnd';
-import { getCreatedDate, getModifiedDate } from '@/utils/drop.util';
+import { getCreatedDate, getModifiedDate, getModifiedXY } from '@/utils/drop.util';
 import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
 import { AuthActionEnum, useAuthDispatch } from '@/context/auth';
@@ -14,9 +14,10 @@ import { UserStamp } from '@/types/UserStamp';
 interface Props {
   weekStr: string;
   date: Date;
+  weekRef: { current: HTMLDivElement | null};
 }
 
-const CellW: React.FC<Props> = ({ weekStr, date }) => {
+const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
   const dateValue = date.getDate();
   const dispatch = useAuthDispatch();
   
@@ -25,16 +26,20 @@ const CellW: React.FC<Props> = ({ weekStr, date }) => {
     drop: async (item: { id: string; happedAt: Date }, monitor) => {
       const clientOffset = monitor.getClientOffset();
       const modifiedDate = getModifiedDate(clientOffset, item.happedAt);
-      if (!modifiedDate) return;
-      // update modifiedDate
-      Loading.setIsLoading(true);
+      const position = getModifiedXY(clientOffset, weekRef);
+      if (!modifiedDate || !position) return;
       try {
-        const res = await api.patch('/happ/modifiedDate', { id: item.id, happedAt: modifiedDate});
+        const res = await api.patch(
+          '/happ/byDnd', { 
+            id: item.id, 
+            happedAt: modifiedDate,
+            positionX: position.x,
+            positionY: position.y
+          }
+        );
         dispatch(AuthActionEnum.UPDATE_HAPP, res.data);
       } catch (error) {
         handleError(error);
-      } finally {
-        Loading.setIsLoading(false);
       }
     },
   });
@@ -43,16 +48,19 @@ const CellW: React.FC<Props> = ({ weekStr, date }) => {
     drop: async ( UserStamp: UserStamp, monitor) => {
       const clientOffset = monitor.getClientOffset();
       const createdDate = getCreatedDate(clientOffset);
-      if (!createdDate) return;
+      const position = getModifiedXY(clientOffset, weekRef);
+      if (!createdDate || !position) return;
       // Stamping by Drag and Drop
-      Loading.setIsLoading(true);
       try {
-        const res = await api.post('/happ/byDnd', { UserStamp, happedAt: createdDate});
+        const res = await api.post('/happ/byDnd', { 
+          UserStamp, 
+          happedAt: createdDate,
+          positionX: position.x,
+          positionY: position.y
+        });
         dispatch(AuthActionEnum.SET_HAPP, res.data);
       } catch (error) {
         handleError(error);
-      } finally {
-        Loading.setIsLoading(false);
       }
     },
   });

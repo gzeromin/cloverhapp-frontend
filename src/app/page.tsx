@@ -9,13 +9,13 @@ import { memo } from 'react';
 
 const pattern = 'pattern-dots';
 const color = 'pattern-primary-100';
-const size = 'pattern-size-24';
+const size = 'pattern-size-32';
 const opacity = 'pattern-opacity-40';
   
 const Home: React.FC = () => {
   return (
     <div className={cls(
-      'h-screen flex items-center justify-center',
+      'h-screen flex items-end md:items-center justify-center',
     )}>
       {/* Background Pattern */}
       <div
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
       </div>
       <div
         className={cls(
-          'z-50 flex flex-col items-center gap-4',
+          'z-50 flex flex-col items-center justify-end gap-4',
           'text-3xl text-gray-700',
           Language.logoFont,
         )}
@@ -51,13 +51,13 @@ const Home: React.FC = () => {
           height={70}
           priority
         />
-        <p className='tracking-widest'>
+        <p className='tracking-wide'>
           {Language.$t.Welcome}
         </p>
         <Link 
           className={cls(
-            'font-semibold text-4xl hover:text-green-700',
-            'hover:underline underline-offset-8',
+            'font-semibold text-4xl mb-20',
+            'hover:underline hover:text-green-700 underline-offset-8',
             'decoration-4 decoration-dotted decoration-green-700'
           )}
           href={'/main'}

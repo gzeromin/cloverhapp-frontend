@@ -87,6 +87,8 @@ const reducer = (state: State, { type, payload }: Action) => {
         ? state.happList.map((v) => {
           if (v.id == payload.id) {
             v.happedAt = payload.happedAt;
+            v.positionX = payload.positionX;
+            v.positionY = payload.positionY;
             v.memo = payload.memo;
             v.imageUrls = payload.imageUrls;
             v.Tags = payload.Tags;

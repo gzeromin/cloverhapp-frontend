@@ -1,4 +1,5 @@
 import { TimeCtrllor } from '@/mobx';
+import { RefObject } from 'react';
 import { XYCoord } from 'react-dnd';
 
 export const getModifiedDate = (clientOffset: XYCoord | null, happedAt: Date) => {
@@ -6,10 +7,9 @@ export const getModifiedDate = (clientOffset: XYCoord | null, happedAt: Date) =>
     const dropElement = document.elementFromPoint(clientOffset.x, clientOffset.y);
     const parent = dropElement?.parentElement;
     const grandparent = parent?.parentElement?.parentElement?.parentElement;
-
     // date-value 속성 읽기(날짜)
     const dateElement = grandparent?.querySelector('[date-value]');
-    const modifiedDate = Number(dateElement?.getAttribute('date-value'));
+    let modifiedDate = Number(dateElement?.getAttribute('date-value'));
 
     // hour-value 속성 읽기(시간)
     const hourElement = parent?.querySelector('[hour-value]');
@@ -28,12 +28,15 @@ export const getModifiedDate = (clientOffset: XYCoord | null, happedAt: Date) =>
     if (modifiedDate && modifiedHour && modifiedMinute) {
       const newDate = new Date(happedAt);
       let modifiedMonth = newDate.getMonth();
-      const currentDate = happedAt.getDate();
+      const currentDate = newDate.getDate();
       const diffDate = currentDate - modifiedDate;
       if (diffDate < -7) {
         modifiedMonth -= 1;
       } else if (diffDate > 7) {
         modifiedMonth += 1;
+      }
+      if(modifiedHour < 5) {
+        modifiedDate += 1;
       }
       newDate.setMonth(modifiedMonth);
       newDate.setDate(modifiedDate);
@@ -54,7 +57,7 @@ export const getCreatedDate = (clientOffset: XYCoord | null) => {
 
     // date-value 속성 읽기(날짜)
     const dateElement = grandparent?.querySelector('[date-value]');
-    const createdDate = Number(dateElement?.getAttribute('date-value'));
+    let createdDate = Number(dateElement?.getAttribute('date-value'));
 
     // hour-value 속성 읽기(시간)
     const hourElement = parent?.querySelector('[hour-value]');
@@ -83,6 +86,9 @@ export const getCreatedDate = (clientOffset: XYCoord | null) => {
       } else if (diffDate > 7) {
         createdMonth += 1;
       }
+      if(createdHour < 5) {
+        createdDate += 1;
+      }
       newDate.setMonth(createdMonth);
       newDate.setDate(createdDate);
       newDate.setHours(createdHour);
@@ -90,6 +96,29 @@ export const getCreatedDate = (clientOffset: XYCoord | null) => {
       return newDate;
     }
     return null;
+  }
+  return null;
+};
+
+export const getModifiedXY = (
+  clientOffset: XYCoord | null, 
+  weekRef: RefObject<HTMLDivElement> | null
+) => {
+  if (clientOffset && weekRef && weekRef.current) {
+    // 기준 div에 대한 정보를 가져옵니다.
+    const weekRect = weekRef.current.getBoundingClientRect();
+    const { x: clientX, y: clientY } = clientOffset;
+    const { left, top, width, height } = weekRect;
+
+    // 상대적인 X, Y 좌표를 구함
+    const relativeX = clientX - left - 30;
+    const relativeY = clientY - top - 15;
+
+    // 백분율로 변환
+    const positionX = (relativeX / width) * 100;
+    const positionY = (relativeY / height) * 100;
+
+    return { x: positionX, y: positionY };
   }
   return null;
 };

@@ -48,7 +48,7 @@ export const getAvrHappedAt = (happList: Happ[]) => {
   }, 0);
 
   // 평균 시간 (분 단위) 계산
-  const averageMinutes = totalMinutes / happList.length;
+  const averageMinutes = totalMinutes / happList.length || 0;
 
   // 평균 시간을 다시 시간과 분으로 변환
   const avgHours = Math.floor(averageMinutes / 60); // 시간 단위
