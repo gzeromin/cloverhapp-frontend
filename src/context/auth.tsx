@@ -86,10 +86,14 @@ const reducer = (state: State, { type, payload }: Action) => {
       happList: state.happList
         ? state.happList.map((v) => {
           if (v.id == payload.id) {
-            v.happedAt = payload.happedAt;
+            v.startTime = payload.startTime;
+            v.endTime = payload.endTime;
             v.positionX = payload.positionX;
             v.positionY = payload.positionY;
             v.memo = payload.memo;
+            v.money = payload.money;
+            v.moneyUnit = payload.moneyUnit;
+            v.water = payload.water;
             v.imageUrls = payload.imageUrls;
             v.Tags = payload.Tags;
           }

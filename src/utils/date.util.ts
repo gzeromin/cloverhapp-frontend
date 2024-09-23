@@ -143,7 +143,7 @@ const getFormatDate = (date: Date) => {
   return `${year}-${month}-${day}`;
 };
 
-const getFormatDateHour = (date: Date) => {
+const getFormatDateHourMin = (date: Date) => {
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   const hour = String(date.getHours()).padStart(2, '0');
@@ -151,10 +151,20 @@ const getFormatDateHour = (date: Date) => {
   return `${month}/${day} ${hour}:${minute}`;
 };
 
-const getFormatHour = (date: Date) => {
+const getFormatHourMin = (date: Date) => {
   const hour = String(date.getHours()).padStart(2, '0');
   const minute = String(date.getMinutes()).padStart(2, '0');
   return `${hour}:${minute}`;
+};
+
+const getFormatHour = (date: Date) => {
+  const hour = String(date.getHours()).padStart(2, '0');
+  return `${hour}`;
+};
+
+const getFormatMin = (date: Date) => {
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  return `${minute}`;
 };
 
 const dateUtils = {
@@ -189,8 +199,10 @@ const dateUtils = {
   getWeeksCountByMonth2,
   getFiveToFourHour,
   getFormatDate,
-  getFormatDateHour,
+  getFormatDateHourMin,
+  getFormatHourMin,
   getFormatHour,
+  getFormatMin,
   isSaturday: (date: Date) => {
     return date.getDay() === 6;
   },

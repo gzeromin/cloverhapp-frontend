@@ -4,11 +4,15 @@ import { User } from './User';
 import { UserStamp } from './UserStamp';
 
 export interface Happ {
-  happedAt: string;
+  startTime: string;
+  endTime: string;
   positionX: string;
   positionY: string;
   createdAt: string;
   memo: string;
+  money: string;
+  water: string;
+  moneyUnit: MoneyUnit;
   id: string;
   imageUrls: string[];
   userId: string;
@@ -21,4 +25,9 @@ export interface Happ {
 export enum Dnd {
   MODIFIED = 'MODIFIED',
   CREATED = 'CREATED'
+}
+export enum MoneyUnit {
+  Dollar = 0,
+  Won = 1,
+  Yen = 2,
 }

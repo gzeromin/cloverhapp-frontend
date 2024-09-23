@@ -1,7 +1,7 @@
 'use client';
 import { memo, useEffect, useState } from 'react';
 import { useAuthState } from '@/context/auth';
-import { getAvrHappedAt, getLastSevenDaysHapp, getSleepTime, getThisMonthHapp, getThisWeekHapp } from '@/utils/happ.util';
+import { getAvrStartTime, getAvrStartTimeForNight, getLastSevenDaysHapp, getSleepTime, getThisMonthHapp, getThisWeekHapp } from '@/utils/happ.util';
 import { StampType } from '@/types/Stamp';
 import { TimeCtrllor } from '@/mobx';
 import { observer } from 'mobx-react-lite';
@@ -28,16 +28,16 @@ const Main: React.FC = () => {
       const lastSevenDaysHappList = getLastSevenDaysHapp(happList);
       const thisMonthHappList = getThisMonthHapp(happList);
       
-      const weekWakeUp = getAvrHappedAt(lastSevenDaysHappList.filter(
+      const weekWakeUp = getAvrStartTime(lastSevenDaysHappList.filter(
         happ => happ.UserStamp.Stamp.type === StampType.WAKE_UP
       ));
-      const weekGoToBed = getAvrHappedAt(lastSevenDaysHappList.filter(
+      const weekGoToBed = getAvrStartTimeForNight(lastSevenDaysHappList.filter(
         happ => happ.UserStamp.Stamp.type === StampType.GO_TO_BED
       ));
-      const monthWakeUp = getAvrHappedAt(thisMonthHappList.filter(
+      const monthWakeUp = getAvrStartTime(thisMonthHappList.filter(
         happ => happ.UserStamp.Stamp.type === StampType.WAKE_UP
       ));
-      const monthGoToBed = getAvrHappedAt(thisMonthHappList.filter(
+      const monthGoToBed = getAvrStartTimeForNight(thisMonthHappList.filter(
         happ => happ.UserStamp.Stamp.type === StampType.GO_TO_BED
       ));
 

@@ -23,16 +23,16 @@ const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
   
   const [, modifiedRef] = useDrop({
     accept: Dnd.MODIFIED,
-    drop: async (item: { id: string; happedAt: Date }, monitor) => {
+    drop: async (item: { id: string; startTime: Date }, monitor) => {
       const clientOffset = monitor.getClientOffset();
-      const modifiedDate = getModifiedDate(clientOffset, item.happedAt);
+      const modifiedDate = getModifiedDate(clientOffset, item.startTime);
       const position = getModifiedXY(clientOffset, weekRef);
       if (!modifiedDate || !position) return;
       try {
         const res = await api.patch(
           '/happ/byDnd', { 
             id: item.id, 
-            happedAt: modifiedDate,
+            startTime: modifiedDate,
             positionX: position.x,
             positionY: position.y,
           }
@@ -54,7 +54,7 @@ const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
       try {
         const res = await api.post('/happ/byDnd', { 
           UserStamp, 
-          happedAt: createdDate,
+          startTime: createdDate,
           positionX: position.x,
           positionY: position.y,
         });

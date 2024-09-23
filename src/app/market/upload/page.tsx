@@ -108,7 +108,6 @@ const Upload: React.FC = () => {
               className="object-cover mx-auto mb-4 rounded"
               width={240}
               height={240}
-              priority
             />
           ) : (
             <p className="flex flex-col items-center justify-center w-[240px] h-[240px] text-gray-500">
@@ -143,7 +142,6 @@ const Upload: React.FC = () => {
             value={droplet}
             onChange={(e) => setDroplet(e.target.value)}
             error={errors.droplet}
-            defaultValue="1"
             marginBottom="mb-1"
             min="0"
           />

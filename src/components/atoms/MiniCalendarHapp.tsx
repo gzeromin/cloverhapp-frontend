@@ -1,28 +1,27 @@
 'use client';
 import cls from 'classnames';
-import { InputHTMLAttributes } from 'react';
 import { observer } from 'mobx-react-lite';
 import { TimeCtrllor } from '@/mobx/index';
 import dateUtil from '@/utils/date.util';
 
-interface MiniCalendarProps extends InputHTMLAttributes<HTMLInputElement> {
+interface MiniCalendarProps {
   className: string;
-  happedAt: Date;
-  setHappedAt: (newDate: Date) => void;
+  startTime: Date;
+  setStartTime: (newDate: Date) => void;
 }
 
 const MiniCalendar: React.FC<MiniCalendarProps> = ({
   className,
-  happedAt,
-  setHappedAt,
+  startTime,
+  setStartTime,
 }) => {
-  const month = happedAt.getMonth();
+  const month = startTime.getMonth();
 
-  const changeHappedAt = (newDate: Date | boolean) => {
+  const changeStartTime = (newDate: Date | boolean) => {
     if (newDate instanceof Date) {
-      const newHappedAt = new Date(happedAt);
-      newHappedAt.setDate(newDate.getDate());
-      setHappedAt(newHappedAt);
+      const newStartTime = new Date(startTime);
+      newStartTime.setDate(newDate.getDate());
+      setStartTime(newStartTime);
     }
   };
 
@@ -43,13 +42,13 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
             ${date && dateUtil.isSaturday(date) && 'text-saturday'}
             ${date && dateUtil.isSunday(date) && 'text-red-500'}
           `}
-          onClick={() => changeHappedAt(date)}
+          onClick={() => changeStartTime(date)}
         >
           {date && (
             <span
               className={cls('rounded cursor-pointer hover:bg-gray-100 p-1', {
                 'bg-primary text-white hover:bg-primary-hover':
-                  dateUtil.isTargetDate(date, happedAt),
+                  dateUtil.isTargetDate(date, startTime),
               })}
             >
               {date.getDate()}

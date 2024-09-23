@@ -113,7 +113,7 @@ const CommentHapp: React.FC<Props> = ({
                         {comment.User.nickname}
                       </span>
                       <span className="text-xs text-gray-500">
-                        {dateUtil.getFormatDateHour(
+                        {dateUtil.getFormatDateHourMin(
                           new Date(comment.createdAt),
                         )}
                       </span>

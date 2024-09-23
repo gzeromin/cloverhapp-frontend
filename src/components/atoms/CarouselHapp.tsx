@@ -46,7 +46,6 @@ const CarouselHapp: React.FC<CarouselProps> = ({
                     src={imageUrl}
                     alt={`Uploaded Happ image ${index}`}
                     className="w-auto h-auto max-w-full object-contain aspect-square"
-                    priority
                     width={size}
                     height={size}
                   />
@@ -74,7 +73,7 @@ const CarouselHapp: React.FC<CarouselProps> = ({
       {deleteImageUrls && (
         <button
           onClick={deleteImageUrls}
-          className="absolute top-0 right-2 p-2 rounded font-extrabold text-primary"
+          className="absolute top-0 right-2 p-2 rounded font-extrabold text-green-600"
         >
           <AiFillCloseSquare size={24} />
         </button>

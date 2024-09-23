@@ -2,12 +2,12 @@
 import { memo, useState } from 'react';
 import cls from 'classnames';
 import StampButton from '@/components/molecules/StampButton';
-import HappSaveModal from '@/components/molecules/HappSaveModal';
 import { fetcher } from '@/utils/api.util';
 import { UserStamp } from '@/types/UserStamp';
 import useSWR from 'swr';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import HappSaveModal from './HappSaveModal';
 
 interface StampPaletteProps {
   className?: string;
@@ -22,7 +22,6 @@ const StampPalette: React.FC<StampPaletteProps> = ({
   const [showStampSaveModal, setShowStampSaveModal] = useState<boolean>(false);
   const [selectedUserStamp, setSelectedUserStamp] = useState<UserStamp>();
   const { data: userStamps } = useSWR<UserStamp[]>('/user-stamp', fetcher);
-
 
   const onClickStamp = (userStamp: UserStamp) => {
     setShowStampSaveModal(true);
@@ -46,7 +45,7 @@ const StampPalette: React.FC<StampPaletteProps> = ({
         )}
       </DndProvider>
       {showStampSaveModal && (
-        <HappSaveModal 
+        <HappSaveModal
           userStamp={selectedUserStamp}
           closeModal={() => setShowStampSaveModal(false)}
           mutateHapp={mutateStamp}

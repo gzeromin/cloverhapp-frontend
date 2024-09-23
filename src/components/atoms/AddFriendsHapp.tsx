@@ -2,7 +2,6 @@
 import cls from 'classnames';
 import {
   Dispatch,
-  InputHTMLAttributes,
   SetStateAction,
   memo,
   useEffect,
@@ -17,7 +16,7 @@ import { fetcher } from '@/utils/api.util';
 import UserProrile from '../molecules/UserProrile';
 import { RiCloseLine } from 'react-icons/ri';
 
-interface AddFriendsHappProps extends InputHTMLAttributes<HTMLInputElement> {
+interface AddFriendsHappProps {
   className: string;
   friendList: Friend[];
   setFriendList: Dispatch<SetStateAction<Friend[]>>;

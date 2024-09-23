@@ -2,7 +2,6 @@
 import cls from 'classnames';
 import {
   Dispatch,
-  InputHTMLAttributes,
   SetStateAction,
   memo,
   useEffect,
@@ -16,7 +15,7 @@ import { RiCloseLine, RiHashtag } from 'react-icons/ri';
 import { Tag } from '@/types/Tag';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
-interface AddTagsHappProps extends InputHTMLAttributes<HTMLInputElement> {
+interface AddTagsHappProps{
   className: string;
   tagList: Tag[];
   setTagList: Dispatch<SetStateAction<Tag[]>>;

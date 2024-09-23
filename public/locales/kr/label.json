@@ -47,7 +47,8 @@
     "Memo": "메모",
     "RequestMessage": "친구요청 메세지",
     "ChangeAliasMessage": "애칭 변경 메세지",
-    "Type": "타입"
+    "Type": "타입",
+    "Sip": "모금"
   },
   "Link": {
     "GetStarted": "시작하기"
@@ -103,6 +104,13 @@
     "11월",
     "12월"
   ],
+  "Time": {
+    "Hour": "시간",
+    "Minute": "분",
+    "Minute0": "0분",
+    "Now": "지금",
+    "Duration": "지속 시간"
+  },
   "UserMenu": {
     "ProfilePhoto": "프로필 사진",
     "ChangePassword": "비밀번호 변경",

@@ -8,7 +8,6 @@ import api from '@/utils/api.util';
 import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { observer } from 'mobx-react-lite';
 import { Dialog, Language, Loading } from '@/mobx';
-import HappSaveModal from './HappSaveModal';
 import Image from 'next/image';
 import HappDisplayModal from './HappDisplayModal';
 
@@ -26,7 +25,6 @@ const HappFeed: React.FC<Props> = ({
   mutateHapp,
 }) => {
   const { user } = useAuthState();
-  const [showHappSaveModal, setShowHappSaveModal] = useState<boolean>(false);
   const [showDisplayModal, setShowDisplayModal] = useState<boolean>(false);
 
   const showCtrlModal = (newHappId: string) => {
@@ -105,8 +103,8 @@ const HappFeed: React.FC<Props> = ({
                   <ul className="absolute bg-white shadow-lg rounded -translate-y-7 translate-x-7">
                     <li
                       className="flex items-center gap-1 text-gray-600 m-1 px-2 break-keep rounded cursor-pointer hover:bg-gray-100 hover:font-semi-bold"
-                      onClick={() => setShowHappSaveModal(true)}
                     >
+                      {/* TODO 햅 편집 */}
                       <FaEdit />
                       {Language.$t.Button.Edit}
                     </li>
@@ -127,17 +125,9 @@ const HappFeed: React.FC<Props> = ({
 
         {/* 시간 */}
         <span className="text-xs text-gray-500">
-          {dateUtil.getFormatHour(new Date(happ.createdAt))}
+          {dateUtil.getFormatHourMin(new Date(happ.createdAt))}
         </span>
       </div>
-
-      {/* Happ Save Modal */}
-      {showHappSaveModal && (
-        <HappSaveModal
-          userStamp={happ.UserStamp}
-          closeModal={() => setShowHappSaveModal(false)}
-        />
-      )}
 
       {/* Happ Display Modal */}
       {showDisplayModal && (

@@ -1,14 +1,12 @@
 'use client';
 import cls from 'classnames';
-import { InputHTMLAttributes } from 'react';
 import { observer } from 'mobx-react-lite';
 
-interface InputHappProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputHappProps {
   type?: string;
   labelName?: string;
   placeholder?: string;
   error?: string;
-  row?: boolean;
   border?: boolean;
   marginBottom?: string;
   className?: string;
@@ -26,7 +24,6 @@ const InputHapp: React.FC<InputHappProps> = ({
   labelName = '',
   placeholder = '',
   error,
-  row,
   border = true,
   marginBottom = 'mb-3',
   className,
@@ -40,9 +37,7 @@ const InputHapp: React.FC<InputHappProps> = ({
 }) => {
   return (
     <div
-      className={`${error ? 'mb-1' : marginBottom} ${
-        row ? 'flex items-center' : ''
-      } ${className}`}
+      className={`${error ? 'mb-1' : marginBottom} ${className}`}
     >
       {labelName && (
         <label className="text-nowrap font-extralight text-sm mr-2 mb-1">

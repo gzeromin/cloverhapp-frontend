@@ -6,7 +6,7 @@ import { useAuthState } from '@/context/auth';
 import { Happ } from '@/types/Happ';
 import cls from 'classnames';
 import CellW from '@/components/molecules/week/CellW';
-import CalendarHapp from '@/components/molecules/week/CalendarHapp';
+import CalendarHappIcon from '@/components/molecules/week/CalendarHappIcon';
 
 const Week: React.FC = () => {
   const { happList } = useAuthState();
@@ -29,7 +29,7 @@ const Week: React.FC = () => {
 
         // filter happ
         const happs = happList.filter((v: Happ) =>
-          dateUtil.getFiveToFourHour(date, new Date(v.happedAt)),
+          dateUtil.getFiveToFourHour(date, new Date(v.startTime)),
         );
 
         return (
@@ -44,7 +44,7 @@ const Week: React.FC = () => {
               weekRef={{ current: weekRefs.current[i]}}
             />
             {happs.map(happ => 
-              <CalendarHapp key={`calendar weekly happ ${happ.id}`} happ={happ} />
+              <CalendarHappIcon key={`calendar weekly happ ${happ.id}`} happ={happ} />
             )}
           </div>
         );

@@ -47,7 +47,8 @@
     "Memo": "Memo",
     "RequestMessage": "Request Friend Message",
     "ChangeAliasMessage": "Change Alias Message",
-    "Type": "Type"
+    "Type": "Type",
+    "Sip": "sip"
   },
   "Link": {
     "GetStarted": "Get Started"
@@ -103,6 +104,13 @@
     "November",
     "December"
   ],
+  "Time": {
+    "Hour": "hour",
+    "Minute": "min",
+    "Minute0": "0 min",
+    "Now": "now",
+    "Duration": "duration"
+  },
   "UserMenu": {
     "ProfilePhoto": "Profile Photo",
     "ChangePassword": "Change Password",

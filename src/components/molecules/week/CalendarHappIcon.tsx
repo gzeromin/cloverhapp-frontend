@@ -9,11 +9,11 @@ import { useDrag } from 'react-dnd';
 import HappModifyModal from '../HappModifyModal';
 import HappDisplayModal from '../HappDisplayModal';
 
-interface CalendarHappProps {
+interface CalendarHappIconProps {
   happ: Happ;
 }
 
-const CalendarHapp: React.FC<CalendarHappProps> = ({ happ }) => {
+const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
   const { user } = useAuthState();
 
   const [showDisplayModal, setShowDisplayModal] = useState(false);
@@ -22,7 +22,7 @@ const CalendarHapp: React.FC<CalendarHappProps> = ({ happ }) => {
 
   const [{ isDragging }, dragRef] = useDrag({
     type: Dnd.MODIFIED,
-    item: { id: happ.id, happedAt: happ.happedAt },
+    item: { id: happ.id, startTime: happ.startTime },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -50,7 +50,7 @@ const CalendarHapp: React.FC<CalendarHappProps> = ({ happ }) => {
         <Image
           ref={ref}
           src={happ.UserStamp.Stamp.url}
-          alt={`happedAt ${happ.happedAt}`}
+          alt={`startTime ${happ.startTime}`}
           className={cls(
             'translate-x-3',
             'rounded-full object-contain aspect-square',
@@ -90,4 +90,4 @@ const CalendarHapp: React.FC<CalendarHappProps> = ({ happ }) => {
   );
 };
 
-export default observer(CalendarHapp);
+export default observer(CalendarHappIcon);

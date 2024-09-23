@@ -8,8 +8,8 @@ export const getThisWeekHapp = (happList: Happ[]) => {
   const startDate = dateUtils.getFirstDateOfWeek(selectedDate);
   // startDate와 endDate 사이에 있는 Happ을 필터링
   return happList.filter((happ) => {
-    const happedAt = new Date(happ.happedAt); // Date 객체로 변환
-    return happedAt >= startDate && happedAt <= endDate;
+    const startTime = new Date(happ.startTime); // Date 객체로 변환
+    return startTime >= startDate && startTime <= endDate;
   });
 };
 
@@ -20,8 +20,8 @@ export const getLastSevenDaysHapp = (happList: Happ[]) => {
   startDate.setDate(startDate.getDate() - 7); // 7일 전으로 설정
   // startDate와 endDate 사이에 있는 Happ을 필터링
   return happList.filter((happ) => {
-    const happedAt = new Date(happ.happedAt); // Date 객체로 변환
-    return happedAt >= startDate && happedAt <= endDate;
+    const startTime = new Date(happ.startTime); // Date 객체로 변환
+    return startTime >= startDate && startTime <= endDate;
   });
 };
 
@@ -32,17 +32,17 @@ export const getThisMonthHapp = (happList: Happ[]) => {
   startDate.setDate(startDate.getDate() - 30); // 30일 전으로 설정
   // startDate와 endDate 사이에 있는 Happ을 필터링
   return happList.filter((happ) => {
-    const happedAt = new Date(happ.happedAt); // Date 객체로 변환
-    return happedAt >= startDate && happedAt <= endDate;
+    const startTime = new Date(happ.startTime); // Date 객체로 변환
+    return startTime >= startDate && startTime <= endDate;
   });
 };
 
-export const getAvrHappedAt = (happList: Happ[]) => {
+export const getAvrStartTime = (happList: Happ[]) => {
   // 총 시간의 합을 계산 (분 단위로 변환 후 합산)
   const totalMinutes = happList.reduce((total, happ) => {
-    const happedAt = new Date(happ.happedAt);
-    const hours = happedAt.getHours();
-    const minutes = happedAt.getMinutes();
+    const startTime = new Date(happ.startTime);
+    const hours = startTime.getHours();
+    const minutes = startTime.getMinutes();
     
     return total + (hours * 60) + minutes;
   }, 0);
@@ -54,6 +54,30 @@ export const getAvrHappedAt = (happList: Happ[]) => {
   const avgHours = Math.floor(averageMinutes / 60); // 시간 단위
   const avgMinutes = Math.floor(averageMinutes % 60); // 분 단위
 
+  // 평균 시간을 "hh:mm" 형식으로 반환
+  return `${String(avgHours).padStart(2, '0')}:${String(avgMinutes).padStart(2, '0')}`;
+};
+
+export const getAvrStartTimeForNight = (happList: Happ[]) => {
+  // 총 시간의 합을 계산 (분 단위로 변환 후 합산)
+  const totalMinutes = happList.reduce((total, happ) => {
+    const startTime = new Date(happ.startTime);
+    const hours = normalizeTime(startTime.getHours());
+    const minutes = startTime.getMinutes();
+    
+    return total + (hours * 60) + minutes;
+  }, 0);
+
+  // 평균 시간 (분 단위) 계산
+  const averageMinutes = totalMinutes / happList.length || 0;
+
+  // 평균 시간을 다시 시간과 분으로 변환
+  let avgHours = Math.floor(averageMinutes / 60); // 시간 단위
+  const avgMinutes = Math.floor(averageMinutes % 60); // 분 단위
+
+  // 24시가 넘을 경우 알맞은 표기로 변경 (예: 25:34 -> 01:34)
+  avgHours = avgHours > 24 ? avgHours - 24 : avgHours;
+  
   // 평균 시간을 "hh:mm" 형식으로 반환
   return `${String(avgHours).padStart(2, '0')}:${String(avgMinutes).padStart(2, '0')}`;
 };
@@ -85,4 +109,9 @@ export const getSleepTime = (wakeUp: string, goToBed: string) => {
 const timeToMinutes = (time: string): number => {
   const [hours, minutes] = time.split(':').map(Number);
   return hours * 60 + minutes;
+};
+
+// 자정을 기준으로 시간을 계산하는 함수
+const normalizeTime = (hours: number): number => {
+  return hours < 12 ? hours + 24 : hours;
 };

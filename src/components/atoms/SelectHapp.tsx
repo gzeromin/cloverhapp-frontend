@@ -143,7 +143,6 @@ const SelectHapp: React.FC<SelectHappProps> = ({
                     alt={option.image.alt ? option.image.alt : option.image.src}
                     width={option.image.width ?? defaultImageSize}
                     height={option.image.height ?? defaultImageSize}
-                    priority
                   />
                 )}
                 {option.icon}

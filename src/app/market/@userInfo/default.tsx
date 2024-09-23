@@ -41,7 +41,6 @@ const Shop: React.FC<Props> = () => {
             className="object-cover"
             width={30}
             height={30}
-            priority
           />
         </div>
         {user && user.nickname == 'aaa' &&

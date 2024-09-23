@@ -10,7 +10,6 @@ import TextareaHapp from '../atoms/TextareaHapp';
 import { observer } from 'mobx-react-lite';
 import cls from 'classnames';
 import FileUploadHapp from '../atoms/FileUploadHapp';
-import DateTimeHapp from '../atoms/DateTimeHapp';
 import { AuthActionEnum, useAuthDispatch } from '@/context/auth';
 import { GoPeople, GoTag } from 'react-icons/go';
 import AddFriendsHapp from '../atoms/AddFriendsHapp';
@@ -33,7 +32,7 @@ const HappModifyModal: React.FC<HappModifyModalProps> = ({
   const [openTimeMover, setOpenTimeMover] = useState(false);
   const [openAddFriends, setOpenAddFriends] = useState(false);
   const [openAddTags, setOpenAddTags] = useState(false);
-  const [happedAt, setHappedAt] = useState<Date>();
+  const [startTime, setStartTime] = useState<Date>();
   const [uploadedImages, setUploadedImages] = useState<File[] | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>();
   const [friendList, setFriendList] = useState<Friend[]>([]);
@@ -45,7 +44,7 @@ const HappModifyModal: React.FC<HappModifyModalProps> = ({
   useEffect(() => {
     api.get('/happ/' + happId).then((res) => {
       const happ: Happ = res.data;
-      setHappedAt(new Date(happ.happedAt));
+      setStartTime(new Date(happ.startTime));
       setMemo(happ.memo);
       setStampUrl(happ.UserStamp.Stamp.url);
       if (happ.imageUrls && happ.imageUrls.length !== 0) {
@@ -64,7 +63,7 @@ const HappModifyModal: React.FC<HappModifyModalProps> = ({
     try {
       const updateHappDto = {
         id: happId,
-        happedAt: happedAt,
+        startTime: startTime,
         memo,
         imageUrls: imageUrls,
         friends: friendList,
@@ -105,7 +104,6 @@ const HappModifyModal: React.FC<HappModifyModalProps> = ({
               src={stampUrl}
               alt={`happ modify modal ${happId}`}
               className="object-contain aspect-square"
-              priority
               width={50}
               height={50}
             />
@@ -137,11 +135,6 @@ const HappModifyModal: React.FC<HappModifyModalProps> = ({
               textSize="text-base"
               imageUrls={imageUrls}
               onDeleteImageUrls={() => setImageUrls([])}
-            />
-            <DateTimeHapp
-              className={`${openTimeMover ? 'block' : 'hidden'}`}
-              happedAt={happedAt}
-              setHappedAt={setHappedAt}
             />
             <AddFriendsHapp
               className={`${openAddFriends ? 'block' : 'hidden'}`}

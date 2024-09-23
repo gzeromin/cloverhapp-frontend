@@ -48,7 +48,6 @@ const HappDisplayModal: React.FC<HappDisplayModalProps> = ({
             src={BASE_URL + '/' + userStamp.Stamp.url}
             alt={`stamp modify modal ${userStamp.Stamp.id}`}
             className="h-auto object-contain aspect-square"
-            priority
             width={50}
             height={50}
           /> */}

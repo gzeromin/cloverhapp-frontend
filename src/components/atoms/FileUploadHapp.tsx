@@ -1,5 +1,4 @@
 'use client';
-import { InputHTMLAttributes } from 'react';
 import { GrAdd } from 'react-icons/gr';
 import { useDropzone } from 'react-dropzone';
 import { useCallback } from 'react';
@@ -7,8 +6,8 @@ import CarouselHapp from './CarouselHapp';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
 
-interface FileUploadHappProps extends InputHTMLAttributes<HTMLInputElement> {
-  uploadedImages: File[] | null;
+interface FileUploadHappProps {
+  uploadedImages: File[] | null | undefined;
   setUploadedImages: (file: File[] | null) => void;
   width?: number;
   height?: number;

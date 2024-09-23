@@ -2,7 +2,7 @@ import { TimeCtrllor } from '@/mobx';
 import { RefObject } from 'react';
 import { XYCoord } from 'react-dnd';
 
-export const getModifiedDate = (clientOffset: XYCoord | null, happedAt: Date) => {
+export const getModifiedDate = (clientOffset: XYCoord | null, startTime: Date) => {
   if (clientOffset) {
     const dropElement = document.elementFromPoint(clientOffset.x, clientOffset.y);
     const parent = dropElement?.parentElement;
@@ -26,7 +26,7 @@ export const getModifiedDate = (clientOffset: XYCoord | null, happedAt: Date) =>
     const modifiedMinute = Math.round((offsetX / elementWidth) * 60);
 
     if (modifiedDate && modifiedHour && modifiedMinute) {
-      const newDate = new Date(happedAt);
+      const newDate = new Date(startTime);
       let modifiedMonth = newDate.getMonth();
       const currentDate = newDate.getDate();
       const diffDate = currentDate - modifiedDate;

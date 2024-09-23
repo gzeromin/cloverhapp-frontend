@@ -161,7 +161,6 @@ const Profile: React.FC<Props> = () => {
               className=""
               width={55}
               height={55}
-              priority
             />
             <div className="font-bold text-lg">{user && thousandComma(user.droplet)}</div>
           </div>

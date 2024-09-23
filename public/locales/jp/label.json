@@ -47,7 +47,8 @@
     "Memo": "メモ",
     "RequestMessage": "友達要請メッセージ",
     "ChangeAliasMessage": "愛称変更メッセージ",
-    "Type": "タイプ"
+    "Type": "タイプ",
+    "Sip": "口"
   },
   "Link": {
     "GetStarted": "始める"
@@ -103,6 +104,13 @@
     "11月",
     "12月"
   ],
+  "Time": {
+    "Hour": "時間",
+    "Minute": "分",
+    "Minute0": "0分",
+    "Now": "只今",
+    "Duration": "持続時間"
+  },
   "UserMenu": {
     "ProfilePhoto": "プロフィール写真",
     "ChangePassword": "パスワード変更",

@@ -1,24 +1,21 @@
 'use client';
 import api from '@/utils/api.util';
 import Image from 'next/image';
-import { useState } from 'react';
-import { TbPhoto } from 'react-icons/tb';
+import { useEffect, useState } from 'react';
 import { Language, Loading } from '@/mobx/index';
 import { observer } from 'mobx-react-lite';
 import cls from 'classnames';
-import TextareaHapp from '../atoms/TextareaHapp';
-import FileUploadHapp from '../atoms/FileUploadHapp';
 import { Friend } from '@/types/Friend';
 import { Tag } from '@/types/Tag';
-import AddFriendsHapp from '../atoms/AddFriendsHapp';
-import AddTagsHapp from '../atoms/AddTagsHapp';
-import { GoPeople, GoTag } from 'react-icons/go';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import { UserStamp } from '@/types/UserStamp';
 import { handleError } from '@/utils/error.util';
-import { TfiPencilAlt } from 'react-icons/tfi';
 import { FaExclamation } from 'react-icons/fa';
 import { AiFillCloseSquare } from 'react-icons/ai';
+import InputNav, { OPEN_MONEY, OPEN_TIME } from '@/components/molecules/happSaveModal/InputNav';
+import { MoneyUnit } from '@/types/Happ';
+import InputArea from '@/components/molecules/happSaveModal/InputArea';
+import { StampType } from '@/types/Stamp';
 
 interface HappSaveModalProps {
   userStamp: UserStamp | undefined;
@@ -31,17 +28,35 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   closeModal,
   mutateHapp,
 }) => {
-  const [openMemoSpace, setOpenMemoSpace] = useState(false);
+  const [openTime, setOpenTime] = useState(false);
+  const [openWater, setOpenWater] = useState(false);
+  const [openMoney, setOpenMoney] = useState(false);
+  const [openMemo, setOpenMemo] = useState(false);
   const [openUploadPhoto, setOpenUploadPhoto] = useState(false);
   const [uploadedImages, setUploadedImages] = useState<File[] | null>(null);
+  const [openFriends, setOpenFriends] = useState(false);
+  const [openTags, setOpenTags] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>();
+  const [startTime, setStartTime] = useState<Date>();
+  const [endTime, setEndTime] = useState<Date>();
+  const [water, setWater] = useState('10');
+  const [money, setMoney] = useState('0');
+  const [moneyUnit, setMoneyUnit] = useState<MoneyUnit>(MoneyUnit.Won);
   const [memo, setMemo] = useState('');
-  const [openAddFriends, setOpenAddFriends] = useState(false);
-  const [openAddTags, setOpenAddTags] = useState(false);
   const [friendList, setFriendList] = useState<Friend[]>([]);
   const [tagList, setTagList] = useState<Tag[]>([]);
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
+
+  useEffect(() => {
+    const stampType = userStamp?.Stamp.type;
+    if (stampType) {
+      setOpenTime(OPEN_TIME.includes(stampType));
+      setOpenMoney(OPEN_MONEY.includes(stampType));
+      setOpenWater(stampType === StampType.WATER);
+    }
+  }, [userStamp]);
+
   const createHapp = async () => {
     Loading.setIsLoading(true);
     try {
@@ -49,7 +64,11 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
         const createHappDto = {
           userId: user.id,
           UserStamp: userStamp,
+          startTime,
+          endTime,
           memo,
+          money,
+          moneyUnit,
         };
         const formData = new FormData();
         if (uploadedImages != null) {
@@ -105,7 +124,6 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
               className="h-auto object-contain aspect-square lg:w-1/2"
               width={90}
               height={90}
-              priority
             />
           }
           <div
@@ -134,80 +152,57 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
         {/* body */}
         <div className="pt-0 p-2">
           {/* Mini Navigation */}
-          <div className="flex gap-3 justify-end items-center bg-primary-hover rounded p-2 mb-2">
-            <TfiPencilAlt 
-              className={cls(
-                'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-                {
-                  'text-primary': openMemoSpace,
-                },
-              )}
-              onClick={() => setOpenMemoSpace(!openMemoSpace)}
-            />
-            <TbPhoto
-              className={cls(
-                'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-                {
-                  'text-primary':
-                        openUploadPhoto || (imageUrls && imageUrls.length > 0),
-                },
-              )}
-              onClick={() => setOpenUploadPhoto(!openUploadPhoto)}
-            />
-            <GoPeople
-              className={cls(
-                'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-                {
-                  'text-primary': openAddFriends,
-                },
-              )}
-              onClick={() => setOpenAddFriends(!openAddFriends)}
-            />
-            <GoTag
-              className={cls(
-                'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-                {
-                  'text-primary': openAddTags,
-                },
-              )}
-              onClick={() => setOpenAddTags(!openAddTags)}
-            />
-          </div>
-          <div className="flex flex-col gap-3">
-            <TextareaHapp
-              className={`${openMemoSpace ? 'block' : 'hidden'} text-lg`}
-              placeholder={Language.$t.Placeholder.Memo}
-              value={memo}
-              onChange={(e) => setMemo(e.target.value)}
-              autoHeight={true}
-              border={true}
-              marginBottom=""
-              textAreaClassName='border-dashed border-2 border-gray-100 min-h-[50px]'
-            />
-            {/* Drop Zone */}
-            <FileUploadHapp
-              className={`${openUploadPhoto ? 'block' : 'hidden'}`}
-              uploadedImages={uploadedImages}
-              setUploadedImages={setUploadedImages}
-              width={0}
-              height={0}
-              textColor="text-gray-400"
-              textSize="text-base"
-              imageUrls={imageUrls}
-              onDeleteImageUrls={() => setImageUrls([])}
-            />
-            <AddFriendsHapp
-              className={`${openAddFriends ? 'block' : 'hidden'}`}
-              friendList={friendList}
-              setFriendList={setFriendList}
-            />
-            <AddTagsHapp
-              className={`${openAddTags ? 'block' : 'hidden'}`}
-              tagList={tagList}
-              setTagList={setTagList}
-            />
-            
-          </div>
+          <InputNav
+            type={userStamp?.Stamp.type}
+            openTime={openTime}
+            setOpenTime={setOpenTime}
+            openWater={openWater}
+            setOpenWater={setOpenWater}
+            openMoney={openMoney}
+            setOpenMoney={setOpenMoney}
+            openMemo={openMemo}
+            setOpenMemo={setOpenMemo}
+            openUploadPhoto={openUploadPhoto}
+            setOpenUploadPhoto={setOpenUploadPhoto}
+            existPhoto={(imageUrls && imageUrls.length > 0)}
+            openFriends={openFriends}
+            setOpenFriends={setOpenFriends}
+            openTags={openTags}
+            setOpenTags={setOpenTags}
+          />
+          <InputArea
+            type={userStamp?.Stamp.type}
+            openTime={openTime}
+            startTime={startTime}
+            setStartTime={setStartTime}
+            endTime={endTime}
+            setEndTime={setEndTime}
+            openWater={openWater}
+            water={water}
+            setWater={setWater}
+            openMoney={openMoney}
+            money={money}
+            setMoney={setMoney}
+            moneyUnit={moneyUnit}
+            setMoneyUnit={setMoneyUnit}
+            openMemo={openMemo}
+            memo={memo}
+            setMemo={setMemo}
+            openUploadPhoto={openUploadPhoto}
+            uploadedImages={uploadedImages}
+            setUploadedImages={setUploadedImages}
+            imageUrls={imageUrls}
+            setImageUrls={setImageUrls}
+            openFriends={openFriends}
+            friendList={friendList}
+            setFriendList={setFriendList}
+            openTags={openTags}
+            tagList={tagList}
+            setTagList={setTagList}
+            // openTimeMover={openTimeMover}
+            // startTime={startTime}
+            // setStartTime={setStartTime}
+          />
         </div>
       </div>
     </div>

@@ -94,7 +94,6 @@ const UserStampModifyModal: React.FC<UserStampModifyModalProps> = ({
                 className="m-auto p-6 object-contain aspect-square"
                 width={200}
                 height={200}
-                priority
               />
             </div>
             <div className="">
