@@ -11,8 +11,9 @@ export interface Happ {
   createdAt: string;
   memo: string;
   money: string;
-  water: string;
   moneyUnit: MoneyUnit;
+  water: string;
+  todo: TodoStatus;
   id: string;
   imageUrls: string[];
   userId: string;
@@ -26,8 +27,16 @@ export enum Dnd {
   MODIFIED = 'MODIFIED',
   CREATED = 'CREATED'
 }
+
 export enum MoneyUnit {
   Dollar = 0,
   Won = 1,
   Yen = 2,
 }
+
+export enum TodoStatus {
+  NOT_TODO = 'NOT_TODO',
+  TODO = 'TODO',
+  COMPLETE = 'COMPLETE',
+}
+

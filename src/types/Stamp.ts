@@ -33,3 +33,8 @@ export const WEEK_TOTAL = [
   StampType.MEDITATION,
   StampType.BOOK,
 ];
+
+export const DAY_TOTAL = [
+  StampType.WATER,
+  StampType.MEAL,
+];

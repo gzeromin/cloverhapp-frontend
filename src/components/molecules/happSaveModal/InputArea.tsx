@@ -7,7 +7,7 @@ import AddTagsHapp from '@/components/atoms/AddTagsHapp';
 import MoneyHapp from '@/components/atoms/MoneyHapp';
 import { Friend } from '@/types/Friend';
 import { Tag } from '@/types/Tag';
-import { MoneyUnit } from '@/types/Happ';
+import { MoneyUnit, TodoStatus } from '@/types/Happ';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
 import cls from 'classnames';
@@ -16,6 +16,7 @@ import StartEndTimeInput from '@/components/organisms/StartEndTimeInput';
 import { StampType } from '@/types/Stamp';
 import { OPEN_TIME } from './InputNav';
 import StartTimeInput from '@/components/organisms/StartTimeInput';
+import TodoHapp from '@/components/atoms/TodoHapp';
 
 interface Props {
   type: StampType | undefined;
@@ -49,6 +50,8 @@ interface Props {
   setTagList?: Dispatch<SetStateAction<Tag[]>>;
   openTimeMover?: boolean;
   openTodo?: boolean;
+  todo?: TodoStatus;
+  setTodo?: Dispatch<SetStateAction<TodoStatus>>;
   openCopy?: boolean;
 }
 
@@ -62,6 +65,9 @@ const InputArea: React.FC<Props> = ({
   openWater,
   water,
   setWater,
+  openTodo,
+  todo,
+  setTodo,
   openMoney,
   money,
   setMoney,
@@ -149,9 +155,13 @@ const InputArea: React.FC<Props> = ({
           onDeleteImageUrls={() => setImageUrls([])}
         />
       )}
-      {/* {setStartTime && (
-        TODO
-      )} */}
+      {setTodo && (
+        <TodoHapp
+          className={`${openTodo ? 'block' : 'hidden'} border-gray-100`}
+          todo={todo}
+          setTodo={setTodo}
+        />
+      )}
       {friendList && setFriendList && (
         <AddFriendsHapp
           className={`${openFriends ? 'block' : 'hidden'}`}

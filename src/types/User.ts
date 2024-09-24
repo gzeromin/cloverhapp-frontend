@@ -12,7 +12,7 @@ export interface User {
 }
 
 export enum Locale {
-  En = 0,
-  Kr = 1,
-  Jp = 2,
+  Kr = 'KR',
+  En = 'EN',
+  Jp = 'JP',
 }

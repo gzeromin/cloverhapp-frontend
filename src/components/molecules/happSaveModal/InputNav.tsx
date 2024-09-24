@@ -2,12 +2,13 @@
 import { memo } from 'react';
 import { TbArrowsMove, TbPhoto } from 'react-icons/tb';
 import { GoPeople, GoTag } from 'react-icons/go';
-import { TfiCheckBox, TfiPencilAlt } from 'react-icons/tfi';
+import { TfiPencilAlt } from 'react-icons/tfi';
 import { MdAttachMoney } from 'react-icons/md';
 import cls from 'classnames';
 import { LuCopyPlus, LuGlassWater } from 'react-icons/lu';
 import { StampType } from '@/types/Stamp';
 import { WiTime7 } from 'react-icons/wi';
+import { BsCheckCircle } from 'react-icons/bs';
 
 interface Props {
   type: StampType | undefined;
@@ -49,6 +50,8 @@ export const OPEN_MONEY = [
 export const OPEN_MEMO = Object.values(StampType);
 
 export const OPEN_UPLOAD_PHOTO = Object.values(StampType);
+
+export const OPEN_TODO = Object.values(StampType);
 
 const InputNav: React.FC<Props> = ({
   type,
@@ -165,8 +168,8 @@ const InputNav: React.FC<Props> = ({
           onClick={() => setOpenTimeMover(!openTimeMover)}
         />
       )}
-      {setOpenTodo && (
-        <TfiCheckBox
+      {setOpenTodo && type && OPEN_TODO.includes(type) && (
+        <BsCheckCircle
           className={cls(
             'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
             {

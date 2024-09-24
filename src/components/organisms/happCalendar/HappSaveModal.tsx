@@ -12,8 +12,8 @@ import { UserStamp } from '@/types/UserStamp';
 import { handleError } from '@/utils/error.util';
 import { FaExclamation } from 'react-icons/fa';
 import { AiFillCloseSquare } from 'react-icons/ai';
-import InputNav, { OPEN_MONEY, OPEN_TIME } from '@/components/molecules/happSaveModal/InputNav';
-import { MoneyUnit } from '@/types/Happ';
+import InputNav, { OPEN_MONEY } from '@/components/molecules/happSaveModal/InputNav';
+import { MoneyUnit, TodoStatus } from '@/types/Happ';
 import InputArea from '@/components/molecules/happSaveModal/InputArea';
 import { StampType } from '@/types/Stamp';
 
@@ -36,6 +36,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   const [uploadedImages, setUploadedImages] = useState<File[] | null>(null);
   const [openFriends, setOpenFriends] = useState(false);
   const [openTags, setOpenTags] = useState(false);
+  const [openTodo, setOpenTodo] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>();
   const [startTime, setStartTime] = useState<Date>();
   const [endTime, setEndTime] = useState<Date>();
@@ -43,6 +44,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   const [money, setMoney] = useState('0');
   const [moneyUnit, setMoneyUnit] = useState<MoneyUnit>(MoneyUnit.Won);
   const [memo, setMemo] = useState('');
+  const [todo, setTodo] = useState<TodoStatus>(TodoStatus.TODO);
   const [friendList, setFriendList] = useState<Friend[]>([]);
   const [tagList, setTagList] = useState<Tag[]>([]);
   const { user } = useAuthState();
@@ -51,7 +53,6 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   useEffect(() => {
     const stampType = userStamp?.Stamp.type;
     if (stampType) {
-      setOpenTime(OPEN_TIME.includes(stampType));
       setOpenMoney(OPEN_MONEY.includes(stampType));
       setOpenWater(stampType === StampType.WATER);
     }
@@ -69,6 +70,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           memo,
           money,
           moneyUnit,
+          todo: openTodo ? todo : TodoStatus.NOT_TODO,
         };
         const formData = new FormData();
         if (uploadedImages != null) {
@@ -169,6 +171,8 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             setOpenFriends={setOpenFriends}
             openTags={openTags}
             setOpenTags={setOpenTags}
+            openTodo={openTodo}
+            setOpenTodo={setOpenTodo}
           />
           <InputArea
             type={userStamp?.Stamp.type}
@@ -199,6 +203,9 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             openTags={openTags}
             tagList={tagList}
             setTagList={setTagList}
+            openTodo={openTodo}
+            todo={todo}
+            setTodo={setTodo}
             // openTimeMover={openTimeMover}
             // startTime={startTime}
             // setStartTime={setStartTime}

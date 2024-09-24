@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { memo, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import cls from 'classnames';
 import { UserStamp } from '@/types/UserStamp';
 import { useDrag } from 'react-dnd';
@@ -18,7 +18,7 @@ const StampButton: React.FC<Props> = ({
   onClickStamp,
 }) => {
 
-  const [{ isDragging }, dragRef] = useDrag({
+  const [{ isDragging }, dragRef, preview] = useDrag({
     type: Dnd.CREATED,
     item: userStamp ? userStamp : null,
     collect: (monitor) => ({
@@ -28,6 +28,13 @@ const StampButton: React.FC<Props> = ({
   
   const ref = useRef<HTMLImageElement>(null);
   dragRef(ref);
+
+  useEffect(() => {
+    if (ref.current) {
+      // 이미지 태그만 드래그 미리보기로 사용
+      preview(ref.current, { captureDraggingState: true });
+    }
+  }, [preview]);
 
   return (
     <div
@@ -41,6 +48,7 @@ const StampButton: React.FC<Props> = ({
     >
       { userStamp && (
         <Image
+          ref={ref}
           src={userStamp.Stamp.url}
           alt={userStamp.alias}
           className={cls(
@@ -50,7 +58,6 @@ const StampButton: React.FC<Props> = ({
           width={size}
           height={size}
           priority
-          ref={ref}
         />
       )}
     </div>

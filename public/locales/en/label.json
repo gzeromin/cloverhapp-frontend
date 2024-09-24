@@ -29,7 +29,8 @@
     "Deny": "Deny",
     "Pending": "Pending",
     "ChargeDroplet": "Charge Droplet",
-    "Stamping": "Stamping"
+    "Stamping": "Stamping",
+    "Todo": "Todo"
   },
   "Input": {
     "Email": "Email",

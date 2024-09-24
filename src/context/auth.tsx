@@ -94,6 +94,7 @@ const reducer = (state: State, { type, payload }: Action) => {
             v.money = payload.money;
             v.moneyUnit = payload.moneyUnit;
             v.water = payload.water;
+            v.todo = payload.todo;
             v.imageUrls = payload.imageUrls;
             v.Tags = payload.Tags;
           }
