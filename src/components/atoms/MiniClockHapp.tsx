@@ -1,6 +1,6 @@
 'use client';
 import cls from 'classnames';
-import { memo, useEffect, useState } from 'react';
+import { memo, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx/index';
 import dateUtils from '@/utils/date.util';
@@ -21,28 +21,14 @@ const MiniClock: React.FC<MiniClockProps> = ({
   time,
   setTime,
 }) => {
-  const hour = time ? time.getHours() : 0;
-  const minutes = time ? time.getMinutes() : 0;
+  const [hour, setHour] = useState(time ? time.getHours() : 0);
+  const [minutes, setMinutes] = useState(time ? time.getMinutes() : 0);
   const [meridiem, setMeridiem] = useState(hour >= 12 ? MeridiemEnum.PM : MeridiemEnum.AM);
-  const [newHour, setNewHour] = useState(hour > 12 ? hour - 12 : hour);
-  const [newMinutes, setNewMinutes] = useState(minutes);
 
-  useEffect(() => {
-    if (time) {
-      if (hour >= 12) {
-        setMeridiem(MeridiemEnum.PM);
-        setNewHour(hour > 12 ? hour - 12 : hour);
-      } else {
-        setMeridiem(MeridiemEnum.AM);
-      }
-      setNewMinutes(minutes);
-    }
-  }, [hour, minutes, time]);
-
-  const center = { x: 88, y: 89 }; // Clock center position
-  const radiusHour = 85; // Radius for clock's circle layout
-  const radiusMinute = 67; // Radius for clock's circle layout
-  const angleStepHour = (2 * Math.PI) / 12; // Clock angle step for hours
+  const center = { x: 79, y: 79 }; // Clock center position
+  const radiusHour = 53; // Radius for clock's circle layout
+  const radiusMinute = 78; // Radius for clock's circle layout
+  const angleStepHour = (2 * Math.PI) / 24; // Clock angle step for hours
   const angleStepMinutes = (2 * Math.PI) / 60; // Angle step for minutes (60 divisions)
 
   // Calculate position for hours
@@ -57,54 +43,33 @@ const MiniClock: React.FC<MiniClockProps> = ({
     y: center.y + radiusMinute * Math.sin(angle),
   });
 
-  const setAM = () => {
-    if (!time || !setTime) return;
-    const newTime = new Date(time);
-    if (hour >= 12) {
-      newTime.setHours(hour - 12);
+  const setNewHour = (i: number) => {
+    if (time) {
+      const newTime = new Date(time);
+      newTime.setHours(i);
+      setTime(newTime);
+      setMeridiem(i >= 12 ? MeridiemEnum.PM : MeridiemEnum.AM);
+      setHour(i);
     }
-    setTime(newTime);
-    setMeridiem(MeridiemEnum.AM);
   };
 
-  const setPM = () => {
-    if (!time || !setTime) return;
-    const newTime = new Date(time);
-    if (hour < 12) {
-      newTime.setHours(hour + 12);
+  const setNewMinutes = (i: number) => {
+    if (time) {
+      const newTime = new Date(time);
+      newTime.setMinutes(i);
+      setTime(newTime);
+      setMinutes(i);
     }
-    setTime(newTime);
-    setMeridiem(MeridiemEnum.PM);
-  };
-
-  const changeHour = (newHour: number) => {
-    if (!time || !setTime) return;
-    const newTime = new Date(time);
-    if (meridiem === MeridiemEnum.AM) {
-      newTime.setHours(newHour === 12 ? 0 : newHour);
-    } else {
-      newTime.setHours(newHour === 12 ? 12 : newHour + 12);
-    }
-    setTime(newTime);
-    setNewHour(newHour);
-  };
-
-  const changeMinutes = (newMinutes: number) => {
-    if (!time || !setTime) return;
-    const newTime = new Date(time);
-    newTime.setMinutes(newMinutes);
-    setTime(newTime);
-    setNewMinutes(newMinutes);
   };
 
   return (
     <div
-      className={`absolute w-[200px] h-[200px] m-1 rounded-full bg-white shadow-md ${className}`}
+      className={`absolute w-[180px] h-[180px] m-1 rounded-full bg-white shadow-md ${className}`}
     >
       <div className="absolute inset-0 flex justify-center items-center">
         {/* Hour selection */}
-        {Array.from({ length: 12 }, (_, i) => {
-          const angle = (i - 2) * angleStepHour;
+        {Array.from({ length: 24 }, (_, i) => {
+          const angle = (i - 6) * angleStepHour;
           const position = getPositionHours(angle);
           return (
             <div
@@ -114,56 +79,32 @@ const MiniClock: React.FC<MiniClockProps> = ({
             >
               <div
                 className={cls(
-                  'h-6 w-6 rounded-full hover:bg-gray-100 flex justify-center items-center cursor-pointer',
-                  {
-                    'bg-green-700 text-white hover:bg-primary-hover': newHour === i + 1,
-                  },
-                )}
-                onClick={() => changeHour(i + 1)}
-              >
-                <span className={cls('text-lg font-bold')}>{i + 1}</span>
-              </div>
-            </div>
-          );
-        })}
-
-        {/* Minute selection */}
-        {Array.from({ length: 60 }, (_, i) => {
-          const angle = (i - 15) * angleStepMinutes;
-          const position = getPositionMinutes(angle);
-          const minuteValue = i;
-          return (
-            <div
-              key={minuteValue}
-              className="absolute text-xs"
-              style={{ top: `${position.y}px`, left: `${position.x}px` }}
-            >
-              <div
-                className={cls(
                   'h-6 w-6 rounded-full hover:bg-gray-100 group', 
                   'flex justify-center items-center cursor-pointer',
+                  'bg-green-100 rounded-full',
+                  'z-10'
                 )}
-                onClick={() => changeMinutes(minuteValue)}
+                onClick={() => setNewHour(i)}
               >
-                { newMinutes === minuteValue && (
+                { hour === i && (
                   <span className={cls(
                     'h-6 w-6 rounded-full text-lg font-bold',
                     'flex justify-center items-center',
-                    'bg-blue-700 text-white hover:bg-primary-hover',
-                    'z-0'
+                    'bg-green-700 text-white',
+                    'z-20'
                   )}>
                     {i}
                   </span>
                 )}
-                { newMinutes !== minuteValue && (
-                  <div className='z-10'>
+                { hour !== i && (
+                  <div className='z-30'>
                     <span className={cls(
-                      'text-lg font-bold group-hover:hidden'
+                      'text-lg font-bold group-hover:hidden',
                     )}>
-                      {i%10==0 ? i : '・'}
+                      {i%3==0 ? i : '・'}
                     </span>
                     <span className={cls(
-                      'text-lg text-gray-600 font-bold hidden group-hover:block'
+                      'text-lg text-gray-600 font-bold hidden group-hover:block',
                     )}>
                       {i}
                     </span>
@@ -173,7 +114,74 @@ const MiniClock: React.FC<MiniClockProps> = ({
             </div>
           );
         })}
-        <div className={cls('flex flex-col items-center')}>
+
+        {/* Minute selection */}
+        {Array.from({ length: 60 }, (_, i) => {
+          const angle = (i - 15) * angleStepMinutes;
+          const position = getPositionMinutes(angle);
+          return (
+            <div
+              key={i}
+              className="absolute text-xs"
+              style={{ top: `${position.y}px`, left: `${position.x}px` }}
+            >
+              <div
+                className={cls(
+                  'h-6 w-6 rounded-full hover:bg-gray-100 group', 
+                  'flex justify-center items-center cursor-pointer',
+                )}
+                onClick={() => setNewMinutes(i)}
+              >
+                { minutes === i && (
+                  <span className={cls(
+                    'h-6 w-6 rounded-full text-lg font-bold',
+                    'flex justify-center items-center',
+                    'bg-blue-700 text-white',
+                  )}>
+                    {i}
+                  </span>
+                )}
+                { minutes !== i && (
+                  <div className='z-10'>
+                    <span className={cls(
+                      'text-lg font-bold group-hover:hidden',
+                      'z-30'
+                    )}>
+                      {i % 5 == 0 ? i : '・'}
+                    </span>
+                    <span className={cls(
+                      'text-lg text-gray-600 font-bold hidden group-hover:block',
+                    )}>
+                      {i}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+        <div className={cls(
+          'flex flex-col items-center justify-center', 
+          'w-[75px] h-[75px] rounded-full'
+        )}>
+          { meridiem === MeridiemEnum.AM && (
+            <div
+              className={cls(
+                'text-primary text-base'
+              )}
+            >
+              {Language.$t.Meridiem.AM}
+            </div>
+          )}
+          { meridiem === MeridiemEnum.PM && (
+            <div
+              className={cls(
+                'text-primary text-base'
+              )}
+            >
+              {Language.$t.Meridiem.PM}
+            </div>
+          )}
           {/* Show Time */}
           {time && (
             <div className='flex'>
@@ -186,28 +194,6 @@ const MiniClock: React.FC<MiniClockProps> = ({
               </span>
             </div>
           )}
-          {/* AM/PM toggle */}
-          <div className="flex gap-1 text-base mt-1">
-            <div
-              className={cls('hover:bg-gray-100 cursor-pointer px-1 rounded', {
-                'bg-primary text-white hover:bg-primary-hover':
-                  meridiem === MeridiemEnum.AM,
-              })}
-              onClick={setAM}
-            >
-              {Language.$t.Meridiem.AM}
-            </div>
-            <div>・</div>
-            <div
-              className={cls('hover:bg-gray-100 cursor-pointer px-1 rounded', {
-                'bg-primary text-white hover:bg-primary-hover':
-                  meridiem === MeridiemEnum.PM,
-              })}
-              onClick={setPM}
-            >
-              {Language.$t.Meridiem.PM}
-            </div>
-          </div>
         </div>
       </div>
     </div>

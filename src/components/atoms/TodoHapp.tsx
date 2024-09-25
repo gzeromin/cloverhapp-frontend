@@ -14,7 +14,7 @@ interface TodoHappProps {
 
 const TodoHapp: React.FC<TodoHappProps> = ({ className, todo, setTodo }) => {
   return (
-    <div className={cls('flex gap-2', className)}>
+    <div className={cls('flex gap-2 text-base', Language.logoFont, className)}>
       <button
         className={`flex items-center gap-2 justify-center px-4 py-1 rounded ${
           todo === TodoStatus.TODO ? 'bg-blue-500 text-white grow' : 'bg-gray-200'

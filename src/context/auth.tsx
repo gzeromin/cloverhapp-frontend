@@ -34,6 +34,7 @@ export enum AuthActionEnum {
   SET_HAPPLIST = 'SET_HAPPLIST',
   SET_HAPP = 'SET_HAPP',
   UPDATE_HAPP = 'UPDATE_HAPP',
+  UPDATE_HAPPLIST = 'ADD_HAPPLIST',
 }
 
 const reducer = (state: State, { type, payload }: Action) => {
@@ -101,6 +102,11 @@ const reducer = (state: State, { type, payload }: Action) => {
           return v;
         })
         : [],
+    };
+  case AuthActionEnum.UPDATE_HAPPLIST:
+    return {
+      ...state,
+      happList: state.happList ? state.happList.concat(...payload) : payload,
     };
   default:
     throw new Error(`Unknown action type: ${type}`);

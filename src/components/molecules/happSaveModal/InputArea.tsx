@@ -17,6 +17,7 @@ import { StampType } from '@/types/Stamp';
 import { OPEN_TIME } from './InputNav';
 import StartTimeInput from '@/components/organisms/StartTimeInput';
 import TodoHapp from '@/components/atoms/TodoHapp';
+import DateTimesInput from '@/components/organisms/DateTimesInput';
 
 interface Props {
   type: StampType | undefined;
@@ -53,6 +54,8 @@ interface Props {
   todo?: TodoStatus;
   setTodo?: Dispatch<SetStateAction<TodoStatus>>;
   openCopy?: boolean;
+  copy?: Date[];
+  setCopy?: Dispatch<SetStateAction<Date[]>>;
 }
 
 const InputArea: React.FC<Props> = ({
@@ -88,8 +91,9 @@ const InputArea: React.FC<Props> = ({
   openTags,
   tagList,
   setTagList,
-  // openTodo,
-  // openCopy,
+  openCopy,
+  copy,
+  setCopy,
 }) => {
   return (
     <div className="flex flex-col gap-3">
@@ -160,6 +164,13 @@ const InputArea: React.FC<Props> = ({
           className={`${openTodo ? 'block' : 'hidden'} border-gray-100`}
           todo={todo}
           setTodo={setTodo}
+        />
+      )}
+      {setCopy && (
+        <DateTimesInput 
+          className={`${openCopy ? 'block' : 'hidden'} border-gray-100`}
+          times={copy}
+          setTimes={setCopy}
         />
       )}
       {friendList && setFriendList && (

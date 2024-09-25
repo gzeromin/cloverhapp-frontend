@@ -49,6 +49,7 @@ const InputTimeModule: React.FC<InputTimeModuleProps> = ({
           <MiniClock
             className={cls(
               'z-50',
+              'delay-0 duration-150 transition-colors ease-in-out',
               '-translate-x-[200px] -translate-y-[200px]'
             )}
             time={time}

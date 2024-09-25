@@ -1,8 +1,10 @@
 'use client';
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
-import { TimeCtrllor } from '@/mobx/index';
+import { Language, TimeCtrllor } from '@/mobx/index';
 import dateUtil from '@/utils/date.util';
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { memo, useEffect, useState } from 'react';
 
 interface MiniCalendarProps {
   className: string;
@@ -15,7 +17,17 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
   startTime,
   setStartTime,
 }) => {
-  const month = startTime.getMonth();
+  const [month, setMonth] = useState<number>(0);
+  const [year, setYear] = useState<number>(0);
+
+  useEffect(() => {
+    setMonth(startTime.getMonth());
+    setYear(startTime.getFullYear());
+  }, [startTime]);
+
+  const getMonth = () => {
+    return String(month % 12);
+  };
 
   const changeStartTime = (newDate: Date | boolean) => {
     if (newDate instanceof Date) {
@@ -25,10 +37,22 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
     }
   };
 
+  const goPrev = () => {
+    const newStartTime = new Date(startTime);
+    newStartTime.setMonth(month - 1);
+    setStartTime(newStartTime);
+  };
+
+  const goNext = () => {
+    const newStartTime = new Date(startTime);
+    newStartTime.setMonth(month + 1);
+    setStartTime(newStartTime);
+  };
+
   const renderDays = (week: number, showMonth: number) => {
     return [...Array(7)].map((v, i) => {
-      const firstDate = new Date(TimeCtrllor.selectedYear, showMonth, 1);
-      const lastDate = new Date(TimeCtrllor.selectedYear, showMonth + 1, 0);
+      const firstDate = new Date(year, showMonth, 1);
+      const lastDate = new Date(year, showMonth + 1, 0);
       const dateNum = 7 * (week - 1) + (i + 1) - (firstDate.getDay() - 1);
       const date =
         firstDate.getDate() <= dateNum &&
@@ -67,15 +91,41 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
     });
   };
 
+  const goBtnStyle = 'text-gray px-2';
+  const iconStyle = 'rounded-full hover:bg-gray-100 cursor-pointer';
+
   return (
-    <div className={`m-1 flex items-center justify-end ${className}`}>
+    <div className={`absolute m-1 bg-white shadow-md ${className}`}>
       <div
         className="m-1 text-center text-base"
         key={`mini calendar showMonth ${month}`}
       >
-        <span className="text-gray-600">
-          {month + 1 === 0 ? '12' : month + 1}
-        </span>
+        <div className="flex items-center justify-between pb-1">
+          {/* < */}
+          <span className={goBtnStyle}>
+            <AiOutlineLeft className={iconStyle} onClick={goPrev} />
+          </span>
+
+          {/* 月 text */}
+          <span className="text-gray-600 mx-0text-center">
+            <span
+              style={{
+                marginRight: '10px',
+              }}
+            >
+              {Language.$t.Months[getMonth()]}
+            </span>
+            { year }
+          </span>
+
+          {/* > */}
+          <span className={goBtnStyle}>
+            <AiOutlineRight
+              className={iconStyle}
+              onClick={goNext}
+            />
+          </span>
+        </div>
         <table className="w-[120px] text-center text-sm">
           <thead>
             <tr>
@@ -98,4 +148,4 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
   );
 };
 
-export default observer(MiniCalendar);
+export default memo(observer(MiniCalendar));

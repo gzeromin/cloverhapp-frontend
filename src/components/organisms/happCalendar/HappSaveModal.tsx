@@ -37,6 +37,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   const [openFriends, setOpenFriends] = useState(false);
   const [openTags, setOpenTags] = useState(false);
   const [openTodo, setOpenTodo] = useState(false);
+  const [openCopy, setOpenCopy] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>();
   const [startTime, setStartTime] = useState<Date>();
   const [endTime, setEndTime] = useState<Date>();
@@ -45,6 +46,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   const [moneyUnit, setMoneyUnit] = useState<MoneyUnit>(MoneyUnit.Won);
   const [memo, setMemo] = useState('');
   const [todo, setTodo] = useState<TodoStatus>(TodoStatus.TODO);
+  const [copy, setCopy] = useState<Date[]>([]);
   const [friendList, setFriendList] = useState<Friend[]>([]);
   const [tagList, setTagList] = useState<Tag[]>([]);
   const { user } = useAuthState();
@@ -71,6 +73,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           money,
           moneyUnit,
           todo: openTodo ? todo : TodoStatus.NOT_TODO,
+          copy: openCopy ? copy : undefined,
         };
         const formData = new FormData();
         if (uploadedImages != null) {
@@ -89,7 +92,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           mutateHapp();
         } else {
           // HappCalendar
-          dispatch(AuthActionEnum.SET_HAPP, res.data);
+          dispatch(AuthActionEnum.UPDATE_HAPPLIST, res.data);
         }
       }
       closeModal();
@@ -110,7 +113,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
       </div>
       <div className="z-50 box-border shadow-lg lg:min-w-[400px] bg-white border border-light-black rounded-lg text-2xl">
         {/* header */}
-        <div className="relative flex flex-col gap-2 items-stretch p-3 pb-0 lg:flex-row">
+        <div className="relative flex gap-2 items-stretch p-3 pb-0 flex-row">
           <AiFillCloseSquare
             className={cls(
               'text-primary cursor-pointer text-3xl', 
@@ -173,6 +176,8 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             setOpenTags={setOpenTags}
             openTodo={openTodo}
             setOpenTodo={setOpenTodo}
+            openCopy={openCopy}
+            setOpenCopy={setOpenCopy}
           />
           <InputArea
             type={userStamp?.Stamp.type}
@@ -206,9 +211,9 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             openTodo={openTodo}
             todo={todo}
             setTodo={setTodo}
-            // openTimeMover={openTimeMover}
-            // startTime={startTime}
-            // setStartTime={setStartTime}
+            openCopy={openCopy}
+            copy={copy}
+            setCopy={setCopy}
           />
         </div>
       </div>

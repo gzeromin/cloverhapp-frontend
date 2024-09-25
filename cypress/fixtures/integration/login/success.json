@@ -7,7 +7,7 @@
       "email": "aaa@aaa.aaa",
       "photoUrl": null,
       "role": 99,
-      "locale": 0,
+      "locale": "EN",
       "droplet": 1000,
       "notifNum": 0
   }
