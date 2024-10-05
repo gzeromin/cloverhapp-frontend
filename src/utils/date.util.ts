@@ -1,3 +1,5 @@
+import { Language } from '@/mobx';
+
 const months = [
   'January',
   'February',
@@ -167,6 +169,26 @@ const getFormatMin = (date: Date) => {
   return `${minute}`;
 };
 
+const getFormatHourMinByMinutes = (minutes: number) => {
+  try {
+    const hour = Math.floor(minutes / 60);
+    const minute = minutes % 60;
+    if (hour == 0) {
+      if (minute == 0) {
+        return Language.$t.Time.Minute0;
+      } else {
+        return minute + Language.$t.Time.M;
+      }
+    } else if (minute == 0) {
+      return hour + Language.$t.Time.H;
+    }
+    return hour + Language.$t.Time.H
+      + ' ' + minute + Language.$t.Time.M;
+  } catch (error) {
+    return Language.$t.Time.Minute0;
+  }
+};
+
 const dateUtils = {
   weeksEn,
   weeksJp,
@@ -203,6 +225,7 @@ const dateUtils = {
   getFormatHourMin,
   getFormatHour,
   getFormatMin,
+  getFormatHourMinByMinutes,
   isSaturday: (date: Date) => {
     return date.getDay() === 6;
   },

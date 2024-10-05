@@ -30,8 +30,8 @@ const HappCalendar: React.FC<Props> = ({ className }) => {
         });
   }, [TimeCtrllor.selectedYear, user]);
 
-  const goBtnStyle = 'text-gray pt-5 px-2';
-  const iconStyle = 'scale-150 rounded-full hover:bg-gray-100 cursor-pointer';
+  const goBtnStyle = 'text-gray pt-5 px-2 cursor-pointer hover:bg-gray-100 rounded-full';
+  const iconStyle = 'scale-150';
 
   return (
     <div className={className}>

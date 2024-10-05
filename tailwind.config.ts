@@ -63,6 +63,25 @@ const config: Config = {
       fontWeight: {
         'semi-bold': '700',
       },
+      fontFamily: {
+        // En
+        dancing: ['Dancing Script R', 'cursive'],
+        'dancing-bold': ['Dancing Script B', 'cursive'],
+        'dancing-medium': ['Dancing Script M', 'cursive'],
+        'dancing-semi-bold': ['Dancing Script SB', 'cursive'],
+        // Kr
+        'single-day': ['Single Day', 'cursive'],
+        // Jp
+        slackside: ['Slackside One', 'cursive'],
+        // 통합
+        'm-plus': ['M PLUS 1p R', 'sans-serif'],
+        'm-plus-blod': ['M PLUS 1p B', 'sans-serif'],
+        'm-plus-extra-bold': ['M PLUS 1p EB', 'sans-serif'],
+        'm-plus-black': ['M PLUS 1p Black', 'sans-serif'],
+        'm-plus-light': ['M PLUS 1p L', 'sans-serif'],
+        'm-plus-medium': ['M PLUS 1p M', 'sans-serif'],
+        'm-plus-thin': ['M PLUS 1p T', 'sans-serif'],
+      },
       maxWidth: {
         'contents-screen': '1080px',
       },

@@ -23,11 +23,6 @@ export interface Happ {
   UserStamp: UserStamp;
 }
 
-export enum Dnd {
-  MODIFIED = 'MODIFIED',
-  CREATED = 'CREATED'
-}
-
 export enum MoneyUnit {
   Dollar = 0,
   Won = 1,

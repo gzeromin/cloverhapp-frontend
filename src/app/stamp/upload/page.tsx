@@ -15,6 +15,8 @@ import cls from 'classnames';
 import SelectHapp from '@/components/atoms/SelectHapp';
 import { StampType } from '@/types/Stamp';
 import Image from 'next/image';
+import AddTagsHapp from '@/components/atoms/AddTagsHapp';
+import { Tag } from '@/types/Tag';
 
 const options = Object.values(StampType)
   .map(v => ({
@@ -28,6 +30,8 @@ const Upload: React.FC = () => {
   const [description, setDescription] = useState('');
   const [droplet, setDroplet] = useState('');
   const [type, setType] = useState<StampType>(StampType.HAPPY);
+  const [tags, setTags] = useState<Tag[]>([]);
+
   const [errors, setErrors] = useState<{
     name?: string;
     description?: string;
@@ -59,7 +63,13 @@ const Upload: React.FC = () => {
       formData.append('stamp-icon', uploadedImage);
       formData.append(
         'stamp-data',
-        JSON.stringify({ name, description, droplet, type }),
+        JSON.stringify({ 
+          name, 
+          description, 
+          droplet, 
+          type,
+          Tags: tags,
+        }),
       );
       await api.post('/stamp', formData, {
         headers: {
@@ -75,6 +85,7 @@ const Upload: React.FC = () => {
         setDescription('');
         setDroplet('');
         setUploadedImage(null);
+        setTags([]);
       }
     } catch (error: any) {
       handleError(error, setErrors);
@@ -90,7 +101,7 @@ const Upload: React.FC = () => {
     )}>
       <IoArrowUndoCircleOutline
         className="absolute top-[30px] left-[30px] text-6xl text-primary hover:text-primary-hover cursor-pointer"
-        onClick={() => router.push('/market')}
+        onClick={() => router.push('/stamp')}
       />
       <div className={cls('flex items-center justify-center gap-2')}>
         {/* Drop Zone */}
@@ -155,6 +166,10 @@ const Upload: React.FC = () => {
             border={true}
             dark={true}
             wide={true}
+          />
+          <AddTagsHapp 
+            tags={tags}
+            setTags={setTags}
           />
         </div>
       </div>

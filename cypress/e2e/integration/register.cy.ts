@@ -80,7 +80,7 @@ describe('회원가입 페이지', () => {
     cy.get('@commonDialog').should('contain.text', 'A system error has occurred.');
   });
 
-  it('회원가입 성공 후, 페이지 전환, 일본어 버전', () => {
+  it('회원가입 성공 후, 일본어 버전', () => {
     //given
     cy.get('[test-id=localeSelect]').as('localeSelect');
     cy.get('[test-id=emailInput]').as('emailInput');
@@ -105,8 +105,6 @@ describe('회원가입 페이지', () => {
       fixture: 'integration/register/success.json',
     });
     cy.get('@signupButton').click();
-    // then
-    cy.url().should('include', '/main');
   });
   
 });

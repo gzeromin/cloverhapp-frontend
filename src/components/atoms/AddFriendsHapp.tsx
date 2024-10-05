@@ -17,15 +17,15 @@ import UserProrile from '../molecules/UserProrile';
 import { RiCloseLine } from 'react-icons/ri';
 
 interface AddFriendsHappProps {
-  className: string;
-  friendList: Friend[];
-  setFriendList: Dispatch<SetStateAction<Friend[]>>;
+  className?: string;
+  friends: Friend[];
+  setFriends: Dispatch<SetStateAction<Friend[]>>;
 }
 
 const AddFriendsHapp: React.FC<AddFriendsHappProps> = ({
   className,
-  friendList,
-  setFriendList,
+  friends,
+  setFriends,
 }) => {
   const [observedIcon, setObservedIcon] = useState('');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -42,20 +42,20 @@ const AddFriendsHapp: React.FC<AddFriendsHappProps> = ({
     setSize: setPage,
   } = useSWRInfinite<Friend[]>(getKey, fetcher);
 
-  const friends: Friend[] = data
+  const friendList: Friend[] = data
     ? ([] as Friend[])
       .concat(...data)
-      .filter((d) => !friendList.some((f) => f.id === d.id))
+      .filter((d) => !friends.some((f) => f.id === d.id))
     : [];
 
   useEffect(() => {
-    if (!friends || friends.length === 0) return;
-    const id = friends[friends.length - 1].id;
+    if (!friendList || friendList.length === 0) return;
+    const id = friendList[friendList.length - 1].id;
     if (id !== observedIcon) {
       setObservedIcon(id);
       observeElement(document.getElementById(id));
     }
-  }, [friends]);
+  }, [friendList]);
 
   const observeElement = (element: HTMLElement | null) => {
     if (!element) return;
@@ -73,14 +73,14 @@ const AddFriendsHapp: React.FC<AddFriendsHappProps> = ({
   };
 
   const addFriend = (friend: Friend) => {
-    setFriendList((prev: Friend[]) => {
+    setFriends((prev: Friend[]) => {
       return [...prev, friend];
     });
     setSearchTerm('');
   };
 
   const deleteFriend = (friend: Friend) => {
-    setFriendList((prev: Friend[]) => {
+    setFriends((prev: Friend[]) => {
       return prev.filter((e) => e.id !== friend.id);
     });
   };
@@ -88,11 +88,14 @@ const AddFriendsHapp: React.FC<AddFriendsHappProps> = ({
     <div
       className={`relative flex items-end justify-between py-1 ${className}`}
     >
-      <div className={cls('grow grid grid-cols-3 gap-1')}>
-        {friendList?.map((friend, index) => (
+      <div className={cls(
+        'flex flex-wrap gap-1 shadow-md rounded-md',
+        'max-h-[90px] overflow-y-auto'
+      )}>
+        {friends?.map((friend, index) => (
           <div
             key={`friendList ${friend.id} ${index}`}
-            className="flex px-1 rounded-full bg-gray-100 items-center justify-between group hover:bg-primary-hover hover:cursor-pointer"
+            className="flex px-1 rounded-full bg-gray-100 items-center justify-between group hover:bg-green-100 cursor-pointer"
             onClick={() => deleteFriend(friend)}
           >
             <UserProrile
@@ -102,12 +105,15 @@ const AddFriendsHapp: React.FC<AddFriendsHappProps> = ({
               className="rounded-full"
             />
             <span className="text-sm mr-1">{friend.alias}</span>
-            <RiCloseLine className="text-sm mr-1 group-hover:text-primary group-hover:font-extrabold" />
+            <RiCloseLine className="text-sm mr-1 group-hover:text-green-700 group-hover:font-extrabold" />
           </div>
         ))}
       </div>
       <div className="flex items-center justify-end gap-1">
-        <LuAtSign className="text-gray-500 text-xl" />
+        <LuAtSign className={cls(
+          'text-gray-500 text-xl',
+          { 'text-green-700': showFriends }
+        )} />
         <input
           type="text"
           placeholder={Language.$t.Placeholder.AddFriend}
@@ -121,14 +127,19 @@ const AddFriendsHapp: React.FC<AddFriendsHappProps> = ({
       {showFriends && (
         <div
           className={cls(
-            'absolute right-0 bottom-0 translate-x-2 -translate-y-7 bg-white border border-light-gray border-collapse w-[170px] max-h-[150px] overflow-y-auto rounded shadow-md',
+            'absolute right-0 bottom-0 translate-x-2 -translate-y-7',
+            'w-[170px] max-h-[150px] break-all overflow-y-auto rounded shadow-md',
+            'bg-white border-collapse',
           )}
         >
-          {friends?.map((friend, index) => (
+          {friendList?.map((friend, index) => (
             <div
               key={`friends ${friend.id} ${index}`}
               id={friend.id}
-              className="flex items-center hover:bg-gray-200 cursor-pointer hover:bg-primary-hover hover:font-bold gap-1 p-1 min-h-[35px]"
+              className={cls(
+                'flex items-center hover:bg-green-50 cursor-pointer',
+                'hover:font-bold gap-1 p-1 min-h-[35px]'
+              )}
               onMouseDown={(e) => {
                 e.preventDefault(); // Prevent the blur event
                 addFriend(friend);

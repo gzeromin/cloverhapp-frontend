@@ -41,10 +41,11 @@ const Shop: React.FC<Props> = () => {
             className="object-cover"
             width={30}
             height={30}
+            style={{ width: 'auto' }}
           />
         </div>
         {user && user.nickname == 'aaa' &&
-          <Link href="/market/upload">
+          <Link href="/stamp/upload">
             <PiUploadDuotone className={cls(
               'w-[40px] h-[40px] text-light-gray',
               'hover:text-primary cursor-pointer')}

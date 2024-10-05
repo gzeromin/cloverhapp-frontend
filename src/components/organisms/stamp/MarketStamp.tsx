@@ -42,13 +42,12 @@ const MarketStamp: React.FC<MarketStampProps> = ({ stamp, selectStamp }) => {
             className={cls('object-cover')}
             width={20}
             height={20}
-            priority
           />
         </div>
         
         <Image
           src={stamp.url}
-          alt={`market stamp ${stamp.id}`}
+          alt={`stamp stamp ${stamp.id}`}
           className="h-auto w-auto mx-auto pt-6 object-contain aspect-square"
           priority
           width={90}

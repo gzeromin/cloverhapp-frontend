@@ -1,6 +1,6 @@
 'use client';
 import cls from 'classnames';
-import { Dnd, Happ, TodoStatus } from '@/types/Happ';
+import { Happ, TodoStatus } from '@/types/Happ';
 import { useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
@@ -11,6 +11,7 @@ import HappDisplayModal from '../HappDisplayModal';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
+import { Dnd } from '@/enums/Dnd';
 
 interface CalendarHappIconProps {
   happ: Happ;
@@ -25,7 +26,7 @@ const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
   // const size = 38;
 
   const [{ isDragging }, dragRef] = useDrag({
-    type: Dnd.MODIFIED,
+    type: Dnd.MODIFIED_HAPP,
     item: { id: happ.id, startTime: happ.startTime },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),

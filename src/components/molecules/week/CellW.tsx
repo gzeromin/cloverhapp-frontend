@@ -8,8 +8,8 @@ import { getCreatedDate, getModifiedDate, getModifiedXY } from '@/utils/drop.uti
 import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
 import { AuthActionEnum, useAuthDispatch } from '@/context/auth';
-import { Dnd } from '@/types/Happ';
 import { UserStamp } from '@/types/UserStamp';
+import { Dnd } from '@/enums/Dnd';
 
 interface Props {
   weekStr: string;
@@ -22,7 +22,7 @@ const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
   const dispatch = useAuthDispatch();
   
   const [, modifiedRef] = useDrop({
-    accept: Dnd.MODIFIED,
+    accept: Dnd.MODIFIED_HAPP,
     drop: async (item: { id: string; startTime: Date }, monitor) => {
       const clientOffset = monitor.getClientOffset();
       const modifiedDate = getModifiedDate(clientOffset, item.startTime);
@@ -44,7 +44,7 @@ const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
     },
   });
   const [, createdRef] = useDrop({
-    accept: Dnd.CREATED,
+    accept: Dnd.CREATED_HAPP,
     drop: async ( UserStamp: UserStamp, monitor) => {
       const clientOffset = monitor.getClientOffset();
       const createdDate = getCreatedDate(clientOffset);

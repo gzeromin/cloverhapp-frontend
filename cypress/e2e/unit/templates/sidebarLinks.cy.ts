@@ -12,7 +12,7 @@ describe('사이드바 링크 컴포넌트', () => {
     cy.get('[test-id="memoLink"]').should('exist');
     cy.get('[test-id="homeLink"]').should('exist');
     cy.get('[test-id="stampLink"]').should('exist');
-    cy.get('[test-id="visitorLink"]').should('exist');
+    cy.get('[test-id="friendLink"]').should('exist');
     cy.get('[test-id="profileLink"]').should('exist');
   });
 

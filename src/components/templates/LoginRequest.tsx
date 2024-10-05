@@ -30,7 +30,7 @@ const LoginRequest: React.FC<Props> = ({ testId }) => {
         href="/login"
         test-id="loginLink"
       >
-        {Language.$t.SideBar.RequestLogin}
+        {Language.$t.SideBarMessage.RequestLogin}
       </Link>
     </div>
   );

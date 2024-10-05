@@ -1,5 +1,5 @@
 {
-  "Welcome": "클로버햅에 오신것을 환영합니다",
+  "Welcome": "행운 아닌 행복",
   "NotHaveId": "아직 등록되지 않은 회원이라면...",
   "HaveId": "이미 등록된 회원이라면...",
   "Placeholder": {
@@ -14,7 +14,7 @@
     "Droplet": "물방울",
     "Title": "제목을 입력해주세요.",
     "SearchFriend": "친구 찾기: 별명이나 이메일로 검색해주세요.",
-    "AddFriend": "누구와 함께하고 있나요?",
+    "AddFriend": "친구를 추가해보세요.",
     "AddTag": "태그를 추가해보세요.",
     "FileUpload": "드래그 앤 드롭 또는 클릭하여 이미지를 업로드해주세요."
   },
@@ -55,9 +55,14 @@
     "Message6": "하나하나씩 모아나가보자"
   },
   "ErrorMessage": {
+    "Unauthorized": "로그인 해주세요.",
     "SystemError": "시스템 에러가 발생했습니다."
   },
-  "SideBar": {
-    "RequestLogin": "로그인 해주세요."
+  "SideBarMessage": {
+    "RequestLogin": "로그인 해주세요.",
+    "Stamp": {
+      "Display": "보이는 스탬프 목록",
+      "NotDisplay": "숨겨진 스탬프 목록"
+    }
   }
 }

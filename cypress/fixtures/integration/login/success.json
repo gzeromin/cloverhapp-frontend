@@ -1,14 +1,15 @@
 {
   "user": {
-      "id": "6bb8f197-432d-4521-9eca-dd1a57a3eb14",
-      "createdAt": "2024-09-10T10:47:44.384Z",
-      "updatedAt": "2024-09-10T10:47:44.384Z",
-      "nickname": "aaa",
-      "email": "aaa@aaa.aaa",
-      "photoUrl": null,
-      "role": 99,
-      "locale": "EN",
-      "droplet": 1000,
-      "notifNum": 0
+    "id": "8c15b63f-8854-48b6-9aba-569cd0ce6b2c",
+    "createdAt": "2024-09-19T12:23:43.436Z",
+    "updatedAt": "2024-10-05T23:24:12.634Z",
+    "nickname": "aaa",
+    "email": "aaa@aaa.aaa",
+    "photoUrl": null,
+    "role": 99,
+    "locale": "EN",
+    "droplet": 1000,
+    "notifNum": 0
   }
 }
+

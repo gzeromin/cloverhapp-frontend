@@ -5,6 +5,7 @@ import { TextareaHTMLAttributes, useEffect, useRef } from 'react';
 interface TextareaHappProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   labelName?: string;
+  labelClassName?: string;
   placeholder?: string;
   error?: string;
   rows?: number;
@@ -21,6 +22,7 @@ interface TextareaHappProps
 
 const TextareaHapp: React.FC<TextareaHappProps> = ({
   labelName = '',
+  labelClassName,
   placeholder = '',
   error,
   rows = 2,
@@ -55,32 +57,44 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
   }, [value, autoHeight]);
 
   return (
-    <div className={`${error ? 'mb-1' : marginBottom} ${className}`}>
+    <div
+      className={cls(
+        error ? 'mb-1' : marginBottom,
+        className,
+      )}
+    >
       {labelName && (
-        <label className="font-extralight text-sm text-gray">{labelName}</label>
+        <label className={cls(
+          'text-sm text-gray text-nowrap',
+          labelClassName
+        )}>
+          {labelName}
+        </label>
       )}
-      <textarea
-        style={{ minWidth: 300 }}
-        className={cls(
-          'w-full p-2 mt-1 rounded focus:outline-none',
-          { 'border-red-500': error },
-          {
-            'transition duration-200 border border-gray-400 bg-gray-50 focus:bg-white hover:bg-white focus:border-happ-focus focus:ring-happ-focus focus:ring-4':
-              border,
-          },
-          { 'resize-none': !resizable },
-          textAreaClassName,
+      <div className={cls('grow')}>
+        <textarea
+          style={{ minWidth: 120 }}
+          className={cls(
+            'w-full p-2 mt-1 rounded focus:outline-none',
+            { 'border-red-500': error },
+            {
+              'transition duration-200 border border-gray-400 bg-gray-50 focus:bg-white hover:bg-white focus:border-happ-focus focus:ring-happ-focus focus:ring-4':
+                border,
+            },
+            { 'resize-none': !resizable },
+            textAreaClassName,
+          )}
+          rows={rows}
+          placeholder={placeholder ? placeholder : labelName}
+          disabled={disable}
+          value={value}
+          ref={textareaRef}
+          onChange={handleChange}
+        />
+        {error && (
+          <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>
         )}
-        rows={rows}
-        placeholder={placeholder ? placeholder : labelName}
-        disabled={disable}
-        value={value}
-        ref={textareaRef}
-        onChange={handleChange}
-      />
-      {error && (
-        <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>
-      )}
+      </div>
     </div>
   );
 };

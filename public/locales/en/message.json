@@ -1,5 +1,5 @@
 {
-  "Welcome": "Welcome to Cloverhapp",
+  "Welcome": "Happiness, not Luck",
   "NotHaveId": "If you don't have ID...",
   "HaveId": "If you have already ID...",
   "Placeholder": {
@@ -14,7 +14,7 @@
     "Droplet": "droplet",
     "Title": "input title",
     "SearchFriend": "search friend: search by nickname or email",
-    "AddFriend": "who are you with?",
+    "AddFriend": "add friends, please.",
     "AddTag": "add tags, please.",
     "FileUpload": "Drag & drop or click to upload an image"
   },
@@ -55,9 +55,14 @@
     "Message6": "every single happiness in life"
   },
   "ErrorMessage": {
+    "Unauthorized": "Please login.",
     "SystemError": "A system error has occurred."
   },
-  "SideBar": {
-    "RequestLogin": "Please login."
+  "SideBarMessage": {
+    "RequestLogin": "Please login.",
+    "Stamp": {
+      "Display": "Visible Stamps",
+      "NotDisplay": "Hidden Stamps"
+    }
   }
 }

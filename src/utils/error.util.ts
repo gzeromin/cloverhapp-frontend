@@ -5,6 +5,7 @@ enum StatusCode {
   FormError = 1000,
   SystemError = 500,
   NotFoundError = 404,
+  Unauthorized = 401
 }
 
 export const handleError = async (
@@ -34,12 +35,17 @@ export const handleError = async (
     return false;
     // Default
     // message: string | string[] | null | ''
-  case StatusCode.SystemError:
+  case StatusCode.Unauthorized:
+    return await Dialog.openDialog(
+      Dialog.DANGER,
+      Language.$t.ErrorMessage.Unauthorized,
+    );
+  case StatusCode.NotFoundError:
     return await Dialog.openDialog(
       Dialog.DANGER,
       Language.$t.ErrorMessage.SystemError,
     );
-  case StatusCode.NotFoundError:
+  case StatusCode.SystemError:
     return await Dialog.openDialog(
       Dialog.DANGER,
       Language.$t.ErrorMessage.SystemError,

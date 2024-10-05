@@ -176,15 +176,15 @@ const InputArea: React.FC<Props> = ({
       {friendList && setFriendList && (
         <AddFriendsHapp
           className={`${openFriends ? 'block' : 'hidden'}`}
-          friendList={friendList}
-          setFriendList={setFriendList}
+          friends={friendList}
+          setFriends={setFriendList}
         />
       )}
       {tagList && setTagList && (
         <AddTagsHapp
           className={`${openTags ? 'block' : 'hidden'}`}
-          tagList={tagList}
-          setTagList={setTagList}
+          tags={tagList}
+          setTags={setTagList}
         />
       )}
     </div>

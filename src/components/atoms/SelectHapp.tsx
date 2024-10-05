@@ -31,6 +31,7 @@ interface SelectHappProps {
   labelName?: string;
   testId?: string;
   wide?: boolean;
+  disable?: boolean;
 }
 
 const SelectHapp: React.FC<SelectHappProps> = ({
@@ -43,6 +44,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
   labelName,
   testId,
   wide = false,
+  disable,
 }) => {
   const [selectedOption, setSelectedOption] = useState({
     value: '',
@@ -57,12 +59,25 @@ const SelectHapp: React.FC<SelectHappProps> = ({
   }, [selected, options]);
 
   const selectValue = (value: string | number) => {
-    onSelected(value);
-    setShow(false);
+    if (!disable) {
+      onSelected(value);
+      setShow(false);
+    }
   };
+
+  const handleShow = () => {
+    if (!disable) {
+      setShow(true);
+    }
+  };
+
   return (
     <div
-      className={cls('relative cursor-pointer', className)}
+      className={cls('relative', {
+        'cursor-pointer': !disable,
+        'bg-gray-200 text-gray-400 cursor-not-allowed': disable,
+      }, className
+      )}
       test-id={testId}
     >
       {labelName && (
@@ -79,13 +94,13 @@ const SelectHapp: React.FC<SelectHappProps> = ({
           },
           {
             'outline-none border-happ-focus ring-happ-focus ring-4':
-              show && border,
+              show && border && !disable,
           },
           {
             'py-2': wide,
           }
         )}
-        onClick={() => setShow((prev) => !prev)}
+        onClick={handleShow}
       >
         {selectedOption.image && (
           <Image
@@ -110,12 +125,12 @@ const SelectHapp: React.FC<SelectHappProps> = ({
           <div
             className={cls(
               'h-0 border-white-transparent border-x-transparent border-[5px] border-b-0',
-              { 'border-gray-600': dark },
+              { 'border-gray-700': dark },
             )}
           ></div>
         </div>
       </div>
-      {show && (
+      {show && !disable && (
         <div className=''>
           {/* Background opacity */}
           <div

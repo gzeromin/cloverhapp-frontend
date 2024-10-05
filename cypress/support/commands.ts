@@ -20,6 +20,14 @@ Cypress.Commands.add('login', (email = 'aaa@aaa.aaa', password = 'aaaaaa') => {
     fixture: 'integration/login/success.json',
   }).as('loginRequest');
 
+  cy.intercept({
+    method: 'GET',
+    url: '**/auth/me',
+  }, {
+    statusCode: 200,
+    fixture: 'integration/login/success.json',
+  });
+  
   // 로그인 페이지로 이동
   cy.visit('/login');
 

@@ -23,7 +23,7 @@ const Login = () => {
   const router = useRouter();
   useEffect(() => {
     if (user) {
-      router.push('/main');
+      router.back();
     }
   }, [user, router]);
 
@@ -53,7 +53,7 @@ const Login = () => {
         height={70}
         priority
       />
-      <div className="w-10/12 mx-auto lg:w-96">
+      <div className="mx-auto w-96">
         <form onSubmit={onSubmit}>
           <InputHapp
             labelName={Language.$t.Input.Email}

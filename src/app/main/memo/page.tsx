@@ -16,8 +16,8 @@ const Memo: React.FC<Props> = () => {
     >
       <RiSave3Fill 
         className={cls(
-          'text-primary cursor-pointer text-3xl', 
-          'mr-2 hover:text-primary-hover',
+          'text-gray-500 cursor-pointer text-2xl', 
+          'mr-2 hover:text-primary',
           'absolute right-0 top-1'
         )}
       />

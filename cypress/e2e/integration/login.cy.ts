@@ -1,12 +1,9 @@
 
 describe('로그인 페이지', () => {
-
-  beforeEach(() => {
+  it('폼 언어 변경 테스트', () => {
     // 로그인 페이지로 이동
     cy.visit('/login');
-  });
 
-  it('폼 언어 변경 테스트', () => {
     //given
     cy.get('[test-id=emailInput]').as('emailInput').should('exist');
     cy.get('[test-id=passwordInput]').as('passwordInput').should('exist');
@@ -14,11 +11,11 @@ describe('로그인 페이지', () => {
     cy.get('[test-id=signupLink]').as('signupLink').should('exist');
     cy.get('[test-id=localeSelect]').as('localeSelect').should('exist');
     // 처음 표시 언어 확인하기(한국어)
-    cy.get('@emailInput').parent().find('label').should('have.text','이메일');
+    cy.get('@emailInput').parent().parent().find('label').should('have.text','이메일');
     // 영어로 변경 확인
     cy.get('@localeSelect').click();
     cy.get('@localeSelect').find('li').eq(1).click();
-    cy.get('@passwordInput').parent().find('label').should('have.text','Password');
+    cy.get('@passwordInput').parent().parent().find('label').should('have.text','Password');
     // 일본어로 변경 확인
     cy.get('@localeSelect').click();
     cy.get('@localeSelect').find('li').eq(2).click();
@@ -30,6 +27,9 @@ describe('로그인 페이지', () => {
   });
 
   it('폼 에러 발생, 일본어 버전', () => {
+    // 로그인 페이지로 이동
+    cy.visit('/login');
+
     // given
     cy.get('[test-id=localeSelect]').as('localeSelect');
     cy.get('[test-id=emailInput]').as('emailInput');
@@ -58,6 +58,9 @@ describe('로그인 페이지', () => {
   });
 
   it('로그인 실패, 한국어 버전', () => {
+    // 로그인 페이지로 이동
+    cy.visit('/login');
+
     // given
     cy.get('[test-id=emailInput]').as('emailInput');
     cy.get('[test-id=passwordInput]').as('passwordInput');
@@ -72,7 +75,7 @@ describe('로그인 페이지', () => {
       url: '**/auth/signin',
     }, {
       statusCode: 401,
-      fixture: 'integration/login/unauthorized-error.json',
+      fixture: 'integration/login/login-error.json',
     });
     cy.get('@loginButton').click();
     // then
@@ -80,6 +83,10 @@ describe('로그인 페이지', () => {
   });
 
   it('로그인 성공 후, 페이지 전환, 언어 적용 확인', () => {
+    // 로그인 후, 페이지 이동을 확인하기 위해
+    cy.visit('/main');
+    cy.visit('/login');
+
     // given
     cy.get('[test-id=emailInput]').as('emailInput');
     cy.get('[test-id=passwordInput]').as('passwordInput');
@@ -96,6 +103,13 @@ describe('로그인 페이지', () => {
       statusCode: 201,
       fixture: 'integration/login/success.json',
     });
+    cy.intercept({
+      method: 'GET',
+      url: '**/auth/me',
+    }, {
+      statusCode: 200,
+      fixture: 'integration/login/success.json',
+    });
     cy.get('@loginButton').click();
     // then
     cy.url().should('include', '/main');
@@ -103,6 +117,9 @@ describe('로그인 페이지', () => {
   });
 
   it('회원가입 페이지로 이동', () => {
+    // 로그인 페이지로 이동
+    cy.visit('/login');
+
     // given
     cy.get('[test-id=signupLink]').as('signupLink').should('exist');
 

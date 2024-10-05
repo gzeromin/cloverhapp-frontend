@@ -1,5 +1,5 @@
 {
-  "Welcome": "クローバーハップへようこそ",
+  "Welcome": "幸運ではなく幸せ",
   "NotHaveId": "まだIDを持ってない方は。。。",
   "HaveId": "すでにIDを持っている方は。。。",
   "Placeholder": {
@@ -14,7 +14,7 @@
     "Droplet": "水滴",
     "Title": "題名を入力して下さい。",
     "SearchFriend": "友達探し：ニックネームまたはメールアドレスで検索してください。",
-    "AddFriend": "だれと一緒ですか？",
+    "AddFriend": "友達を追加してください。",
     "AddTag": "タグを追加してください。",
     "FileUpload": "ドラッグ＆ドロップまたはクリックして画像をアップロードしてください。"
   },
@@ -55,9 +55,14 @@
     "Message6": "一つ一つずつ集めて行きましょう"
   },
   "ErrorMessage": {
+    "Unauthorized": "ログインして下さい。",
     "SystemError": "システムエラーが発生しました。"
   },
-  "SideBar": {
-    "RequestLogin": "ログインしてください。"
+  "SideBarMessage": {
+    "RequestLogin": "ログインして下さい。",
+    "Stamp": {
+      "Display": "表示されているスタンプ",
+      "NotDisplay": "非表示のスタンプリスト"
+    }
   }
 }

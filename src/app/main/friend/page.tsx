@@ -3,15 +3,15 @@ import { memo } from 'react';
 
 interface Props {}
 
-const Visitor: React.FC<Props> = () => {
+const Friend: React.FC<Props> = () => {
   return (
     <div 
       className="flex flex-col p-3"
-      test-id="visitorPage"
+      test-id="friendPage"
     >
       Visitor
     </div>
   );
 };
 
-export default memo(Visitor);
+export default memo(Friend);

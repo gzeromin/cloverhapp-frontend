@@ -138,13 +138,13 @@ const HappModifyModal: React.FC<HappModifyModalProps> = ({
             />
             <AddFriendsHapp
               className={`${openAddFriends ? 'block' : 'hidden'}`}
-              friendList={friendList}
-              setFriendList={setFriendList}
+              friends={friendList}
+              setFriends={setFriendList}
             />
             <AddTagsHapp
               className={`${openAddTags ? 'block' : 'hidden'}`}
-              tagList={tagList}
-              setTagList={setTagList}
+              tags={tagList}
+              setTags={setTagList}
             />
             <div className="flex items-center bg-primary-hover rounded p-2 justify-between">
               <div className="flex gap-3">

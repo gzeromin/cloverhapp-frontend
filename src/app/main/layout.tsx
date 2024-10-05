@@ -28,7 +28,9 @@ export default function DashboardLayout(props: {
             <div className="p-2 border border-white border-dashed rounded-lg bg-primary">
               <div className="h-[600px] border-2 rounded-lg bg-white">
                 <div className="flex h-full">
-                  <div className="w-full lg:mr-1 lg:w-9/12" test-id='happCalendarSection'>{props.happCalendar}</div>
+                  <div className="w-full lg:mr-1 lg:w-9/12" test-id='happCalendarSection'>
+                    {props.happCalendar}
+                  </div>
                   <div className="hidden w-3/12 ml-1 lg:block" test-id='sideBarSection'>
                     {/*  로그인 안했을 때 */}
                     { !user && <LoginRequest testId="loginRequestComp"/> }

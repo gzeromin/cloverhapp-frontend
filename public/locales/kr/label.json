@@ -49,7 +49,24 @@
     "RequestMessage": "친구요청 메세지",
     "ChangeAliasMessage": "애칭 변경 메세지",
     "Type": "타입",
-    "Sip": "모금"
+    "Sip": "모금",
+    "Display": "표시",
+    "Order": "표시 순서",
+    "Friend": "친구",
+    "Tag": "태그",
+    "Goal": "목표",
+    "EconomicCommunity": "경제 공동체"
+  },
+  "CounterUnit": {
+    "Number": "회",
+    "Milliliter": "ml",
+    "Time": "시간",
+    "Hour": "시",
+    "Book": "권",
+    "Kcal": "kcal",
+    "Dollar": "천달러",
+    "Yen": "천엔",
+    "Won": "만원"
   },
   "Link": {
     "GetStarted": "시작하기"
@@ -88,7 +105,7 @@
     "Home": "홈",
     "Stamp": "스탬프",
     "Memo": "메모",
-    "Visitor": "방문객"
+    "Friend": "친구"
   },
   "Weeks": ["월", "화", "수", "목", "금", "토", "일"],
   "Months": [
@@ -106,7 +123,11 @@
     "12월"
   ],
   "Time": {
+    "H": "시간",
     "Hour": "시간",
+    "Hour2": "시",
+    "Hours": "시간",
+    "M": "분",
     "Minute": "분",
     "Minute0": "0분",
     "Now": "지금",

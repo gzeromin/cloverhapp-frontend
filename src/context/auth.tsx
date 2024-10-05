@@ -132,7 +132,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     async function loadUser() {
       try {
         const res = await api.get('/auth/me');
-        dispatch(AuthActionEnum.LOGIN, res.data);
+        dispatch(AuthActionEnum.LOGIN, res.data?.user);
       } catch (error) {
         console.log(error);
       } finally {

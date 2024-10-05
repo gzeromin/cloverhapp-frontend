@@ -10,7 +10,7 @@ enum Menu {
   Memo = '/main/memo',
   Home = '/main',
   Stamp = '/main/stamp',
-  Visitor = '/main/visitor',
+  Friend = '/main/friend',
   Profile = '/main/profile',
 }
 
@@ -60,12 +60,12 @@ const SideBarLinks: React.FC = () => {
         {Language.$t.SideBar.Stamp}
       </Link>
       <Link
-        className={tabStyle(Menu.Visitor)}
-        onClick={() => setSelectedMenu(Menu.Visitor)}
-        href="/main/visitor"
-        test-id="visitorLink"
+        className={tabStyle(Menu.Friend)}
+        onClick={() => setSelectedMenu(Menu.Friend)}
+        href="/main/friend"
+        test-id="friendLink"
       >
-        {Language.$t.SideBar.Visitor}
+        {Language.$t.SideBar.Friend}
       </Link>
       <Link
         className={tabStyle(Menu.Profile)}

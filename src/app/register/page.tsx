@@ -62,7 +62,7 @@ const Register = () => {
       >
         {Language.$t.Logo}
       </p>
-      <div className="w-10/12 mx-auto lg:w-96">
+      <div className="mx-auto w-96">
         <form onSubmit={onSubmit}>
           <InputHapp
             labelName={Language.$t.Input.Email}

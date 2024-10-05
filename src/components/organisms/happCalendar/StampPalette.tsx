@@ -23,6 +23,7 @@ const StampPalette: React.FC<StampPaletteProps> = ({
   const [selectedUserStamp, setSelectedUserStamp] = useState<UserStamp>();
   const { data: userStamps } = useSWR<UserStamp[]>('/user-stamp', fetcher);
 
+
   const onClickStamp = (userStamp: UserStamp) => {
     setShowStampSaveModal(true);
     setSelectedUserStamp(userStamp);
@@ -45,7 +46,7 @@ const StampPalette: React.FC<StampPaletteProps> = ({
         )}
       </DndProvider>
       {showStampSaveModal && (
-        <HappSaveModal
+        <HappSaveModal 
           userStamp={selectedUserStamp}
           closeModal={() => setShowStampSaveModal(false)}
           mutateHapp={mutateStamp}

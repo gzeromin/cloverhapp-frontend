@@ -16,19 +16,20 @@ import { Tag } from '@/types/Tag';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
 interface AddTagsHappProps{
-  className: string;
-  tagList: Tag[];
-  setTagList: Dispatch<SetStateAction<Tag[]>>;
+  className?: string;
+  tags: Tag[];
+  setTags: Dispatch<SetStateAction<Tag[]>>;
 }
 
 const AddTagsHapp: React.FC<AddTagsHappProps> = ({
   className,
-  tagList,
-  setTagList,
+  tags,
+  setTags,
 }) => {
   const [observedIcon, setObservedIcon] = useState('');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [showTags, setShowTags] = useState(false);
+  const [isComposing, setIsComposing] = useState(false);
 
   const getKey = (pageIndex: number, previousPageData: Tag[]) => {
     if (previousPageData && !previousPageData.length) return null;
@@ -41,20 +42,20 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
     setSize: setPage,
   } = useSWRInfinite<Tag[]>(getKey, fetcher);
 
-  const tags: Tag[] = data
+  const tagList: Tag[] = data
     ? ([] as Tag[])
       .concat(...data)
-      .filter((d) => !tagList.some((f) => f.name === d.name))
+      .filter((d) => !tags.some((f) => f.name === d.name))
     : [];
 
   useEffect(() => {
-    if (!tags || tags.length === 0) return;
-    const id = tags[tags.length - 1].id;
+    if (!tagList || tagList.length === 0) return;
+    const id = tagList[tagList.length - 1].id;
     if (id !== observedIcon) {
       setObservedIcon(id);
       observeElement(document.getElementById(id));
     }
-  }, [tags]);
+  }, [tagList]);
 
   const observeElement = (element: HTMLElement | null) => {
     if (!element) return;
@@ -72,7 +73,7 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
   };
 
   const addTag = (tag: Tag) => {
-    setTagList((prev: Tag[]) => {
+    setTags((prev: Tag[]) => {
       return [...prev, tag];
     });
     setSearchTerm('');
@@ -80,35 +81,56 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
 
   const addTagDirect = () => {
     const newTag = { name: searchTerm } as Tag;
-    setTagList((prev: Tag[]) => {
+    setTags((prev: Tag[]) => {
       return [...prev, newTag];
     });
     setSearchTerm('');
   };
 
   const deleteTag = (tag: Tag) => {
-    setTagList((prev: Tag[]) => {
-      return prev.filter((e) => e.id !== tag.id);
+    setTags((prev: Tag[]) => {
+      return prev.filter((e) => e.name !== tag.name);
     });
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // IME 입력 중이 아니라면 Enter 키를 처리
+    if (e.key === 'Enter' && !isComposing && searchTerm.trim()) {
+      e.preventDefault(); // 폼 제출 등의 기본 동작 방지
+      addTagDirect();      // 태그 추가
+    }
+  };
+
+  const handleCompositionEnd = (e: React.CompositionEvent<HTMLInputElement>) => {
+    setIsComposing(false); // IME 입력 끝났다고 알림
+    setSearchTerm(e.currentTarget.value); // 최종 입력 값을 searchTerm에 반영
+  };
+  
+
   return (
     <div
       className={`relative flex items-end justify-between py-1 ${className}`}
     >
-      <div className={cls('grow grid grid-cols-3 gap-1')}>
-        {tagList?.map((tag, index) => (
+      <div className={cls(
+        'flex flex-wrap gap-1 shadow-md rounded-md',
+        'max-h-[90px] overflow-y-auto'
+      )}>
+        {tags?.map((tag, index) => (
           <div
             key={`tagList ${tag.id} ${index}`}
-            className="flex px-1 rounded-full bg-gray-100 items-center justify-between break-all group hover:bg-primary-hover hover:cursor-pointer"
+            className="flex px-1 rounded-full bg-gray-100 items-center justify-between break-all group hover:bg-green-100 cursor-pointer"
             onClick={() => deleteTag(tag)}
           >
             <span className="text-sm mr-1">{tag.name}</span>
-            <RiCloseLine className="text-sm mr-1 group-hover:text-primary group-hover:font-extrabold" />
+            <RiCloseLine className="text-sm mr-1 group-hover:text-green-700 group-hover:font-extrabold" />
           </div>
         ))}
       </div>
       <div className="flex items-center justify-end gap-1">
-        <RiHashtag className="text-gray-500 text-xl" />
+        <RiHashtag className={cls(
+          'text-gray-500 text-xl',
+          { 'text-green-700': showTags }
+        )} />
         <input
           type="text"
           placeholder={Language.$t.Placeholder.AddTag}
@@ -117,17 +139,25 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
           onChange={(e) => setSearchTerm(e.currentTarget.value)}
           onFocus={() => setShowTags(true)}
           onBlur={() => setTimeout(() => setShowTags(false), 100)}
+          onKeyDown={handleKeyDown}
+          onCompositionStart={() => setIsComposing(true)}   // IME 입력 시작
+          onCompositionEnd={handleCompositionEnd}           // IME 입력 완료 시 호출
         />
       </div>
       {showTags && (
         <div
           className={cls(
-            'absolute right-0 bottom-0 translate-x-2 -translate-y-7 bg-white border border-light-gray border-collapse w-[170px] max-h-[150px] break-all overflow-y-auto rounded shadow-md',
+            'absolute right-0 bottom-0 translate-x-2 -translate-y-7',
+            'w-[170px] max-h-[150px] break-all overflow-y-auto rounded shadow-md',
+            'bg-white border-collapse',
           )}
         >
-          {searchTerm && tagList.every((e) => e.name !== searchTerm) && (
+          {searchTerm && tags.every((e) => e.name !== searchTerm) && (
             <div
-              className="flex items-center justify-between hover:bg-gray-200 cursor-pointer hover:bg-primary-hover hover:font-bold gap-1 p-1"
+              className={cls(
+                'flex items-center justify-between gap-1 p-1',
+                'hover:bg-green-50 cursor-pointer hover:font-bold'
+              )}
               onMouseDown={(e) => {
                 e.preventDefault(); // Prevent the blur event
                 addTagDirect();
@@ -137,11 +167,14 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
               <BsArrowReturnLeft />
             </div>
           )}
-          {tags?.map((tag, index) => (
+          {tagList?.map((tag, index) => (
             <div
               key={`tags ${tag.id} ${index}`}
               id={tag.id}
-              className="flex items-center hover:bg-gray-200 cursor-pointer hover:bg-primary-hover hover:font-bold gap-1 p-1 min-h-[35px]"
+              className={cls(
+                'flex items-center hover:bg-green-50 cursor-pointer',
+                'hover:font-bold gap-1 p-1 min-h-[35px]'
+              )}
               onMouseDown={(e) => {
                 e.preventDefault(); // Prevent the blur event
                 addTag(tag);

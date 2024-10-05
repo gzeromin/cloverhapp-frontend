@@ -49,7 +49,24 @@
     "RequestMessage": "友達要請メッセージ",
     "ChangeAliasMessage": "愛称変更メッセージ",
     "Type": "タイプ",
-    "Sip": "口"
+    "Sip": "口",
+    "Display": "表示",
+    "Order": "表示 順番",
+    "Friend": "友達",
+    "Tag": "タグ",
+    "Goal": "目標",
+    "EconomicCommunity": "経済共同体"
+  },
+  "CounterUnit": {
+    "Number": "回",
+    "Milliliter": "ml",
+    "Time": "時間",
+    "Hour": "時",
+    "Book": "冊",
+    "Kcal": "kcal",
+    "Dollar": "千ドル",
+    "Yen": "千円",
+    "Won": "万ウォン"
   },
   "Link": {
     "GetStarted": "始める"
@@ -88,7 +105,7 @@
     "Home": "ホーム",
     "Stamp": "スタンプ",
     "Memo": "メモ",
-    "Visitor": "訪問者"
+    "Friend": "友達"
   },
   "Weeks": ["月", "火", "水", "木", "金", "土", "日"],
   "Months": [
@@ -106,7 +123,11 @@
     "12月"
   ],
   "Time": {
+    "H": "時間",
     "Hour": "時間",
+    "Hour2": "時",
+    "Hours": "時間",
+    "M": "分",
     "Minute": "分",
     "Minute0": "0分",
     "Now": "只今",
