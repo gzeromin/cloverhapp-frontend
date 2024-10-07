@@ -30,7 +30,6 @@ const FileUploadHapp: React.FC<FileUploadHappProps> = ({
   imageUrls,
   onDeleteImageUrls,
 }) => {
-  const BASE_URL = process.env.BASE_URL;
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       setUploadedImages(acceptedFiles);
@@ -58,7 +57,7 @@ const FileUploadHapp: React.FC<FileUploadHappProps> = ({
   ) : imageUrls && imageUrls.length > 0 ? (
     <CarouselHapp
       className={`${className}`}
-      imageUrls={imageUrls.map((imageUrl) => BASE_URL + '/' + imageUrl)}
+      imageUrls={imageUrls}
       deleteImageUrls={deleteUploadedImages}
     />
   ) : (

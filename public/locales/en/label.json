@@ -55,7 +55,8 @@
     "Friend": "Friend",
     "Tag": "Tag",
     "Goal": "Goal",
-    "EconomicCommunity": "Economic community"
+    "CommunityOfFate": "Community Of Fate",
+    "StampStatus": "Status"
   },
   "CounterUnit": {
     "Number": "time(s)",
@@ -73,7 +74,7 @@
   },
   "StampStatus": {
     "Private": "Private",
-    "Protected": "Friends",
+    "Friend": "Friend",
     "Public": "Public"
   },
   "StampType": {
@@ -130,6 +131,7 @@
     "M": "m",
     "Minute": "min",
     "Minute0": "0 min",
+    "Plus15Minute": "+15 min",
     "Now": "now",
     "Duration": "duration"
   },

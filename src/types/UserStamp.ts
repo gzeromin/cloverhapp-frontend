@@ -1,5 +1,5 @@
 import { Friend } from './Friend';
-import { Stamp } from './Stamp';
+import { Stamp, StampStatus } from './Stamp';
 import { Tag } from './Tag';
 
 export interface UserStamp {
@@ -10,6 +10,7 @@ export interface UserStamp {
   memo: string;
   isDisplay: boolean;
   displayOrder: number;
+  status: StampStatus;
   existGoal: boolean;
   goalUnit: CounterUnit;
   goalInterval: IntervalUnit;

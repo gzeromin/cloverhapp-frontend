@@ -6,16 +6,18 @@ import { observer } from 'mobx-react-lite';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import Image from 'next/image';
 import { useDrag } from 'react-dnd';
-import HappModifyModal from '../HappModifyModal';
 import HappDisplayModal from '../HappDisplayModal';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
 import { Dnd } from '@/enums/Dnd';
+import HappSaveModal from '@/components/organisms/happCalendar/HappSaveModal';
 
 interface CalendarHappIconProps {
   happ: Happ;
 }
+
+const iconSize = 23;
 
 const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
   const { user } = useAuthState();
@@ -49,7 +51,7 @@ const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
       const res = await api.patch(
         '/happ/todo-complete/' + happ.id
       );
-      dispatch(AuthActionEnum.UPDATE_HAPP, res.data);
+      dispatch(AuthActionEnum.UPDATE_HAPP, {updated: res.data, created: []});
     } catch (error) {
       handleError(error);
     }
@@ -81,8 +83,8 @@ const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
               'hover:bg-primary-hover',
               { 'opacity-50': isDragging },
             )}
-            width={33}
-            height={33}
+            width={iconSize}
+            height={iconSize}
             onClick={setShow}
           />
         )}
@@ -99,8 +101,8 @@ const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
               { 'opacity-50': isDragging },
               'opacity-50 border border-green-600 border-dotted border-3',
             )}
-            width={33}
-            height={33}
+            width={iconSize}
+            height={iconSize}
             onClick={checkTodo}
           />
         )}
@@ -118,8 +120,8 @@ const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
                 'hover:bg-primary-hover',
                 { 'opacity-50': isDragging },
               )}
-              width={33}
-              height={33}
+              width={iconSize}
+              height={iconSize}
               onClick={setShow}
             />
             {/* 체크 아이콘을 이미지 위에 오버레이 */}
@@ -142,7 +144,8 @@ const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
       </div>
       {/* Happ Modify Modal */}
       {showModifyModal && (
-        <HappModifyModal
+        <HappSaveModal
+          userStamp={happ.UserStamp}
           happId={happ.id}
           closeModal={() => setShowModifyModal(false)}
         />

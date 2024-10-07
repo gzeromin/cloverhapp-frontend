@@ -55,7 +55,8 @@
     "Friend": "友達",
     "Tag": "タグ",
     "Goal": "目標",
-    "EconomicCommunity": "経済共同体"
+    "CommunityOfFate": "運命共同体",
+    "StampStatus": "公開範囲"
   },
   "CounterUnit": {
     "Number": "回",
@@ -73,7 +74,7 @@
   },
   "StampStatus": {
     "Private": "非公開",
-    "Protected": "友達公開",
+    "Friend": "友達公開",
     "Public": "公開"
   },
   "StampType": {
@@ -130,6 +131,7 @@
     "M": "分",
     "Minute": "分",
     "Minute0": "0分",
+    "Plus15Minute": "+15分",
     "Now": "只今",
     "Duration": "持続時間"
   },

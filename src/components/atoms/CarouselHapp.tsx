@@ -56,7 +56,7 @@ const CarouselHapp: React.FC<CarouselProps> = ({
                       <div
                         key={`Carousel Btn ${i}`}
                         className={cls(
-                          'w-2 h-2 rounded-full bg-gray-100 cursor-pointer hover:bg-gray-300',
+                          'w-2 h-2 rounded-full bg-gray-100 hover:bg-gray-300',
                           {
                             'w-3 bg-gray-200': i === currentIndex,
                           },

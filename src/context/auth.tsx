@@ -34,6 +34,7 @@ export enum AuthActionEnum {
   SET_HAPPLIST = 'SET_HAPPLIST',
   SET_HAPP = 'SET_HAPP',
   UPDATE_HAPP = 'UPDATE_HAPP',
+  DELETE_HAPP = 'DELETE_HAPP',
   UPDATE_HAPPLIST = 'ADD_HAPPLIST',
 }
 
@@ -82,26 +83,27 @@ const reducer = (state: State, { type, payload }: Action) => {
       happList: state.happList ? state.happList.concat(payload) : [],
     };
   case AuthActionEnum.UPDATE_HAPP:
+    const {updated, created} = payload;
     return {
       ...state,
       happList: state.happList
         ? state.happList.map((v) => {
-          if (v.id == payload.id) {
-            v.startTime = payload.startTime;
-            v.endTime = payload.endTime;
-            v.positionX = payload.positionX;
-            v.positionY = payload.positionY;
-            v.memo = payload.memo;
-            v.money = payload.money;
-            v.moneyUnit = payload.moneyUnit;
-            v.water = payload.water;
-            v.todo = payload.todo;
-            v.imageUrls = payload.imageUrls;
-            v.Tags = payload.Tags;
+          if (v.id == updated.id) {
+            v.startTime = updated.startTime;
+            v.endTime = updated.endTime;
+            v.positionX = updated.positionX;
+            v.positionY = updated.positionY;
+            v.memo = updated.memo;
+            v.todo = updated.todo;
           }
           return v;
-        })
+        }).concat(created)
         : [],
+    };
+  case AuthActionEnum.DELETE_HAPP:
+    return {
+      ...state,
+      happList: state.happList ? state.happList.filter((e) => e.id != payload) : [],
     };
   case AuthActionEnum.UPDATE_HAPPLIST:
     return {

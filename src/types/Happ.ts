@@ -1,4 +1,6 @@
 import { Comment } from './Comment';
+import { Friend } from './Friend';
+import { StampStatus } from './Stamp';
 import { Tag } from './Tag';
 import { User } from './User';
 import { UserStamp } from './UserStamp';
@@ -14,19 +16,21 @@ export interface Happ {
   moneyUnit: MoneyUnit;
   water: string;
   todo: TodoStatus;
+  status: StampStatus;
   id: string;
   imageUrls: string[];
   userId: string;
   User: User;
   Comments: Comment[];
   Tags: Tag[];
+  Friends: Friend[];
   UserStamp: UserStamp;
 }
 
 export enum MoneyUnit {
-  Dollar = 0,
-  Won = 1,
-  Yen = 2,
+  Dollar = 'EN',
+  Won = 'KR',
+  Yen = 'JP',
 }
 
 export enum TodoStatus {

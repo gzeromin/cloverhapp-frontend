@@ -23,10 +23,9 @@ const StampPage: React.FC<Props> = ({}) => {
             'absolute right-0 top-1'
           )}
         />
-        {'<경제 공동체>'}
-        {'<목표>'}
-
       </Link>
+      {'<경제 공동체>'}
+      {'<목표>'}
     </div>
   );
 };

@@ -7,9 +7,9 @@ import { FaDollarSign, FaWonSign, FaYenSign } from 'react-icons/fa6';
 import SelectHapp from './SelectHapp';
 
 const options = [
-  { value: MoneyUnit.Won, icon: <FaWonSign className='text-2xl'/> },
-  { value: MoneyUnit.Dollar, icon: <FaYenSign className='text-2xl' /> },
-  { value: MoneyUnit.Yen, icon: <FaDollarSign className='text-2xl' /> },
+  { value: MoneyUnit.Won, icon: <FaWonSign className='text-2xl text-primary'/> },
+  { value: MoneyUnit.Yen, icon: <FaYenSign className='text-2xl text-green-700' /> },
+  { value: MoneyUnit.Dollar, icon: <FaDollarSign className='text-2xl text-blue-700' /> },
 ];
 
 interface MoneyHappProps {

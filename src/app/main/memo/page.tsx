@@ -1,17 +1,36 @@
 'use client';
 import TextareaHapp from '@/components/atoms/TextareaHapp';
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import cls from 'classnames';
 import { RiSave3Fill } from 'react-icons/ri';
+import { observer } from 'mobx-react-lite';
+import { TimeCtrllor } from '@/mobx';
+import { useAuthState } from '@/context/auth';
+import api from '@/utils/api.util';
+import { Memo } from '@/types/Memo';
 
 interface Props {}
 
-const Memo: React.FC<Props> = () => {
+const MemoPage: React.FC<Props> = () => {
+  const { user } = useAuthState();
+  // const [memos, setMemos] = useState<Memo[]>([]);
   const [memo, setMemo] = useState('');
+
+  useEffect(() => {
+    if(user)
+      api
+        .get(`/memo/${TimeCtrllor.formattedSelectedDate}/${user.id}`)
+        .then((res) => {
+          // setMemos(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }, [TimeCtrllor.formattedSelectedDate, user]);
 
   return (
     <div 
-      className="flex flex-col p-3"
+      className="flex flex-col pt-4"
       test-id="memoPage"
     >
       <RiSave3Fill 
@@ -32,11 +51,12 @@ const Memo: React.FC<Props> = () => {
         marginBottom=""
         textAreaClassName={cls(
           'bg-transparent',
-          'whitespace-pre-wrap' // 개행 유지
+          'whitespace-pre-wrap', // 개행 유지
+          'text-sm'
         )}
       />
     </div>
   );
 };
 
-export default memo(Memo);
+export default memo(observer(MemoPage));

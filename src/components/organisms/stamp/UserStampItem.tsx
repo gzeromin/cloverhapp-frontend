@@ -1,5 +1,6 @@
 import { Language } from '@/mobx';
 import { notoSans } from '@/styles/fonts';
+import { StampStatus } from '@/types/Stamp';
 import { CounterUnit, UserStamp } from '@/types/UserStamp';
 import dateUtils from '@/utils/date.util';
 import cls from 'classnames';
@@ -7,7 +8,9 @@ import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { memo } from 'react';
+import { GoPeople } from 'react-icons/go';
 import { LuGoal } from 'react-icons/lu';
+import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
 
 interface Props {
   userStamp: UserStamp;
@@ -35,6 +38,17 @@ const UserStampItem: React.FC<Props> = ({
     return goalNumber;
   };
   
+  const getUserStampStatus = () => {
+    switch (userStamp.status) {
+    case StampStatus.PRIVATE:
+      return <RxLockClosed className='text-sm text-primary'/>;
+    case StampStatus.FRIEND:
+      return <GoPeople className='text-sm text-blue-700'/>;
+    case StampStatus.PUBLIC:
+      return <RxLockOpen2 className='text-sm text-green-700'/>;
+    }
+  };
+
   return (
     <div
       className={cls(
@@ -68,6 +82,7 @@ const UserStampItem: React.FC<Props> = ({
           <p className={cls('mr-3')}>
             {userStamp.alias}
           </p>
+          { getUserStampStatus() }
         </div>
         {userStamp.existGoal && (
           <div className={cls('flex items-center w-1/2')}>

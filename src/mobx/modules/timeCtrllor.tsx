@@ -68,6 +68,10 @@ class timeCtrllor {
     return dateUtil.getMonth(this.selectedDate);
   }
 
+  get formattedSelectedDate() {
+    return dateUtil.getDate(this.selectedDate);
+  }
+
   get selectedFirstDate() {
     return dateUtil.getFirstDateOfMonth(this.selectedDate);
   }

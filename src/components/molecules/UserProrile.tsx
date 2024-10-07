@@ -19,7 +19,7 @@ const UserProfile: React.FC<Props> = ({
   className,
   onClickProfile,
 }) => {
-  return user.photoUrl ? (
+  return user && user.photoUrl ? (
     <Image
       src={user.photoUrl}
       alt={alt}

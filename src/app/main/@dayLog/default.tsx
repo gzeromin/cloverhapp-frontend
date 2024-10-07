@@ -7,7 +7,6 @@ import useSWRInfinite from 'swr/infinite';
 import { fetcher } from '@/utils/api.util';
 import makeSection from '@/utils/makeSection.util';
 import HappFeed from '@/components/molecules/HappFeed';
-import StampPalette from '@/components/organisms/happCalendar/StampPalette';
 interface DayLogProps {
   className: string;
 }
@@ -23,14 +22,14 @@ const DayLog: React.FC<DayLogProps> = ({
   };
 
   const {
-    data,
+    data: happData,
     size: page,
     setSize: setPage,
     mutate,
   } = useSWRInfinite<Happ[]>(getKey, fetcher);
 
   const happs: { [key: string]: Happ[] } = makeSection(
-    data ? ([] as Happ[]).concat(...data) : [],
+    happData ? ([] as Happ[]).concat(...happData) : [],
   );
 
   useEffect(() => {
@@ -91,10 +90,6 @@ const DayLog: React.FC<DayLogProps> = ({
           },
         )}
       </div>
-      <StampPalette 
-        className='fixed bottom-0 inset-x-0 w-full p-1 pt-2 pb-3 bg-green-50' size={50}
-        mutateStamp={mutate}
-      />
     </div>
   );
 };

@@ -29,6 +29,13 @@ const getMonth = (date: Date) => {
   return date.getMonth();
 };
 
+const getDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const dateNumber =  date.getDate();
+  return `${year}-${month}-${dateNumber}`;
+};
+
 const getHour = (date: string) => {
   return new Date(date).getHours();
 };
@@ -211,6 +218,7 @@ const dateUtils = {
   },
   getFullYear,
   getMonth,
+  getDate,
   getHour,
   getFirstDateOfMonth,
   getFirstDateOfWeek,

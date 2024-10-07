@@ -96,7 +96,7 @@ const InputArea: React.FC<Props> = ({
   setCopy,
 }) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-1">
       { type && OPEN_TIME.includes(type) && 
         setStartTime && setEndTime && (
         <StartEndTimeInput
@@ -159,20 +159,6 @@ const InputArea: React.FC<Props> = ({
           onDeleteImageUrls={() => setImageUrls([])}
         />
       )}
-      {setTodo && (
-        <TodoHapp
-          className={`${openTodo ? 'block' : 'hidden'} border-gray-100`}
-          todo={todo}
-          setTodo={setTodo}
-        />
-      )}
-      {setCopy && (
-        <DateTimesInput 
-          className={`${openCopy ? 'block' : 'hidden'} border-gray-100`}
-          times={copy}
-          setTimes={setCopy}
-        />
-      )}
       {friendList && setFriendList && (
         <AddFriendsHapp
           className={`${openFriends ? 'block' : 'hidden'}`}
@@ -185,6 +171,20 @@ const InputArea: React.FC<Props> = ({
           className={`${openTags ? 'block' : 'hidden'}`}
           tags={tagList}
           setTags={setTagList}
+        />
+      )}
+      {setTodo && (
+        <TodoHapp
+          className={`${openTodo ? 'block' : 'hidden'} border-gray-100`}
+          todo={todo}
+          setTodo={setTodo}
+        />
+      )}
+      {setCopy && (
+        <DateTimesInput 
+          className={`${openCopy ? 'block' : 'hidden'} border-gray-100`}
+          times={copy}
+          setTimes={setCopy}
         />
       )}
     </div>

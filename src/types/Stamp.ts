@@ -7,6 +7,7 @@ export interface Stamp {
   url: string;
   droplet: number;
   type: StampType;
+  status: StampStatus;
   userId: string;
   Register: User;
 }
@@ -24,6 +25,12 @@ export enum StampType {
   EXPENSE = 'Expense',
   BOOK = 'Book',
   STUDY = 'Study',
+}
+
+export enum StampStatus {
+  PUBLIC = 'Public',
+  FRIEND = 'Friend',
+  PRIVATE = 'Private',
 }
 
 export const WEEK_TOTAL = [

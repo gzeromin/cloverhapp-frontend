@@ -10,24 +10,26 @@ import { Tag } from '@/types/Tag';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import { UserStamp } from '@/types/UserStamp';
 import { handleError } from '@/utils/error.util';
-import { FaExclamation } from 'react-icons/fa';
+import { FaEraser, FaExclamation } from 'react-icons/fa';
 import { AiFillCloseSquare } from 'react-icons/ai';
 import InputNav, { OPEN_MONEY } from '@/components/molecules/happSaveModal/InputNav';
-import { MoneyUnit, TodoStatus } from '@/types/Happ';
+import { Happ, MoneyUnit, TodoStatus } from '@/types/Happ';
 import InputArea from '@/components/molecules/happSaveModal/InputArea';
-import { StampType } from '@/types/Stamp';
+import { StampStatus, StampType } from '@/types/Stamp';
+import { RiDeleteBinLine } from 'react-icons/ri';
 
 interface HappSaveModalProps {
   userStamp: UserStamp | undefined;
   closeModal: () => void;
-  mutateHapp?: () => void;
+  happId?: string;
 }
 
 const HappSaveModal: React.FC<HappSaveModalProps> = ({
   userStamp,
   closeModal,
-  mutateHapp,
+  happId,
 }) => {
+  const [stampStatus, setStampStatus] = useState(StampStatus.PRIVATE);
   const [openTime, setOpenTime] = useState(false);
   const [openWater, setOpenWater] = useState(false);
   const [openMoney, setOpenMoney] = useState(false);
@@ -41,24 +43,70 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   const [imageUrls, setImageUrls] = useState<string[]>();
   const [startTime, setStartTime] = useState<Date>();
   const [endTime, setEndTime] = useState<Date>();
-  const [water, setWater] = useState('10');
+  const [water, setWater] = useState('0');
   const [money, setMoney] = useState('0');
   const [moneyUnit, setMoneyUnit] = useState<MoneyUnit>(MoneyUnit.Won);
   const [memo, setMemo] = useState('');
   const [todo, setTodo] = useState<TodoStatus>(TodoStatus.TODO);
-  const [copy, setCopy] = useState<Date[]>([]);
+  const [copy, setCopy] = useState<Date[]>([new Date()]);
   const [friendList, setFriendList] = useState<Friend[]>([]);
   const [tagList, setTagList] = useState<Tag[]>([]);
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
 
   useEffect(() => {
-    const stampType = userStamp?.Stamp.type;
-    if (stampType) {
-      setOpenMoney(OPEN_MONEY.includes(stampType));
-      setOpenWater(stampType === StampType.WATER);
+    if (happId) {
+      // UPDATE
+      api.get('/happ/' + happId).then((res) => {
+        const happ: Happ = res.data;
+        if (happ.status) {
+          setStampStatus(happ.status);
+        }
+        if (happ.imageUrls && happ.imageUrls.length !== 0) {
+          setImageUrls(happ.imageUrls);
+          setOpenUploadPhoto(true);
+        }
+        setStartTime(new Date(happ.startTime));
+        setEndTime(new Date(happ.endTime));
+        if (happ.endTime && happ.startTime !== happ.endTime) {
+          setOpenTime(true);
+        }
+        if (userStamp?.Stamp.type === StampType.WATER && happ.water) {
+          setWater(happ.water);
+          setOpenWater(true);
+        }
+        if (userStamp && OPEN_MONEY.includes(userStamp.Stamp.type) && happ.money) {
+          setMoney(happ.money);
+          setOpenMoney(true);
+        }
+        setMoneyUnit(happ.moneyUnit);
+        if (happ.memo) {
+          setMemo(happ.memo);
+          setOpenMemo(true);
+        }
+        if (happ.todo !== TodoStatus.NOT_TODO) {
+          setTodo(happ.todo);
+          setOpenTodo(true);
+        }
+        if (happ.Tags && happ.Tags.length !== 0) {
+          setTagList(happ.Tags);
+          setOpenTags(true);
+        }
+        if (happ.Friends && happ.Friends.length !== 0) {
+          setFriendList(happ.Friends);
+          setOpenFriends(true);
+        }
+      });
+    } else {
+      // CREATE
+      const stampType = userStamp?.Stamp.type;
+      if (stampType) {
+        setOpenMoney(OPEN_MONEY.includes(stampType));
+        setOpenWater(stampType === StampType.WATER);
+        setStampStatus(userStamp.status);
+      }
     }
-  }, [userStamp]);
+  }, [JSON.stringify(userStamp), happId]);
 
   const createHapp = async () => {
     Loading.setIsLoading(true);
@@ -72,8 +120,12 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           memo,
           money,
           moneyUnit,
+          water,
+          status: stampStatus,
           todo: openTodo ? todo : TodoStatus.NOT_TODO,
           copy: openCopy ? copy : undefined,
+          Friends: friendList,
+          Tags: tagList,
         };
         const formData = new FormData();
         if (uploadedImages != null) {
@@ -87,17 +139,65 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             'Content-Type': 'multipart/form-data',
           },
         });
-        if (mutateHapp) {
-          // DayLog
-          mutateHapp();
-        } else {
-          // HappCalendar
-          dispatch(AuthActionEnum.UPDATE_HAPPLIST, res.data);
-        }
+        // HappCalendar
+        dispatch(AuthActionEnum.UPDATE_HAPPLIST, res.data);
       }
       closeModal();
     } catch (error: any) {
       console.log(error);
+      handleError(error);
+    } finally {
+      Loading.setIsLoading(false);
+    }
+  };
+
+  const updateHapp = async () => {
+    Loading.setIsLoading(true);
+    try {
+      const updateHappDto = {
+        id: happId,
+        UserStamp: userStamp,
+        startTime,
+        endTime,
+        memo,
+        imageUrls,
+        money,
+        moneyUnit,
+        water,
+        status: stampStatus,
+        todo: openTodo ? todo : TodoStatus.NOT_TODO,
+        copy: openCopy ? copy : undefined,
+        Friends: friendList,
+        Tags: tagList,
+      };
+      const formData = new FormData();
+      if (uploadedImages != null) {
+        uploadedImages.forEach((file) => {
+          formData.append('happ-images', file);
+        });
+      }
+      formData.append('happ-data', JSON.stringify(updateHappDto));
+      const res = await api.patch('/happ', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      dispatch(AuthActionEnum.UPDATE_HAPP, res.data);
+      closeModal();
+    } catch (error: any) {
+      handleError(error);
+    } finally {
+      Loading.setIsLoading(false);
+    }
+  };
+
+  const deleteHapp = async () => {
+    Loading.setIsLoading(true);
+    try {
+      api.delete('/happ/' + happId);
+      dispatch(AuthActionEnum.DELETE_HAPP, happId);
+      closeModal();
+    } catch (error: any) {
       handleError(error);
     } finally {
       Loading.setIsLoading(false);
@@ -140,24 +240,56 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             )}>
               {userStamp?.alias}
             </p>
-            <button
-              className={cls(
-                'w-full rounded-lg border-primary',
-                'border-2 border-dashed', 
-                'hover:bg-primary hover:text-white py-1.5 px-3',
-                'text-primary font-normal text-lg',
-                'flex items-center justify-center'
-              )}
-              onClick={createHapp}
-            >
-              {Language.$t.Button.Stamping} <FaExclamation />
-            </button>
+            {!happId && 
+              <button
+                className={cls(
+                  'w-full rounded-lg border-primary',
+                  'border-2 border-dashed', 
+                  'hover:bg-primary hover:text-white py-1.5 px-3',
+                  'text-primary font-normal text-lg',
+                  'flex items-center justify-center'
+                )}
+                onClick={createHapp}
+              > 
+                {Language.$t.Button.Stamping} <FaExclamation />
+              </button>
+            }
+            {happId && 
+              <div className={cls('flex items-center w-full gap-2')}>
+                <button
+                  className={cls(
+                    'w-1/2 rounded-lg border-blue-700',
+                    'border-2 border-dashed', 
+                    'hover:bg-blue-700 hover:text-white py-1.5 px-3',
+                    'text-blue-700 font-normal text-lg',
+                    'flex items-center justify-center'
+                  )}
+                  onClick={deleteHapp}
+                > 
+                  {Language.$t.Button.Delete} <RiDeleteBinLine />
+                </button>
+                <button
+                  className={cls(
+                    'w-1/2 rounded-lg border-green-700',
+                    'border-2 border-dashed', 
+                    'hover:bg-green-700 hover:text-white py-1.5 px-3',
+                    'text-green-700 font-normal text-lg',
+                    'flex items-center justify-center'
+                  )}
+                  onClick={updateHapp}
+                > 
+                  {Language.$t.Button.Edit} <FaEraser />
+                </button>
+              </div>
+            }
           </div>
         </div>
         {/* body */}
         <div className="pt-0 p-2">
           {/* Mini Navigation */}
           <InputNav
+            stampStatus={stampStatus}
+            setStampStatus={setStampStatus}
             type={userStamp?.Stamp.type}
             openTime={openTime}
             setOpenTime={setOpenTime}

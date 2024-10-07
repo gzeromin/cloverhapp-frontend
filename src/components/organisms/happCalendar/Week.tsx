@@ -43,8 +43,8 @@ const Week: React.FC = () => {
               date={date}
               weekRef={{ current: weekRefs.current[i]}}
             />
-            {happs.map(happ => 
-              <CalendarHappIcon key={`calendar weekly happ ${happ.id}`} happ={happ} />
+            {happs.map((happ, index) => 
+              <CalendarHappIcon key={`calendar weekly happ ${happ.id} ${index}`} happ={happ} />
             )}
           </div>
         );

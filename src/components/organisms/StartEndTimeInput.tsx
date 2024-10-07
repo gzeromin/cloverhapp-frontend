@@ -83,6 +83,14 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
     }
   };
 
+  // 종료 시간을 15분 뒤로 설정
+  const handleEndTimePlus15min = () => {
+    if (endTime) {
+      const newTime = addMinutes(endTime, 15);
+      handleEndTimeChange(newTime);
+    }
+  };
+
   // 슬라이더로 현재 시간을 기준으로 시간을 변경
   const handleTimeChange = (offset: number) => {
     const newTime = addMinutes(new Date(), offset);
@@ -94,10 +102,11 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
     if (!startTime && setStartTime) {
       setStartTime(new Date());
     }
-    // 최초 랜더링 시, 종료 시간이 없으면 현재시간으로 설정
+    // 최초 랜더링 시, 종료 시간이 없으면 시작 시간으로 설정
     if (!endTime && setEndTime) {
-      setEndTime(new Date());
+      setEndTime(startTime);
     }
+
     // 최초 렌더링 시, 지속 시간을 계산해서 설정
     if (!duration && startTime && endTime && setDuration) {
       const initialDuration = calculateDuration(startTime, endTime);
@@ -143,7 +152,7 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
               {Language.$t.Time.Duration}
             </div>
             <div className={cls('flex gap-1')}>
-              {/* 종료 시간을 시작 시간으로 설정하는 버튼 TODO */}
+              {/* 종료 시간을 시작 시간으로 설정하는 버튼 */}
               <button
                 onClick={() => handleDurationChange(0)}
                 className={cls(
@@ -153,6 +162,17 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
                 )}
               >
                 {Language.$t.Time.Minute0}
+              </button>
+              {/* 종료 시간을 15분 뒤로 설정하는 버튼 */}
+              <button
+                onClick={() => handleEndTimePlus15min()}
+                className={cls(
+                  'border border-blue-700 text-blue-700',
+                  'rounded-lg px-1',
+                  'hover:bg-blue-700 hover:text-white'
+                )}
+              >
+                {Language.$t.Time.Plus15Minute}
               </button>
               {/* 종료 시간을 현재 시각으로 설정하는 버튼 */}
               <button

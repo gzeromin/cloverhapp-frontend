@@ -1,17 +1,43 @@
 'use client';
-import { memo } from 'react';
+import { Dispatch, memo, SetStateAction } from 'react';
 import { TbArrowsMove, TbPhoto } from 'react-icons/tb';
 import { GoPeople, GoTag } from 'react-icons/go';
 import { TfiPencilAlt } from 'react-icons/tfi';
 import { MdAttachMoney } from 'react-icons/md';
 import cls from 'classnames';
 import { LuCopyPlus, LuGlassWater } from 'react-icons/lu';
-import { StampType } from '@/types/Stamp';
+import { StampStatus, StampType } from '@/types/Stamp';
 import { WiTime7 } from 'react-icons/wi';
 import { BsCheckCircle } from 'react-icons/bs';
+import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
+import SelectHapp from '@/components/atoms/SelectHapp';
+import { RiLinksLine } from 'react-icons/ri';
+
+const statusOptions = [
+  {
+    value: StampStatus.PRIVATE,
+    labelLevel1: 'StampStatus',
+    labelLevel2: StampStatus.PRIVATE,
+    icon: <RxLockClosed />,
+  },
+  {
+    value: StampStatus.FRIEND,
+    labelLevel1: 'StampStatus',
+    labelLevel2: StampStatus.FRIEND,
+    icon: <GoPeople />,
+  },
+  {
+    value: StampStatus.PUBLIC,
+    labelLevel1: 'StampStatus',
+    labelLevel2: StampStatus.PUBLIC,
+    icon: <RxLockOpen2 />,
+  },
+];
 
 interface Props {
   type: StampType | undefined;
+  stampStatus: StampStatus;
+  setStampStatus: Dispatch<SetStateAction<StampStatus>>;
   openTime?: boolean;
   setOpenTime?: (open: boolean) => void;
   openWater?: boolean;
@@ -43,6 +69,7 @@ export const OPEN_TIME = [
 ];
 
 export const OPEN_MONEY = [
+  StampType.MEAL,
   StampType.INCOME,
   StampType.EXPENSE,
 ];
@@ -55,6 +82,8 @@ export const OPEN_TODO = Object.values(StampType);
 
 const InputNav: React.FC<Props> = ({
   type,
+  stampStatus,
+  setStampStatus,
   openTime,
   setOpenTime,
   openWater,
@@ -79,6 +108,12 @@ const InputNav: React.FC<Props> = ({
 }) => {
   return (
     <div className="flex gap-3 justify-end items-center bg-primary-hover rounded p-2 mb-2">
+      <SelectHapp
+        className='text-base grow'
+        options={statusOptions}
+        selected={stampStatus}
+        onSelected={setStampStatus}
+      ></SelectHapp>
       {setOpenTime && (
         <WiTime7 
           className={cls(
@@ -136,7 +171,7 @@ const InputNav: React.FC<Props> = ({
         />
       )}
       {setOpenFriends && (
-        <GoPeople
+        <RiLinksLine
           className={cls(
             'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
             {

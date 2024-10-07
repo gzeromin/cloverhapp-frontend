@@ -55,7 +55,8 @@
     "Friend": "친구",
     "Tag": "태그",
     "Goal": "목표",
-    "EconomicCommunity": "경제 공동체"
+    "CommunityOfFate": "운명 공동체",
+    "StampStatus": "공개 범위"
   },
   "CounterUnit": {
     "Number": "회",
@@ -73,7 +74,7 @@
   },
   "StampStatus": {
     "Private": "비공개",
-    "Protected": "친구공개",
+    "Friend": "친구공개",
     "Public": "공개"
   },
   "StampType": {
@@ -130,6 +131,7 @@
     "M": "분",
     "Minute": "분",
     "Minute0": "0분",
+    "Plus15Minute": "+15분",
     "Now": "지금",
     "Duration": "지속 시간"
   },

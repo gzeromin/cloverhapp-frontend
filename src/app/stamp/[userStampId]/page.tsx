@@ -20,8 +20,31 @@ import FieldWrapperHapp from '@/components/atoms/FieldWrapperHapp';
 import { MdOutlineDriveFileRenameOutline } from 'react-icons/md';
 import CycleCounter from '@/components/molecules/\bCycleCounter';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { StampType } from '@/types/Stamp';
+import { StampStatus, StampType } from '@/types/Stamp';
+import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
+import SelectHapp from '@/components/atoms/SelectHapp';
+import { GoPeople } from 'react-icons/go';
 
+const statusOptions = [
+  {
+    value: StampStatus.PRIVATE,
+    labelLevel1: 'StampStatus',
+    labelLevel2: StampStatus.PRIVATE,
+    icon: <RxLockClosed />,
+  },
+  {
+    value: StampStatus.FRIEND,
+    labelLevel1: 'StampStatus',
+    labelLevel2: StampStatus.FRIEND,
+    icon: <GoPeople />,
+  },
+  {
+    value: StampStatus.PUBLIC,
+    labelLevel1: 'StampStatus',
+    labelLevel2: StampStatus.PUBLIC,
+    icon: <RxLockOpen2 />,
+  },
+];
 interface UserStampUpdatePageProps {
   params: { userStampId: string };
 }
@@ -39,6 +62,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
   const [goalUnit, setGoalUnit] = useState<CounterUnit>(CounterUnit.Number);
   const [goalInterval, setGoalInterval] = useState<IntervalUnit>(IntervalUnit.Week);
   const [goalNumber, setGoalNumber] = useState<string>('0');
+  const [stampStatus, setStampStatus] = useState(StampStatus.PRIVATE);
 
   const router = useRouter();
 
@@ -48,6 +72,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
       setUserStamp(data);
       setDisplayOrder(String(data.displayOrder));
       setIsDisplay(data.isDisplay);
+      setStampStatus(data.status);
       setAlias(data.alias);
       setMemo(data.memo);
       setTags(data.Tags);
@@ -69,6 +94,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         memo,
         isDisplay,
         displayOrder,
+        status: stampStatus,
         Tags: tags,
         Friends: friends,
         existGoal,
@@ -149,36 +175,39 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
 
       {/* body */}
       <div className="w-full p-4">
-        <div className={cls('flex items-center')}>
+        <div className={cls('flex items-center justify-between')}>
           <div className={cls(
-            'text-base flex gap-3 w-1/2 items-center mb-3'
+            'mb-3 w-1/3 flex justify-between gap-3',
+            'text-base'
           )}>
             <label className={cls(
-              'text-sm text-gray text-nowrap font-bold',
+              'text-sm text-nowrap font-bold',
             )}>
               {Language.$t.Input.Display}
             </label>
-            {isDisplay &&          
-              <AiOutlineEye className='text-2xl'/>
-            }
-            {!isDisplay &&
-              <AiOutlineEyeInvisible className='text-2xl'/>
-            }
-            <input
-              type="checkbox"
-              className={cls(
-                'w-full p-2 focus:bg-white focus:outline-none rounded',
-                'scale-150',
-              )}
-              checked={isDisplay}
-              onChange={(e) => setIsDisplay(e.target.checked)}
-            />
+            <div className={cls('flex items-center gap-2')}>
+              {isDisplay &&          
+                <AiOutlineEye className='text-2xl'/>
+              }
+              {!isDisplay &&
+                <AiOutlineEyeInvisible className='text-2xl'/>
+              }
+              <input
+                type="checkbox"
+                className={cls(
+                  'p-2 focus:bg-white focus:outline-none rounded',
+                  'scale-150',
+                )}
+                checked={isDisplay}
+                onChange={(e) => setIsDisplay(e.target.checked)}
+              />
+            </div>
           </div>
           <InputHapp
             labelName={Language.$t.Input.Order}
-            labelClassName='w-1/2 font-bold'
+            labelClassName='font-bold'
             className={cls(
-              'text-base flex gap-3 w-1/2 items-center'
+              'text-base flex gap-3 items-center w-1/4'
             )}
             type="number"
             placeholder='1'
@@ -187,6 +216,20 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             inputClassName='text-center'
             min="1"
           />
+          <SelectHapp
+            className={cls(
+              'flex items-center gap-3 mb-3',
+              'rounded-md w-1/4'
+            )}
+            labelName={Language.$t.Input.StampStatus}
+            labelClassName={cls('font-bold')}
+            options={statusOptions}
+            selected={stampStatus}
+            onSelected={setStampStatus}
+            border={true}
+            dark={true}
+            wide={true}
+          ></SelectHapp>
         </div>
         <FieldWrapperHapp
           labelName={Language.$t.Input.Goal}
@@ -210,7 +253,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         {((userStamp && userStamp.Stamp.type === StampType.EXPENSE) 
         || (userStamp && userStamp.Stamp.type === StampType.INCOME)) && (
           <FieldWrapperHapp
-            labelName={Language.$t.Input.EconomicCommunity}
+            labelName={Language.$t.Input.CommunityOfFate}
             labelClassName='w-1/5 font-bold'
             className={cls(
               'text-base flex gap-3 items-center'
