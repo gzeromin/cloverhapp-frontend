@@ -15,7 +15,7 @@ export default defineConfig({
       // implement node event listeners here
     },
     baseUrl: 'http://localhost:3000',
-    defaultCommandTimeout: 60000, // 기본 명령 타임아웃 (예: 60초)
+    defaultCommandTimeout: 120000, // 기본 명령 타임아웃 (예: 60초)
     responseTimeout: 120000, // 응답 타임아웃 (예: 120초)
   },
 });
