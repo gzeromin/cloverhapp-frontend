@@ -9,7 +9,7 @@ import {
   getAvrStartTime, 
   getAvrStartTimeForNight, 
   getGoalNumber, 
-  getSleepTime
+  getSleepTime,
 } from '@/utils/happ.util';
 
 interface Props {
@@ -55,7 +55,7 @@ const SleepInfo: React.FC<Props> = ({
       return getGoalNumber(userStamp.goalUnit, userStamp.goalNumber);
     }
     return '';
-  }
+  };
 
   const getSleepingTimeGoal = () => {
     const wakeUp = userStamps?.filter(e => e.Stamp.type === StampType.WAKE_UP)[0];
@@ -71,7 +71,7 @@ const SleepInfo: React.FC<Props> = ({
   };
 
   return (
-    <div className="space-y-2 text-center py-1 my-2 shadow-lg bg-white rounded-md">
+    <div className="space-y-2 text-center py-1 my-2 shadow-sm bg-white rounded-md">
       {/* 1 열 */}
       <div className="flex">
         <div className="flex-[1_1_15%]"></div> {/* 작은 공간 */}

@@ -26,7 +26,7 @@ const MoneyInfo: React.FC<Props> = ({
   thisWeekHappList,
   thisMonthHappList,
   lastWeekHappList,
-  lastMonthHappList
+  lastMonthHappList,
 }) => {
   const [thisWeekIncome, setThisWeekIncome] = useState<number>(0);
   const [thisWeekExpense, setThisWeekExpense] = useState<number>(0);
@@ -78,7 +78,7 @@ const MoneyInfo: React.FC<Props> = ({
   }, [thisWeekHappList, thisMonthHappList, lastWeekHappList, lastMonthHappList]);
 
   return (
-    <div className="space-y-1 text-center shadow-lg py-1 bg-white rounded-md">
+    <div className="space-y-1 text-center shadow-sm py-1 bg-white rounded-md">
       {/* 1 열 */}
       <DisplayGoal userStamp={incomeStamp}/>
       {/* 2 열 */}

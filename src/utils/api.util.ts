@@ -24,4 +24,4 @@ export const kakaoBookFetcher = async (url: string) => {
       },
     })
     .then((res) => res.data.documents);
-}
+};

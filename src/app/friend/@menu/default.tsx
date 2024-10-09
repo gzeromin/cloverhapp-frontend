@@ -4,7 +4,6 @@ import { observer } from 'mobx-react-lite';
 import { usePathname } from 'next/navigation';
 import cls from 'classnames';
 import Link from 'next/link';
-import { useAuthState } from '@/context/auth';
 import { Language } from '@/mobx';
 
 interface Props {}
@@ -17,8 +16,6 @@ enum Pathname {
 }
 
 const Friend: React.FC<Props> = () => {
-  const { user } = useAuthState();
-
   const pathname = usePathname();
 
   return (

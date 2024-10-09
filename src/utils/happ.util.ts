@@ -143,7 +143,7 @@ export const getTotalDurationTime = (happList: Happ[]) => {
     return total + dateUtils.calculateDuration(start, end);
   }, 0);
   return dateUtils.getFormatHourMinByMinutes(totalMinutes);
-}
+};
 
 export const getTotalMoneyDollar = (happList: Happ[]) => {
   const total = happList.reduce((total, happ) => {
@@ -153,7 +153,7 @@ export const getTotalMoneyDollar = (happList: Happ[]) => {
     return total + 0;
   }, 0);
   return total / 1000;
-}
+};
 
 export const getTotalMoneyYen = (happList: Happ[]) => {
   const total = happList.reduce((total, happ) => {
@@ -163,7 +163,7 @@ export const getTotalMoneyYen = (happList: Happ[]) => {
     return total + 0;
   }, 0);
   return total / 1000;
-}
+};
 
 export const getTotalMoneyWon = (happList: Happ[]) => {
   const total = happList.reduce((total, happ) => {
@@ -173,7 +173,7 @@ export const getTotalMoneyWon = (happList: Happ[]) => {
     return total + 0;
   }, 0);
   return total / 10000;
-}
+};
 
 export const getBookCount = (happList: Happ[]) => {
   const uniqueBookIds = new Set<string>();
@@ -185,32 +185,32 @@ export const getBookCount = (happList: Happ[]) => {
   });
 
   return uniqueBookIds.size;
-}
+};
 
 export const getGoalCount = (goalUnit: CounterUnit, list: Happ[], type: StampType) => {
   switch (goalUnit) {
-    case CounterUnit.Milliliter:
-      return list.reduce((total, happ) => total + Number(happ.water), 0);
-    case CounterUnit.Book:
-      return getBookCount(list);
-    case CounterUnit.Number:
-      return list.length;
-    case CounterUnit.Hour:
-      if (type == StampType.GO_TO_BED) {
-        return getAvrStartTimeForNight(list);
-      }
-      return getAvrStartTime(list);
-    case CounterUnit.Time:
-      return getTotalDurationTime(list);
-    case CounterUnit.Dollar:
-      return getTotalMoneyDollar(list);
-    case CounterUnit.Won:
-      return getTotalMoneyWon(list);
-    case CounterUnit.Yen:
-      return getTotalMoneyYen(list);
+  case CounterUnit.Milliliter:
+    return list.reduce((total, happ) => total + Number(happ.water), 0);
+  case CounterUnit.Book:
+    return getBookCount(list);
+  case CounterUnit.Number:
+    return list.length;
+  case CounterUnit.Hour:
+    if (type == StampType.GO_TO_BED) {
+      return getAvrStartTimeForNight(list);
+    }
+    return getAvrStartTime(list);
+  case CounterUnit.Time:
+    return getTotalDurationTime(list);
+  case CounterUnit.Dollar:
+    return getTotalMoneyDollar(list);
+  case CounterUnit.Won:
+    return getTotalMoneyWon(list);
+  case CounterUnit.Yen:
+    return getTotalMoneyYen(list);
   }
-  return ''
-}
+  return '';
+};
 
 export const getGoalNumber = (unit: CounterUnit, goalNumber: string) => {
   if (unit == CounterUnit.Time) {
@@ -225,4 +225,4 @@ export const getBalance = (income: number | null, expense: number | null) => {
     return Math.round(balance * 10) / 10;
   }
   return 0;
-}
+};

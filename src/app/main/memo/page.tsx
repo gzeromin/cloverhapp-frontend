@@ -19,7 +19,7 @@ const MemoPage: React.FC<Props> = () => {
     if(user)
       api
         .get(`/memo/${TimeCtrllor.formattedSelectedDate}/${user.id}`)
-        .then((res) => {
+        .then(() => {
           // setMemos(res.data);
         })
         .catch((err) => {

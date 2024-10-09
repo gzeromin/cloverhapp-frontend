@@ -1,6 +1,5 @@
 'use client';
 import { Notif } from '@/types/Notif';
-import { User } from '@/types/User';
 import { fetcher } from '@/utils/api.util';
 import { memo, useEffect, useState } from 'react';
 import useSWRInfinite from 'swr/infinite';

@@ -21,11 +21,11 @@ const HappyStamp: React.FC<Props> = ({
   thisWeekHappList,
   thisMonthHappList,
   lastWeekHappList,
-  lastMonthHappList
+  lastMonthHappList,
 }) => {
   
   return (
-    <div className="flex flex-col py-1 shadow-lg bg-white rounded-md">
+    <div className="flex flex-col py-1 shadow-sm bg-white rounded-md">
       {/* Goal */}
       <DisplayGoal userStamp={userStamp}/>
 

@@ -84,7 +84,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
       api.get('/happ/' + happId).then((res) => {
         const happ: Happ = res.data;
         const UserStamp: UserStamp = happ.UserStamp;
-        console.log(happ)
+        console.log(happ);
         setUserStamp(UserStamp);
         if (happ.status) {
           setStampStatus(happ.status);

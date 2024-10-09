@@ -1,6 +1,6 @@
 'use client';
 import { Dispatch, memo, SetStateAction } from 'react';
-import { TbArrowsMove, TbPhoto } from 'react-icons/tb';
+import { TbPhoto } from 'react-icons/tb';
 import { GoPeople, GoTag } from 'react-icons/go';
 import { TfiPencilAlt } from 'react-icons/tfi';
 import { MdAttachMoney } from 'react-icons/md';

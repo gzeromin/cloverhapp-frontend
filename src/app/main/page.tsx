@@ -2,21 +2,18 @@
 import { memo, useEffect, useState } from 'react';
 import { useAuthState } from '@/context/auth';
 import {
-  getGoalNumber,
   getLastMonthHapp,
   getLastWeekHapp,
   getThisMonthHapp, 
-  getThisWeekHapp 
+  getThisWeekHapp, 
 } from '@/utils/happ.util';
 import { StampType } from '@/types/Stamp';
-import { Language, TimeCtrllor } from '@/mobx';
+import { TimeCtrllor } from '@/mobx';
 import { observer } from 'mobx-react-lite';
-import Image from 'next/image';
-import { BUCKET_URL, fetcher } from '@/utils/api.util';
+import { fetcher } from '@/utils/api.util';
 import { Happ } from '@/types/Happ';
 import useSWR from 'swr';
-import { IntervalUnit, UserStamp } from '@/types/UserStamp';
-import cls from 'classnames';
+import { UserStamp } from '@/types/UserStamp';
 import SleepInfo from '@/components/organisms/sideBarHome/SleepInfo';
 import HappyStamp from '@/components/organisms/sideBarHome/HappyStamp';
 import MoneyInfo from '@/components/organisms/sideBarHome/MoneyInfo';

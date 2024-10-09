@@ -12,7 +12,7 @@ interface Props {
 }
 
 const DisplayGoal: React.FC<Props> = ({
-  userStamp
+  userStamp,
 }) => {
   return (
     <div className='flex items-center'>

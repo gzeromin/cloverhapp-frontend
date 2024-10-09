@@ -9,12 +9,11 @@ import {
   getGoalNumber, 
   getThisDateHapp, 
   getThisMonthHapp, 
-  getThisWeekHapp
+  getThisWeekHapp,
 } from '@/utils/happ.util';
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { memo, useEffect, useState } from 'react';
 import { GoPeople } from 'react-icons/go';
 import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
@@ -30,20 +29,19 @@ const UserStampItem: React.FC<Props> = ({
 }) => {
   const { happList } = useAuthState();
   const [filteredHappList, setFilteredHappList] = useState<Happ[]>([]);
-  const router = useRouter();
 
   useEffect(() => {
     let intervalFilteredList: Happ[] = [];
     switch (userStamp.goalInterval) {
-      case IntervalUnit.Month:
-        intervalFilteredList = getThisMonthHapp(happList, TimeCtrllor.selectedDate);
-        break;
-      case IntervalUnit.Week:
-        intervalFilteredList = getThisWeekHapp(happList, TimeCtrllor.selectedDate);
-        break;
-      case IntervalUnit.Day:
-        intervalFilteredList = getThisDateHapp(happList);
-        break;
+    case IntervalUnit.Month:
+      intervalFilteredList = getThisMonthHapp(happList, TimeCtrllor.selectedDate);
+      break;
+    case IntervalUnit.Week:
+      intervalFilteredList = getThisWeekHapp(happList, TimeCtrllor.selectedDate);
+      break;
+    case IntervalUnit.Day:
+      intervalFilteredList = getThisDateHapp(happList);
+      break;
     }
     setFilteredHappList(intervalFilteredList.filter(
       happ => happ.UserStamp.id == userStamp.id
