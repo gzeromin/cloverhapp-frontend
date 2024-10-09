@@ -67,8 +67,6 @@ const CycleCounter: React.FC<Props> = ({
     switch(goalUnit) {
     case CounterUnit.Milliliter:
       return '500';
-    case CounterUnit.Kcal:
-      return '200';
     case CounterUnit.Time:
       return '15';
     case CounterUnit.Hour:

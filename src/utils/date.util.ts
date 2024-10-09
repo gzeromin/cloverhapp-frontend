@@ -145,6 +145,11 @@ const getFiveToFourHour = (date: Date, targetDate: Date) => {
   return false;
 };
 
+const calculateDuration = (start: Date, end: Date) => {
+  const diff = (end.getTime() - start.getTime()) / (1000 * 60); // Difference in minutes
+  return diff > 0 ? Math.ceil(diff) : 0;
+};
+
 const getFormatDate = (date: Date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -228,6 +233,7 @@ const dateUtils = {
   getWeeksCountByMonth,
   getWeeksCountByMonth2,
   getFiveToFourHour,
+  calculateDuration,
   getFormatDate,
   getFormatDateHourMin,
   getFormatHourMin,

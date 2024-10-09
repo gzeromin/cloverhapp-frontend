@@ -98,7 +98,7 @@ const HappCalendar: React.FC<Props> = ({ className }) => {
             )}
             {showStampSaveModal && (
               <HappSaveModal 
-                userStamp={selectedUserStamp}
+                userStampId={selectedUserStamp ? selectedUserStamp.id : undefined}
                 closeModal={() => setShowStampSaveModal(false)}
               />
             )}

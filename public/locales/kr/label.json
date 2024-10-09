@@ -167,5 +167,19 @@
     "requested": "내가 받은 요청",
     "requesting": "나의 친구 요청",
     "search": "친구 찾기"
+  },
+  "Home": {
+    "WakeUp": "기상",
+    "GoToBed": "취침",
+    "Sleeping": "수면",
+    "Income": "수입",
+    "Expense": "지출",
+    "Balance": "잔액",
+    "This": "이번",
+    "Last": "지난",
+    "Month": "달",
+    "Week": "주",
+    "Day": "일",
+    "Every": "매"
   }
 }

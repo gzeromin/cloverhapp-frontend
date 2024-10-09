@@ -17,21 +17,24 @@ import { Happ, MoneyUnit, TodoStatus } from '@/types/Happ';
 import InputArea from '@/components/molecules/happSaveModal/InputArea';
 import { StampStatus, StampType } from '@/types/Stamp';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { Book } from '@/types/Book';
 
 interface HappSaveModalProps {
-  userStamp: UserStamp | undefined;
+  userStampId?: string;
   closeModal: () => void;
   happId?: string;
 }
 
 const HappSaveModal: React.FC<HappSaveModalProps> = ({
-  userStamp,
+  userStampId,
   closeModal,
   happId,
 }) => {
+  const [userStamp, setUserStamp] = useState<UserStamp>();
   const [stampStatus, setStampStatus] = useState(StampStatus.PRIVATE);
   const [openTime, setOpenTime] = useState(false);
   const [openWater, setOpenWater] = useState(false);
+  const [openBook, setOpenBook] = useState(false);
   const [openMoney, setOpenMoney] = useState(false);
   const [openMemo, setOpenMemo] = useState(false);
   const [openUploadPhoto, setOpenUploadPhoto] = useState(false);
@@ -44,6 +47,8 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   const [startTime, setStartTime] = useState<Date>();
   const [endTime, setEndTime] = useState<Date>();
   const [water, setWater] = useState('0');
+  const [book, setBook] = useState<Book | null>(null);
+  const [bookPercent, setBookPercent] = useState<string>('0');
   const [money, setMoney] = useState('0');
   const [moneyUnit, setMoneyUnit] = useState<MoneyUnit>(MoneyUnit.Won);
   const [memo, setMemo] = useState('');
@@ -55,10 +60,32 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   const dispatch = useAuthDispatch();
 
   useEffect(() => {
+    if (userStampId) {
+      // CREATE
+      api.get('/user-stamp/' + userStampId).then((res) => {
+        const UserStamp: UserStamp = res.data;
+        console.log(UserStamp);
+        setUserStamp(UserStamp);
+        const stampType = UserStamp.Stamp.type;
+        setOpenMoney(OPEN_MONEY.includes(stampType));
+        setOpenWater(stampType === StampType.WATER);
+        if (stampType === StampType.BOOK) {
+          setOpenBook(true);
+          setBook(UserStamp.Book);
+          setBookPercent(UserStamp.bookPercent);
+        }
+        setStampStatus(UserStamp.status);
+      });
+    }
+  }, [userStampId]);
+  useEffect(() => {
     if (happId) {
       // UPDATE
       api.get('/happ/' + happId).then((res) => {
         const happ: Happ = res.data;
+        const UserStamp: UserStamp = happ.UserStamp;
+        console.log(happ)
+        setUserStamp(UserStamp);
         if (happ.status) {
           setStampStatus(happ.status);
         }
@@ -71,11 +98,11 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
         if (happ.endTime && happ.startTime !== happ.endTime) {
           setOpenTime(true);
         }
-        if (userStamp?.Stamp.type === StampType.WATER && happ.water) {
+        if (UserStamp.Stamp.type === StampType.WATER && happ.water) {
           setWater(happ.water);
           setOpenWater(true);
         }
-        if (userStamp && OPEN_MONEY.includes(userStamp.Stamp.type) && happ.money) {
+        if (OPEN_MONEY.includes(UserStamp.Stamp.type) && happ.money) {
           setMoney(happ.money);
           setOpenMoney(true);
         }
@@ -96,17 +123,14 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           setFriendList(happ.Friends);
           setOpenFriends(true);
         }
+        if (UserStamp.Stamp.type === StampType.BOOK) {
+          setOpenBook(true);
+          setBook(happ.Book);
+          setBookPercent(happ.bookPercent);
+        }
       });
-    } else {
-      // CREATE
-      const stampType = userStamp?.Stamp.type;
-      if (stampType) {
-        setOpenMoney(OPEN_MONEY.includes(stampType));
-        setOpenWater(stampType === StampType.WATER);
-        setStampStatus(userStamp.status);
-      }
     }
-  }, [JSON.stringify(userStamp), happId]);
+  }, [happId]);
 
   const createHapp = async () => {
     Loading.setIsLoading(true);
@@ -126,6 +150,8 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           copy: openCopy ? copy : undefined,
           Friends: friendList,
           Tags: tagList,
+          Book: book,
+          bookPercent,
         };
         const formData = new FormData();
         if (uploadedImages != null) {
@@ -169,6 +195,8 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
         copy: openCopy ? copy : undefined,
         Friends: friendList,
         Tags: tagList,
+        Book: book,
+        bookPercent,
       };
       const formData = new FormData();
       if (uploadedImages != null) {
@@ -295,6 +323,8 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             setOpenTime={setOpenTime}
             openWater={openWater}
             setOpenWater={setOpenWater}
+            openBook={openBook}
+            setOpenBook={setOpenBook}
             openMoney={openMoney}
             setOpenMoney={setOpenMoney}
             openMemo={openMemo}
@@ -321,6 +351,11 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
             openWater={openWater}
             water={water}
             setWater={setWater}
+            openBook={openBook}
+            book={book}
+            setBook={setBook}
+            bookPercent={bookPercent}
+            setBookPercent={setBookPercent}
             openMoney={openMoney}
             money={money}
             setMoney={setMoney}

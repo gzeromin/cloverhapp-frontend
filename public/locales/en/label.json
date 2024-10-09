@@ -167,5 +167,19 @@
     "requested": "Received Request",
     "requesting": "My Request",
     "search": "Friend Search"
+  },
+  "Home": {
+    "WakeUp": "wake up",
+    "GoToBed": "sleep",
+    "Sleeping": "sleeping",
+    "Income": "income",
+    "Expense": "expense",
+    "Balance": "balance",
+    "This": "this",
+    "Last": "last",
+    "Month": "month",
+    "Week": "week",
+    "Day": "day",
+    "Every": "every "
   }
 }

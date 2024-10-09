@@ -12,3 +12,16 @@ export default instance;
 export const fetcher = async (url: string) => {
   return await instance.get(url).then((res) => res.data);
 };
+
+export const kakaoBookFetcher = async (url: string) => {
+  const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
+
+  return await axios
+    .get(url, {
+      baseURL: 'https://dapi.kakao.com/v3/search',
+      headers: {
+        Authorization: `KakaoAK ${REST_API_KEY}`,
+      },
+    })
+    .then((res) => res.data.documents);
+}

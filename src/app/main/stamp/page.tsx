@@ -5,27 +5,44 @@ import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
 import { TbSettingsShare } from 'react-icons/tb';
 import Link from 'next/link';
+import useSWR from 'swr';
+import { UserStamp } from '@/types/UserStamp';
+import { fetcher } from '@/utils/api.util';
+import UserStampItem from '@/components/organisms/sideBarStamp/UserStampItem';
 
-interface Props {
-}
+const StampPage: React.FC = ({}) => {
+  const { 
+    data,
+  } = useSWR<UserStamp[]>('/user-stamp/display', fetcher);
 
-const StampPage: React.FC<Props> = ({}) => {
   return (
     <div className={cls(
       'flex flex-col p-1',
       Language.logoFont
     )}>
-      <Link href="/stamp">
+      <Link 
+        className={cls('flex w-full items-center justify-end h-[18px]')}
+        href="/stamp"
+      >
         <TbSettingsShare 
           className={cls(
             'text-gray-500 cursor-pointer text-2xl', 
-            'mr-2 hover:text-primary',
-            'absolute right-0 top-1'
+            'hover:text-primary',
           )}
         />
       </Link>
-      {'<경제 공동체>'}
-      {'<목표>'}
+      <div className={cls(
+        'h-[520px] overflow-y-auto'
+      )}>
+        {data?.map((userStamp) => {
+          return (
+            <UserStampItem
+              key={`sideBarStamp userStampItem ${userStamp.id}`}
+              userStamp={userStamp}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

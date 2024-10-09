@@ -145,7 +145,6 @@ const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
       {/* Happ Modify Modal */}
       {showModifyModal && (
         <HappSaveModal
-          userStamp={happ.UserStamp}
           happId={happ.id}
           closeModal={() => setShowModifyModal(false)}
         />

@@ -1,3 +1,4 @@
+import { Book } from './Book';
 import { Comment } from './Comment';
 import { Friend } from './Friend';
 import { StampStatus } from './Stamp';
@@ -21,6 +22,8 @@ export interface Happ {
   imageUrls: string[];
   userId: string;
   User: User;
+  Book: Book;
+  bookPercent: string;
   Comments: Comment[];
   Tags: Tag[];
   Friends: Friend[];

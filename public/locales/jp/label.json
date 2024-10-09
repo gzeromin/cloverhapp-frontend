@@ -167,5 +167,19 @@
     "requested": "受け取った要請",
     "requesting": "自分の友達要請",
     "search": "友達探し"
+  },
+  "Home": {
+    "WakeUp": "起床",
+    "GoToBed": "就寝",
+    "Sleeping": "睡眠",
+    "Income": "収入",
+    "Expense": "支出",
+    "Balance": "残高",
+    "This": "今",
+    "Last": "先",
+    "Month": "月",
+    "Week": "週",
+    "Day": "日",
+    "Every": "毎"
   }
 }

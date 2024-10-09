@@ -14,7 +14,9 @@ const nextConfig = {
     domains: [
       'elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com', 
       'elasticbeanstalk-us-east-1-149536466661.s3.us-east-1.amazonaws.com',
-      'source.unsplash.com'],
+      'source.unsplash.com',
+      'search1.kakaocdn.net'
+    ],
   },
 };
 

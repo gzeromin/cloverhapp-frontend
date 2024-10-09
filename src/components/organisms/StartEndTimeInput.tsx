@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
 import InputTimeModule from '../molecules/InputTimeModule';
 import SliderHapp from '../atoms/SliderHapp';
+import dateUtils from '@/utils/date.util';
 
 interface StartEndTimeInputProps {
   className?: string;
@@ -28,12 +29,6 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
     const newDate = new Date(date);
     newDate.setMinutes(newDate.getMinutes() + minutes);
     return newDate;
-  };
-
-  // Helper function to calculate the difference in minutes between two Date objects
-  const calculateDuration = (start: Date, end: Date) => {
-    const diff = (end.getTime() - start.getTime()) / (1000 * 60); // Difference in minutes
-    return diff > 0 ? Math.ceil(diff) : 0;
   };
 
   // 슬라이더로 지속 시간 변경
@@ -62,7 +57,7 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
 
     // Recalculate duration based on the new start time and existing end time
     if (newTime && endTime && setDuration) {
-      const newDuration = calculateDuration(newTime, endTime);
+      const newDuration = dateUtils.calculateDuration(newTime, endTime);
       setDuration(newDuration);
     }
   };
@@ -78,7 +73,7 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
     }
     // Recalculate duration based on the new end time and existing start time
     if (startTime && newTime && setDuration) {
-      const newDuration = calculateDuration(startTime, newTime);
+      const newDuration = dateUtils.calculateDuration(startTime, newTime);
       setDuration(newDuration);
     }
   };
@@ -109,7 +104,7 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
 
     // 최초 렌더링 시, 지속 시간을 계산해서 설정
     if (!duration && startTime && endTime && setDuration) {
-      const initialDuration = calculateDuration(startTime, endTime);
+      const initialDuration = dateUtils.calculateDuration(startTime, endTime);
       setDuration(initialDuration);
     }
   }, [startTime, setStartTime, endTime, setEndTime, setDuration]);

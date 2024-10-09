@@ -12,6 +12,7 @@ import { BsCheckCircle } from 'react-icons/bs';
 import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
 import SelectHapp from '@/components/atoms/SelectHapp';
 import { RiLinksLine } from 'react-icons/ri';
+import { BiBook } from 'react-icons/bi';
 
 const statusOptions = [
   {
@@ -38,27 +39,27 @@ interface Props {
   type: StampType | undefined;
   stampStatus: StampStatus;
   setStampStatus: Dispatch<SetStateAction<StampStatus>>;
-  openTime?: boolean;
-  setOpenTime?: (open: boolean) => void;
-  openWater?: boolean;
-  setOpenWater?: (open: boolean) => void;
-  openMoney?: boolean;
-  setOpenMoney?: (open: boolean) => void;
-  openMemo?: boolean;
-  setOpenMemo?: (open: boolean) => void;
-  openUploadPhoto?: boolean;
-  setOpenUploadPhoto?: (open: boolean) => void;
-  existPhoto?: boolean;
-  openFriends?: boolean;
-  setOpenFriends?: (open: boolean) => void;
-  openTags?: boolean;
-  setOpenTags?: (open: boolean) => void;
-  openTimeMover?: boolean;
-  setOpenTimeMover?: (open: boolean) => void;
-  openTodo?: boolean;
-  setOpenTodo?: (open: boolean) => void;
-  openCopy?: boolean;
-  setOpenCopy?: (open: boolean) => void;
+  openTime: boolean;
+  setOpenTime: (open: boolean) => void;
+  openWater: boolean;
+  setOpenWater: (open: boolean) => void;
+  openBook: boolean;
+  setOpenBook: (open: boolean) => void;
+  openMoney: boolean;
+  setOpenMoney: (open: boolean) => void;
+  openMemo: boolean;
+  setOpenMemo: (open: boolean) => void;
+  openUploadPhoto: boolean;
+  setOpenUploadPhoto: (open: boolean) => void;
+  existPhoto: boolean | undefined;
+  openFriends: boolean;
+  setOpenFriends: (open: boolean) => void;
+  openTags: boolean;
+  setOpenTags: (open: boolean) => void;
+  openTodo: boolean;
+  setOpenTodo: (open: boolean) => void;
+  openCopy: boolean;
+  setOpenCopy: (open: boolean) => void;
 }
 
 export const OPEN_TIME = [
@@ -88,6 +89,8 @@ const InputNav: React.FC<Props> = ({
   setOpenTime,
   openWater,
   setOpenWater,
+  openBook,
+  setOpenBook,
   openMoney,
   setOpenMoney,
   openMemo,
@@ -99,8 +102,6 @@ const InputNav: React.FC<Props> = ({
   setOpenFriends,
   openTags,
   setOpenTags,
-  openTimeMover,
-  setOpenTimeMover,
   openTodo,
   setOpenTodo,
   openCopy,
@@ -114,18 +115,16 @@ const InputNav: React.FC<Props> = ({
         selected={stampStatus}
         onSelected={setStampStatus}
       ></SelectHapp>
-      {setOpenTime && (
-        <WiTime7 
-          className={cls(
-            'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-            {
-              'text-primary': openTime,
-            },
-          )}
-          onClick={() => setOpenTime(!openTime)}
-        />
-      )}
-      {setOpenWater && type && type == StampType.WATER && (
+      <WiTime7 
+        className={cls(
+          'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
+          {
+            'text-primary': openTime,
+          },
+        )}
+        onClick={() => setOpenTime(!openTime)}
+      />
+      {type && type == StampType.WATER && (
         <LuGlassWater 
           className={cls(
             'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
@@ -136,7 +135,18 @@ const InputNav: React.FC<Props> = ({
           onClick={() => setOpenWater(!openWater)}
         />
       )}
-      {setOpenMoney && type && OPEN_MONEY.includes(type) && (
+      {type && type == StampType.BOOK && (
+        <BiBook 
+          className={cls(
+            'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
+            {
+              'text-primary': openBook,
+            },
+          )}
+          onClick={() => setOpenBook(!openBook)}
+        />
+      )}
+      {type && OPEN_MONEY.includes(type) && (
         <MdAttachMoney 
           className={cls(
             'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
@@ -147,7 +157,7 @@ const InputNav: React.FC<Props> = ({
           onClick={() => setOpenMoney(!openMoney)}
         />
       )}
-      {setOpenMemo && type && OPEN_MEMO.includes(type) && (
+      {type && OPEN_MEMO.includes(type) && (
         <TfiPencilAlt 
           className={cls(
             'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
@@ -158,7 +168,7 @@ const InputNav: React.FC<Props> = ({
           onClick={() => setOpenMemo(!openMemo)}
         />
       )}
-      {setOpenUploadPhoto && type && OPEN_UPLOAD_PHOTO.includes(type) && (
+      {type && OPEN_UPLOAD_PHOTO.includes(type) && (
         <TbPhoto
           className={cls(
             'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
@@ -170,40 +180,25 @@ const InputNav: React.FC<Props> = ({
           onClick={() => setOpenUploadPhoto(!openUploadPhoto)}
         />
       )}
-      {setOpenFriends && (
-        <RiLinksLine
-          className={cls(
-            'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-            {
-              'text-primary': openFriends,
-            },
-          )}
-          onClick={() => setOpenFriends(!openFriends)}
-        />
-      )}
-      {setOpenTags && (
-        <GoTag
-          className={cls(
-            'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-            {
-              'text-primary': openTags,
-            },
-          )}
-          onClick={() => setOpenTags(!openTags)}
-        />
-      )}
-      {setOpenTimeMover && (
-        <TbArrowsMove
-          className={cls(
-            'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-            {
-              'text-primary': openTimeMover,
-            },
-          )}
-          onClick={() => setOpenTimeMover(!openTimeMover)}
-        />
-      )}
-      {setOpenTodo && type && OPEN_TODO.includes(type) && (
+      <RiLinksLine
+        className={cls(
+          'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
+          {
+            'text-primary': openFriends,
+          },
+        )}
+        onClick={() => setOpenFriends(!openFriends)}
+      />
+      <GoTag
+        className={cls(
+          'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
+          {
+            'text-primary': openTags,
+          },
+        )}
+        onClick={() => setOpenTags(!openTags)}
+      />
+      {type && OPEN_TODO.includes(type) && (
         <BsCheckCircle
           className={cls(
             'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
@@ -214,17 +209,15 @@ const InputNav: React.FC<Props> = ({
           onClick={() => setOpenTodo(!openTodo)}
         />
       )}
-      {setOpenCopy && (
-        <LuCopyPlus 
-          className={cls(
-            'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-            {
-              'text-primary': openCopy,
-            },
-          )}
-          onClick={() => setOpenCopy(!openCopy)}
-        />
-      )}
+      <LuCopyPlus 
+        className={cls(
+          'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
+          {
+            'text-primary': openCopy,
+          },
+        )}
+        onClick={() => setOpenCopy(!openCopy)}
+      />
     </div>
   );
 };

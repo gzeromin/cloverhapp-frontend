@@ -1,3 +1,4 @@
+import { Book } from './Book';
 import { Friend } from './Friend';
 import { Stamp, StampStatus } from './Stamp';
 import { Tag } from './Tag';
@@ -17,6 +18,8 @@ export interface UserStamp {
   goalNumber: string;
   Tags: Tag[];
   Friends: Friend[];
+  Book: Book;
+  bookPercent: string;
 }
 
 export enum CounterUnit {
@@ -25,7 +28,6 @@ export enum CounterUnit {
   Time = 'Time',
   Hour = 'Hour',
   Book = 'Book',
-  Kcal = 'Kcal',
   Dollar = 'Dollar',
   Yen = 'Yen',
   Won = 'Won'

@@ -7,7 +7,6 @@ import { observer } from 'mobx-react-lite';
 import { TimeCtrllor } from '@/mobx';
 import { useAuthState } from '@/context/auth';
 import api from '@/utils/api.util';
-import { Memo } from '@/types/Memo';
 
 interface Props {}
 
