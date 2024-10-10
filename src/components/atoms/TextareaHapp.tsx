@@ -18,6 +18,7 @@ interface TextareaHappProps
   resizable?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  grow?: boolean;
 }
 
 const TextareaHapp: React.FC<TextareaHappProps> = ({
@@ -35,6 +36,7 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
   resizable = true,
   value = '',
   onChange,
+  grow = true,
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null!);
 
@@ -65,13 +67,13 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
     >
       {labelName && (
         <label className={cls(
-          'text-sm text-gray text-nowrap',
+          'text-sm text-nowrap',
           labelClassName
         )}>
           {labelName}
         </label>
       )}
-      <div className={cls('grow')}>
+      <div className={cls({'grow': grow})}>
         <textarea
           style={{ minWidth: 120 }}
           className={cls(

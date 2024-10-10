@@ -16,7 +16,7 @@ const DialogHapp: React.FC = () => {
 
   useEffect(() => {
     setInput(Dialog.defaultInput ? Dialog.defaultInput : '');
-  }, [Dialog.defaultInput]);
+  }, [Dialog.show]);
 
   const icon = () => {
     switch (Dialog.type) {
@@ -42,7 +42,9 @@ const DialogHapp: React.FC = () => {
     Loading.setIsLoading(true);
     Dialog.setInputError(undefined); // resetError
     try {
-      if (Dialog.onSubmit) await Dialog.onSubmit(input);
+      if (Dialog.onSubmit) {
+        await Dialog.onSubmit(input);
+      }
     } catch (error: any) {
       handleError(error, Dialog.setInputError, true);
     } finally {

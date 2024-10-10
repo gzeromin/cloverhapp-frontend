@@ -20,6 +20,7 @@
   },
   "Success": {
     "ChangePassword": "Password was successfully changed.",
+    "ChangeInfo": "Basic info was successfully changed.",
     "ChangeBackground": "Background skin was successfully changed.",
     "UploadIcon": "Stamp was successfully uploaded.",
     "StampEdit": "Stamp was successfully edited.",
@@ -28,7 +29,8 @@
     "RequestCancel": "Friend Request was Successfully canceled.",
     "Accept": "Successfully accepted.",
     "Deny": "Successfully denied.",
-    "Delete": "Successfully deleted."
+    "Delete": "Successfully deleted.",
+    "Sentence": "My one Sentence was successfully saved."
   },
   "Fail": {
     "ChangeBackground": "Background skin can not be changed.",
@@ -40,11 +42,18 @@
     "Deny": "Not denied.",
     "Delete": "Not deleted."
   },
+  "Warning": {
+    "DeletePhoto": "There is no photo to delete."
+  },
+  "Info": {
+    "PreparingService": "This service is under preparation."
+  },
   "UploadIconImage": "Please upload image file.",
   "Variable1": {
     "RequestFriend": "Do you want to request friend to {value}?",
     "AcceptFriend": "Do you accept friend request from {value}?",
-    "DeleteFriend": "Do you want to delete friend '{value}'?"
+    "DeleteFriend": "Do you want to delete friend '{value}'?",
+    "MaxLength": "You can select up to {value} items."
   },
   "HappyStamp": {
     "Message1": "The four-leaf clover means 'luck',",
@@ -64,5 +73,8 @@
       "Display": "Visible Stamps",
       "NotDisplay": "Hidden Stamps"
     }
+  },
+  "ModalPage": {
+    "KeyValue": "Please select up to 7 core values that are most important to you."
   }
 }

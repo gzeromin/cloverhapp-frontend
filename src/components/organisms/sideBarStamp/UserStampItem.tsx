@@ -108,7 +108,7 @@ const UserStampItem: React.FC<Props> = ({
             <p className={cls(
               'text-sm mx-1 bg-green-100 rounded-full'
             )}>
-              {Language.$t.Date[userStamp.goalInterval]}
+              {userStamp.goalInterval == IntervalUnit.Day && Language.$t.Home.Every}{Language.$t.Date[userStamp.goalInterval]}
             </p>
             { getGoalCount(userStamp.goalUnit, filteredHappList, userStamp.Stamp.type) }
             <p className='text-blue-700 px-1'>

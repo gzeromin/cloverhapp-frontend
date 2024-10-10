@@ -84,7 +84,7 @@ describe('로그인 페이지', () => {
 
   it('로그인 성공 후, 페이지 전환, 언어 적용 확인', () => {
     // 로그인 후, 페이지 이동을 확인하기 위해
-    cy.visit('/main');
+    cy.visit('/main/home');
     cy.visit('/login');
 
     // given
@@ -112,7 +112,7 @@ describe('로그인 페이지', () => {
     });
     cy.get('@loginButton').click();
     // then
-    cy.url().should('include', '/main');
+    cy.url().should('include', '/main/home');
     cy.get('@navBarLogo').should('have.text','CloverHapp');
   });
 

@@ -1,5 +1,8 @@
 {
   "Logo": "CloverHapp",
+  "Label": {
+    "SettingKeyValue": "Key Value Setting"
+  },
   "Button": {
     "Yes": "Yes",
     "Ok": "OK",
@@ -22,6 +25,7 @@
     "Upload": "Upload",
     "Download": "Download",
     "ChangePassword": "Change Password",
+    "ChangeInfo": "Change Basic Info",
     "ChangePhoto": "Change Photo",
     "DeletePhoto": "Delete Photo",
     "Request": "Request",
@@ -30,7 +34,11 @@
     "Pending": "Pending",
     "ChargeDroplet": "Charge Droplet",
     "Stamping": "Stamping",
-    "Todo": "Todo"
+    "Todo": "Todo",
+    "Skip": "Skip"
+  },
+  "TextArea": {
+    "Sentence": "My One Sentence"
   },
   "Input": {
     "Email": "Email",
@@ -57,6 +65,10 @@
     "Goal": "Goal",
     "CommunityOfFate": "Community Of Fate",
     "StampStatus": "Status"
+  },
+  "Select": {
+    "Language": "language",
+    "Currency": "currency"
   },
   "CounterUnit": {
     "Number": "time(s)",
@@ -137,9 +149,9 @@
   },
   "UserMenu": {
     "ProfilePhoto": "Profile Photo",
+    "Info": "Basic Info",
     "ChangePassword": "Change Password",
-    "Droplet": "Droplet",
-    "EnrollSaler": "Enroll Saler",
+    "KeyValue": "KeyValue",
     "Withdrawal": "Withdrawal"
   },
   "Dialog": {
@@ -181,5 +193,10 @@
     "Week": "week",
     "Day": "day",
     "Every": "every "
+  },
+  "Money": {
+    "Dollar": "Dollars",
+    "Yen": "Yen",
+    "Won": "Won"
   }
 }

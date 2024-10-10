@@ -1,21 +1,17 @@
-import React, { Dispatch, memo, SetStateAction } from 'react';
+import React, { Dispatch, memo, SetStateAction, useEffect, useState } from 'react';
 import cls from 'classnames';
 import CheckHapp from '../atoms/CheckHapp';
 import InputHapp from '../atoms/InputHapp';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
-import SelectHapp from '../atoms/SelectHapp';
+import SelectHapp, { OptionType } from '../atoms/SelectHapp';
 import { CounterUnit, IntervalUnit } from '@/types/UserStamp';
 import dateUtils from '@/utils/date.util';
+import { StampType } from '@/types/Stamp';
 
-const options = Object.values(CounterUnit)
-  .map(v => ({
-    value: v, 
-    labelLevel1: 'CounterUnit', 
-    labelLevel2: v,
-  }));
 interface Props {
   testId?: string;
+  type: StampType | undefined;
   existGoal: boolean;
   setExistGoal: Dispatch<SetStateAction<boolean>>;
   goalUnit: CounterUnit;
@@ -28,6 +24,7 @@ interface Props {
 
 const CycleCounter: React.FC<Props> = ({
   testId,
+  type,
   existGoal,
   setExistGoal,
   goalUnit,
@@ -37,6 +34,50 @@ const CycleCounter: React.FC<Props> = ({
   goalNumber,
   setGoalNumber,
 }) => {
+  const [options, setOptions] = useState<OptionType[]>([]);
+
+  useEffect(() => {
+    let selectedUnits: CounterUnit[] = [];
+    switch (type) {
+    case StampType.WAKE_UP:
+    case StampType.GO_TO_BED:
+      selectedUnits = [CounterUnit.Hour];
+      break;
+    case StampType.BOOK:
+      selectedUnits = [CounterUnit.Book, CounterUnit.Time];
+      break;
+    case StampType.EXERCISE:
+    case StampType.MEDITATION:
+    case StampType.STUDY:
+      selectedUnits = [CounterUnit.Number, CounterUnit.Time];
+      break;
+    case StampType.EXPENSE:
+    case StampType.INCOME:
+      selectedUnits = [CounterUnit.Won, CounterUnit.Yen, CounterUnit.Dollar];
+      break;
+    case StampType.WATER:
+      selectedUnits = [CounterUnit.Milliliter];
+      break;
+    case StampType.HAPPY:
+    case StampType.MEDICINE:
+      selectedUnits = [CounterUnit.Number];
+      break;
+    case StampType.MEAL:
+      selectedUnits = [CounterUnit.Number, CounterUnit.Dollar, CounterUnit.Won, CounterUnit.Yen];
+      break;
+    }
+    const options = 
+      Object.values(CounterUnit)
+        .filter(e => selectedUnits.includes(e))
+        .map(v => ({
+          value: v, 
+          labelLevel1: 'CounterUnit', 
+          labelLevel2: v,
+        }));
+    setOptions(options);
+
+  }, [type]);
+
   const tabStyleDefault = 'rounded-full p-2 mx-1 w-10 h-10 text-center';
 
   const tabStyleSelected = (unit: IntervalUnit) => {

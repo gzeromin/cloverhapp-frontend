@@ -1,19 +1,22 @@
 import { computed, makeObservable, observable, action } from 'mobx';
 import merge from 'deepmerge';
 
+import keyValueEn from '@public/locales/en/keyValue.json';
 import labelEn from '@public/locales/en/label.json';
 import messageEn from '@public/locales/en/message.json';
+import keyValueKr from '@public/locales/kr/keyValue.json';
 import labelKr from '@public/locales/kr/label.json';
 import messageKr from '@public/locales/kr/message.json';
+import keyValueJp from '@public/locales/jp/keyValue.json';
 import labelJp from '@public/locales/jp/label.json';
 import messageJp from '@public/locales/jp/message.json';
 import { dancingScript, singleDay, slacksideOne } from '@/styles/fonts';
 import { Locale } from '@/types/User';
 import { BUCKET_URL } from '@/utils/api.util';
 
-const kr = merge(labelKr, messageKr) as any;
-const en = merge(labelEn, messageEn) as any;
-const jp = merge(labelJp, messageJp) as any;
+const kr = merge.all([labelKr, messageKr, keyValueKr]) as any;
+const en = merge.all([labelEn, messageEn, keyValueEn]) as any;
+const jp = merge.all([labelJp, messageJp, keyValueJp]) as any;
 
 class language {
   flagKr = BUCKET_URL + '/public/flags/south-korea.png';

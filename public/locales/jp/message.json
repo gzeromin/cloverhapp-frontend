@@ -20,6 +20,7 @@
   },
   "Success": {
     "ChangePassword": "パスワードが成功的に変更されました。",
+    "ChangeInfo": "基本情報が成功的に変更されました。",
     "ChangeBackground": "背景が成功的に変更されました。",
     "UploadIcon": "スタンプが成功的に登録されました。",
     "StampEdit": "スタンプが成功的に修正されました。",
@@ -28,7 +29,8 @@
     "RequestCancel": "成功的に友達要請がキャンセルされました。",
     "Accept": "受諾されました。",
     "Deny": "拒否されました。",
-    "Delete": "削除されました。"
+    "Delete": "削除されました。",
+    "Sentence": "自分の一文章が成功的に保存されました。"
   },
   "Fail": {
     "ChangeBackground": "背景が変更されませんでした。",
@@ -40,11 +42,18 @@
     "Deny": "拒否されませんでした。",
     "Delete": "削除されませんでした。"
   },
+  "Warning": {
+    "DeletePhoto": "削除する写真がありません。"
+  },
+  "Info": {
+    "PreparingService": "準備中のサービスです。"
+  },
   "UploadIconImage": "イメージファイルをアップロードして下さい。",
   "Variable1": {
     "RequestFriend": "{value}に友達要請しましょうか?",
     "AcceptFriend": "{value}の友達要請を受け入れましょうか?",
-    "DeleteFriend": "{value}さんを友達リストから削除しますか？?"
+    "DeleteFriend": "{value}さんを友達リストから削除しますか？?",
+    "MaxLength": "最大{value}つまで選択できます。"
   },
   "HappyStamp": {
     "Message1": "四つ葉のクローバーの花言葉は`幸運`、",
@@ -64,5 +73,8 @@
       "Display": "表示されているスタンプ",
       "NotDisplay": "非表示のスタンプリスト"
     }
+  },
+  "ModalPage": {
+    "KeyValue": "自分に最も重要な核心価値を7つ以下選んでください。"
   }
 }

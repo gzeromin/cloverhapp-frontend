@@ -1,5 +1,8 @@
 {
   "Logo": "クローバーハップ",
+  "Label": {
+    "SettingKeyValue": "核心価値設定"
+  },
   "Button": {
     "Yes": "はい",
     "Ok": "分りました",
@@ -22,6 +25,7 @@
     "Upload": "登録",
     "Download": "ダウンロード",
     "ChangePassword": "パスワード変更",
+    "ChangeInfo": "基本情報変更",
     "ChangePhoto": "写真変更",
     "DeletePhoto": "写真 削除",
     "Request": "要請",
@@ -30,7 +34,11 @@
     "Pending": "保留",
     "ChargeDroplet": "チャージ水滴",
     "Stamping": "スタンプ押し",
-    "Todo": "やること"
+    "Todo": "やること",
+    "Skip": "飛ばす"
+  },
+  "TextArea": {
+    "Sentence": "自分の一文章"
   },
   "Input": {
     "Email": "Eメール",
@@ -57,6 +65,10 @@
     "Goal": "目標",
     "CommunityOfFate": "運命共同体",
     "StampStatus": "公開範囲"
+  },
+  "Select": {
+    "Language": "言語",
+    "Currency": "通貨"
   },
   "CounterUnit": {
     "Number": "回",
@@ -137,9 +149,9 @@
   },
   "UserMenu": {
     "ProfilePhoto": "プロフィール写真",
+    "Info": "基本情報",
     "ChangePassword": "パスワード変更",
-    "Droplet": "水滴",
-    "EnrollSaler": "販売者登録",
+    "KeyValue": "核心価値",
     "Withdrawal": "会員脱退"
   },
   "Dialog": {
@@ -181,5 +193,10 @@
     "Week": "週",
     "Day": "日",
     "Every": "毎"
+  },
+  "Money": {
+    "Dollar": "ドル",
+    "Yen": "円",
+    "Won": "ウォン"
   }
 }

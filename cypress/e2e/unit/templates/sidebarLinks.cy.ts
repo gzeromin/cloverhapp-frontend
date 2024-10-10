@@ -1,7 +1,7 @@
 describe('사이드바 링크 컴포넌트', () => {
   beforeEach(() => {
     // 페이지 방문
-    cy.visit('/main');
+    cy.visit('/main/home');
     // lg 사이즈 이상 (960px 이상)
     cy.viewport(960, 1024);
     // 로그인

@@ -50,7 +50,7 @@ const InputHapp: React.FC<InputHappProps> = ({
     >
       {labelName && (
         <label className={cls(
-          'text-sm text-gray text-nowrap',
+          'text-sm text-nowrap',
           labelClassName,
         )}>
           {labelName}

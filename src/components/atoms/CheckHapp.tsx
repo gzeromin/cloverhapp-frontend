@@ -13,6 +13,7 @@ interface CheckHappProps {
   checked?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   testId?: string;
+  grow?: boolean;
 }
 
 const CheckHapp: React.FC<CheckHappProps> = ({
@@ -26,6 +27,7 @@ const CheckHapp: React.FC<CheckHappProps> = ({
   checked,
   onChange,
   testId,
+  grow = true,
 }) => {
   return (
     <div
@@ -37,13 +39,13 @@ const CheckHapp: React.FC<CheckHappProps> = ({
     >
       {labelName && (
         <label className={cls(
-          'text-sm text-gray text-nowrap',
+          'text-sm text-nowrap',
           labelClassName
         )}>
           {labelName}
         </label>
       )}
-      <div className={cls('grow')}>
+      <div className={cls({'grow': grow})}>
         <input
           type="checkbox"
           className={cls(

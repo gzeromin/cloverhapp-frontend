@@ -12,9 +12,10 @@ type ImageType = {
   height?: number;
 };
 
-type OptionType = {
+export type OptionType = {
   id?: string | number;
   value: string | number;
+  labelLevel0?: string;
   labelLevel1?: string;
   labelLevel2?: string;
   image?: ImageType;
@@ -87,7 +88,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
     >
       {labelName && (
         <label className={cls(
-          'text-sm text-gray text-nowrap',
+          'text-sm text-nowrap',
           labelClassName,
         )}>
           {labelName}
@@ -114,7 +115,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
           )}
           onClick={handleShow}
         >
-          {selectedOption.image && (
+          {selectedOption && selectedOption.image && (
             <Image
               src={selectedOption.image.src}
               alt={
@@ -127,8 +128,9 @@ const SelectHapp: React.FC<SelectHappProps> = ({
               height={selectedOption.image.height ?? defaultImageSize}
             />
           )}
-          {selectedOption.icon}
-          {selectedOption.labelLevel1 &&
+          {selectedOption && selectedOption.icon}
+          {selectedOption && selectedOption.labelLevel0 && selectedOption.labelLevel0}
+          {selectedOption && selectedOption.labelLevel1 &&
             selectedOption.labelLevel2 &&
             Language.$t[selectedOption.labelLevel1][selectedOption.labelLevel2]}
 
@@ -173,6 +175,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
                     />
                   )}
                   {option.icon}
+                  {option.labelLevel0}
                   {option.labelLevel1 &&
                   option.labelLevel2 &&
                   Language.$t[option.labelLevel1][option.labelLevel2]}

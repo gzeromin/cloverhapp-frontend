@@ -27,7 +27,7 @@ const FieldWrapperHapp: React.FC<Props> = ({
     <div className={cls(marginBottom, className)}>
       {labelName && (
         <label className={cls(
-          'text-sm text-gray text-nowrap',
+          'text-sm text-nowrap',
           labelClassName
         )}>
           {labelName}

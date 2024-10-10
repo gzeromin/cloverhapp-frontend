@@ -30,6 +30,8 @@ export enum AuthActionEnum {
   SET_PROFILE_PHOTO = 'SET_PROFILE_PHOTO',
   SET_LOCALE = 'SET_LOCALE',
   SET_NICKNAME = 'SET_NICKNAME',
+  SET_KEY_VALUE = 'SET_KEY_VALUE',
+  SET_SENTENCE = 'SET_SENTENCE',
   SET_DROPLET = 'SET_DROPLET',
   SET_HAPPLIST = 'SET_HAPPLIST',
   SET_HAPP = 'SET_HAPP',
@@ -66,6 +68,16 @@ const reducer = (state: State, { type, payload }: Action) => {
     return {
       ...state,
       user: { ...state.user, nickname: payload },
+    };
+  case AuthActionEnum.SET_KEY_VALUE:
+    return {
+      ...state,
+      user: { ...state.user, keyValues: payload },
+    };
+  case AuthActionEnum.SET_SENTENCE:
+    return {
+      ...state,
+      user: { ...state.user, sentence: payload },
     };
   case AuthActionEnum.SET_DROPLET:
     return {

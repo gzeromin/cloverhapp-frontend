@@ -1,5 +1,8 @@
 {
   "Logo": "클로버햅",
+  "Label": {
+    "SettingKeyValue": "핵심 가치 설정"
+  },
   "Button": {
     "Yes": "네",
     "Ok": "좋아요",
@@ -22,6 +25,7 @@
     "Upload": "등록",
     "Download": "다운로드",
     "ChangePassword": "비밀번호 변경",
+    "ChangeInfo": "기본 정보 변경",
     "ChangePhoto": "사진 변경",
     "DeletePhoto": "사진 삭제",
     "Request": "요청",
@@ -30,7 +34,11 @@
     "Pending": "보류",
     "ChargeDroplet": "물방울 충전",
     "Stamping": "스탬프 찍기",
-    "Todo": "할 일"
+    "Todo": "할 일",
+    "Skip": "건너뛰기"
+  },
+  "TextArea": {
+    "Sentence": "나의 한 문장"
   },
   "Input": {
     "Email": "이메일",
@@ -57,6 +65,10 @@
     "Goal": "목표",
     "CommunityOfFate": "운명 공동체",
     "StampStatus": "공개 범위"
+  },
+  "Select": {
+    "Language": "언어",
+    "Currency": "통화"
   },
   "CounterUnit": {
     "Number": "회",
@@ -137,9 +149,9 @@
   },
   "UserMenu": {
     "ProfilePhoto": "프로필 사진",
+    "Info": "기본 정보",
     "ChangePassword": "비밀번호 변경",
-    "Droplet": "물방울",
-    "EnrollSaler": "판매자 등록",
+    "KeyValue": "핵심 가치",
     "Withdrawal": "회원탈퇴"
   },
   "Dialog": {
@@ -181,5 +193,10 @@
     "Week": "주",
     "Day": "일",
     "Every": "매"
+  },
+  "Money": {
+    "Dollar": "달러",
+    "Yen": "엔",
+    "Won": "원"
   }
 }

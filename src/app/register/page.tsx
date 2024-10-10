@@ -27,7 +27,7 @@ const Register = () => {
   const router = useRouter();
   useEffect(() => {
     if (user) {
-      router.push('/main');
+      router.push('/modalPage/keyValue');
     }
   }, [user, router]);
 

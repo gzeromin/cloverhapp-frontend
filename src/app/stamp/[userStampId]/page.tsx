@@ -240,6 +240,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           border={false}
         >
           <CycleCounter
+            type={userStamp?.Stamp.type}
             existGoal={existGoal}
             setExistGoal={setExistGoal}
             goalUnit={goalUnit}

@@ -9,6 +9,7 @@ import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import api, { BUCKET_URL } from '@/utils/api.util';
 import UserProrile from '@/components/molecules/UserProrile';
 import cls from 'classnames';
+import { handleError } from '@/utils/error.util';
 
 const options = [
   { value: Locale.Kr, image: { src: Language.flagKr } },
@@ -22,16 +23,7 @@ const NavBar: React.FC = () => {
 
   const handleLocale = async (locale: Locale) => {
     if (user) {
-      Loading.setIsLoading(true);
-      try {
-        const res = await api.post('/auth/change-locale', { locale });
-        const updatedLocale = res.data?.locale;
-        dispatch(AuthActionEnum.SET_LOCALE, { locale: updatedLocale });
-      } catch (error: any) {
-        console.log(error);
-      } finally {
-        Loading.setIsLoading(false);
-      }
+      dispatch(AuthActionEnum.SET_LOCALE, { locale });
     } else {
       Language.setLanguage(locale);
     }
@@ -45,7 +37,7 @@ const NavBar: React.FC = () => {
         dispatch(AuthActionEnum.LOGOUT);
       })
       .catch((error) => {
-        console.log(error);
+        handleError(error);
       })
       .finally(() => {
         Loading.setIsLoading(false);
@@ -64,7 +56,6 @@ const NavBar: React.FC = () => {
             height={45}
             priority
           />
-
           <p
             className={cls(
               'hidden sm:block ml-1',

@@ -60,7 +60,7 @@ const Home: React.FC = () => {
             'hover:underline hover:text-green-700 underline-offset-8',
             'decoration-4 decoration-dotted decoration-green-700'
           )}
-          href={'/main'}
+          href={'/main/home'}
         >
           {Language.$t.Link.GetStarted}
         </Link>

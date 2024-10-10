@@ -42,7 +42,7 @@ const HappCalendar: React.FC<Props> = ({ className }) => {
         });
   }, [TimeCtrllor.formattedSelectedDate, user]);
 
-  const goBtnStyle = 'text-gray pt-5 px-2 cursor-pointer hover:bg-gray-100 rounded-full';
+  const goBtnStyle = 'pt-5 px-2 cursor-pointer hover:bg-gray-100 rounded-full';
   const iconStyle = 'scale-150';
 
   return (

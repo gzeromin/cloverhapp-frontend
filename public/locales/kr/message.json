@@ -20,6 +20,7 @@
   },
   "Success": {
     "ChangePassword": "패스워드가 성공적으로 변경되었습니다.",
+    "ChangeInfo": "기본 정보가 성공적으로 변경되었습니다.",
     "ChangeBackground": "배경이 성공적으로 변경되었습니다.",
     "UploadIcon": "스탬프가 성공적으로 등록되었습니다.",
     "StampEdit": "스탬프가 성공적으로 수정되었습니다",
@@ -28,7 +29,8 @@
     "RequestCancel": "친구요청이 정상적으로 취소되었습니다.",
     "Accept": "수락되었습니다.",
     "Deny": "거부되었습니다.",
-    "Delete": "삭제되었습니다."
+    "Delete": "삭제되었습니다.",
+    "Sentence": "나의 한 문장이 성공적으로 저장되었습니다."
   },
   "Fail": {
     "ChangeBackground": "배경이 변경되지 않았습니다.",
@@ -40,11 +42,18 @@
     "Deny": "거부되지 않았습니다.",
     "Delete": "삭제되지 않았습니다."
   },
+  "Warning": {
+    "DeletePhoto": "삭제할 사진이 없습니다."
+  },
+  "Info": {
+    "PreparingService": "준비 중인 서비스 입니다."
+  },
   "UploadIconImage": "이미지 파일을 업로드해주세요.",
   "Variable1": {
     "RequestFriend": "{value}에게 친구요청을 보내시겠습니까?",
     "AcceptFriend": "{value}의 친구요청을 수락하시겠습니까?",
-    "DeleteFriend": "친구 {value}를 삭제하시겠습니까?"
+    "DeleteFriend": "친구 {value}를 삭제하시겠습니까?",
+    "MaxLength": "최대 {value}개까지 선택할 수 있습니다."
   },
   "HappyStamp": {
     "Message1": "네잎클로버의 꽃말은 `행운`,",
@@ -64,5 +73,8 @@
       "Display": "보이는 스탬프 목록",
       "NotDisplay": "숨겨진 스탬프 목록"
     }
+  },
+  "ModalPage": {
+    "KeyValue": "나에게 가장 중요한 핵심가치를 7개 이하로 골라주세요."
   }
 }

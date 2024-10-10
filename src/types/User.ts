@@ -8,6 +8,8 @@ export interface User {
   photoUrl?: string;
   droplet: number;
   notifNum: number;
+  keyValues: string[];
+  sentence: string;
   UserStamp: UserStamp[];
 }
 

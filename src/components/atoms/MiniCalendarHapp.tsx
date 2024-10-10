@@ -91,7 +91,7 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
     });
   };
 
-  const goBtnStyle = 'text-gray px-2';
+  const goBtnStyle = 'px-2';
   const iconStyle = 'rounded-full hover:bg-gray-100 cursor-pointer';
 
   return (

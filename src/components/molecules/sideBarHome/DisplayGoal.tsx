@@ -3,7 +3,7 @@ import { memo } from 'react';
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
-import { UserStamp } from '@/types/UserStamp';
+import { IntervalUnit, UserStamp } from '@/types/UserStamp';
 import Image from 'next/image';
 import { getGoalNumber } from '@/utils/happ.util';
 
@@ -40,7 +40,7 @@ const DisplayGoal: React.FC<Props> = ({
           <div className={cls(
             'text-sm mx-1 bg-indigo-100 rounded-full'
           )}>
-            {Language.$t.Home.Every}{Language.$t.Home[userStamp.goalInterval]}
+            {userStamp.goalInterval == IntervalUnit.Day && Language.$t.Home.Every}{Language.$t.Date[userStamp.goalInterval]}
           </div>
           <div className='text-xl'>
             { getGoalNumber(userStamp.goalUnit, userStamp.goalNumber) }

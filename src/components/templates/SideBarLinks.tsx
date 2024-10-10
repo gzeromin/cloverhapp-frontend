@@ -46,7 +46,7 @@ const SideBarLinks: React.FC = () => {
       <Link
         className={tabStyle(Menu.Home)}
         onClick={() => setSelectedMenu(Menu.Home)}
-        href="/main"
+        href="/main/home"
         test-id="homeLink"
       >
         {Language.$t.SideBar.Home}
