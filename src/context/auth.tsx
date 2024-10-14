@@ -4,7 +4,6 @@ import api from '@/utils/api.util';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { Language } from '@/mobx';
 import { UserStamp } from '@/types/UserStamp';
-import { handleError } from '@/utils/error.util';
 
 interface State {
   authenticated: boolean;
