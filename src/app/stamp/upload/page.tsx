@@ -20,6 +20,7 @@ import { Tag } from '@/types/Tag';
 import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
 import { RiBardLine } from 'react-icons/ri';
 import { GoPeople } from 'react-icons/go';
+import CheckHapp from '@/components/atoms/CheckHapp';
 
 const statusOptions = [
   {
@@ -56,6 +57,7 @@ const Upload: React.FC = () => {
   const [droplet, setDroplet] = useState('');
   const [type, setType] = useState<StampType>(StampType.HAPPY);
   const [stampStatus, setStampStatus] = useState(StampStatus.PRIVATE);
+  const [notForSale, setNotForSale] = useState<boolean>(false);
   const [tags, setTags] = useState<Tag[]>([]);
 
   const [errors, setErrors] = useState<{
@@ -94,6 +96,7 @@ const Upload: React.FC = () => {
           description, 
           droplet, 
           type,
+          notForSale,
           status: stampStatus,
           Tags: tags,
         }),
@@ -113,6 +116,7 @@ const Upload: React.FC = () => {
         setDroplet('');
         setUploadedImage(null);
         setTags([]);
+        setNotForSale(false);
       }
     } catch (error: any) {
       handleError(error, setErrors);
@@ -130,7 +134,7 @@ const Upload: React.FC = () => {
         className="absolute top-[30px] left-[30px] text-6xl text-primary hover:text-primary-hover cursor-pointer"
         onClick={() => router.push('/stamp')}
       />
-      <div className={cls('flex items-center justify-center gap-2')}>
+      <div className={cls('flex items-center justify-center gap-2 lg:gap-6 lx:gap-8')}>
         {/* Drop Zone */}
         <div
           {...getRootProps()}
@@ -165,7 +169,7 @@ const Upload: React.FC = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             error={errors.name}
-            marginBottom="mb-2"
+            marginBottom="mb-1"
           />
           <InputHapp
             className={cls('flex items-center gap-1')}
@@ -179,12 +183,24 @@ const Upload: React.FC = () => {
             marginBottom="mb-1"
             min="0"
           />
+          <CheckHapp
+            className={cls(
+              'flex items-center',
+              'rounded-md'
+            )}
+            labelName={Language.$t.Check.NotForSale}
+            labelClassName={cls('text-xs w-1/3')}
+            checked={notForSale}
+            onChange={(e) => setNotForSale(e.target.checked)}
+            grow={true}
+            marginBottom="mb-0"
+          />
           <SelectHapp
             className={cls(
               'flex items-center',
-              'rounded-md my-2'
+              'rounded-md my-1'
             )}
-            labelName={Language.$t.Input.Type}
+            labelName={Language.$t.Select.Type}
             labelClassName={cls('text-xs w-1/3')}
             options={typeOptions}
             selected={type}
@@ -196,16 +212,16 @@ const Upload: React.FC = () => {
           <SelectHapp
             className={cls(
               'flex items-center',
-              'rounded-md'
+              'rounded-md my-1'
             )}
-            labelName={Language.$t.Input.StampStatus}
+            labelName={Language.$t.Select.StampStatus}
             labelClassName={cls('text-xs w-1/3')}
             options={statusOptions}
             selected={stampStatus}
             onSelected={setStampStatus}
             border={true}
             dark={true}
-          ></SelectHapp>
+          />
           <TextareaHapp
             labelName={Language.$t.Input.Description}
             labelClassName={cls('text-xs')}

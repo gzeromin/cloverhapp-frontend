@@ -1,4 +1,4 @@
-import { useAuthState } from '@/context/auth';
+import { useHappState } from '@/context/happ';
 import { Language, TimeCtrllor } from '@/mobx';
 import { notoSans } from '@/styles/fonts';
 import { Happ } from '@/types/Happ';
@@ -27,7 +27,7 @@ const UserStampItem: React.FC<Props> = ({
   userStamp,
   className,
 }) => {
-  const { happList } = useAuthState();
+  const { happList } = useHappState();
   const [filteredHappList, setFilteredHappList] = useState<Happ[]>([]);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ const UserStampItem: React.FC<Props> = ({
             <p className={cls(
               'text-sm mx-1 bg-green-100 rounded-full'
             )}>
-              {userStamp.goalInterval == IntervalUnit.Day && Language.$t.Home.Every}{Language.$t.Date[userStamp.goalInterval]}
+              {userStamp.goalInterval == IntervalUnit.Day && Language.$t.Statistics.Every}{Language.$t.Date[userStamp.goalInterval]}
             </p>
             { getGoalCount(userStamp.goalUnit, filteredHappList, userStamp.Stamp.type) }
             <p className='text-blue-700 px-1'>

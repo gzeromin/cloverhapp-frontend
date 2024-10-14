@@ -1,6 +1,6 @@
 'use client';
 import cls from 'classnames';
-import { Dispatch, SetStateAction, useEffect, memo } from 'react';
+import { Dispatch, SetStateAction, memo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
 import InputTimeModule from '../molecules/InputTimeModule';
@@ -8,8 +8,8 @@ import SliderHapp from '../atoms/SliderHapp';
 
 interface StartEndTimeInputProps {
   className?: string;
-  startTime?: Date;
-  setStartTime?: Dispatch<SetStateAction<Date | undefined>>;
+  startTime: Date;
+  setStartTime: Dispatch<SetStateAction<Date>>;
 }
 
 const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
@@ -31,18 +31,11 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
     }
   };
 
-  // 슬라이더로 현재 시간을 기준으로 시간을 변경
+  // 슬라이더로 시작 시간을 기준으로 시간을 변경
   const handleTimeChange = (offset: number) => {
-    const newTime = addMinutes(new Date(), offset);
+    const newTime = addMinutes(new Date(startTime), offset);
     handleStartTimeChange(newTime);
   };
-
-  useEffect(() => {
-    // 최초 랜더링 시, 시작 시간이 없으면 현재시간으로 설정
-    if (!startTime && setStartTime) {
-      setStartTime(new Date());
-    }
-  }, [startTime, setStartTime]);
 
   return (
     <div className={cls('text-gray-600', Language.logoFont, className)}>

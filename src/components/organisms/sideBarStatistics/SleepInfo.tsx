@@ -71,23 +71,23 @@ const SleepInfo: React.FC<Props> = ({
   };
 
   return (
-    <div className="space-y-2 text-center py-1 my-2 shadow-sm bg-white rounded-md">
+    <div className="space-y-2 text-center py-1 my-2 shadow-sm rounded-md">
       {/* 1 열 */}
       <div className="flex">
         <div className="flex-[1_1_15%]"></div> {/* 작은 공간 */}
         <div className="flex-[1_1_25%]">
           <span className='text-sm bg-lime-100 rounded-full'>
-            { Language.$t.Home.WakeUp }
+            { Language.$t.Statistics.WakeUp }
           </span>
         </div>
         <div className="flex-[1_1_25%]">
           <span className='text-sm bg-lime-100 rounded-full'>
-            { Language.$t.Home.GoToBed }
+            { Language.$t.Statistics.GoToBed }
           </span>
         </div>
         <div className="flex-[1_1_35%]">
           <span className='text-sm bg-lime-100 rounded-full'>
-            { Language.$t.Home.Sleeping }
+            { Language.$t.Statistics.Sleeping }
           </span>
         </div>
       </div>
@@ -108,7 +108,7 @@ const SleepInfo: React.FC<Props> = ({
       <div className="flex">
         <div className="flex-[1_1_15%]">
           <span className="text-sm bg-fuchsia-100 rounded-full">
-            {Language.$t.Home.This}{Language.$t.Home[IntervalUnit.Week]}
+            {Language.$t.Statistics.This}{Language.$t.Statistics[IntervalUnit.Week]}
           </span>
         </div>
         <div className="flex-[1_1_25%]">{ thisWeekWakeUp }</div>
@@ -120,7 +120,7 @@ const SleepInfo: React.FC<Props> = ({
       <div className="flex">
         <div className="flex-[1_1_15%]">
           <span className='text-sm bg-fuchsia-100 rounded-full'>
-            {Language.$t.Home.This}{Language.$t.Home[IntervalUnit.Month]}
+            {Language.$t.Statistics.This}{Language.$t.Statistics[IntervalUnit.Month]}
           </span>
         </div>
         <div className="flex-[1_1_25%]">{ thisMonthWakeUp }</div>

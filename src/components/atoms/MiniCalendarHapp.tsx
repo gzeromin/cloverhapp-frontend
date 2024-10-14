@@ -2,7 +2,7 @@
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { Language, TimeCtrllor } from '@/mobx/index';
-import dateUtil from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { memo, useEffect, useState } from 'react';
 
@@ -63,8 +63,8 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
         <td
           key={`day-${dateNum}`}
           className={`
-            ${date && dateUtil.isSaturday(date) && 'text-saturday'}
-            ${date && dateUtil.isSunday(date) && 'text-red-500'}
+            ${date && DateUtils.isSaturday(date) && 'text-saturday'}
+            ${date && DateUtils.isSunday(date) && 'text-red-500'}
           `}
           onClick={() => changeStartTime(date)}
         >
@@ -72,7 +72,7 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
             <span
               className={cls('rounded cursor-pointer hover:bg-gray-100 p-1', {
                 'bg-primary text-white hover:bg-primary-hover':
-                  dateUtil.isTargetDate(date, startTime),
+                  DateUtils.isTargetDate(date, startTime),
               })}
             >
               {date.getDate()}
@@ -129,7 +129,7 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
         <table className="w-[120px] text-center text-sm">
           <thead>
             <tr>
-              {dateUtil.weeksJp2.map((v, i) => (
+              {DateUtils.weeksJp2.map((v, i) => (
                 <th
                   key={`mini calendar ${i}`}
                   className={`text-gray-500 ${i === 5 && 'text-saturday'} ${

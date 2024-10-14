@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import cls from 'classnames';
 import { Friend } from '@/types/Friend';
 import { Tag } from '@/types/Tag';
-import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
+import { useAuthState } from '@/context/auth';
 import { UserStamp } from '@/types/UserStamp';
 import { handleError } from '@/utils/error.util';
 import { FaEraser, FaExclamation } from 'react-icons/fa';
@@ -18,6 +18,7 @@ import InputArea from '@/components/molecules/happSaveModal/InputArea';
 import { StampStatus, StampType } from '@/types/Stamp';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { Book } from '@/types/Book';
+import { HappActionEnum, useHappDispatch } from '@/context/happ';
 
 interface HappSaveModalProps {
   userStampId?: string;
@@ -44,7 +45,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   const [openTodo, setOpenTodo] = useState(false);
   const [openCopy, setOpenCopy] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>();
-  const [startTime, setStartTime] = useState<Date>();
+  const [startTime, setStartTime] = useState<Date>(new Date());
   const [endTime, setEndTime] = useState<Date>();
   const [water, setWater] = useState('0');
   const [book, setBook] = useState<Book | null>(null);
@@ -56,8 +57,9 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
   const [copy, setCopy] = useState<Date[]>([new Date()]);
   const [friendList, setFriendList] = useState<Friend[]>([]);
   const [tagList, setTagList] = useState<Tag[]>([]);
+  
   const { user } = useAuthState();
-  const dispatch = useAuthDispatch();
+  const dispatch = useHappDispatch();
 
   useEffect(() => {
     if (userStampId) {
@@ -84,7 +86,6 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
       api.get('/happ/' + happId).then((res) => {
         const happ: Happ = res.data;
         const UserStamp: UserStamp = happ.UserStamp;
-        console.log(happ);
         setUserStamp(UserStamp);
         if (happ.status) {
           setStampStatus(happ.status);
@@ -166,11 +167,10 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           },
         });
         // HappCalendar
-        dispatch(AuthActionEnum.UPDATE_HAPPLIST, res.data);
+        dispatch(HappActionEnum.UPDATE_HAPPLIST, res.data);
       }
       closeModal();
     } catch (error: any) {
-      console.log(error);
       handleError(error);
     } finally {
       Loading.setIsLoading(false);
@@ -210,7 +210,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           'Content-Type': 'multipart/form-data',
         },
       });
-      dispatch(AuthActionEnum.UPDATE_HAPP, res.data);
+      dispatch(HappActionEnum.UPDATE_HAPP, res.data);
       closeModal();
     } catch (error: any) {
       handleError(error);
@@ -223,7 +223,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
     Loading.setIsLoading(true);
     try {
       api.delete('/happ/' + happId);
-      dispatch(AuthActionEnum.DELETE_HAPP, happId);
+      dispatch(HappActionEnum.DELETE_HAPP, happId);
       closeModal();
     } catch (error: any) {
       handleError(error);

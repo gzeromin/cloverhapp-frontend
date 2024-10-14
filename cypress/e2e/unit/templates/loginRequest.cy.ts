@@ -1,7 +1,7 @@
 describe('로그인 요청 컴포넌트', () => {
   beforeEach(() => {
     // 페이지 방문
-    cy.visit('/main/home');
+    cy.visit('/main/null/profile');
     // lg 사이즈 이상 (960px 이상)
     cy.viewport(960, 1024);
   });

@@ -1,11 +1,13 @@
 'use client';
+import FloatingBubbles from '@/components/organisms/FloatingBubbles';
 import { Language } from '@/mobx';
-import { BUCKET_URL } from '@/utils/api.util';
+import { Happ } from '@/types/Happ';
+import { BUCKET_URL, fetcher } from '@/utils/api.util';
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
-import Link from 'next/link';
 import { memo } from 'react';
+import useSWRInfinite from 'swr/infinite';
 
 const pattern = 'pattern-dots';
 const color = 'pattern-primary-100';
@@ -13,6 +15,17 @@ const size = 'pattern-size-32';
 const opacity = 'pattern-opacity-40';
   
 const Home: React.FC = () => {
+  const getKey = (pageIndex: number, previousPageData: Happ[]) => {
+    if (previousPageData && !previousPageData.length) return null;
+    return `/happ/list/user?page=${pageIndex}`;
+  };
+
+  const {
+    data: happData,
+  } = useSWRInfinite<Happ[]>(getKey, fetcher);
+
+  const happs: Happ[] = happData ? ([] as Happ[]).concat(...happData) : [];
+
   return (
     <div className={cls(
       'h-screen flex items-end md:items-center justify-center',
@@ -21,6 +34,7 @@ const Home: React.FC = () => {
       <div
         className={`${pattern} ${color} ${size} ${opacity} pattern-bg-white fixed top-0 left-0 right-0 bottom-0`}
       />
+      <FloatingBubbles happs={happs} />
       {/* Clover Happ Message */}
       <div
         className={cls('absolute right-8 top-24 text-2xl',
@@ -39,7 +53,7 @@ const Home: React.FC = () => {
       </div>
       <div
         className={cls(
-          'z-50 flex flex-col items-center justify-end gap-4',
+          'z-50 flex absolute flex-col items-center gap-4',
           'text-3xl text-gray-700',
           Language.logoFont,
         )}
@@ -54,16 +68,6 @@ const Home: React.FC = () => {
         <p className='tracking-wide'>
           {Language.$t.Welcome}
         </p>
-        <Link 
-          className={cls(
-            'font-semibold text-4xl mb-20',
-            'hover:underline hover:text-green-700 underline-offset-8',
-            'decoration-4 decoration-dotted decoration-green-700'
-          )}
-          href={'/main/home'}
-        >
-          {Language.$t.Link.GetStarted}
-        </Link>
       </div> 
     </div>
   );

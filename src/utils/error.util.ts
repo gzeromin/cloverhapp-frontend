@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction } from 'react';
 
 enum StatusCode {
   FormError = 1000,
+  LoginError = 2000,
+  DoubleRequestError = 3000,
   SystemError = 500,
   NotFoundError = 404,
   Unauthorized = 401
@@ -13,7 +15,6 @@ export const handleError = async (
   setErrors?: Dispatch<SetStateAction<any>>,
   inputFlag: boolean = false,
 ) => {
-  console.log(error);
   const statusCode = error.response?.data?.statusCode;
   const message = error.response?.data?.message;
   switch (statusCode) {
@@ -35,6 +36,8 @@ export const handleError = async (
     return false;
     // Default
     // message: string | string[] | null | ''
+  case StatusCode.DoubleRequestError:
+    return false;
   case StatusCode.Unauthorized:
     return await Dialog.openDialog(
       Dialog.DANGER,

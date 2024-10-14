@@ -119,7 +119,7 @@ const SliderHapp: React.FC<Props> = ({
             <span className="text-base">{currentHour} {Language.$t.Time.Hour} {currentMinute} {Language.$t.Time.Minute}</span>
           </div>
           <div className={cls(
-            'flex gap-3 items-center',
+            'flex gap-3 items-center p-1',
             'text-sm transition-transform duration-300',
             'bg-green-50 rounded-md'
           )}>
@@ -144,8 +144,8 @@ const SliderHapp: React.FC<Props> = ({
 
       {/* 슬라이더 시각적 요소 */}
       <div className="flex flex-col">
-        <div className="w-1 h-3 translate-x-[169px] translate-y-1 rounded-full bg-green-600" />
-        <div className="w-full h-1 -translate-y-1 bg-green-600" />
+        {/* 수직선 */}
+        <div className="w-full h-1 bg-primary-100" />
       </div>
 
       {/* 분 슬라이드 */}
@@ -159,24 +159,33 @@ const SliderHapp: React.FC<Props> = ({
         <div className={cls(
           'flex gap-3 items-center',
           'text-sm transition-transform duration-300',
-          'bg-green-50 rounded-md'
+          'bg-blue-50 rounded-md'
         )}>
           {minuteNumbers.map((num, index) => (
-            <span 
+            <div 
               key={index} 
               className={cls(
-                'flex-1',
-                currentMinute === num && 'text-green-600 font-bold',
+                'flex-1 relative p-1',
+                currentMinute === num && 'text-blue-600 font-bold',
                 {'text-transparent': showHour && num < 0},
                 {'cursor-pointer': showHour && num >= 0},
                 {'cursor-pointer': !showHour},
               )}
               onClick={() => clickValue(num, false)}
             >
+              {/* 눈금 */}
+              {currentMinute === num && (
+                <div 
+                  className={cls(
+                    'absolute left-1/2 -translate-y-3',
+                    'w-1 h-3 rounded-full bg-primary-100'
+                  )}
+                />
+              )}
               {num}
-            </span>
+            </div>
           ))}
-          <span className="flex-1 bg-green-100 rounded-full">{Language.$t.Time.Minute}</span>
+          <span className="flex-1 bg-blue-100 rounded-full">{Language.$t.Time.Minute}</span>
         </div>
       </div>
     </div>

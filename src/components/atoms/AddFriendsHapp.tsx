@@ -89,7 +89,7 @@ const AddFriendsHapp: React.FC<AddFriendsHappProps> = ({
       className={`relative flex items-end justify-between py-1 ${className}`}
     >
       <div className={cls(
-        'flex flex-wrap gap-1 shadow-md rounded-md',
+        'flex flex-wrap gap-1',
         'max-h-[90px] overflow-y-auto'
       )}>
         {friends?.map((friend, index) => (

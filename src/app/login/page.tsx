@@ -34,6 +34,7 @@ const Login = () => {
     try {
       const locale = Language.type;
       const res = await api.post('/auth/signin', { email, password, locale });
+      console.log(res);
       const loginUser = res.data?.user;
       dispatch(AuthActionEnum.LOGIN, loginUser);
     } catch (error: any) {

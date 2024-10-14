@@ -56,19 +56,22 @@
     "Memo": "Memo",
     "RequestMessage": "Request Friend Message",
     "ChangeAliasMessage": "Change Alias Message",
-    "Type": "Type",
     "Sip": "sip",
     "Display": "Display",
     "Order": "Display Order",
     "Friend": "Friend",
     "Tag": "Tag",
     "Goal": "Goal",
-    "CommunityOfFate": "Community Of Fate",
-    "StampStatus": "Status"
+    "CommunityOfFate": "Community Of Fate"
   },
   "Select": {
-    "Language": "language",
-    "Currency": "currency"
+    "Type": "Type",
+    "StampStatus": "Status",
+    "Language": "Language",
+    "Currency": "Currency"
+  },
+  "Check": {
+    "NotForSale": "Not for sale"
   },
   "CounterUnit": {
     "Number": "time(s)",
@@ -115,10 +118,8 @@
   },
   "SideBar": {
     "Profile": "Profile",
-    "Home": "Home",
     "Stamp": "Stamp",
-    "Memo": "Memo",
-    "Friend": "Friend"
+    "Statistics": "Statistics"
   },
   "Weeks": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
   "Months": [
@@ -135,6 +136,7 @@
     "November",
     "December"
   ],
+  "Day": "",
   "Time": {
     "H": "h",
     "Hour": "hour",
@@ -180,7 +182,7 @@
     "requesting": "My Request",
     "search": "Friend Search"
   },
-  "Home": {
+  "Statistics": {
     "WakeUp": "wake up",
     "GoToBed": "sleep",
     "Sleeping": "sleeping",
@@ -194,9 +196,9 @@
     "Day": "day",
     "Every": "every "
   },
-  "Money": {
-    "Dollar": "Dollars",
-    "Yen": "Yen",
-    "Won": "Won"
+  "MoneyUnit": {
+    "EN": "Dollars",
+    "JP": "Yen",
+    "KR": "Won"
   }
 }

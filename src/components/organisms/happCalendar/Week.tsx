@@ -1,15 +1,15 @@
 import { Language, TimeCtrllor } from '@/mobx';
-import dateUtil from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
 import { observer } from 'mobx-react-lite';
 import { memo, useRef } from 'react';
-import { useAuthState } from '@/context/auth';
 import { Happ } from '@/types/Happ';
 import cls from 'classnames';
 import CellW from '@/components/molecules/week/CellW';
 import CalendarHappIcon from '@/components/molecules/week/CalendarHappIcon';
+import { useHappState } from '@/context/happ';
 
 const Week: React.FC = () => {
-  const { happList } = useAuthState();
+  const { happList } = useHappState();
   const weekRefs = useRef<(HTMLDivElement | null)[]>([]); 
   
   const selectedDate = TimeCtrllor.selectedDate;
@@ -29,7 +29,7 @@ const Week: React.FC = () => {
 
         // filter happ
         const happs = happList.filter((v: Happ) =>
-          dateUtil.getFiveToFourHour(date, new Date(v.startTime)),
+          DateUtils.getFiveToFourHour(date, new Date(v.startTime)),
         );
 
         return (

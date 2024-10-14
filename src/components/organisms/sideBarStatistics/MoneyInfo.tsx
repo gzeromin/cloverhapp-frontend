@@ -78,7 +78,7 @@ const MoneyInfo: React.FC<Props> = ({
   }, [thisWeekHappList, thisMonthHappList, lastWeekHappList, lastMonthHappList]);
 
   return (
-    <div className="space-y-1 text-center shadow-sm py-1 bg-white rounded-md">
+    <div className="space-y-1 text-center shadow-sm py-1 rounded-md">
       {/* 1 열 */}
       <DisplayGoal userStamp={incomeStamp}/>
       {/* 2 열 */}
@@ -90,17 +90,17 @@ const MoneyInfo: React.FC<Props> = ({
         </div>
         <div className="flex-[1_1_25%]">
           <span className='text-sm bg-lime-100 rounded-full'>
-            { Language.$t.Home.Income }
+            { Language.$t.Statistics.Income }
           </span>
         </div>
         <div className="flex-[1_1_25%]">
           <span className='text-sm bg-lime-100 rounded-full'>
-            { Language.$t.Home.Expense }
+            { Language.$t.Statistics.Expense }
           </span>
         </div>
         <div className="flex-[1_1_35%]">
           <span className='text-sm bg-lime-100 rounded-full'>
-            { Language.$t.Home.Balance }
+            { Language.$t.Statistics.Balance }
           </span>
         </div>
       </div>
@@ -109,7 +109,7 @@ const MoneyInfo: React.FC<Props> = ({
       <div className="flex">
         <div className="flex-[1_1_15%]">
           <span className="text-sm bg-fuchsia-100 rounded-full">
-            {Language.$t.Home.This}{Language.$t.Home[IntervalUnit.Week]}
+            {Language.$t.Statistics.This}{Language.$t.Statistics[IntervalUnit.Week]}
           </span>
         </div>
         <div className="flex-[1_1_25%]">{ thisWeekIncome }</div>
@@ -121,7 +121,7 @@ const MoneyInfo: React.FC<Props> = ({
       <div className="flex">
         <div className="flex-[1_1_15%]">
           <span className="text-sm bg-amber-100 rounded-full">
-            {Language.$t.Home.Last}{Language.$t.Home[IntervalUnit.Week]}
+            {Language.$t.Statistics.Last}{Language.$t.Statistics[IntervalUnit.Week]}
           </span>
         </div>
         <div className="flex-[1_1_25%]">{ lastWeekIncome }</div>
@@ -133,7 +133,7 @@ const MoneyInfo: React.FC<Props> = ({
       <div className="flex">
         <div className="flex-[1_1_15%]">
           <span className='text-sm bg-amber-100 rounded-full'>
-            {Language.$t.Home.Last}{Language.$t.Home[IntervalUnit.Month]}
+            {Language.$t.Statistics.Last}{Language.$t.Statistics[IntervalUnit.Month]}
           </span>
         </div>
         <div className="flex-[1_1_25%]">{ lastMonthIncome }</div>
@@ -145,7 +145,7 @@ const MoneyInfo: React.FC<Props> = ({
       <div className="flex">
         <div className="flex-[1_1_15%]">
           <span className='text-sm bg-fuchsia-100 rounded-full'>
-            {Language.$t.Home.This}{Language.$t.Home[IntervalUnit.Month]}
+            {Language.$t.Statistics.This}{Language.$t.Statistics[IntervalUnit.Month]}
           </span>
         </div>
         <div className="flex-[1_1_25%]">{ thisMonthIncome }</div>

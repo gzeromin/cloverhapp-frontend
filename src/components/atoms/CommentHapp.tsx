@@ -8,7 +8,7 @@ import { LuSendHorizonal } from 'react-icons/lu';
 import { User } from '@/types/User';
 import api from '@/utils/api.util';
 import { Comment } from '@/types/Comment';
-import dateUtil from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
 import { FaCommentAlt } from 'react-icons/fa';
 import UserProrile from '../molecules/UserProrile';
 
@@ -113,7 +113,7 @@ const CommentHapp: React.FC<Props> = ({
                         {comment.User.nickname}
                       </span>
                       <span className="text-xs text-gray-500">
-                        {dateUtil.getFormatDateHourMin(
+                        {DateUtils.getFormatDateHourMin(
                           new Date(comment.createdAt),
                         )}
                       </span>

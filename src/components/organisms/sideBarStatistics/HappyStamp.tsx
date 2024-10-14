@@ -25,7 +25,7 @@ const HappyStamp: React.FC<Props> = ({
 }) => {
   
   return (
-    <div className="flex flex-col py-1 shadow-sm bg-white rounded-md">
+    <div className="flex flex-col py-1 shadow-sm rounded-md">
       {/* Goal */}
       <DisplayGoal userStamp={userStamp}/>
 
@@ -34,7 +34,7 @@ const HappyStamp: React.FC<Props> = ({
         {/* This */}
         <div className={cls('flex items-center w-1/2 justify-around')}>
           <span className='text-sm mx-1 px-1 bg-fuchsia-100 rounded-full'>
-            { Language.$t.Home.This }{Language.$t.Home[IntervalUnit.Week]}
+            { Language.$t.Statistics.This }{Language.$t.Statistics[IntervalUnit.Week]}
           </span>
           <div className='flex'>
             <div className={cls('text-blue-700 mr-1')}>
@@ -51,7 +51,7 @@ const HappyStamp: React.FC<Props> = ({
             /
           </div>
           <span className='text-sm mx-1 px-1 bg-amber-100 rounded-full'>
-            { Language.$t.Home.Last }{Language.$t.Home[IntervalUnit.Week]}
+            { Language.$t.Statistics.Last }{Language.$t.Statistics[IntervalUnit.Week]}
           </span>
           <div className='flex'>
             <div className={cls('text-blue-700 mr-1 text-sm')}>
@@ -69,7 +69,7 @@ const HappyStamp: React.FC<Props> = ({
         {/* This */}
         <div className={cls('flex items-center w-1/2 justify-around')}>
           <span className='text-sm mx-1 px-1 bg-fuchsia-100 rounded-full'>
-            { Language.$t.Home.This }{Language.$t.Home[IntervalUnit.Month]}
+            { Language.$t.Statistics.This }{Language.$t.Statistics[IntervalUnit.Month]}
           </span>
           <div className={cls('flex')}>
             <div className={cls('text-blue-700 mr-1')}>
@@ -86,7 +86,7 @@ const HappyStamp: React.FC<Props> = ({
             /
           </div>
           <span className='text-sm mx-1 px-1 bg-amber-100 rounded-full'>
-            { Language.$t.Home.Last }{Language.$t.Home[IntervalUnit.Month]}
+            { Language.$t.Statistics.Last }{Language.$t.Statistics[IntervalUnit.Month]}
           </span>
           <div className='flex'>
             <div className={cls('text-blue-700 mr-1 text-sm')}>

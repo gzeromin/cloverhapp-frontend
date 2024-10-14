@@ -1,5 +1,5 @@
-import { TimeCtrllor } from '@/mobx';
-import dateUtil from '@/utils/date.util';
+import { Language, TimeCtrllor } from '@/mobx';
+import DateUtils from '@/utils/date.util';
 import { observer } from 'mobx-react-lite';
 import { memo, useRef } from 'react';
 import cls from 'classnames';
@@ -7,9 +7,9 @@ import { useDrop } from 'react-dnd';
 import { getCreatedDate, getModifiedDate, getModifiedXY } from '@/utils/drop.util';
 import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
-import { AuthActionEnum, useAuthDispatch } from '@/context/auth';
 import { UserStamp } from '@/types/UserStamp';
 import { Dnd } from '@/enums/Dnd';
+import { HappActionEnum, useHappDispatch } from '@/context/happ';
 
 interface Props {
   weekStr: string;
@@ -19,7 +19,7 @@ interface Props {
 
 const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
   const dateValue = date.getDate();
-  const dispatch = useAuthDispatch();
+  const dispatch = useHappDispatch();
   
   const [, modifiedRef] = useDrop({
     accept: Dnd.MODIFIED_HAPP,
@@ -37,7 +37,7 @@ const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
             positionY: position.y,
           }
         );
-        dispatch(AuthActionEnum.UPDATE_HAPP, res.data);
+        dispatch(HappActionEnum.UPDATE_HAPP, res.data);
       } catch (error) {
         handleError(error);
       }
@@ -58,7 +58,7 @@ const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
           positionX: position.x,
           positionY: position.y,
         });
-        dispatch(AuthActionEnum.SET_HAPP, res.data);
+        dispatch(HappActionEnum.SET_HAPP, res.data);
       } catch (error) {
         handleError(error);
       }
@@ -99,17 +99,16 @@ const CellW: React.FC<Props> = ({ weekStr, date, weekRef }) => {
   return (
     <div className="">
       <div
-        className={`
-          text-center
-          h-[23px]
-          border-b-2
-          ${dateUtil.isSaturday(date) && 'text-saturday'}
-          ${dateUtil.isSunday(date) && 'text-red-500'}
-          ${TimeCtrllor.isToday(date) && 'border-pink-400'}
-        `}
+        className={cls(
+          'text-center h-[23px] border-b-2',
+          {'text-saturday' : DateUtils.isSaturday(date)},
+          {'text-red-500' : DateUtils.isSunday(date)},
+          {'border-gray-400' : TimeCtrllor.isSelectedDate(date) && !TimeCtrllor.isToday(date)},
+          {'border-pink-400': TimeCtrllor.isToday(date)},
+        )}
         date-value={dateValue}
       >
-        {dateValue}日({weekStr})
+        {dateValue}{Language.$t.Day}({weekStr})
       </div>
       <div className="relative mt-3" ref={ref}>{renderSchedule()}</div>
     </div>

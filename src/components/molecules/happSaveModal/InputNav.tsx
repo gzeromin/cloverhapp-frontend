@@ -14,7 +14,7 @@ import SelectHapp from '@/components/atoms/SelectHapp';
 import { RiLinksLine } from 'react-icons/ri';
 import { BiBook } from 'react-icons/bi';
 
-const statusOptions = [
+export const statusOptions = [
   {
     value: StampStatus.PRIVATE,
     labelLevel1: 'StampStatus',
@@ -47,8 +47,8 @@ interface Props {
   setOpenBook: (open: boolean) => void;
   openMoney: boolean;
   setOpenMoney: (open: boolean) => void;
-  openMemo: boolean;
-  setOpenMemo: (open: boolean) => void;
+  openMemo?: boolean;
+  setOpenMemo?: (open: boolean) => void;
   openUploadPhoto: boolean;
   setOpenUploadPhoto: (open: boolean) => void;
   existPhoto: boolean | undefined;
@@ -56,10 +56,10 @@ interface Props {
   setOpenFriends: (open: boolean) => void;
   openTags: boolean;
   setOpenTags: (open: boolean) => void;
-  openTodo: boolean;
-  setOpenTodo: (open: boolean) => void;
-  openCopy: boolean;
-  setOpenCopy: (open: boolean) => void;
+  openTodo?: boolean;
+  setOpenTodo?: (open: boolean) => void;
+  openCopy?: boolean;
+  setOpenCopy?: (open: boolean) => void;
 }
 
 export const OPEN_TIME = [
@@ -114,7 +114,7 @@ const InputNav: React.FC<Props> = ({
         options={statusOptions}
         selected={stampStatus}
         onSelected={setStampStatus}
-      ></SelectHapp>
+      />
       <WiTime7 
         className={cls(
           'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
@@ -157,7 +157,7 @@ const InputNav: React.FC<Props> = ({
           onClick={() => setOpenMoney(!openMoney)}
         />
       )}
-      {type && OPEN_MEMO.includes(type) && (
+      {setOpenMemo && type && OPEN_MEMO.includes(type) && (
         <TfiPencilAlt 
           className={cls(
             'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
@@ -198,7 +198,7 @@ const InputNav: React.FC<Props> = ({
         )}
         onClick={() => setOpenTags(!openTags)}
       />
-      {type && OPEN_TODO.includes(type) && (
+      {setOpenTodo && type && OPEN_TODO.includes(type) && (
         <BsCheckCircle
           className={cls(
             'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
@@ -209,15 +209,17 @@ const InputNav: React.FC<Props> = ({
           onClick={() => setOpenTodo(!openTodo)}
         />
       )}
-      <LuCopyPlus 
-        className={cls(
-          'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
-          {
-            'text-primary': openCopy,
-          },
-        )}
-        onClick={() => setOpenCopy(!openCopy)}
-      />
+      {setOpenCopy && (
+        <LuCopyPlus 
+          className={cls(
+            'text-gray-600 rounded cursor-pointer hover:bg-primary-hover',
+            {
+              'text-primary': openCopy,
+            },
+          )}
+          onClick={() => setOpenCopy(!openCopy)}
+        />
+      )}
     </div>
   );
 };

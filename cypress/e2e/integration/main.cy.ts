@@ -1,7 +1,7 @@
 describe('화면 사이즈 lg[960px] 이상', () => {
   beforeEach(() => {
     // 페이지 방문
-    cy.visit('/main/home');
+    cy.visit('/main/null/profile');
     // lg 사이즈 이상 (960px 이상)
     cy.viewport(960, 1024);
   });
@@ -35,7 +35,7 @@ describe('화면 사이즈 lg[960px] 이상', () => {
 describe('화면 사이즈 md[768px] 이상', () => {
   beforeEach(() => {
     // 페이지 방문
-    cy.visit('/main/home');
+    cy.visit('/main/null/profile');
     // md 사이즈 이상 (768px 이상)
     cy.viewport(768, 1024);
   });
@@ -54,7 +54,7 @@ describe('화면 사이즈 md[768px] 이상', () => {
 describe('메인 페이지, 화면 사이즈 md[768px] 이하', () => {
   beforeEach(() => {
     // 페이지 방문
-    cy.visit('/main/home');
+    cy.visit('/main/null/profile');
     // md 사이즈 이하 (768px 이하)
     cy.viewport(574, 800);
   });

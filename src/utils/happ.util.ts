@@ -1,21 +1,22 @@
 import { TimeCtrllor } from '@/mobx';
 import { Happ, MoneyUnit, TodoStatus } from '@/types/Happ';
-import dateUtils from './date.util';
+import DateUtils from './date.util';
 import { CounterUnit } from '@/types/UserStamp';
 import { StampType } from '@/types/Stamp';
+import { thousandComma } from './number.util';
 
 export const getThisDateHapp = (happList: Happ[]) => {
   const selectedDate = new Date(TimeCtrllor.selectedDate);
   // startDate와 endDate 사이에 있는 Happ을 필터링
   return happList.filter((happ) => {
     const startTime = new Date(happ.startTime); // Date 객체로 변환
-    return dateUtils.getFiveToFourHour(selectedDate, startTime) && happ.todo != TodoStatus.TODO;
+    return DateUtils.getFiveToFourHour(selectedDate, startTime) && happ.todo != TodoStatus.TODO;
   });
 };
 
 export const getThisWeekHapp = (happList: Happ[], selectedDate: Date) => {
-  const endDate = dateUtils.getLastDateOfWeek(selectedDate);
-  const startDate = dateUtils.getFirstDateOfWeek(selectedDate);
+  const endDate = DateUtils.getLastDateOfWeek(selectedDate);
+  const startDate = DateUtils.getFirstDateOfWeek(selectedDate);
   // startDate와 endDate 사이에 있는 Happ을 필터링
   return happList.filter((happ) => {
     const startTime = new Date(happ.startTime); // Date 객체로 변환
@@ -140,9 +141,9 @@ export const getTotalDurationTime = (happList: Happ[]) => {
   const totalMinutes = happList.reduce((total, happ) => {
     const start = new Date(happ.startTime);
     const end = new Date(happ.endTime);
-    return total + dateUtils.calculateDuration(start, end);
+    return total + DateUtils.calculateDuration(start, end);
   }, 0);
-  return dateUtils.getFormatHourMinByMinutes(totalMinutes);
+  return DateUtils.getFormatHourMinByMinutes(totalMinutes);
 };
 
 export const getTotalMoneyDollar = (happList: Happ[]) => {
@@ -152,7 +153,7 @@ export const getTotalMoneyDollar = (happList: Happ[]) => {
     }
     return total + 0;
   }, 0);
-  return total / 1000;
+  return thousandComma(total / 1000);
 };
 
 export const getTotalMoneyYen = (happList: Happ[]) => {
@@ -162,7 +163,7 @@ export const getTotalMoneyYen = (happList: Happ[]) => {
     }
     return total + 0;
   }, 0);
-  return total / 1000;
+  return thousandComma(total / 1000);
 };
 
 export const getTotalMoneyWon = (happList: Happ[]) => {
@@ -172,7 +173,7 @@ export const getTotalMoneyWon = (happList: Happ[]) => {
     }
     return total + 0;
   }, 0);
-  return total / 10000;
+  return thousandComma(total / 10000);
 };
 
 export const getBookCount = (happList: Happ[]) => {
@@ -214,7 +215,7 @@ export const getGoalCount = (goalUnit: CounterUnit, list: Happ[], type: StampTyp
 
 export const getGoalNumber = (unit: CounterUnit, goalNumber: string) => {
   if (unit == CounterUnit.Time) {
-    return dateUtils.getFormatHourMinByMinutes(Number(goalNumber));
+    return DateUtils.getFormatHourMinByMinutes(Number(goalNumber));
   }
   return goalNumber;
 };

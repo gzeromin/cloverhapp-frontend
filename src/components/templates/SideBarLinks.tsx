@@ -1,28 +1,23 @@
 'use client';
 import { Language } from '@/mobx';
 import { observer } from 'mobx-react-lite';
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 import Link from 'next/link';
 import cls from 'classnames';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 
 enum Menu {
-  Memo = '/main/memo',
-  Home = '/main',
-  Stamp = '/main/stamp',
-  Friend = '/main/friend',
-  Profile = '/main/profile',
+  Profile = 'profile',
+  Stamp = 'stamp',
+  Statistics = 'statistics',
 }
 
 const SideBarLinks: React.FC = () => {
+  const { userId } = useParams();
   const pathname = usePathname();
-  const [selectedMenu, setSelectedMenu] = useState<string>(Menu.Memo);
-  useEffect(() => {
-    setSelectedMenu(pathname);
-  }, [pathname]);
 
   const tabStyle = (menu: string) => {
-    if (selectedMenu === menu) {
+    if (pathname.includes(menu)) {
       return '-rotate-45 inline-block rounded-t-lg bg-gray-100 text-primary';
     }
     return '-rotate-45 inline-block rounded-t-lg hover:bg-gray-100 bg-gray-50 hover:text-gray-600 text-xs';
@@ -36,44 +31,25 @@ const SideBarLinks: React.FC = () => {
       )}
     >
       <Link
-        className={tabStyle(Menu.Memo)}
-        onClick={() => setSelectedMenu(Menu.Memo)}
-        href="/main/memo"
-        test-id="memoLink"
+        className={tabStyle(Menu.Profile)}
+        href={`/main/${userId}/profile`}
+        test-id="profileLink"
       >
-        {Language.$t.SideBar.Memo}
-      </Link>
-      <Link
-        className={tabStyle(Menu.Home)}
-        onClick={() => setSelectedMenu(Menu.Home)}
-        href="/main/home"
-        test-id="homeLink"
-      >
-        {Language.$t.SideBar.Home}
+        {Language.$t.SideBar.Profile}
       </Link>
       <Link
         className={tabStyle(Menu.Stamp)}
-        onClick={() => setSelectedMenu(Menu.Stamp)}
-        href="/main/stamp"
+        href={`/main/${userId}/stamp`}
         test-id="stampLink"
       >
         {Language.$t.SideBar.Stamp}
       </Link>
       <Link
-        className={tabStyle(Menu.Friend)}
-        onClick={() => setSelectedMenu(Menu.Friend)}
-        href="/main/friend"
-        test-id="friendLink"
+        className={tabStyle(Menu.Statistics)}
+        href={`/main/${userId}/statistics`}
+        test-id="statisticsLink"
       >
-        {Language.$t.SideBar.Friend}
-      </Link>
-      <Link
-        className={tabStyle(Menu.Profile)}
-        onClick={() => setSelectedMenu(Menu.Profile)}
-        href="/main/profile"
-        test-id="profileLink"
-      >
-        {Language.$t.SideBar.Profile}
+        {Language.$t.SideBar.Statistics}
       </Link>
     </div>
   );

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import InputDateModule from '../molecules/InputDateModule';
+import InputDateTimeModule from '../molecules/InputDateTimeModule';
 import cls from 'classnames';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import { Language } from '@/mobx';
@@ -49,7 +49,7 @@ const DateTimesInput: React.FC<DateTimesInputProps> = ({
           <span className={cls('text-base text-green-700 mr-2')}>
             { index + 1 }
           </span>
-          <InputDateModule
+          <InputDateTimeModule
             className={cls('grow')}
             startTime={time}
             setStartTime={(newTime) => updateTime(index, newTime)}

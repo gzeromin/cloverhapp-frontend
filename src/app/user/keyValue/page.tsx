@@ -58,16 +58,10 @@ const KeyValue: React.FC<Props> = () => {
         )}
       >
         { user && user.keyValues 
-          && user.keyValues.map((e, index) => {
-            const randomIndex = Math.floor(Math.random() * 11);
-            return (
-              <KeyValueHapp 
-                key={`keyValue ${e} ${index}`} 
-                value={e}
-                colorNum={randomIndex}
-              />
-            );
-          })}
+          && user.keyValues.map((e, index) => <KeyValueHapp 
+            key={`keyValue ${e} ${index}`} 
+            value={e}
+          />)}
       </div>
       <div className={cls('w-full flex justify-between mb-1')}>
         <div
@@ -98,7 +92,6 @@ const KeyValue: React.FC<Props> = () => {
         marginBottom=""
         textAreaClassName={cls(
           'bg-transparent',
-          'whitespace-pre-wrap', // 개행 유지
           'text-xl tracking-widest text-center',
           Language.logoFont
         )}

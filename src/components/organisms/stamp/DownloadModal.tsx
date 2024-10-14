@@ -36,6 +36,7 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ stamp, closeModal }) => {
     if (stamp && register) {
       const res = await api.post('/user-stamp', {
         stampId: stamp.id,
+        stampStatus: stamp.status,
         registerId: register.id,
         droplet: stamp.droplet,
         name: stamp.name,

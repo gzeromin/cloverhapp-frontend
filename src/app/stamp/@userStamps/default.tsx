@@ -1,30 +1,26 @@
 'use client';
 import { memo, useEffect, useState } from 'react';
-import { fetcher } from '@/utils/api.util';
 import { UserStamp } from '@/types/UserStamp';
-import useSWR from 'swr';
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
 import UserStampItem from '@/components/organisms/stamp/UserStampItem';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { useAuthState } from '@/context/auth';
+import api from '@/utils/api.util';
 
-interface Props {}
-
-const UserStamps: React.FC<Props> = () => {
+const UserStamps: React.FC = () => {
+  const { user } = useAuthState();
   const [displayStamps, setDisplayStamps] = useState<UserStamp[]>([]);
   const [hiddenStamps, setHiddenStamps] = useState<UserStamp[]>([]);
   
-  const { 
-    data: userStamps,
-  } = useSWR<UserStamp[]>('/user-stamp', fetcher);
-
   useEffect(() => {
-    if (userStamps) {
+    api.get('/user-stamp').then((res) => {
+      const userStamps = res.data;
       setDisplayStamps(userStamps.filter(e => e.isDisplay));
       setHiddenStamps(userStamps.filter(e => !e.isDisplay));
-    }
-  }, [userStamps]);
+    });
+  }, [user]);
 
   return (
     <div className={cls(

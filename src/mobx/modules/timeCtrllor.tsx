@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 
-import dateUtil from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
 
 class timeCtrllor {
   // type
@@ -17,6 +17,7 @@ class timeCtrllor {
     makeObservable(this, {
       today: computed,
       isToday: action,
+      isSelectedDate: action,
       isThisMonth: action,
       isSelectedMonth: action,
       selectDate: action,
@@ -29,6 +30,7 @@ class timeCtrllor {
       unit: observable,
       goPrev: action,
       goNext: action,
+      prevDayLog: action,
       getWeeksCountByMonth: action,
       getWeeksCountByMonth2: action,
     });
@@ -39,7 +41,11 @@ class timeCtrllor {
   }
 
   isToday = (date: Date) => {
-    return dateUtil.isTargetDate(date, this.today);
+    return DateUtils.isTargetDate(date, this.today);
+  };
+
+  isSelectedDate = (date: Date) => {
+    return DateUtils.isTargetDate(date, this.selectedDate);
   };
 
   isThisMonth = (month: number) => {
@@ -53,7 +59,7 @@ class timeCtrllor {
   };
 
   isSelectedMonth = (date: Date) => {
-    return dateUtil.isTargetMonth(date, this.selectedDate);
+    return DateUtils.isTargetMonth(date, this.selectedDate);
   };
 
   selectDate = (date: Date) => {
@@ -61,31 +67,31 @@ class timeCtrllor {
   };
 
   get selectedYear() {
-    return dateUtil.getFullYear(this.selectedDate);
+    return DateUtils.getFullYear(this.selectedDate);
   }
 
   get selectedMonth() {
-    return dateUtil.getMonth(this.selectedDate);
+    return DateUtils.getMonth(this.selectedDate);
   }
 
   get formattedSelectedDate() {
-    return dateUtil.getDate(this.selectedDate);
+    return DateUtils.getDate(this.selectedDate);
   }
 
   get selectedFirstDate() {
-    return dateUtil.getFirstDateOfMonth(this.selectedDate);
+    return DateUtils.getFirstDateOfMonth(this.selectedDate);
   }
 
   get selectedLastDate() {
-    return dateUtil.getLastDateOfMonth(this.selectedDate);
+    return DateUtils.getLastDateOfMonth(this.selectedDate);
   }
 
   getWeeksCountByMonth(month: number) {
-    return dateUtil.getWeeksCountByMonth(this.selectedYear, month);
+    return DateUtils.getWeeksCountByMonth(this.selectedYear, month);
   }
 
   getWeeksCountByMonth2(month: number) {
-    return dateUtil.getWeeksCountByMonth2(this.selectedYear, month);
+    return DateUtils.getWeeksCountByMonth2(this.selectedYear, month);
   }
 
   setUnit = (unit: number) => {
@@ -134,6 +140,12 @@ class timeCtrllor {
     default:
       break;
     }
+  };
+
+  prevDayLog = () => {
+    this.selectedDate = new Date(
+      this.selectedDate.setMonth(this.selectedDate.getMonth() - 4),
+    );
   };
 }
 

@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
 import SelectHapp, { OptionType } from '../atoms/SelectHapp';
 import { CounterUnit, IntervalUnit } from '@/types/UserStamp';
-import dateUtils from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
 import { StampType } from '@/types/Stamp';
 
 interface Props {
@@ -42,28 +42,35 @@ const CycleCounter: React.FC<Props> = ({
     case StampType.WAKE_UP:
     case StampType.GO_TO_BED:
       selectedUnits = [CounterUnit.Hour];
+      setGoalUnit(CounterUnit.Hour);
       break;
     case StampType.BOOK:
       selectedUnits = [CounterUnit.Book, CounterUnit.Time];
+      setGoalUnit(CounterUnit.Book);
       break;
     case StampType.EXERCISE:
     case StampType.MEDITATION:
     case StampType.STUDY:
       selectedUnits = [CounterUnit.Number, CounterUnit.Time];
+      setGoalUnit(CounterUnit.Number);
       break;
     case StampType.EXPENSE:
     case StampType.INCOME:
       selectedUnits = [CounterUnit.Won, CounterUnit.Yen, CounterUnit.Dollar];
+      setGoalUnit(CounterUnit.Won);
       break;
     case StampType.WATER:
       selectedUnits = [CounterUnit.Milliliter];
+      setGoalUnit(CounterUnit.Milliliter);
       break;
     case StampType.HAPPY:
     case StampType.MEDICINE:
       selectedUnits = [CounterUnit.Number];
+      setGoalUnit(CounterUnit.Number);
       break;
     case StampType.MEAL:
       selectedUnits = [CounterUnit.Number, CounterUnit.Dollar, CounterUnit.Won, CounterUnit.Yen];
+      setGoalUnit(CounterUnit.Number);
       break;
     }
     const options = 
@@ -93,7 +100,7 @@ const CycleCounter: React.FC<Props> = ({
     return 'bg-gray-50 shadow-lg rounded-full';
   };
 
-  const getInputType = () => {
+  const getInputType = (goalUnit: CounterUnit) => {
     switch(goalUnit) {
     case CounterUnit.Time:
       return 'range';
@@ -104,7 +111,7 @@ const CycleCounter: React.FC<Props> = ({
     }
   };
 
-  const getStep = () => {
+  const getStep = (goalUnit: CounterUnit) => {
     switch(goalUnit) {
     case CounterUnit.Milliliter:
       return '500';
@@ -117,7 +124,7 @@ const CycleCounter: React.FC<Props> = ({
     }
   };
 
-  const getMin = () => {
+  const getMin = (goalUnit: CounterUnit) => {
     switch(goalUnit) {
     case CounterUnit.Hour:
       return '00:00';
@@ -126,7 +133,7 @@ const CycleCounter: React.FC<Props> = ({
     }
   };
 
-  const getMax = () => {
+  const getMax = (goalUnit: CounterUnit) => {
     switch(goalUnit) {
     case CounterUnit.Time:
       return '750';
@@ -178,7 +185,7 @@ const CycleCounter: React.FC<Props> = ({
               0 {Language.$t.Time.Hour}
             </span>
             <span className={cls('text-xs text-blue-700')}>
-              {dateUtils.getFormatHourMinByMinutes(Number(goalNumber))}
+              {DateUtils.getFormatHourMinByMinutes(Number(goalNumber))}
             </span>
             <span className={cls('text-xs text-gray-400')}>
               15 {Language.$t.Time.Hours}
@@ -190,16 +197,16 @@ const CycleCounter: React.FC<Props> = ({
             'flex gap-3 items-center justify-end',
             'ml-5 mr-2 text-base self-stretch'
           )}
-          type={getInputType()}
+          type={getInputType(goalUnit)}
           placeholder={'0'}
           value={goalNumber}
           onChange={(e)=> setGoalNumber(e.target.value)}
           inputClassName='text-center'
-          min={getMin()}
-          max={getMax()}
+          min={getMin(goalUnit)}
+          max={getMax(goalUnit)}
           marginBottom='mb-0'
           disable={!existGoal}
-          step={getStep()}
+          step={getStep(goalUnit)}
           border={CounterUnit.Time !== goalUnit}
         />
       </div>

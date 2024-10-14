@@ -56,19 +56,22 @@
     "Memo": "메모",
     "RequestMessage": "친구요청 메세지",
     "ChangeAliasMessage": "애칭 변경 메세지",
-    "Type": "타입",
     "Sip": "모금",
     "Display": "표시",
     "Order": "표시 순서",
     "Friend": "친구",
     "Tag": "태그",
     "Goal": "목표",
-    "CommunityOfFate": "운명 공동체",
-    "StampStatus": "공개 범위"
+    "CommunityOfFate": "운명 공동체"
   },
   "Select": {
+    "Type": "타입",
+    "StampStatus": "공개 범위",
     "Language": "언어",
     "Currency": "통화"
+  },
+  "Check": {
+    "NotForSale": "비매용"
   },
   "CounterUnit": {
     "Number": "회",
@@ -115,10 +118,8 @@
   },
   "SideBar": {
     "Profile": "프로필",
-    "Home": "홈",
-    "Stamp": "스탬프",
-    "Memo": "메모",
-    "Friend": "친구"
+    "Statistics": "통계",
+    "Stamp": "스탬프"
   },
   "Weeks": ["월", "화", "수", "목", "금", "토", "일"],
   "Months": [
@@ -135,6 +136,7 @@
     "11월",
     "12월"
   ],
+  "Day": "일",
   "Time": {
     "H": "시간",
     "Hour": "시간",
@@ -180,7 +182,7 @@
     "requesting": "나의 친구 요청",
     "search": "친구 찾기"
   },
-  "Home": {
+  "Statistics": {
     "WakeUp": "기상",
     "GoToBed": "취침",
     "Sleeping": "수면",
@@ -194,9 +196,9 @@
     "Day": "일",
     "Every": "매"
   },
-  "Money": {
-    "Dollar": "달러",
-    "Yen": "엔",
-    "Won": "원"
+  "MoneyUnit": {
+    "EN": "달러",
+    "JP": "엔",
+    "KR": "원"
   }
 }

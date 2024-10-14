@@ -88,6 +88,15 @@ const config: Config = {
       maxHeight: {
         '4/5': 'calc(100vh * 0.8)',
       },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+      },
+      animation: {
+        float: 'float 5s ease-in-out infinite',
+      },
     },
   },
   plugins: [require('./src/utils/patterns.util')],

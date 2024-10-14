@@ -84,6 +84,7 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
                 border,
             },
             { 'resize-none': !resizable },
+            'whitespace-pre-wrap', // 개행 유지
             textAreaClassName,
           )}
           rows={rows}

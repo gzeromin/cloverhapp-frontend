@@ -5,7 +5,7 @@ import cls from 'classnames';
 import { Language } from '@/mobx';
 
 // 밝은 배경색과 진한 글자색으로 사용할 색상 배열
-const colorPalette = [
+export const colorPalette = [
   { bg: 'rgb(255, 240, 246)', text: 'rgb(196, 29, 127)' }, // magenta
   { bg: 'rgb(255, 241, 240)', text: 'rgb(207, 19, 34)' }, // red
   { bg: 'rgb(255, 242, 232)', text: 'rgb(212, 56, 13)' }, // volcano
@@ -21,18 +21,17 @@ const colorPalette = [
 
 interface Props {
   value: string,
-  colorNum: number;
 }
 
 const KeyValueHapp: React.FC<Props> = ({ 
   value,
-  colorNum,
 }) => {
   const [color, setColor] = useState<{ bg: string; text: string }>({ bg: '#bfdbfe', text: '#1e3a8a' });
 
   useEffect(() => {
-    setColor(colorPalette[colorNum]);
-  }, [colorNum]);
+    const randomIndex = Math.floor(Math.random() * 11);
+    setColor(colorPalette[randomIndex]);
+  }, [value]);
 
   return (
     <div 

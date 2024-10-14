@@ -1,6 +1,5 @@
 'use client';
 import { memo, useEffect, useState } from 'react';
-import { useAuthState } from '@/context/auth';
 import {
   getLastMonthHapp,
   getLastWeekHapp,
@@ -14,12 +13,13 @@ import { fetcher } from '@/utils/api.util';
 import { Happ } from '@/types/Happ';
 import useSWR from 'swr';
 import { UserStamp } from '@/types/UserStamp';
-import SleepInfo from '@/components/organisms/sideBarHome/SleepInfo';
-import HappyStamp from '@/components/organisms/sideBarHome/HappyStamp';
-import MoneyInfo from '@/components/organisms/sideBarHome/MoneyInfo';
+import SleepInfo from '@/components/organisms/sideBarStatistics/SleepInfo';
+import HappyStamp from '@/components/organisms/sideBarStatistics/HappyStamp';
+import MoneyInfo from '@/components/organisms/sideBarStatistics/MoneyInfo';
+import { useHappState } from '@/context/happ';
 
-const Main: React.FC = () => {
-  const { happList } = useAuthState();
+const Statistics: React.FC = () => {
+  const { happList } = useHappState();
   const { data: userStamps } = useSWR<UserStamp[]>('/user-stamp', fetcher);
   const [thisWeekHappList, setThisWeekHappList] = useState<Happ[]>([]);
   const [thisMonthHappList, setThisMonthHappList] = useState<Happ[]>([]);
@@ -69,4 +69,4 @@ const Main: React.FC = () => {
   );
 };
 
-export default memo(observer(Main));
+export default memo(observer(Statistics));

@@ -1,49 +1,33 @@
 'use client';
 import { Language, TimeCtrllor } from '@/mobx';
 import { observer } from 'mobx-react-lite';
-import { memo, useEffect, useState } from 'react';
+import { memo, useState } from 'react';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import api, { fetcher } from '@/utils/api.util';
-import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import Week from '@/components/organisms/happCalendar/Week';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { UserStamp } from '@/types/UserStamp';
-import useSWR from 'swr';
 import cls from 'classnames';
 import HappSaveModal from '@/components/organisms/happCalendar/HappSaveModal';
 import StampButton from '@/components/molecules/StampButton';
+import { useAuthState } from '@/context/auth';
 
 interface Props {
   className: string;
 }
 
 const HappCalendar: React.FC<Props> = ({ className }) => {
-  const dispatch = useAuthDispatch();
-  const { user } = useAuthState();
   const [showStampSaveModal, setShowStampSaveModal] = useState<boolean>(false);
   const [selectedUserStamp, setSelectedUserStamp] = useState<UserStamp>();
-  const { data: userStamps } = useSWR<UserStamp[]>('/user-stamp', fetcher);
+  const { userStamps } = useAuthState();
 
   const onClickStamp = (userStamp: UserStamp) => {
     setShowStampSaveModal(true);
     setSelectedUserStamp(userStamp);
   };
 
-  useEffect(() => {
-    if(user)
-      api
-        .get(`/happ/list/${TimeCtrllor.formattedSelectedDate}/${user.id}`)
-        .then((res) => {
-          dispatch(AuthActionEnum.SET_HAPPLIST, res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  }, [TimeCtrllor.formattedSelectedDate, user]);
-
-  const goBtnStyle = 'pt-5 px-2 cursor-pointer hover:bg-gray-100 rounded-full';
-  const iconStyle = 'scale-150';
+  const goBtnStyle = 'pt-5 px-2 cursor-pointer';
+  const iconStyle = 'scale-150 hover:bg-gray-100 rounded-full';
 
   return (
     <div className={className}>

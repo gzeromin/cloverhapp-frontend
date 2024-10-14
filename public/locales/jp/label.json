@@ -56,19 +56,22 @@
     "Memo": "メモ",
     "RequestMessage": "友達要請メッセージ",
     "ChangeAliasMessage": "愛称変更メッセージ",
-    "Type": "タイプ",
     "Sip": "口",
     "Display": "表示",
     "Order": "表示 順番",
     "Friend": "友達",
     "Tag": "タグ",
     "Goal": "目標",
-    "CommunityOfFate": "運命共同体",
-    "StampStatus": "公開範囲"
+    "CommunityOfFate": "運命共同体"
   },
   "Select": {
+    "Type": "タイプ",
+    "StampStatus": "公開範囲",
     "Language": "言語",
     "Currency": "通貨"
+  },
+  "Check": {
+    "NotForSale": "非売品"
   },
   "CounterUnit": {
     "Number": "回",
@@ -115,10 +118,8 @@
   },
   "SideBar": {
     "Profile": "プロフィール",
-    "Home": "ホーム",
-    "Stamp": "スタンプ",
-    "Memo": "メモ",
-    "Friend": "友達"
+    "Statistics": "統計",
+    "Stamp": "スタンプ"
   },
   "Weeks": ["月", "火", "水", "木", "金", "土", "日"],
   "Months": [
@@ -135,6 +136,7 @@
     "11月",
     "12月"
   ],
+  "Day": "日",
   "Time": {
     "H": "時間",
     "Hour": "時間",
@@ -180,7 +182,7 @@
     "requesting": "自分の友達要請",
     "search": "友達探し"
   },
-  "Home": {
+  "Statistics": {
     "WakeUp": "起床",
     "GoToBed": "就寝",
     "Sleeping": "睡眠",
@@ -194,9 +196,9 @@
     "Day": "日",
     "Every": "毎"
   },
-  "Money": {
-    "Dollar": "ドル",
-    "Yen": "円",
-    "Won": "ウォン"
+  "MoneyUnit": {
+    "EN": "ドル",
+    "JP": "円",
+    "KR": "ウォン"
   }
 }

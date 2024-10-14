@@ -1,7 +1,7 @@
 import { Happ } from '@/types/Happ';
 import { useState } from 'react';
 import cls from 'classnames';
-import dateUtil from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { useAuthState } from '@/context/auth';
 import api from '@/utils/api.util';
@@ -125,7 +125,7 @@ const HappFeed: React.FC<Props> = ({
 
         {/* 시간 */}
         <span className="text-xs text-gray-500">
-          {dateUtil.getFormatHourMin(new Date(happ.createdAt))}
+          {DateUtils.getFormatHourMin(new Date(happ.startTime))}
         </span>
       </div>
 

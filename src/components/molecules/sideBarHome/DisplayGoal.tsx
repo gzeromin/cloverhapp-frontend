@@ -40,7 +40,7 @@ const DisplayGoal: React.FC<Props> = ({
           <div className={cls(
             'text-sm mx-1 bg-indigo-100 rounded-full'
           )}>
-            {userStamp.goalInterval == IntervalUnit.Day && Language.$t.Home.Every}{Language.$t.Date[userStamp.goalInterval]}
+            {userStamp.goalInterval == IntervalUnit.Day && Language.$t.Statistics.Every}{Language.$t.Date[userStamp.goalInterval]}
           </div>
           <div className='text-xl'>
             { getGoalNumber(userStamp.goalUnit, userStamp.goalNumber) }

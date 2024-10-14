@@ -10,6 +10,7 @@ import api, { BUCKET_URL } from '@/utils/api.util';
 import UserProrile from '@/components/molecules/UserProrile';
 import cls from 'classnames';
 import { handleError } from '@/utils/error.util';
+import { BsCalendarHeart } from 'react-icons/bs';
 
 const options = [
   { value: Locale.Kr, image: { src: Language.flagKr } },
@@ -67,6 +68,13 @@ const NavBar: React.FC = () => {
             {Language.$t.Logo}
           </p>
         </Link>
+        {user && (
+          <Link href={'/main/' + user.id + '/profile'}>
+            <BsCalendarHeart
+              style={{ width: 30, height: 30, color: 'white' }}
+            />
+          </Link>
+        )}
       </div>
 
       <div className="flex items-center gap-3">

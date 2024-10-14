@@ -3,18 +3,19 @@ import { User } from '@/types/User';
 import api from '@/utils/api.util';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { Language } from '@/mobx';
-import { Happ } from '@/types/Happ';
+import { UserStamp } from '@/types/UserStamp';
+import { handleError } from '@/utils/error.util';
 
 interface State {
   authenticated: boolean;
   user: User | undefined;
-  happList: Happ[];
+  userStamps: UserStamp[];
 }
 
 const StateContext = createContext<State>({
   authenticated: false,
   user: undefined,
-  happList: [] as Happ[],
+  userStamps: [] as UserStamp[],
 });
 
 const DispatchContext = createContext<any>(null);
@@ -33,11 +34,8 @@ export enum AuthActionEnum {
   SET_KEY_VALUE = 'SET_KEY_VALUE',
   SET_SENTENCE = 'SET_SENTENCE',
   SET_DROPLET = 'SET_DROPLET',
-  SET_HAPPLIST = 'SET_HAPPLIST',
-  SET_HAPP = 'SET_HAPP',
-  UPDATE_HAPP = 'UPDATE_HAPP',
-  DELETE_HAPP = 'DELETE_HAPP',
-  UPDATE_HAPPLIST = 'ADD_HAPPLIST',
+  
+  SET_USER_STAMPS = 'SET_USER_STAMPS'
 }
 
 const reducer = (state: State, { type, payload }: Action) => {
@@ -84,43 +82,12 @@ const reducer = (state: State, { type, payload }: Action) => {
       ...state,
       user: { ...state.user, droplet: payload },
     };
-  case AuthActionEnum.SET_HAPPLIST:
+
+  // * User Stamp Section *
+  case AuthActionEnum.SET_USER_STAMPS:
     return {
       ...state,
-      happList: payload,
-    };
-  case AuthActionEnum.SET_HAPP:
-    return {
-      ...state,
-      happList: state.happList ? state.happList.concat(payload) : [],
-    };
-  case AuthActionEnum.UPDATE_HAPP:
-    const {updated, created} = payload;
-    return {
-      ...state,
-      happList: state.happList
-        ? state.happList.map((v) => {
-          if (v.id == updated.id) {
-            v.startTime = updated.startTime;
-            v.endTime = updated.endTime;
-            v.positionX = updated.positionX;
-            v.positionY = updated.positionY;
-            v.memo = updated.memo;
-            v.todo = updated.todo;
-          }
-          return v;
-        }).concat(created)
-        : [],
-    };
-  case AuthActionEnum.DELETE_HAPP:
-    return {
-      ...state,
-      happList: state.happList ? state.happList.filter((e) => e.id != payload) : [],
-    };
-  case AuthActionEnum.UPDATE_HAPPLIST:
-    return {
-      ...state,
-      happList: state.happList ? state.happList.concat(...payload) : payload,
+      userStamps: payload,
     };
   default:
     throw new Error(`Unknown action type: ${type}`);
@@ -131,7 +98,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, defaultDispatch] = useReducer(reducer, {
     user: null,
     authenticated: false,
-    happList: [],
+    userStamps: [],
   });
 
   const dispatch = (type: AuthActionEnum, payload?: any) => {
@@ -147,9 +114,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const res = await api.get('/auth/me');
         dispatch(AuthActionEnum.LOGIN, res.data?.user);
+        const userStamps = await api.get('/user-stamp');
+        dispatch(AuthActionEnum.SET_USER_STAMPS, userStamps.data);
       } catch (error) {
-        console.log(error);
-      } finally {
+        // handleError(error);
       }
     }
     loadUser();

@@ -112,7 +112,6 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         window.location.reload();
       }
     } catch (error: any) {
-      console.log(error);
       handleError(error);
     } finally {
       Loading.setIsLoading(false);
@@ -221,7 +220,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
               'flex items-center gap-3 mb-3',
               'rounded-md w-1/4'
             )}
-            labelName={Language.$t.Input.StampStatus}
+            labelName={Language.$t.Select.StampStatus}
             labelClassName={cls('font-bold')}
             options={statusOptions}
             selected={stampStatus}

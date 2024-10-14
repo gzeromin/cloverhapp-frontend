@@ -3,7 +3,7 @@ import cls from 'classnames';
 import { Happ, TodoStatus } from '@/types/Happ';
 import { useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
+import { useAuthState } from '@/context/auth';
 import Image from 'next/image';
 import { useDrag } from 'react-dnd';
 import HappDisplayModal from '../HappDisplayModal';
@@ -12,6 +12,7 @@ import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
 import { Dnd } from '@/enums/Dnd';
 import HappSaveModal from '@/components/organisms/happCalendar/HappSaveModal';
+import { HappActionEnum, useHappDispatch } from '@/context/happ';
 
 interface CalendarHappIconProps {
   happ: Happ;
@@ -21,7 +22,7 @@ const iconSize = 23;
 
 const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
   const { user } = useAuthState();
-  const dispatch = useAuthDispatch();
+  const dispatch = useHappDispatch();
 
   const [showDisplayModal, setShowDisplayModal] = useState(false);
   const [showModifyModal, setShowModifyModal] = useState(false);
@@ -51,7 +52,7 @@ const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
       const res = await api.patch(
         '/happ/todo-complete/' + happ.id
       );
-      dispatch(AuthActionEnum.UPDATE_HAPP, {updated: res.data, created: []});
+      dispatch(HappActionEnum.UPDATE_HAPP, {updated: res.data, created: []});
     } catch (error) {
       handleError(error);
     }

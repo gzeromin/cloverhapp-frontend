@@ -3,10 +3,10 @@ import cls from 'classnames';
 import { memo, useState } from 'react';
 import { LuClock10 } from 'react-icons/lu';
 import MiniClock from '../atoms/MiniClockHapp';
-import dateUtils from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
 
 interface InputTimeModuleProps {
-  className: string;
+  className?: string;
   time: Date | undefined;
   setTime: (e: Date) => void;
 }
@@ -29,13 +29,15 @@ const InputTimeModule: React.FC<InputTimeModuleProps> = ({
           'flex items-center gap-1'
         )}
       >
-        <span className="text-lg text-gray-600">
-          {time && dateUtils.getFormatHourMin(time)}
-        </span>
+        <div className="text-lg text-gray-600 cursor-default">
+          {time && DateUtils.getFormatHourMin(time)}
+        </div>
         <LuClock10
-          className={cls('p-[1px] hover:bg-gray-100 rounded', {
-            'text-blue-700 hover:bg-primary-hover': showClock,
-          })}
+          className={cls(
+            'p-[1px] hover:bg-gray-100 rounded cursor-pointer', {
+              'text-blue-700 hover:bg-primary-hover': showClock,
+            }
+          )}
           onClick={() => setShowClock(true)}
         />
       </div>

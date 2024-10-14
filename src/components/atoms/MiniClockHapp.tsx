@@ -3,7 +3,7 @@ import cls from 'classnames';
 import { memo, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx/index';
-import dateUtils from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
 
 interface MiniClockProps {
   className: string;
@@ -186,11 +186,11 @@ const MiniClock: React.FC<MiniClockProps> = ({
           {time && (
             <div className='flex'>
               <span className={cls('text-green-700')}>
-                {dateUtils.getFormatHour(time)}
+                {DateUtils.getFormatHour(time)}
               </span>
               :
               <span className={cls('text-blue-700')}>
-                {dateUtils.getFormatMin(time)}
+                {DateUtils.getFormatMin(time)}
               </span>
             </div>
           )}

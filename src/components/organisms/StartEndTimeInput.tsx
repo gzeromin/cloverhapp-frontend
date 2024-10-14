@@ -5,13 +5,15 @@ import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
 import InputTimeModule from '../molecules/InputTimeModule';
 import SliderHapp from '../atoms/SliderHapp';
-import dateUtils from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
+import Constants from '@/common/constants';
+import InputDateModule from '../molecules/InputDateModule';
 
 interface StartEndTimeInputProps {
   className?: string;
-  startTime?: Date;
+  startTime: Date;
   endTime?: Date;
-  setStartTime?: Dispatch<SetStateAction<Date | undefined>>;
+  setStartTime: Dispatch<SetStateAction<Date>>;
   setEndTime?: Dispatch<SetStateAction<Date | undefined>>;
 }
 
@@ -57,7 +59,7 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
 
     // Recalculate duration based on the new start time and existing end time
     if (newTime && endTime && setDuration) {
-      const newDuration = dateUtils.calculateDuration(newTime, endTime);
+      const newDuration = DateUtils.calculateDuration(newTime, endTime);
       setDuration(newDuration);
     }
   };
@@ -73,7 +75,7 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
     }
     // Recalculate duration based on the new end time and existing start time
     if (startTime && newTime && setDuration) {
-      const newDuration = dateUtils.calculateDuration(startTime, newTime);
+      const newDuration = DateUtils.calculateDuration(startTime, newTime);
       setDuration(newDuration);
     }
   };
@@ -86,25 +88,16 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
     }
   };
 
-  // 슬라이더로 현재 시간을 기준으로 시간을 변경
+  // 슬라이더로 시작 시간을 기준으로 시간을 변경
   const handleTimeChange = (offset: number) => {
-    const newTime = addMinutes(new Date(), offset);
+    const newTime = addMinutes(startTime, offset);
     handleStartTimeChange(newTime);
   };
 
   useEffect(() => {
-    // 최초 랜더링 시, 시작 시간이 없으면 현재시간으로 설정
-    if (!startTime && setStartTime) {
-      setStartTime(new Date());
-    }
-    // 최초 랜더링 시, 종료 시간이 없으면 시작 시간으로 설정
-    if (!endTime && setEndTime) {
-      setEndTime(startTime);
-    }
-
     // 최초 렌더링 시, 지속 시간을 계산해서 설정
     if (!duration && startTime && endTime && setDuration) {
-      const initialDuration = dateUtils.calculateDuration(startTime, endTime);
+      const initialDuration = DateUtils.calculateDuration(startTime, endTime);
       setDuration(initialDuration);
     }
   }, [startTime, setStartTime, endTime, setEndTime, setDuration]);
@@ -113,20 +106,32 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
     <div className={cls('text-gray-600', Language.logoFont, className)}>
       <div className={cls('flex flex-col')}>
         <div className={cls('flex items-center justify-between gap-1')}>
-          <div></div>
-          {/* 시작 시간 입력 */}
-          <InputTimeModule
-            time={startTime}
-            setTime={handleStartTimeChange}
-            className={cls('')}
-          />
-          <div className='flex gap-1'>
-            ~
+          <div className={cls('flex items-center gap-4 justify-around grow')}>
+            {/* 날짜 입력 */}
+            <InputDateModule
+              startTime={startTime}
+              setStartTime={handleStartTimeChange}
+            />
+            {/* 시작 시간 입력 */}
+            <InputTimeModule
+              time={startTime}
+              setTime={handleStartTimeChange}
+              className={cls('')}
+            />
+          </div>
+          <div className='flex items-center gap-4'>
+            <p className='cursor-default'>
+              {Constants.SYMBOLS.TILDE}
+            </p>
+            {/* 날짜 입력 */}
+            <InputDateModule
+              startTime={endTime}
+              setStartTime={handleEndTimeChange}
+            />
             {/* 종료 시간 입력 */}
             <InputTimeModule
               time={endTime}
               setTime={handleEndTimeChange}
-              className={cls('')}
             />
           </div>
         </div>
@@ -143,7 +148,7 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
             'flex items-center justify-between',
             'text-sm mt-2'
           )}>
-            <div className={cls('text-blue-700')}>
+            <div className={cls('text-primary cursor-default')}>
               {Language.$t.Time.Duration}
             </div>
             <div className={cls('flex gap-1')}>
@@ -151,9 +156,9 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
               <button
                 onClick={() => handleDurationChange(0)}
                 className={cls(
-                  'border border-blue-700 text-blue-700',
+                  'border border-primary text-primary',
                   'rounded-lg px-1',
-                  'hover:bg-blue-700 hover:text-white'
+                  'hover:bg-primary hover:text-white'
                 )}
               >
                 {Language.$t.Time.Minute0}
@@ -162,9 +167,9 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
               <button
                 onClick={() => handleEndTimePlus15min()}
                 className={cls(
-                  'border border-blue-700 text-blue-700',
+                  'border border-primary text-primary',
                   'rounded-lg px-1',
-                  'hover:bg-blue-700 hover:text-white'
+                  'hover:bg-primary hover:text-white'
                 )}
               >
                 {Language.$t.Time.Plus15Minute}
@@ -173,9 +178,9 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
               <button
                 onClick={() => handleEndTimeChange(new Date())}
                 className={cls(
-                  'border border-blue-700 text-blue-700',
+                  'border border-primary text-primary',
                   'rounded-lg px-1',
-                  'hover:bg-blue-700 hover:text-white'
+                  'hover:bg-primary hover:text-white'
                 )}
               >
                 {Language.$t.Time.Now}

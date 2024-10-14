@@ -1,7 +1,7 @@
 describe('사이드바 링크 컴포넌트', () => {
   beforeEach(() => {
     // 페이지 방문
-    cy.visit('/main/home');
+    cy.visit('/main/null/profile');
     // lg 사이즈 이상 (960px 이상)
     cy.viewport(960, 1024);
     // 로그인
@@ -9,10 +9,8 @@ describe('사이드바 링크 컴포넌트', () => {
   });
 
   it('로그인 했을 때, 사이드바 링크 표시', () => {
-    cy.get('[test-id="memoLink"]').should('exist');
-    cy.get('[test-id="homeLink"]').should('exist');
+    cy.get('[test-id="statisticsLink"]').should('exist');
     cy.get('[test-id="stampLink"]').should('exist');
-    cy.get('[test-id="friendLink"]').should('exist');
     cy.get('[test-id="profileLink"]').should('exist');
   });
 

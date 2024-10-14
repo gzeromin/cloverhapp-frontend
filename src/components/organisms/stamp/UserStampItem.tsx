@@ -2,7 +2,7 @@ import { Language } from '@/mobx';
 import { notoSans } from '@/styles/fonts';
 import { StampStatus } from '@/types/Stamp';
 import { CounterUnit, IntervalUnit, UserStamp } from '@/types/UserStamp';
-import dateUtils from '@/utils/date.util';
+import DateUtils from '@/utils/date.util';
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
@@ -33,7 +33,7 @@ const UserStampItem: React.FC<Props> = ({
   const getGoalNumber = () => {
     const goalNumber = userStamp.goalNumber;
     if (userStamp.goalUnit == CounterUnit.Time) {
-      return dateUtils.getFormatHourMinByMinutes(Number(goalNumber));
+      return DateUtils.getFormatHourMinByMinutes(Number(goalNumber));
     }
     return goalNumber;
   };
@@ -88,7 +88,7 @@ const UserStampItem: React.FC<Props> = ({
           <div className={cls('flex items-center w-1/2')}>
             <LuGoal className={cls('text-primary')}/>
             <p className={cls('text-sm mx-1 px-1 bg-green-100 rounded-full')}>
-              {userStamp.goalInterval == IntervalUnit.Day && Language.$t.Home.Every}{Language.$t.Date[userStamp.goalInterval]}
+              {userStamp.goalInterval == IntervalUnit.Day && Language.$t.Statistics.Every}{Language.$t.Date[userStamp.goalInterval]}
             </p>
             <p>
               {getGoalNumber()}

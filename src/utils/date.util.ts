@@ -181,6 +181,15 @@ const getFormatMin = (date: Date) => {
   return `${minute}`;
 };
 
+const getFullDateString = (date: Date) => {
+  const month = date.getMonth();
+  const dateString = date.getDate();
+  const monthString = Language.$t.Months[month];
+  const day = date.getDay() == 0 ? 6 : date.getDay() - 1;
+  const dayString = Language.$t.Weeks[day];
+  return `${monthString} ${dateString}${Language.$t.Day}(${dayString})`;
+};
+
 const getFormatHourMinByMinutes = (minutes: number) => {
   try {
     const hour = Math.floor(minutes / 60);
@@ -201,7 +210,12 @@ const getFormatHourMinByMinutes = (minutes: number) => {
   }
 };
 
-const dateUtils = {
+const getFormatDuration = (start: Date, end: Date) => {
+  const minutes = calculateDuration(start, end);
+  return getFormatHourMinByMinutes(minutes);
+};
+
+const DateUtils = {
   weeksEn,
   weeksJp,
   weeksJp2,
@@ -239,7 +253,9 @@ const dateUtils = {
   getFormatHourMin,
   getFormatHour,
   getFormatMin,
+  getFullDateString,
   getFormatHourMinByMinutes,
+  getFormatDuration,
   isSaturday: (date: Date) => {
     return date.getDay() === 6;
   },
@@ -248,4 +264,4 @@ const dateUtils = {
   },
 };
 
-export default dateUtils;
+export default DateUtils;

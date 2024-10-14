@@ -48,8 +48,8 @@ const Profile: React.FC<Props> = () => {
       </div>
 
       {/* User Info */}
-      <div className={cls('px-4')}>
-        <p className={cls('text-lg font-semibold text-gray-800')}>
+      <div className={cls('flex flex-col items-center pt-1')}>
+        <p className={cls('text-xl font-semibold text-gray-800')}>
           { user && user.nickname}
         </p>
         <p className={cls('text-sm text-primary')}>
@@ -58,28 +58,22 @@ const Profile: React.FC<Props> = () => {
       </div>
 
       <div className={cls(
-        'relative',
+        'relative h-[220px] flex items-center justify-center',
         'whitespace-pre-wrap', // 개행 유지
         'text-xl tracking-widest text-center',
         Language.logoFont
       )}>
-        <ImQuotesLeft className='absolute top-4 left-8 text-red-600' />
-        <ImQuotesRight className='absolute bottom-2 right-8 text-blue-600' />
+        <ImQuotesLeft className='absolute top-4 left-0 lx:left-1 xl:left-3 text-red-600' />
+        <ImQuotesRight className='absolute bottom-2 right-0 lx:right-4 xl:right-6 text-blue-600' />
         { user && user.sentence }
       </div>
 
       <div className={cls('absolute p-4 bottom-4 flex flex-wrap gap-2 justify-evenly')}>
         { user && user.keyValues 
-          && user.keyValues.map((e, index) => {
-            const randomIndex = Math.floor(Math.random() * 11);
-            return (
-              <KeyValueHapp 
-                key={`keyValue ${e} ${index}`} 
-                value={e}
-                colorNum={randomIndex}
-              />
-            );
-          })}
+          && user.keyValues.map((e, index) => <KeyValueHapp 
+            key={`keyValue ${e} ${index}`} 
+            value={e}
+          />)}
       </div>
     </div>
   );

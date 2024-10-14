@@ -24,9 +24,9 @@ import { Book } from '@/types/Book';
 interface Props {
   type: StampType | undefined;
   openTime: boolean;
-  startTime: Date | undefined;
+  startTime: Date;
   endTime: Date | undefined;
-  setStartTime: Dispatch<SetStateAction<Date | undefined>>;
+  setStartTime: Dispatch<SetStateAction<Date>>;
   setEndTime: Dispatch<SetStateAction<Date | undefined>>;
   openWater: boolean;
   water: string;
@@ -41,9 +41,9 @@ interface Props {
   setMoney: Dispatch<SetStateAction<string>>;
   moneyUnit: MoneyUnit;
   setMoneyUnit: Dispatch<SetStateAction<MoneyUnit>>;
-  openMemo: boolean;
-  memo: string;
-  setMemo: Dispatch<SetStateAction<string>>;
+  openMemo?: boolean;
+  memo?: string;
+  setMemo?: Dispatch<SetStateAction<string>>;
   openUploadPhoto: boolean;
   uploadedImages: File[] | null;
   setUploadedImages: Dispatch<SetStateAction<File[] | null>>;
@@ -55,12 +55,12 @@ interface Props {
   openTags: boolean;
   tagList: Tag[];
   setTagList: Dispatch<SetStateAction<Tag[]>>;
-  openTodo: boolean;
-  todo: TodoStatus;
-  setTodo: Dispatch<SetStateAction<TodoStatus>>;
-  openCopy: boolean;
-  copy: Date[];
-  setCopy: Dispatch<SetStateAction<Date[]>>;
+  openTodo?: boolean;
+  todo?: TodoStatus;
+  setTodo?: Dispatch<SetStateAction<TodoStatus>>;
+  openCopy?: boolean;
+  copy?: Date[];
+  setCopy?: Dispatch<SetStateAction<Date[]>>;
 }
 
 const InputArea: React.FC<Props> = ({
@@ -144,16 +144,18 @@ const InputArea: React.FC<Props> = ({
         moneyUnit={moneyUnit}
         setMoneyUnit={setMoneyUnit}
       />
-      <TextareaHapp
-        className={`${openMemo ? 'block' : 'hidden'} text-lg`}
-        placeholder={Language.$t.Placeholder.Memo}
-        value={memo}
-        onChange={(e) => setMemo(e.target.value)}
-        autoHeight={true}
-        border={true}
-        marginBottom=""
-        textAreaClassName='border-dashed border-2 border-gray-100 min-h-[50px]'
-      />
+      {setMemo && (
+        <TextareaHapp
+          className={`${openMemo ? 'block' : 'hidden'} text-lg`}
+          placeholder={Language.$t.Placeholder.Memo}
+          value={memo}
+          onChange={(e) => setMemo(e.target.value)}
+          autoHeight={true}
+          border={true}
+          marginBottom=""
+          textAreaClassName='border-dashed border-2 border-gray-100 min-h-[50px]'
+        />
+      )}
       <FileUploadHapp
         className={`${openUploadPhoto ? 'block' : 'hidden'} border-gray-100`}
         uploadedImages={uploadedImages}
@@ -175,16 +177,20 @@ const InputArea: React.FC<Props> = ({
         tags={tagList}
         setTags={setTagList}
       />
-      <TodoHapp
-        className={`${openTodo ? 'block' : 'hidden'} border-gray-100`}
-        todo={todo}
-        setTodo={setTodo}
-      />
-      <DateTimesInput 
-        className={`${openCopy ? 'block' : 'hidden'} border-gray-100`}
-        times={copy}
-        setTimes={setCopy}
-      />
+      {setTodo && (
+        <TodoHapp
+          className={`${openTodo ? 'block' : 'hidden'} border-gray-100`}
+          todo={todo}
+          setTodo={setTodo}
+        />
+      )}
+      {setCopy && (
+        <DateTimesInput 
+          className={`${openCopy ? 'block' : 'hidden'} border-gray-100`}
+          times={copy}
+          setTimes={setCopy}
+        />
+      )}
     </div>
   );
 };
