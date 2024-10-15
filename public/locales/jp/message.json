@@ -50,11 +50,22 @@
     "PreparingService": "準備中のサービスです。"
   },
   "UploadIconImage": "イメージファイルをアップロードして下さい。",
-  "Variable1": {
+  "Variable": {
     "RequestFriend": "{value}に友達要請しましょうか?",
     "AcceptFriend": "{value}の友達要請を受け入れましょうか?",
     "DeleteFriend": "{value}さんを友達リストから削除しますか？?",
-    "MaxLength": "最大{value}つまで選択できます。"
+    "MaxItemSelect": "最大{value}つまで選択できます。",
+    "DuplicatedTag": "{value}はすでに追加されたタグです。",
+    "MaxItemAdd": "最大{value}つまで追加できます。"
+  },
+  "FormError": {
+    "Duplicated": "'{value}'は既に使用されています。",
+    "EqualNickname": "現在のニックネーム'{value}'と異なるニックネームを入力して下さい。",
+    "OverMaxLength": "最大{value}文字以下入力して下さい。",
+    "UnderMinLength": "最小{value}文字以上入力して下さい。",
+    "NotEmail": "Eメールの形式で入力して下さい。",
+    "PasswordsNotMatch": "パスワードが一致していません。",
+    "Default": "問題が発生しました。"
   },
   "HappyStamp": {
     "Message1": "四つ葉のクローバーの花言葉は`幸運`、",

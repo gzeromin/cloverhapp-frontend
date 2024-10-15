@@ -81,7 +81,7 @@ const _RequestModal: React.FC<RequestModalProps> = ({
         {friendUser && (
           <div className="p-4 flex flex-col justify-center">
             <p className="text-2xl font-normal">
-              {Language.$t.Variable1.RequestFriend.replace(
+              {Language.$t.Variable.RequestFriend.replace(
                 '{value}',
                 friendUser.nickname,
               )}

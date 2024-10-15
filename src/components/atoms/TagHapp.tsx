@@ -6,10 +6,12 @@ import { colorPalette } from './KeyValueHapp';
 import { GoTag } from 'react-icons/go';
 
 interface Props {
+  className?: string,
   name: string,
 }
 
-const TagHapp: React.FC<Props> = ({ 
+const TagHapp: React.FC<Props> = ({
+  className,
   name,
 }) => {
   const [color, setColor] = useState<{ bg: string; text: string }>({ bg: '#bfdbfe', text: '#1e3a8a' });
@@ -22,12 +24,14 @@ const TagHapp: React.FC<Props> = ({
     <div 
       className={cls(
         'flex items-center text-sm',
+        className
       )}
       style={{
         color: color.text,
       }}
     >
-      <GoTag />{name}
+      <GoTag />
+      {name}
     </div>
   );
 };

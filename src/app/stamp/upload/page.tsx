@@ -101,7 +101,7 @@ const Upload: React.FC = () => {
           Tags: tags,
         }),
       );
-      const res = await api.post('/stamp', formData, {
+      await api.post('/stamp', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

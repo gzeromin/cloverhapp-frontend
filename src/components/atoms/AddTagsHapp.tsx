@@ -5,15 +5,15 @@ import {
   SetStateAction,
   memo,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Language } from '@/mobx/index';
-import useSWRInfinite from 'swr/infinite';
-import { fetcher } from '@/utils/api.util';
-import { RiCloseLine, RiHashtag } from 'react-icons/ri';
+import { Dialog, Language } from '@/mobx/index';
+import { RiCloseLine } from 'react-icons/ri';
 import { Tag } from '@/types/Tag';
-import { BsArrowReturnLeft } from 'react-icons/bs';
+import TagHapp from './TagHapp';
+import { GoTag } from 'react-icons/go';
 
 interface AddTagsHappProps{
   className?: string;
@@ -28,60 +28,51 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
   setTags,
   testId,
 }) => {
-  const [observedIcon, setObservedIcon] = useState('');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [showTags, setShowTags] = useState(false);
   const [isComposing, setIsComposing] = useState(false);
-
-  const getKey = (pageIndex: number, previousPageData: Tag[]) => {
-    if (previousPageData && !previousPageData.length) return null;
-    return `/tag?page=${pageIndex}&&term=${searchTerm}`;
-  };
-
-  const {
-    data,
-    size: page,
-    setSize: setPage,
-  } = useSWRInfinite<Tag[]>(getKey, fetcher);
-
-  const tagList: Tag[] = data
-    ? ([] as Tag[])
-      .concat(...data)
-      .filter((d) => !tags.some((f) => f.name === d.name))
-    : [];
+  const tagContainerRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (!tagList || tagList.length === 0) return;
-    const id = tagList[tagList.length - 1].id;
-    if (id !== observedIcon) {
-      setObservedIcon(id);
-      observeElement(document.getElementById(id));
+    const index = tags.length - 1;
+    if (tagContainerRef.current && index > -1) {
+      const id = `${index}-${tags[index].name}`;
+      const newTagElement = document.getElementById(id);
+      newTagElement?.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
-  }, [tagList]);
+  }, [tags]);
+  
+  const addTag = async () => {
+    let error;
+    // 태그는 최대 10개까지 등록 가능
+    if (tags.length > 9) {
+      error = Language.$t.Variable.MaxItemAdd.replace('{value}', 10);
+    }
+    // 중복된 태그인지 체크
+    if (tags.some((f) => f.name === searchTerm)) {
+      error = Language.$t.Variable.DuplicatedTag.replace('{value}', searchTerm);
+    }
+    // 30자 이하인지 체크
+    if (searchTerm.length > 30) {
+      error = Language.$t.FormError.OverMaxLength
+        .replace('{value}', 30).replace('{field}', 'Tag');
+    }
 
-  const observeElement = (element: HTMLElement | null) => {
-    if (!element) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting === true) {
-          console.log('[addTags]마지막 포스트에 왔습니다.');
-          setPage(page + 1);
-          observer.unobserve(element);
+    // 에러 메세지 출력
+    if (error) {
+      const result = await Dialog.openDialog(
+        Dialog.WARNING,
+        error
+      );
+      if (result) {
+        if (inputRef.current) {
+          inputRef.current.focus();
         }
-      },
-      { threshold: 1 },
-    );
-    observer.observe(element);
-  };
+        return;
+      }
+    }
 
-  const addTag = (tag: Tag) => {
-    setTags((prev: Tag[]) => {
-      return [...prev, tag];
-    });
-    setSearchTerm('');
-  };
-
-  const addTagDirect = () => {
     const newTag = { name: searchTerm } as Tag;
     setTags((prev: Tag[]) => {
       return [...prev, newTag];
@@ -99,7 +90,7 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
     // IME 입력 중이 아니라면 Enter 키를 처리
     if (e.key === 'Enter' && !isComposing && searchTerm.trim()) {
       e.preventDefault(); // 폼 제출 등의 기본 동작 방지
-      addTagDirect();      // 태그 추가
+      addTag();      // 태그 추가
     }
   };
 
@@ -107,34 +98,49 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
     setIsComposing(false); // IME 입력 끝났다고 알림
     setSearchTerm(e.currentTarget.value); // 최종 입력 값을 searchTerm에 반영
   };
-  
 
   return (
     <div
       className={`relative flex items-end justify-between py-1 ${className}`}
     >
-      <div className={cls(
-        'flex flex-wrap gap-1',
-        'max-h-[90px] overflow-y-auto'
-      )}>
+      <div 
+        ref={tagContainerRef}
+        className={cls(
+          'flex flex-wrap gap-1 justify-start',
+          'max-h-[90px] overflow-y-auto'
+        )}
+        data-cy="tagContainer"
+      >
         {tags?.map((tag, index) => (
           <div
-            key={`tagList ${tag.id} ${index}`}
-            className="flex px-1 rounded-full bg-gray-100 items-center justify-between break-all group hover:bg-green-100 cursor-pointer"
+            key={`tagList ${index}-${tag.name}`}
+            id={`${index}-${tag.name}`}
+            className={cls(
+              'px-1 flex items-center justify-between', 
+              'rounded-full break-all group',
+              'hover:bg-green-100 cursor-pointer'
+            )}
             onClick={() => deleteTag(tag)}
+            data-cy={`tag-${index}`}
           >
-            <span className="text-sm mr-1">{tag.name}</span>
-            <RiCloseLine className="text-sm mr-1 group-hover:text-green-700 group-hover:font-extrabold" />
+            <TagHapp
+              name={tag.name} 
+            />
+            <RiCloseLine className={cls(
+              'text-sm text-gray-600',
+              'group-hover:text-green-700 group-hover:font-extrabold'
+            )} />
           </div>
         ))}
       </div>
       <div className="flex items-center justify-end gap-1">
-        <RiHashtag className={cls(
+        <GoTag className={cls(
           'text-gray-500 text-xl',
           { 'text-green-700': showTags }
         )} />
         <input
           type="text"
+          ref={inputRef}
           placeholder={Language.$t.Placeholder.AddTag}
           className="w-[150px] focus:outline-none rounded text-sm"
           value={searchTerm}
@@ -147,47 +153,6 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
           data-cy={testId}
         />
       </div>
-      {showTags && (
-        <div
-          className={cls(
-            'absolute right-0 bottom-0 translate-x-2 -translate-y-7',
-            'w-[170px] max-h-[150px] break-all overflow-y-auto rounded shadow-md',
-            'bg-white border-collapse',
-          )}
-        >
-          {searchTerm && tags.every((e) => e.name !== searchTerm) && (
-            <div
-              className={cls(
-                'flex items-center justify-between gap-1 p-1',
-                'hover:bg-green-50 cursor-pointer hover:font-bold'
-              )}
-              onMouseDown={(e) => {
-                e.preventDefault(); // Prevent the blur event
-                addTagDirect();
-              }}
-            >
-              {searchTerm}
-              <BsArrowReturnLeft />
-            </div>
-          )}
-          {tagList?.map((tag, index) => (
-            <div
-              key={`tags ${tag.id} ${index}`}
-              id={tag.id}
-              className={cls(
-                'flex items-center hover:bg-green-50 cursor-pointer',
-                'hover:font-bold gap-1 p-1 min-h-[35px]'
-              )}
-              onMouseDown={(e) => {
-                e.preventDefault(); // Prevent the blur event
-                addTag(tag);
-              }}
-            >
-              <span className="text-xs">{tag.name}</span>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

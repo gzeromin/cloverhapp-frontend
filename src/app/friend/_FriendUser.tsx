@@ -27,7 +27,7 @@ const FriendUser: React.FC<FriendUserProps> = ({
   const deleteFriend = async () => {
     const confirmResult = await Dialog.openDialog(
       Dialog.CONFIRM,
-      Language.$t.Variable1.DeleteFriend.replace('{value}', friend.alias),
+      Language.$t.Variable.DeleteFriend.replace('{value}', friend.alias),
     );
     if (!confirmResult) {
       return;

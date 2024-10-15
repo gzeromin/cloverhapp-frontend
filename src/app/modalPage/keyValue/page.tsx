@@ -36,7 +36,7 @@ const KeyValueList: React.FC<Props> = () => {
         // 이미 7개가 선택된 경우 경고 메시지 표시
         Dialog.openDialog(
           Dialog.WARNING,
-          Language.$t.Variable1.MaxLength.replace('{value}', 7),
+          Language.$t.Variable.MaxItemSelect.replace('{value}', 7),
         );
       }
     }

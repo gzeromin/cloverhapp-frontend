@@ -11,6 +11,7 @@ describe('Upload Page', () => {
     cy.get('[data-cy="descriptionTextarea"]').as('descriptionTextarea');
     cy.get('[data-cy="addTagsHapp"]').as('addTagsHapp');
     cy.get('[data-cy="uploadButton"]').as('uploadButton');
+    cy.get('[data-cy="commonDialog"]').as('commonDialog');
   });
 
   it('초기 화면 표시 확인', () => {
@@ -25,6 +26,7 @@ describe('Upload Page', () => {
     cy.get('@descriptionTextarea').should('be.visible');
     cy.get('@addTagsHapp').should('be.visible');
     cy.get('@uploadButton').should('exist');
+    cy.get('@commonDialog').should('have.class', 'hidden');
   });
 
   it('스탬프 등록 성공', () => {
@@ -66,9 +68,9 @@ describe('Upload Page', () => {
     cy.get('@uploadButton').click();
 
     // 성공 다이얼로그가 나타나는지 확인
-    cy.get('[data-cy="commonDialog"]').should('have.class', 'block');
+    cy.get('@commonDialog').should('have.class', 'block');
     cy.get('[data-cy="commonDialog-ok"]').click();
-    cy.get('[data-cy="commonDialog"]').should('have.class', 'hidden');
+    cy.get('@commonDialog').should('have.class', 'hidden');
 
     // 검증: 필드 초기화 여부
     cy.get('@stampNameInput').should('have.value', ''); // 이름 필드가 빈 값으로 초기화되는지 확인
@@ -85,8 +87,8 @@ describe('Upload Page', () => {
     cy.get('@uploadButton').click();
 
     // 에러 메시지가 표시되는지 확인
-    cy.get('[data-cy="commonDialog"]').should('have.class', 'block');
-    cy.get('[data-cy="commonDialog"]').should('contain', '이미지 파일을 업로드해주세요.');
+    cy.get('@commonDialog').should('have.class', 'block');
+    cy.get('@commonDialog').should('contain', '이미지 파일을 업로드해주세요.');
   });
 
   it('폼에러 출력 확인', () => {

@@ -69,7 +69,7 @@ const RequestToMe: React.FC<RequestToMeProps> = ({ notif, mutate }) => {
       id={notif.id}
     >
       <p className="text-md p-3">
-        {Language.$t.Variable1.AcceptFriend.replace(
+        {Language.$t.Variable.AcceptFriend.replace(
           '{value}',
           friendUser.nickname,
         )}
