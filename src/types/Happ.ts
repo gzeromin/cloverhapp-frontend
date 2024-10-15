@@ -31,7 +31,7 @@ export interface Happ {
 }
 
 export enum MoneyUnit {
-  Dollar = 'EN',
+  Dollar = 'En',
   Won = 'KR',
   Yen = 'JP',
 }

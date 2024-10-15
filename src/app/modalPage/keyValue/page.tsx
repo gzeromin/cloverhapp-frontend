@@ -70,7 +70,8 @@ const KeyValueList: React.FC<Props> = () => {
         <button 
           className={cls(
             'bg-primary-hover text-primary rounded-lg px-1 shadow-lg',
-            'hover:bg-primary hover:text-white'
+            'hover:bg-primary hover:text-white',
+            'transition-transform transform hover:scale-105'
           )}
           onClick={saveKeyValue}
         >
@@ -79,7 +80,8 @@ const KeyValueList: React.FC<Props> = () => {
         <button 
           className={cls(
             'bg-amber-100 text-amber-600 rounded-lg px-1 shadow-lg',
-            'hover:bg-amber-600 hover:text-white'
+            'hover:bg-amber-600 hover:text-white',
+            'transition-transform transform hover:scale-105'
           )}
           onClick={() => router.push('/user/keyValue')}
         >
@@ -91,14 +93,14 @@ const KeyValueList: React.FC<Props> = () => {
           <div 
             key={key}
             className={cls(
-              'flex bg-white transition-transform transform hover:scale-150 hover:z-20',
+              'flex bg-white transition-transform transform hover:scale-125 hover:z-20',
               'p-1 rounded-md shadow-md hover:p-2'
             )}
             onClick={() => handleCheckboxChange(key)}
           >
             <CheckHapp
               labelName={Language.$t.KeyValue[key]}
-              className={cls('flex grow justify-between')}
+              className={cls('flex flex-row-reverse grow justify-between px-1')}
               checked={selectedValues.includes(key)}
               onChange={() => handleCheckboxChange(key)}
               marginBottom='mb-0'

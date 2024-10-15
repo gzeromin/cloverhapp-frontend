@@ -53,7 +53,7 @@ const DialogHapp: React.FC = () => {
   };
 
   return (
-    <div className={Dialog.show ? 'block' : 'hidden'} test-id="commonDialog">
+    <div className={Dialog.show ? 'block' : 'hidden'} data-cy="commonDialog">
       <div className="fixed z-50 inset-0 w-full h-full flex flex-col items-center justify-center">
         <div className="fixed inset-0 w-full h-full bg-black opacity-50">
           {/* Background opacity */}
@@ -108,6 +108,7 @@ const DialogHapp: React.FC = () => {
               <button
                 className="m-1 border rounded-lg bg-primary py-1.5 px-3 text-white font-extralight text-lg"
                 onClick={() => Dialog.closeDialog(true)}
+                data-cy="commonDialog-ok"
               >
                 {Language.$t.Button.Ok}
               </button>

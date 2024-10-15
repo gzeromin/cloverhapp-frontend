@@ -14,7 +14,7 @@ const Profile: React.FC<Props> = () => {
   const { user } = useAuthState();
 
   return (
-    <div className='p-1' test-id="profilePage">
+    <div className='py-1' data-cy="profilePage">
       <Link 
         className={cls('flex w-full items-center justify-end h-[18px]')}
         href="/user/photo"
@@ -58,17 +58,19 @@ const Profile: React.FC<Props> = () => {
       </div>
 
       <div className={cls(
-        'relative h-[220px] flex items-center justify-center',
+        'relative flex items-center justify-center',
         'whitespace-pre-wrap', // 개행 유지
         'text-xl tracking-widest text-center',
         Language.logoFont
       )}>
-        <ImQuotesLeft className='absolute top-4 left-0 lx:left-1 xl:left-3 text-red-600' />
-        <ImQuotesRight className='absolute bottom-2 right-0 lx:right-4 xl:right-6 text-blue-600' />
-        { user && user.sentence }
+        <ImQuotesLeft className='absolute -top-4 left-0 lx:left-1 xl:left-3 text-red-600' />
+        <ImQuotesRight className='absolute -bottom-4 right-0 lx:right-4 xl:right-6 text-blue-600' />
+        <div className={cls('h-[220px] overflow-y-auto')}>
+          { user && user.sentence }
+        </div>
       </div>
 
-      <div className={cls('absolute p-4 bottom-4 flex flex-wrap gap-2 justify-evenly')}>
+      <div className={cls('absolute p-4 bottom-0 flex flex-wrap gap-2 justify-evenly')}>
         { user && user.keyValues 
           && user.keyValues.map((e, index) => <KeyValueHapp 
             key={`keyValue ${e} ${index}`} 

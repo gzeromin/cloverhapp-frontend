@@ -19,12 +19,14 @@ interface AddTagsHappProps{
   className?: string;
   tags: Tag[];
   setTags: Dispatch<SetStateAction<Tag[]>>;
+  testId?: string;
 }
 
 const AddTagsHapp: React.FC<AddTagsHappProps> = ({
   className,
   tags,
   setTags,
+  testId,
 }) => {
   const [observedIcon, setObservedIcon] = useState('');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -142,6 +144,7 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
           onKeyDown={handleKeyDown}
           onCompositionStart={() => setIsComposing(true)}   // IME 입력 시작
           onCompositionEnd={handleCompositionEnd}           // IME 입력 완료 시 호출
+          data-cy={testId}
         />
       </div>
       {showTags && (

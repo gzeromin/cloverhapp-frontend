@@ -50,7 +50,7 @@ const WaterHapp: React.FC<WaterHappProps> = ({
             { 'cursor-not-allowed': disable },
             inputClassName,
           )}
-          test-id={testId}
+          data-cy={testId}
         />
         <div className={cls('text-end text-base w-1/4', Language.logoFont)}>
           {inputValue/10}{Language.$t.Input.Sip}, {inputValue} ml {/* 선택된 물의 양을 표시 */}

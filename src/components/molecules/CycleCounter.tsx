@@ -145,7 +145,7 @@ const CycleCounter: React.FC<Props> = ({
   return (
     <div
       className={cls('flex items-center justify-between')}
-      test-id={testId}
+      data-cy={testId}
     >
       <CheckHapp
         className={cls('mx-3')}

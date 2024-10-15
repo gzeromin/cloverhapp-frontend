@@ -84,7 +84,7 @@ const KeyValue: React.FC<Props> = () => {
       <TextareaHapp
         rows={7}
         className={'h-[220px] overflow-y-auto rounded-md w-11/12 border-2 border-amber-600'}
-        placeholder={''}
+        placeholder={Language.$t.Placeholder.Sentence}
         value={sentence}
         onChange={(e) => setSentence(e.target.value)}
         autoHeight={true}

@@ -5,11 +5,11 @@ describe('로그인 페이지', () => {
     cy.visit('/login');
 
     //given
-    cy.get('[test-id=emailInput]').as('emailInput').should('exist');
-    cy.get('[test-id=passwordInput]').as('passwordInput').should('exist');
-    cy.get('[test-id=loginButton]').as('loginButton').should('exist');
-    cy.get('[test-id=signupLink]').as('signupLink').should('exist');
-    cy.get('[test-id=localeSelect]').as('localeSelect').should('exist');
+    cy.get('[data-cy=emailInput]').as('emailInput').should('exist');
+    cy.get('[data-cy=passwordInput]').as('passwordInput').should('exist');
+    cy.get('[data-cy=loginButton]').as('loginButton').should('exist');
+    cy.get('[data-cy=signupLink]').as('signupLink').should('exist');
+    cy.get('[data-cy=localeSelect]').as('localeSelect').should('exist');
     // 처음 표시 언어 확인하기(한국어)
     cy.get('@emailInput').parent().parent().find('label').should('have.text','이메일');
     // 영어로 변경 확인
@@ -31,10 +31,10 @@ describe('로그인 페이지', () => {
     cy.visit('/login');
 
     // given
-    cy.get('[test-id=localeSelect]').as('localeSelect');
-    cy.get('[test-id=emailInput]').as('emailInput');
-    cy.get('[test-id=passwordInput]').as('passwordInput');
-    cy.get('[test-id=loginButton]').as('loginButton');
+    cy.get('[data-cy=localeSelect]').as('localeSelect');
+    cy.get('[data-cy=emailInput]').as('emailInput');
+    cy.get('[data-cy=passwordInput]').as('passwordInput');
+    cy.get('[data-cy=loginButton]').as('loginButton');
     // 일어로 변경
     cy.get('@localeSelect').click();
     cy.get('@localeSelect').find('li').eq(2).click();
@@ -62,10 +62,10 @@ describe('로그인 페이지', () => {
     cy.visit('/login');
 
     // given
-    cy.get('[test-id=emailInput]').as('emailInput');
-    cy.get('[test-id=passwordInput]').as('passwordInput');
-    cy.get('[test-id=loginButton]').as('loginButton');
-    cy.get('[test-id=commonDialog]').as('commonDialog').should('exist');
+    cy.get('[data-cy=emailInput]').as('emailInput');
+    cy.get('[data-cy=passwordInput]').as('passwordInput');
+    cy.get('[data-cy=loginButton]').as('loginButton');
+    cy.get('[data-cy=commonDialog]').as('commonDialog').should('exist');
     // when 잘못된 로그인 정보 입력
     cy.get('@emailInput').type('aaa@aaa.aaa');
     cy.get('@passwordInput').type('aaabbb');
@@ -88,10 +88,10 @@ describe('로그인 페이지', () => {
     cy.visit('/login');
 
     // given
-    cy.get('[test-id=emailInput]').as('emailInput');
-    cy.get('[test-id=passwordInput]').as('passwordInput');
-    cy.get('[test-id=loginButton]').as('loginButton');
-    cy.get('[test-id=navBarLogo]').as('navBarLogo').should('exist');
+    cy.get('[data-cy=emailInput]').as('emailInput');
+    cy.get('[data-cy=passwordInput]').as('passwordInput');
+    cy.get('[data-cy=loginButton]').as('loginButton');
+    cy.get('[data-cy=navBarLogo]').as('navBarLogo').should('exist');
     // when 영어 사용자 로그인 정보 입력
     cy.get('@emailInput').type('aaa@aaa.aaa');
     cy.get('@passwordInput').type('aaaaaa');
@@ -121,7 +121,7 @@ describe('로그인 페이지', () => {
     cy.visit('/login');
 
     // given
-    cy.get('[test-id=signupLink]').as('signupLink').should('exist');
+    cy.get('[data-cy=signupLink]').as('signupLink').should('exist');
 
     // when
     cy.get('@signupLink').click();

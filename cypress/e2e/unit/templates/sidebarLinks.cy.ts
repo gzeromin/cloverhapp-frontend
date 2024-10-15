@@ -9,32 +9,31 @@ describe('사이드바 링크 컴포넌트', () => {
   });
 
   it('로그인 했을 때, 사이드바 링크 표시', () => {
-    cy.get('[test-id="statisticsLink"]').should('exist');
-    cy.get('[test-id="stampLink"]').should('exist');
-    cy.get('[test-id="profileLink"]').should('exist');
-  });
+    cy.get('[data-cy="profileLink"]').as('profileLink').should('exist');
+    cy.get('[data-cy="stampLink"]').as('stampLink').should('exist');
+    cy.get('[data-cy="statisticsLink"]').as('statisticsLink').should('exist');
 
-  it('탭 선택 스타일 변화 확인', () => {
-    // 테스트 대상(프로필 버튼)
-    cy.get('[test-id="profileLink"]').as('profileLink');
-    // 프로필 버튼 탭 확인
-    cy.get('@profileLink').should('have.class', 'bg-gray-50');
-    // 프로필 버튼 클릭
-    cy.get('@profileLink').click();
-    // 프로필 버튼 탭 스타일 변화 확인
+    // 초기 선택된 탭 CSS 확인
     cy.get('@profileLink').should('have.class', 'bg-gray-100');
+    cy.get('@stampLink').should('have.class', 'bg-gray-50');
+    cy.get('@statisticsLink').should('have.class', 'bg-gray-50');
   });
 
   it('페이지 변경 확인', () => {
-    // 프로필 버튼 클릭
-    cy.get('[test-id="profileLink"]').click();
-    // 프로필 메뉴 표시 확인
-    cy.url().should('include', '/profile');
-
-    // 스탬프 버튼 클릭
-    cy.get('[test-id="stampLink"]').click();
-    // 스탬프 메뉴 표시 확인
+    // GIVEN
+    // 테스트 대상(스탬프 링크)
+    cy.get('[data-cy="stampLink"]').as('stampLink');
+    
+    // WHEN
+    // 스탬프 링크 클릭
+    cy.get('@stampLink').click({ force: true });
+    
+    // THEN
+    // 변경 후 선택된 탭 CSS 확인
     cy.url().should('include', '/stamp');
+    cy.get('[data-cy="profileLink"]').should('have.class', 'bg-gray-50');
+    cy.get('@stampLink').should('have.class', 'bg-gray-100');
+    cy.get('[data-cy="statisticsLink"]').should('have.class', 'bg-gray-50');
   });
 
 });

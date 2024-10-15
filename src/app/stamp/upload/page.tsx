@@ -54,11 +54,12 @@ const typeOptions = Object.values(StampType)
 const Upload: React.FC = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [droplet, setDroplet] = useState('');
+  const [droplet, setDroplet] = useState('0');
   const [type, setType] = useState<StampType>(StampType.HAPPY);
   const [stampStatus, setStampStatus] = useState(StampStatus.PRIVATE);
   const [notForSale, setNotForSale] = useState<boolean>(false);
   const [tags, setTags] = useState<Tag[]>([]);
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
 
   const [errors, setErrors] = useState<{
     name?: string;
@@ -67,7 +68,6 @@ const Upload: React.FC = () => {
   }>({});
 
   const router = useRouter();
-  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -94,14 +94,14 @@ const Upload: React.FC = () => {
         JSON.stringify({ 
           name, 
           description, 
-          droplet, 
+          droplet: Number(droplet), 
           type,
           notForSale,
           status: stampStatus,
           Tags: tags,
         }),
       );
-      await api.post('/stamp', formData, {
+      const res = await api.post('/stamp', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -113,7 +113,7 @@ const Upload: React.FC = () => {
       if (dialogReulst) {
         setName('');
         setDescription('');
-        setDroplet('');
+        setDroplet('0');
         setUploadedImage(null);
         setTags([]);
         setNotForSale(false);
@@ -132,7 +132,7 @@ const Upload: React.FC = () => {
     )}>
       <IoArrowUndoCircleOutline
         className="absolute top-[30px] left-[30px] text-6xl text-primary hover:text-primary-hover cursor-pointer"
-        onClick={() => router.push('/stamp')}
+        onClick={() => router.back()}
       />
       <div className={cls('flex items-center justify-center gap-2 lg:gap-6 lx:gap-8')}>
         {/* Drop Zone */}
@@ -141,6 +141,7 @@ const Upload: React.FC = () => {
           className={`border-2 border-dashed p-8 text-center cursor-pointer ${
             isDragActive ? 'border-happ-focus' : 'border-gray-300'
           }`}
+          data-cy="dropZone"
         >
           <input {...getInputProps()} />
           {uploadedImage ? (
@@ -154,7 +155,7 @@ const Upload: React.FC = () => {
           ) : (
             <p className="flex flex-col items-center justify-center w-[180px] h-[180px] text-gray-500">
               <GrAdd size="50px" />
-              Drag & drop or click to upload an image
+              {Language.$t.Placeholder.FileUpload}
             </p>
           )}
         </div>
@@ -170,31 +171,36 @@ const Upload: React.FC = () => {
             onChange={(e) => setName(e.target.value)}
             error={errors.name}
             marginBottom="mb-1"
+            testId='stampNameInput'
           />
-          <InputHapp
-            className={cls('flex items-center gap-1')}
-            labelName={Language.$t.Input.Droplet}
-            labelClassName={cls('text-xs w-1/3')}
-            placeholder={Language.$t.Placeholder.Droplet}
-            type="number"
-            value={droplet}
-            onChange={(e) => setDroplet(e.target.value)}
-            error={errors.droplet}
-            marginBottom="mb-1"
-            min="0"
-          />
-          <CheckHapp
-            className={cls(
-              'flex items-center',
-              'rounded-md'
-            )}
-            labelName={Language.$t.Check.NotForSale}
-            labelClassName={cls('text-xs w-1/3')}
-            checked={notForSale}
-            onChange={(e) => setNotForSale(e.target.checked)}
-            grow={true}
-            marginBottom="mb-0"
-          />
+          <div className={cls('flex items-center gap-1')}>
+            <CheckHapp
+              className={cls(
+                'w-1/2 flex items-center',
+              )}
+              labelName={Language.$t.Check.NotForSale}
+              labelClassName={cls('text-xs w-2/3 mr-1')}
+              checked={notForSale}
+              onChange={(e) => setNotForSale(e.target.checked)}
+              grow={false}
+              marginBottom="mb-0"
+              testId='notForSaleCheck'
+            />
+            <InputHapp
+              className={cls('w-1/2 flex items-center gap-1')}
+              labelName={Language.$t.Input.Droplet}
+              labelClassName={cls('text-xs w-3/4')}
+              placeholder={Language.$t.Placeholder.Droplet}
+              type="number"
+              value={droplet}
+              onChange={(e) => setDroplet(e.target.value)}
+              error={errors.droplet}
+              marginBottom="mb-1"
+              min="0"
+              disable={notForSale}
+              testId='dropletInput'
+            />
+          </div>
           <SelectHapp
             className={cls(
               'flex items-center',
@@ -219,6 +225,7 @@ const Upload: React.FC = () => {
             options={statusOptions}
             selected={stampStatus}
             onSelected={setStampStatus}
+            testId="statusSelect"
             border={true}
             dark={true}
           />
@@ -230,6 +237,7 @@ const Upload: React.FC = () => {
             onChange={(e) => setDescription(e.target.value)}
             error={errors.description}
             marginBottom="mb-1"
+            testId='descriptionTextarea'
           />
         </div>
       </div>
@@ -237,6 +245,7 @@ const Upload: React.FC = () => {
         className={cls('w-2/3')}
         tags={tags}
         setTags={setTags}
+        testId='addTagsHapp'
       />
       <button
         className={cls(
@@ -246,6 +255,7 @@ const Upload: React.FC = () => {
           'hover:bg-primary-hover hover:text-primary rounded'
         )}
         onClick={onSubmit}
+        data-cy='uploadButton'
       >
         {Language.$t.Button.Upload}
       </button>

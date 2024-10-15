@@ -33,21 +33,21 @@ const SideBarLinks: React.FC = () => {
       <Link
         className={tabStyle(Menu.Profile)}
         href={`/main/${userId}/profile`}
-        test-id="profileLink"
+        data-cy="profileLink"
       >
         {Language.$t.SideBar.Profile}
       </Link>
       <Link
         className={tabStyle(Menu.Stamp)}
         href={`/main/${userId}/stamp`}
-        test-id="stampLink"
+        data-cy="stampLink"
       >
         {Language.$t.SideBar.Stamp}
       </Link>
       <Link
         className={tabStyle(Menu.Statistics)}
         href={`/main/${userId}/statistics`}
-        test-id="statisticsLink"
+        data-cy="statisticsLink"
       >
         {Language.$t.SideBar.Statistics}
       </Link>

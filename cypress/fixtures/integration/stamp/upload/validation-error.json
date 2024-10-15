@@ -1,0 +1,14 @@
+{
+  "error": "formError",
+  "message": [
+      {
+          "field": "name",
+          "message": "최소 1자 이상 입력 바랍니다."
+      },
+      {
+          "field": "description",
+          "message": "최대 200자 이하 입력 바랍니다."
+      }
+  ],
+  "statusCode": 1000
+}

@@ -34,7 +34,6 @@ const Login = () => {
     try {
       const locale = Language.type;
       const res = await api.post('/auth/signin', { email, password, locale });
-      console.log(res);
       const loginUser = res.data?.user;
       dispatch(AuthActionEnum.LOGIN, loginUser);
     } catch (error: any) {
@@ -76,7 +75,7 @@ const Login = () => {
           <button
             className="w-full py-3 mt-5 mb-2 text-s tracking-wider font-bold text-white uppercase
            bg-primary border hover:bg-primary-hover hover:text-primary rounded"
-            test-id="loginButton"
+            data-cy="loginButton"
           >
             {Language.$t.Button.Signin}
           </button>
@@ -85,7 +84,7 @@ const Login = () => {
             <Link
               className="ml-1 font-bold hover:text-blue-500 uppercase"
               href="/register"
-              test-id="signupLink"
+              data-cy="signupLink"
             >
               {Language.$t.Button.Signup}
             </Link>

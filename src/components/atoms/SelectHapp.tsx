@@ -84,7 +84,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
       }, 
       className
       )}
-      test-id={testId}
+      data-cy={testId}
     >
       {labelName && (
         <label className={cls(

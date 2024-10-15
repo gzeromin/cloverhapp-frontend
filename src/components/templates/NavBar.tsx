@@ -63,7 +63,7 @@ const NavBar: React.FC = () => {
               'text-2xl font-thin text-white tracking-normal',
               Language.logoFont
             )}
-            test-id='navBarLogo'
+            data-cy='navBarLogo'
           >
             {Language.$t.Logo}
           </p>

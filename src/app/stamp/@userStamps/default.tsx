@@ -7,20 +7,16 @@ import { Language } from '@/mobx';
 import UserStampItem from '@/components/organisms/stamp/UserStampItem';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useAuthState } from '@/context/auth';
-import api from '@/utils/api.util';
 
 const UserStamps: React.FC = () => {
-  const { user } = useAuthState();
+  const { userStamps } = useAuthState();
   const [displayStamps, setDisplayStamps] = useState<UserStamp[]>([]);
   const [hiddenStamps, setHiddenStamps] = useState<UserStamp[]>([]);
   
   useEffect(() => {
-    api.get('/user-stamp').then((res) => {
-      const userStamps = res.data;
-      setDisplayStamps(userStamps.filter(e => e.isDisplay));
-      setHiddenStamps(userStamps.filter(e => !e.isDisplay));
-    });
-  }, [user]);
+    setDisplayStamps(userStamps.filter(e => e.isDisplay));
+    setHiddenStamps(userStamps.filter(e => !e.isDisplay));
+  }, [userStamps]);
 
   return (
     <div className={cls(

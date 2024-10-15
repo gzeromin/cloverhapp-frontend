@@ -1,15 +1,25 @@
 {
   "user": {
-    "id": "8c15b63f-8854-48b6-9aba-569cd0ce6b2c",
-    "createdAt": "2024-09-19T12:23:43.436Z",
-    "updatedAt": "2024-10-05T23:24:12.634Z",
+    "id": "914d16f6-ed67-4eaa-9435-a2b2d107dd7f",
+    "createdAt": "2024-10-10T09:29:15.610Z",
+    "updatedAt": "2024-10-10T20:41:43.720Z",
     "nickname": "aaa",
     "email": "aaa@aaa.aaa",
-    "photoUrl": null,
+    "photoUrl": "https://elasticbeanstalk-us-east-1-149536466661.s3.us-east-1.amazonaws.com/cloverhapp/user/93a521ad5fdc743c2b0e5f039ce0d67f-1728552869437-766209541.png",
     "role": 99,
-    "locale": "EN",
-    "droplet": 1000,
+    "locale": "KR",
+    "droplet": 1100,
+    "admin": false,
+    "keyValues": [
+        "Connection",
+        "Patriotism",
+        "Creativity",
+        "Enjoyment",
+        "Goodwill",
+        "Health",
+        "Success"
+    ],
+    "sentence": "\n즐겁게 사람들과 어울리며\n건강한 삶을 영위하고,\n나의 창의성을 발휘하여\n성공해서 이웃과 국가에\n좋은 영향력을 끼치자.",
     "notifNum": 0
   }
 }
-

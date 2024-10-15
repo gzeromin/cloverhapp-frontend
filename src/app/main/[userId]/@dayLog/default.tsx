@@ -49,7 +49,7 @@ const DayLog: React.FC<DayLogProps> = ({
   };
 
   return (
-    <div className={cls(notoSans.className, className)}>
+    <div className={cls(notoSans.className, className)} data-cy="dayLogPage">
       <div className="flex h-[90vh] pb-14 flex-col overflow-y-auto">
         {Object.entries(happs).map(
           ([monthDate, happSection]: [string, Happ[]]) => {

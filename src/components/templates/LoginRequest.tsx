@@ -16,7 +16,7 @@ const LoginRequest: React.FC<Props> = ({ testId }) => {
       className={cls('flex flex-col h-full items-center justify-center relative',
         'bg-gray-200'
       )}
-      test-id={testId}
+      data-cy={testId}
     >
       <RiLock2Line className={cls('text-5xl text-green-500')}/>
       <Link 
@@ -28,7 +28,7 @@ const LoginRequest: React.FC<Props> = ({ testId }) => {
             'decoration-green-500 underline-offset-2 decoration-2 decoration-dashed',
           )}
         href="/login"
-        test-id="loginLink"
+        data-cy="loginLink"
       >
         {Language.$t.SideBarMessage.RequestLogin}
       </Link>

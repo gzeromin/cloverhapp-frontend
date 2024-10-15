@@ -103,7 +103,7 @@ const MoneyHapp: React.FC<MoneyHappProps> = ({
             value={inputValue}
             disabled={disable}
             onChange={handleChange}
-            test-id={testId}
+            data-cy={testId}
           />
           {error && (
             <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>

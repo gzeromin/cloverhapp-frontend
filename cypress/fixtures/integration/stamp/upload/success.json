@@ -1,0 +1,22 @@
+{
+  "name": "테스트",
+  "description": "This is a test description.",
+  "url": "https://elasticbeanstalk-us-east-1-149536466661.s3.us-east-1.amazonaws.com/cloverhapp/stamp/test-1728916131314-555839967.png",
+  "droplet": "0",
+  "notForSale": true,
+  "type": "Happy",
+  "status": "Friend",
+  "userId": "9cd5ede7-c167-4f0b-9512-ab1fd73a46ed",
+  "Tags": [
+      {
+          "id": "fb876768-506d-46db-854d-e3151d6008ef",
+          "createdAt": "2024-10-14T14:24:57.147Z",
+          "updatedAt": "2024-10-14T14:27:51.809Z",
+          "name": "test Tag",
+          "enrolledCount": 4
+      }
+  ],
+  "id": "9cf3b0fc-fae7-4938-b8a2-9f9d77437031",
+  "createdAt": "2024-10-14T14:28:52.843Z",
+  "updatedAt": "2024-10-14T14:28:52.843Z"
+}

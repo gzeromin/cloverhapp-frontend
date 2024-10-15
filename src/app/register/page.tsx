@@ -58,7 +58,7 @@ const Register = () => {
     <div className="flex flex-col items-center justify-center h-screen">
       <p 
         className={`text-4xl mb-3 ${Language.logoFont}`}
-        test-id="registLogo"
+        data-cy="registLogo"
       >
         {Language.$t.Logo}
       </p>
@@ -101,7 +101,7 @@ const Register = () => {
           <button
             className="w-full py-3 mt-5 mb-2 text-s tracking-wider font-bold text-white uppercase
            bg-primary border hover:bg-primary-hover hover:text-primary rounded"
-            test-id="signupButton"
+            data-cy="signupButton"
           >
             {Language.$t.Button.Signup}
           </button>
@@ -110,7 +110,7 @@ const Register = () => {
             <Link
               className="ml-1 font-bold hover:text-blue-500 uppercase"
               href="/login"
-              test-id="loginLink"
+              data-cy="loginLink"
             >
               {Language.$t.Button.Signin}
             </Link>

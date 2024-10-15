@@ -57,7 +57,7 @@ const CheckHapp: React.FC<CheckHappProps> = ({
           checked={checked}
           disabled={disable}
           onChange={onChange}
-          test-id={testId}
+          data-cy={testId}
         />
         {error && (
           <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>

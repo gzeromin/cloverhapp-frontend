@@ -16,7 +16,8 @@
     "SearchFriend": "search friend: search by nickname or email",
     "AddFriend": "add friends, please.",
     "AddTag": "add tags, please.",
-    "FileUpload": "Drag & drop or click to upload an image"
+    "FileUpload": "Drag & drop or click to upload an image",
+    "Sentence": "Write a sentence that best describes yourself."
   },
   "Success": {
     "ChangePassword": "Password was successfully changed.",
