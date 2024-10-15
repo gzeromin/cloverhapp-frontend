@@ -15,7 +15,7 @@ interface InputHappProps {
   disable?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  testId?: string;
+  dataCy?: string;
   min?: string;
   max?: string;
   grow?: boolean;
@@ -35,7 +35,7 @@ const InputHapp: React.FC<InputHappProps> = ({
   disable = false,
   value = '',
   onChange,
-  testId,
+  dataCy,
   min,
   max,
   grow = true,
@@ -79,7 +79,7 @@ const InputHapp: React.FC<InputHappProps> = ({
           disabled={disable}
           onChange={onChange}
           step={step}
-          data-cy={testId}
+          data-cy={dataCy}
         />
         {error && (
           <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>

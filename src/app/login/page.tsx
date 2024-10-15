@@ -61,7 +61,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={errors.email}
-            testId='emailInput'
+            dataCy='emailInput'
           />
           <InputHapp
             labelName={Language.$t.Input.Password}
@@ -70,7 +70,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             error={errors.password}
-            testId='passwordInput'
+            dataCy='passwordInput'
           />
           <button
             className="w-full py-3 mt-5 mb-2 text-s tracking-wider font-bold text-white uppercase

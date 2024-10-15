@@ -107,4 +107,14 @@ describe('회원가입 페이지', () => {
     cy.get('@signupButton').click();
   });
   
+  it('로그인 페이지로 이동', () => {
+    // given
+    cy.get('[data-cy=loginLink]').as('loginLink').should('exist');
+
+    // when
+    cy.get('@loginLink').click();
+
+    // then
+    cy.url().should('include', '/login');
+  });
 });

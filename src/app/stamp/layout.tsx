@@ -19,7 +19,7 @@ export default function DashboardLayout(props: {
           {/*  로그인 안했을 때 */}
           { !user && (
             <div className="w-1/3">
-              <LoginRequest testId="loginRequestComp"/> 
+              <LoginRequest dataCy="stamp-loginRequestComp"/> 
             </div>
           )}
           {/* 로그인 했을 때 */}

@@ -31,7 +31,7 @@ interface SelectHappProps {
   border?: boolean;
   labelName?: string;
   labelClassName?: string;
-  testId?: string;
+  dataCy?: string;
   wide?: boolean;
   disable?: boolean;
   grow?: boolean;
@@ -46,7 +46,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
   border = false,
   labelName,
   labelClassName,
-  testId,
+  dataCy,
   wide = false,
   disable,
   grow = true,
@@ -84,7 +84,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
       }, 
       className
       )}
-      data-cy={testId}
+      data-cy={dataCy}
     >
       {labelName && (
         <label className={cls(

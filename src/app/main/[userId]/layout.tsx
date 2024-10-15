@@ -39,7 +39,7 @@ const DashboardLayout = observer((props: {
                     </div>
                     <div className="hidden w-3/12 ml-1 lg:block" data-cy='sideBarSection'>
                       {/*  로그인 안했을 때 */}
-                      { !user && <LoginRequest testId="loginRequestComp"/> }
+                      { !user && <LoginRequest dataCy="web-loginRequestComp"/> }
                       {/* 로그인 했을 때 */}
                       { user &&
                         <div data-cy="SideBarMenu">
@@ -64,7 +64,7 @@ const DashboardLayout = observer((props: {
               data-cy='dayLogSection'
             >
               {/*  로그인 안했을 때 */}
-              { !user && <LoginRequest testId="loginRequestComp"/> }
+              { !user && <LoginRequest dataCy="mobile-loginRequestComp"/> }
               {/* 로그인 했을 때 */}
               { user && (
                 props.dayLog

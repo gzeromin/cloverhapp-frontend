@@ -7,16 +7,16 @@ import cls from 'classnames';
 import Link from 'next/link';
 
 interface Props {
-  testId: string;
+  dataCy: string;
 }
 
-const LoginRequest: React.FC<Props> = ({ testId }) => {
+const LoginRequest: React.FC<Props> = ({ dataCy }) => {
   return (
     <div 
       className={cls('flex flex-col h-full items-center justify-center relative',
         'bg-gray-200'
       )}
-      data-cy={testId}
+      data-cy={dataCy}
     >
       <RiLock2Line className={cls('text-5xl text-green-500')}/>
       <Link 
@@ -28,7 +28,6 @@ const LoginRequest: React.FC<Props> = ({ testId }) => {
             'decoration-green-500 underline-offset-2 decoration-2 decoration-dashed',
           )}
         href="/login"
-        data-cy="loginLink"
       >
         {Language.$t.SideBarMessage.RequestLogin}
       </Link>

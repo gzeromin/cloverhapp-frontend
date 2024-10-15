@@ -12,7 +12,7 @@ interface CheckHappProps {
   disable?: boolean;
   checked?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  testId?: string;
+  dataCy?: string;
   grow?: boolean;
 }
 
@@ -26,7 +26,7 @@ const CheckHapp: React.FC<CheckHappProps> = ({
   disable = false,
   checked,
   onChange,
-  testId,
+  dataCy,
   grow = true,
 }) => {
   return (
@@ -57,7 +57,7 @@ const CheckHapp: React.FC<CheckHappProps> = ({
           checked={checked}
           disabled={disable}
           onChange={onChange}
-          data-cy={testId}
+          data-cy={dataCy}
         />
         {error && (
           <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>

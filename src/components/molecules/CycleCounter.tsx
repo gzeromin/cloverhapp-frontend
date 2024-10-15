@@ -10,7 +10,7 @@ import DateUtils from '@/utils/date.util';
 import { StampType } from '@/types/Stamp';
 
 interface Props {
-  testId?: string;
+  dataCy?: string;
   type: StampType | undefined;
   existGoal: boolean;
   setExistGoal: Dispatch<SetStateAction<boolean>>;
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const CycleCounter: React.FC<Props> = ({
-  testId,
+  dataCy,
   type,
   existGoal,
   setExistGoal,
@@ -145,7 +145,7 @@ const CycleCounter: React.FC<Props> = ({
   return (
     <div
       className={cls('flex items-center justify-between')}
-      data-cy={testId}
+      data-cy={dataCy}
     >
       <CheckHapp
         className={cls('mx-3')}
@@ -217,7 +217,7 @@ const CycleCounter: React.FC<Props> = ({
         options={options}
         selected={goalUnit}
         onSelected={setGoalUnit}
-        testId="typeSelect"
+        dataCy="typeSelect"
         border={true}
         dark={true}
         wide={true}

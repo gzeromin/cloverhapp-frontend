@@ -171,7 +171,7 @@ const Upload: React.FC = () => {
             onChange={(e) => setName(e.target.value)}
             error={errors.name}
             marginBottom="mb-1"
-            testId='stampNameInput'
+            dataCy='stampNameInput'
           />
           <div className={cls('flex items-center gap-1')}>
             <CheckHapp
@@ -184,7 +184,7 @@ const Upload: React.FC = () => {
               onChange={(e) => setNotForSale(e.target.checked)}
               grow={false}
               marginBottom="mb-0"
-              testId='notForSaleCheck'
+              dataCy='notForSaleCheck'
             />
             <InputHapp
               className={cls('w-1/2 flex items-center gap-1')}
@@ -198,7 +198,7 @@ const Upload: React.FC = () => {
               marginBottom="mb-1"
               min="0"
               disable={notForSale}
-              testId='dropletInput'
+              dataCy='dropletInput'
             />
           </div>
           <SelectHapp
@@ -211,7 +211,7 @@ const Upload: React.FC = () => {
             options={typeOptions}
             selected={type}
             onSelected={setType}
-            testId="typeSelect"
+            dataCy="typeSelect"
             border={true}
             dark={true}
           />
@@ -225,7 +225,7 @@ const Upload: React.FC = () => {
             options={statusOptions}
             selected={stampStatus}
             onSelected={setStampStatus}
-            testId="statusSelect"
+            dataCy="statusSelect"
             border={true}
             dark={true}
           />
@@ -237,7 +237,7 @@ const Upload: React.FC = () => {
             onChange={(e) => setDescription(e.target.value)}
             error={errors.description}
             marginBottom="mb-1"
-            testId='descriptionTextarea'
+            dataCy='descriptionTextarea'
           />
         </div>
       </div>
@@ -245,7 +245,7 @@ const Upload: React.FC = () => {
         className={cls('w-2/3')}
         tags={tags}
         setTags={setTags}
-        testId='addTagsHapp'
+        dataCy='addTagsHapp'
       />
       <button
         className={cls(

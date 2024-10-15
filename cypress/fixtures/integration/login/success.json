@@ -5,9 +5,9 @@
     "updatedAt": "2024-10-10T20:41:43.720Z",
     "nickname": "aaa",
     "email": "aaa@aaa.aaa",
-    "photoUrl": "https://elasticbeanstalk-us-east-1-149536466661.s3.us-east-1.amazonaws.com/cloverhapp/user/93a521ad5fdc743c2b0e5f039ce0d67f-1728552869437-766209541.png",
+    "photoUrl": null,
     "role": 99,
-    "locale": "KR",
+    "locale": "EN",
     "droplet": 1100,
     "admin": false,
     "keyValues": [

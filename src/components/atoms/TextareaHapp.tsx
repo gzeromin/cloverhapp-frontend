@@ -19,7 +19,7 @@ interface TextareaHappProps
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   grow?: boolean;
-  testId?: string;
+  dataCy?: string;
 }
 
 const TextareaHapp: React.FC<TextareaHappProps> = ({
@@ -38,7 +38,7 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
   value = '',
   onChange,
   grow = true,
-  testId,
+  dataCy,
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null!);
 
@@ -95,7 +95,7 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
           value={value}
           ref={textareaRef}
           onChange={handleChange}
-          data-cy={testId}
+          data-cy={dataCy}
         />
         {error && (
           <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>

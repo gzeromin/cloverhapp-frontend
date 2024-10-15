@@ -17,7 +17,7 @@ describe('화면 사이즈 lg[960px] 이상', () => {
 
   it('로그인 안했을 때, 로그인 요청 표시', () => {
     // 로그인 요청 표시
-    cy.get('[data-cy="loginRequestComp"]').should('exist');
+    cy.get('[data-cy="web-loginRequestComp"]').should('exist');
     // 사이드바 링크 표시 안함
     cy.get('[data-cy="SideBarMenu"]').should('not.exist');
   });
@@ -26,7 +26,7 @@ describe('화면 사이즈 lg[960px] 이상', () => {
     // 로그인
     cy.login();
     // 로그인 요청 메세지 표시 안함
-    cy.get('[data-cy="loginRequestComp"]').should('not.exist');
+    cy.get('[data-cy="web-loginRequestComp"]').should('not.exist');
     // 사이드바 링크 표시 표시
     cy.get('[data-cy="SideBarMenu"]').should('exist');
   });
@@ -70,7 +70,7 @@ describe('메인 페이지, 화면 사이즈 md[768px] 이하', () => {
 
   it('로그인 안했을 때, 로그인 요청 표시', () => {
     // 로그인 요청 표시
-    cy.get('[data-cy="loginRequestComp"]').should('exist');
+    cy.get('[data-cy="mobile-loginRequestComp"]').should('exist');
     // 데이 로그 페이지 표시 안함
     cy.get('[data-cy="dayLogPage"]').should('not.exist');
   });
@@ -79,7 +79,7 @@ describe('메인 페이지, 화면 사이즈 md[768px] 이하', () => {
     // 로그인
     cy.login();
     // 로그인 요청 메세지 표시 안함
-    cy.get('[data-cy="loginRequestComp"]').should('not.exist');
+    cy.get('[data-cy="mobile-loginRequestComp"]').should('not.exist');
     // 데이 로그 페이지 표시
     cy.get('[data-cy="dayLogPage"]').should('exist');
   });

@@ -11,7 +11,7 @@ interface WaterHappProps {
   disable?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  testId?: string;
+  dataCy?: string;
 }
 
 const WaterHapp: React.FC<WaterHappProps> = ({
@@ -20,7 +20,7 @@ const WaterHapp: React.FC<WaterHappProps> = ({
   disable = false,
   value = '0',
   onChange,
-  testId,
+  dataCy,
 }) => {
   const [inputValue, setInputValue] = useState<number>(parseInt(value));
 
@@ -50,7 +50,7 @@ const WaterHapp: React.FC<WaterHappProps> = ({
             { 'cursor-not-allowed': disable },
             inputClassName,
           )}
-          data-cy={testId}
+          data-cy={dataCy}
         />
         <div className={cls('text-end text-base w-1/4', Language.logoFont)}>
           {inputValue/10}{Language.$t.Input.Sip}, {inputValue} ml {/* 선택된 물의 양을 표시 */}

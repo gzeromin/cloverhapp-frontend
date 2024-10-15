@@ -70,7 +70,7 @@ const Register = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={errors.email}
-            testId="emailInput"
+            dataCy="emailInput"
           />
           <InputHapp
             labelName={Language.$t.Input.Nickname}
@@ -78,7 +78,7 @@ const Register = () => {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             error={errors.nickname}
-            testId="nicknameInput"
+            dataCy="nicknameInput"
           />
           <InputHapp
             labelName={Language.$t.Input.Password}
@@ -87,7 +87,7 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             error={errors.password}
-            testId="passwordInput"
+            dataCy="passwordInput"
           />
           <InputHapp
             labelName={Language.$t.Input.PasswordConfirm}
@@ -96,7 +96,7 @@ const Register = () => {
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
             error={errors.passwordConfirm}
-            testId="passwordConfirmInput"
+            dataCy="passwordConfirmInput"
           />
           <button
             className="w-full py-3 mt-5 mb-2 text-s tracking-wider font-bold text-white uppercase

@@ -82,7 +82,7 @@ const NavBar: React.FC = () => {
           options={options}
           selected={Language.type}
           onSelected={handleLocale}
-          testId="localeSelect"
+          dataCy="localeSelect"
         />
         <div className="text-center">
           {authenticated ? (
