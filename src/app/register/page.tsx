@@ -44,8 +44,7 @@ const Register = () => {
         passwordConfirm,
         locale,
       });
-      const user = res.data?.user;
-      dispatch(AuthActionEnum.LOGIN, user);
+      dispatch(AuthActionEnum.LOGIN, res.data);
       router.push('/');
     } catch (error: any) {
       handleError(error, setErrors);

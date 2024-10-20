@@ -65,7 +65,7 @@ const Profile: React.FC<Props> = () => {
       )}>
         <ImQuotesLeft className='absolute -top-4 left-0 lx:left-1 xl:left-3 text-red-600' />
         <ImQuotesRight className='absolute -bottom-4 right-0 lx:right-4 xl:right-6 text-blue-600' />
-        <div className={cls('h-[220px] overflow-y-auto')}>
+        <div className={cls('h-[220px] overflow-y-auto flex items-center justify-center')}>
           { user && user.sentence }
         </div>
       </div>

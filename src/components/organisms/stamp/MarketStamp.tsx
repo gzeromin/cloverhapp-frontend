@@ -3,16 +3,16 @@ import { Stamp } from '@/types/Stamp';
 import { BUCKET_URL } from '@/utils/api.util';
 import Image from 'next/image';
 import cls from 'classnames';
+import { Language } from '@/mobx';
 
 interface MarketStampProps {
   stamp: Stamp;
-  selectStamp: (stamp: Stamp) => void;
+  selectStamp: (stampId: string) => void;
 }
 
 const MarketStamp: React.FC<MarketStampProps> = ({ stamp, selectStamp }) => {
   return (
-    <div className="py-2 pl-4" id={stamp.id} onClick={() => selectStamp(stamp)}>
-      
+    <div className="py-2 pl-4" id={stamp.id} onClick={() => selectStamp(stamp.id)}>
       <div className={cls(
         'relative pb-6 cursor-pointer rounded-md shadow-sm', 
         'border border-gray-400 border-dashed',
@@ -21,10 +21,18 @@ const MarketStamp: React.FC<MarketStampProps> = ({ stamp, selectStamp }) => {
         {/* Type */}
         <div className={cls(
           'object-cover absolute left-2 top-1',
-          'flex items-center'
+          'flex items-center gap-1'
         )}>
-          <p className='text-xs text-green-600'>
-            {stamp.type}
+          {stamp.notForSale && (
+            <p className={cls(
+              'bg-blue-50 text-blue-700 border border-blue-700',
+              'rounded-md text-xs px-1 cursor-default'
+            )}>
+              {Language.$t.Stamp.Default}
+            </p>
+          )}
+          <p className='text-sm text-green-600'>
+            {Language.$t.StampType[stamp.type]}
           </p>
         </div>
 
@@ -33,7 +41,7 @@ const MarketStamp: React.FC<MarketStampProps> = ({ stamp, selectStamp }) => {
           'object-cover absolute right-2 top-1',
           'flex items-center'
         )}>
-          <p className='text-xs'>
+          <p className='text-sm'>
             {stamp.droplet}
           </p>
           <Image

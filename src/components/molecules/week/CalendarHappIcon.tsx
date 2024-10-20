@@ -18,7 +18,7 @@ interface CalendarHappIconProps {
   happ: Happ;
 }
 
-const iconSize = 23;
+const iconSize = 39;
 
 const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
   const { user } = useAuthState();

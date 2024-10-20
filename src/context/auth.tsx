@@ -34,7 +34,8 @@ export enum AuthActionEnum {
   SET_SENTENCE = 'SET_SENTENCE',
   SET_DROPLET = 'SET_DROPLET',
   
-  SET_USER_STAMPS = 'SET_USER_STAMPS'
+  SET_USER_STAMPS = 'SET_USER_STAMPS',
+  ADD_USER_STAMP = 'ADD_USER_STAMP'
 }
 
 const reducer = (state: State, { type, payload }: Action) => {
@@ -43,7 +44,8 @@ const reducer = (state: State, { type, payload }: Action) => {
     return {
       ...state,
       authenticated: true,
-      user: payload,
+      user: payload?.user,
+      userStamps: payload?.userStamps,
     };
   case AuthActionEnum.LOGOUT:
     return {
@@ -88,6 +90,11 @@ const reducer = (state: State, { type, payload }: Action) => {
       ...state,
       userStamps: payload,
     };
+  case AuthActionEnum.ADD_USER_STAMP:
+    return {
+      ...state,
+      userStamps: state.userStamps ? state.userStamps.concat(payload): [],
+    };
   default:
     throw new Error(`Unknown action type: ${type}`);
   }
@@ -102,7 +109,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const dispatch = (type: AuthActionEnum, payload?: any) => {
     // set Locale
-    if (type === AuthActionEnum.LOGIN || type === AuthActionEnum.SET_LOCALE) {
+    if (type === AuthActionEnum.LOGIN) {
+      Language.setLanguage(payload.user.locale);
+    } else if (type === AuthActionEnum.SET_LOCALE) {
       Language.setLanguage(payload.locale);
     }
     defaultDispatch({ type, payload });
@@ -112,11 +121,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     async function loadUser() {
       try {
         const res = await api.get('/auth/me');
-        dispatch(AuthActionEnum.LOGIN, res.data?.user);
-        const userStamps = await api.get('/user-stamp');
-        dispatch(AuthActionEnum.SET_USER_STAMPS, userStamps.data);
+        dispatch(AuthActionEnum.LOGIN, res.data);
       } catch (error) {
-        // handleError(error);
+        // DO NOTHING
       }
     }
     loadUser();

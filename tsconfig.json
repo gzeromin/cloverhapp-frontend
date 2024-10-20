@@ -32,7 +32,8 @@
     ".next/types/**/*.ts", 
     "src/utils/patterns.util.ts",
     "cypress/**/*.ts",
-    "cypress/**/*.d.ts"
-, "src/components/atoms/SliderHapp.tsx.bak"  ],
+    "cypress/**/*.d.ts", 
+    "src/components/atoms/SliderHapp.tsx.bak"
+  ],
   "exclude": ["node_modules"]
 }

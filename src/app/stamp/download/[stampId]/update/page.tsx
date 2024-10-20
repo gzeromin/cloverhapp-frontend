@@ -1,6 +1,6 @@
 'use client';
 import InputHapp from '@/components/atoms/InputHapp';
-import { FormEvent, memo, useCallback } from 'react';
+import { FormEvent, memo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { IoArrowUndoCircleOutline } from 'react-icons/io5';
@@ -9,11 +9,9 @@ import { Dialog, Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { handleError } from '@/utils/error.util';
 import TextareaHapp from '@/components/atoms/TextareaHapp';
-import { useDropzone } from 'react-dropzone';
-import { GrAdd } from 'react-icons/gr';
 import cls from 'classnames';
 import SelectHapp from '@/components/atoms/SelectHapp';
-import { StampStatus, StampType } from '@/types/Stamp';
+import { Stamp, StampStatus, StampType } from '@/types/Stamp';
 import Image from 'next/image';
 import AddTagsHapp from '@/components/atoms/AddTagsHapp';
 import { Tag } from '@/types/Tag';
@@ -51,7 +49,13 @@ const typeOptions = Object.values(StampType)
     icon: <RiBardLine />,
   }));
 
-const Upload: React.FC = () => {
+  interface Props {
+    params: { stampId: string };
+  }
+
+const Update: React.FC<Props> = ({ params }: Props) => {
+  const { stampId } = params;
+  const [iconUrl, setIconUrl] = useState<string | null>(null);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [droplet, setDroplet] = useState('0');
@@ -59,7 +63,6 @@ const Upload: React.FC = () => {
   const [stampStatus, setStampStatus] = useState(StampStatus.PRIVATE);
   const [notForSale, setNotForSale] = useState<boolean>(false);
   const [tags, setTags] = useState<Tag[]>([]);
-  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
 
   const [errors, setErrors] = useState<{
     name?: string;
@@ -69,62 +72,54 @@ const Upload: React.FC = () => {
 
   const router = useRouter();
 
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      const file = acceptedFiles[0];
-      setUploadedImage(file);
-    },
-    [setUploadedImage],
-  );
+  useEffect(() => {
+    api.get('/stamp/' + stampId).then((res) => {
+      const data: Stamp = res.data;
+      setIconUrl(data.url);
+      setName(data.name);
+      setDescription(data.description);
+      setDroplet(String(data.droplet));
+      setType(data.type);
+      setStampStatus(data.status);
+      setNotForSale(data.notForSale);
+      setTags(data.Tags);
+
+    }).catch((error) => {
+      handleError(error);
+    });
+  }, [stampId]);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErrors({}); // resetError
 
-    if (uploadedImage == null) {
-      Dialog.openDialog(Dialog.WARNING, Language.$t.UploadIconImage);
-      return;
-    }
     Loading.setIsLoading(true);
     try {
-      const formData = new FormData();
-      formData.append('stamp-icon', uploadedImage);
-      formData.append(
-        'stamp-data',
-        JSON.stringify({ 
-          name, 
-          description, 
-          droplet: Number(droplet), 
-          type,
-          notForSale,
-          status: stampStatus,
-          Tags: tags,
-        }),
-      );
-      await api.post('/stamp', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const stamp = {
+        id: stampId,
+        name, 
+        description, 
+        droplet: Number(droplet), 
+        type,
+        notForSale,
+        status: stampStatus,
+        Tags: tags,
+      };
+      await api.patch('/stamp', stamp);
       Loading.setIsLoading(false);
       const dialogReulst = await Dialog.openDialog(
         Dialog.SUCCESS,
-        Language.$t.Success.UploadIcon,
+        Language.$t.Success.StampEdit,
       );
       if (dialogReulst) {
-        setName('');
-        setDescription('');
-        setDroplet('0');
-        setUploadedImage(null);
-        setTags([]);
-        setNotForSale(false);
+        router.back();
       }
     } catch (error: any) {
       Loading.setIsLoading(false);
       handleError(error, setErrors);
     }
   };
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  
   return (
     <div className={cls(
       'relative h-[80vh] overflow-y-auto',
@@ -135,28 +130,17 @@ const Upload: React.FC = () => {
         onClick={() => router.back()}
       />
       <div className={cls('flex items-center justify-center gap-2 lg:gap-6 lx:gap-8')}>
-        {/* Drop Zone */}
-        <div
-          {...getRootProps()}
-          className={`border-2 border-dashed p-8 text-center cursor-pointer ${
-            isDragActive ? 'border-happ-focus' : 'border-gray-300'
-          }`}
-          data-cy="dropZone"
-        >
-          <input {...getInputProps()} />
-          {uploadedImage ? (
+        {/* Stamp Icon */}
+        <div className={cls('w-1/2')}>
+          {iconUrl && (
             <Image
-              src={URL.createObjectURL(uploadedImage)}
-              alt="Uploaded"
-              className="object-cover mx-auto mb-4 rounded"
-              width={180}
-              height={180}
+              src={iconUrl}
+              alt={stampId}
+              className="m-auto p-6 object-contain aspect-square"
+              priority={false}
+              width={250}
+              height={250}
             />
-          ) : (
-            <p className="flex flex-col items-center justify-center w-[180px] h-[180px] text-gray-500">
-              <GrAdd size="50px" />
-              {Language.$t.Placeholder.FileUpload}
-            </p>
           )}
         </div>
 
@@ -246,20 +230,38 @@ const Upload: React.FC = () => {
         setTags={setTags}
         dataCy='addTagsHapp'
       />
-      <button
-        className={cls(
-          'absolute bottom-[30px] w-4/5 p-3', 
-          'text-s tracking-wider font-bold text-white uppercase',
-          'bg-primary border', 
-          'hover:bg-primary-hover hover:text-primary rounded'
-        )}
-        onClick={onSubmit}
-        data-cy='uploadButton'
-      >
-        {Language.$t.Button.Upload}
-      </button>
+      {/* footer */}
+      <div className={cls(
+        'absolute w-full bottom-0 p-5',
+        'grid grid-flow-col items-center justify-stretch gap-5', 
+      )}>
+        <button
+          className={cls(
+            'm-1 py-1.5 px-3 rounded-lg text-lg',
+            'tracking-wider font-bold text-white uppercase',
+            'bg-cancel border border-cancel', 
+            'hover:bg-gray-100 hover:text-cancel',
+            'transition-colors duration-300 ease-in-out'
+          )}
+          onClick={() => router.back()}
+        >
+          {Language.$t.Button.Cancel}
+        </button>
+        <button 
+          className={cls(
+            'm-1 py-1.5 px-3 rounded-lg text-lg',
+            'tracking-wider font-bold text-white uppercase',
+            'bg-blue-700 border border-blue-700', 
+            'hover:bg-blue-100 hover:text-blue-700',
+            'transition-colors duration-300 ease-in-out'
+          )}
+          onClick={onSubmit}
+        >
+          {Language.$t.Button.Edit}
+        </button>
+      </div>
     </div>
   );
 };
 
-export default memo(observer(Upload));
+export default memo(observer(Update));

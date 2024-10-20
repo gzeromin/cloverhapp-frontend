@@ -1,3 +1,4 @@
+import { Tag } from './Tag';
 import { User } from './User';
 
 export interface Stamp {
@@ -8,8 +9,10 @@ export interface Stamp {
   droplet: number;
   type: StampType;
   status: StampStatus;
+  notForSale: boolean;
   userId: string;
   Register: User;
+  Tags: Tag[];
 }
 
 export enum StampType {

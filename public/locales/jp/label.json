@@ -23,7 +23,7 @@
     "Prev": "前へ戻る",
     "Update": "更新",
     "Upload": "登録",
-    "Download": "ダウンロード",
+    "Purchase": "購入",
     "ChangePassword": "パスワード変更",
     "ChangeInfo": "基本情報変更",
     "ChangePhoto": "写真変更",
@@ -119,7 +119,7 @@
   "SideBar": {
     "Profile": "プロフィール",
     "Statistics": "統計",
-    "Stamp": "スタンプ"
+    "Goal": "目標"
   },
   "Weeks": ["月", "火", "水", "木", "金", "土", "日"],
   "Months": [
@@ -200,5 +200,8 @@
     "EN": "ドル",
     "JP": "円",
     "KR": "ウォン"
+  },
+  "Stamp": {
+    "Default": "規定"
   }
 }

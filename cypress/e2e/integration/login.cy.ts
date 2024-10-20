@@ -93,8 +93,8 @@ describe('로그인 페이지', () => {
     cy.get('[data-cy=loginButton]').as('loginButton');
     cy.get('[data-cy=navBarLogo]').as('navBarLogo').should('exist');
     // when 영어 사용자 로그인 정보 입력
-    cy.get('@emailInput').type('aaa@aaa.aaa');
-    cy.get('@passwordInput').type('aaaaaa');
+    cy.get('@emailInput').type('bbb@bbb.bbb');
+    cy.get('@passwordInput').type('bbbbbb');
     // 로그인 버튼 클릭
     cy.intercept({
       method: 'POST',

@@ -35,7 +35,7 @@ describe('Upload Page', () => {
     // Not for sale 체크박스 확인 및 체크
     cy.get('@notForSaleCheck').check().should('be.checked');
     // Droplet 필드에 값 입력 (Not for Sale 체크박스가 체크되어 있으면 비활성화되어야 함)
-    cy.get('@dropletInput').should('be.disabled');
+    cy.get('@dropletInput').type('{backspace}5');
     // Stamp Type 선택
     cy.get('@typeSelect').click();
     cy.get('@typeSelect').find('li').eq(2).click(); // 행복 타입
@@ -52,7 +52,7 @@ describe('Upload Page', () => {
       const mimeType = 'image/png'; // 파일의 MIME 타입
       cy.get('@dropZone').upload(fileContent, fileName, mimeType);
       cy.get('@dropZone').find('img[alt="Uploaded"]').should('exist');
-    cy.get('@dropZone').find('p').should('not.exist');
+      cy.get('@dropZone').find('p').should('not.exist');
     });
 
     // 성공 응답
@@ -93,10 +93,9 @@ describe('Upload Page', () => {
 
   it('폼에러 출력 확인', () => {
     // Stamp Name 입력 안함
-    // Not for sale 체크박스 확인 및 체크
-    cy.get('@notForSaleCheck').check().should('be.checked');
-    // Droplet 필드에 값 입력 (Not for Sale 체크박스가 체크되어 있으면 비활성화되어야 함)
-    cy.get('@dropletInput').should('be.disabled');
+    // Not for sale 체크 안함
+    // Droplet 필드에 값 입력
+    cy.get('@dropletInput').type('{backspace}7');
     // Stamp Type 선택
     cy.get('@typeSelect').click();
     cy.get('@typeSelect').find('li').eq(2).click(); // 행복 타입

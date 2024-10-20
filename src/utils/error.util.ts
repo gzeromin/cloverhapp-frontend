@@ -7,7 +7,8 @@ enum StatusCode {
   DoubleRequestError = 3000,
   SystemError = 500,
   NotFoundError = 404,
-  Unauthorized = 401
+  Unauthorized = 401,
+  Conflict = 409
 }
 
 export const handleError = async (
@@ -53,6 +54,8 @@ export const handleError = async (
       Dialog.DANGER,
       Language.$t.ErrorMessage.SystemError,
     );
+  case StatusCode.Conflict:
+    return false;
   default:
     let dialogMessage = '';
     if (Array.isArray(message)) {
@@ -71,6 +74,4 @@ export const handleError = async (
       dialogMessage,
     );
   }
-
-  return true;
 };

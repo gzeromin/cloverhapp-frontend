@@ -1,18 +1,20 @@
 'use client';
 import MarketStamp from '@/components/organisms/stamp/MarketStamp';
+import { useAuthState } from '@/context/auth';
 import { Stamp } from '@/types/Stamp';
 import { fetcher } from '@/utils/api.util';
+import { useRouter } from 'next/navigation';
 import { memo, useEffect, useState } from 'react';
 import useSWRInfinite from 'swr/infinite';
-import DownloadModal from '@/components/organisms/stamp/DownloadModal';
+import cls from 'classnames';
+import { Dialog, Language } from '@/mobx';
 
 interface Props {}
 
 const Market: React.FC<Props> = () => {
-
+  const { user, userStamps } = useAuthState();
   const [observedStamp, setObservedStamp] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [selectedStamp, setSelectedStamp] = useState<Stamp>();
+  const router = useRouter();
 
   const getKey = (pageIndex: number, previousPageData: Stamp[]) => {
     if (previousPageData && !previousPageData.length) return null;
@@ -24,7 +26,6 @@ const Market: React.FC<Props> = () => {
     size: page,
     setSize: setPage,
   } = useSWRInfinite<Stamp[]>(getKey, fetcher);
-
   const stamps: Stamp[] = data ? ([] as Stamp[]).concat(...data) : [];
 
   useEffect(() => {
@@ -51,13 +52,15 @@ const Market: React.FC<Props> = () => {
     observer.observe(element);
   };
 
-  const onSelectStamp = (stamp: Stamp) => {
-    setShowModal(true);
-    setSelectedStamp(stamp);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
+  const onSelectStamp = (stampId: string) => {
+    if (user) {
+      router.push('stamp/download/' + stampId);
+    } else {
+      Dialog.openDialog(
+        Dialog.WARNING, 
+        Language.$t.SideBarMessage.RequestLogin
+      );
+    }
   };
 
   return (
@@ -79,22 +82,25 @@ const Market: React.FC<Props> = () => {
           </span>
         </div>
       </div>
-      <div className="h-[85vh] overflow-y-auto">
-        {/* TODO
-          가격별, 타입별로 검색할 수 있는 filter도 있으면 좋을 것 같아
-        */}
-        <div className="grid grid-cols-4 m-4">
-          {stamps?.map((stamp, index) => (
-            <MarketStamp
+      {/* TODO
+        가격별, 타입별로 검색할 수 있는 filter도 있으면 좋을 것 같아
+      */}
+      <div
+        className={cls(
+          'h-[85vh] overflow-y-auto',
+          'grid grid-cols-4 m-4'
+        )}
+        data-cy='marketList'
+      >
+        {stamps?.map((stamp, index) => {
+          if (!userStamps.some((e) => e.Stamp.id == stamp.id)) {
+            return <MarketStamp
               key={`${stamp.id} ${index}`}
               stamp={stamp}
               selectStamp={onSelectStamp}
-            />
-          ))}
-        </div>
-        {showModal && (
-          <DownloadModal stamp={selectedStamp} closeModal={closeModal} />
-        )}
+            />;
+          }
+        })}
       </div>
     </div>
   );

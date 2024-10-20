@@ -23,7 +23,7 @@
     "Prev": "이전",
     "Update": "갱신",
     "Upload": "등록",
-    "Download": "다운로드",
+    "Purchase": "구매",
     "ChangePassword": "비밀번호 변경",
     "ChangeInfo": "기본 정보 변경",
     "ChangePhoto": "사진 변경",
@@ -119,7 +119,7 @@
   "SideBar": {
     "Profile": "프로필",
     "Statistics": "통계",
-    "Stamp": "스탬프"
+    "Goal": "목표"
   },
   "Weeks": ["월", "화", "수", "목", "금", "토", "일"],
   "Months": [
@@ -200,5 +200,8 @@
     "EN": "달러",
     "JP": "엔",
     "KR": "원"
+  },
+  "Stamp": {
+    "Default": "기본"
   }
 }

@@ -6,7 +6,7 @@ import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
-import { notFound, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { memo, useEffect, useState } from 'react';
 import cls from 'classnames';
 import TextareaHapp from '@/components/atoms/TextareaHapp';
@@ -24,6 +24,7 @@ import { StampStatus, StampType } from '@/types/Stamp';
 import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
 import SelectHapp from '@/components/atoms/SelectHapp';
 import { GoPeople } from 'react-icons/go';
+import { AuthActionEnum, useAuthDispatch } from '@/context/auth';
 
 const statusOptions = [
   {
@@ -65,6 +66,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
   const [stampStatus, setStampStatus] = useState(StampStatus.PRIVATE);
 
   const router = useRouter();
+  const dispatch = useAuthDispatch();
 
   useEffect(() => {
     api.get('/user-stamp/' + userStampId).then((res) => {
@@ -81,8 +83,8 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
       setGoalUnit(data.goalUnit);
       setGoalInterval(data.goalInterval);
       setGoalNumber(data.goalNumber);
-    }).catch(() => {
-      notFound();
+    }).catch((error) => {
+      handleError(error);
     });
   }, [userStampId]);
 
@@ -102,14 +104,14 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         goalInterval,
         goalNumber,
       };
-      await api.post('/user-stamp/' + userStamp!.id, updateStampDto);
+      const res = await api.post('/user-stamp/' + userStamp!.id, updateStampDto);
       // 업데이트 성공 후 페이지 새로 고침
       const dialogResult = await Dialog.openDialog(
         Dialog.SUCCESS,
         Language.$t.Success.StampEdit,
       );
       if (dialogResult) {
-        window.location.reload();
+        dispatch(AuthActionEnum.SET_USER_STAMPS, res.data);
       }
     } catch (error: any) {
       handleError(error);
@@ -121,7 +123,16 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
   const deleteUserStamp = async () => {
     Loading.setIsLoading(true);
     try {
-      await api.delete('/user-stamp/' + userStamp!.id);
+      const res = await api.delete('/user-stamp/' + userStamp!.id);
+      // 업데이트 성공 후 페이지 새로 고침
+      const dialogResult = await Dialog.openDialog(
+        Dialog.SUCCESS,
+        Language.$t.Success.StampDelete,
+      );
+      if (dialogResult) {
+        dispatch(AuthActionEnum.SET_USER_STAMPS, res.data);
+        router.back();
+      }
     } catch (error: any) {
       handleError(error);
     } finally {

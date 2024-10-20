@@ -72,14 +72,16 @@ const HappCalendar: React.FC<Props> = ({ className }) => {
             'flex items-center justify-start gap-3',
             'overflow-x-auto whitespace-nowrap'
           )}>
-            {userStamps && userStamps.map((userStamp) => 
-              <StampButton
-                userStamp={userStamp}
-                key={`stampPalette-${userStamp.id}`}
-                onClickStamp={() => onClickStamp(userStamp)}
-                size={40}
-              />
-            )}
+            {userStamps && userStamps.map((userStamp) => {
+              if (userStamp.isDisplay) {
+                return <StampButton
+                  userStamp={userStamp}
+                  key={`stampPalette-${userStamp.id}`}
+                  onClickStamp={() => onClickStamp(userStamp)}
+                  size={40}
+                />;
+              }
+            })}
             {showStampSaveModal && (
               <HappSaveModal 
                 userStampId={selectedUserStamp ? selectedUserStamp.id : undefined}

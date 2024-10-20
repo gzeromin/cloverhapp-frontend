@@ -23,7 +23,7 @@
     "Prev": "Prev",
     "Update": "Update",
     "Upload": "Upload",
-    "Download": "Download",
+    "Purchase": "Purchase",
     "ChangePassword": "Change Password",
     "ChangeInfo": "Change Basic Info",
     "ChangePhoto": "Change Photo",
@@ -118,7 +118,7 @@
   },
   "SideBar": {
     "Profile": "Profile",
-    "Stamp": "Stamp",
+    "Goal": "Goal",
     "Statistics": "Statistics"
   },
   "Weeks": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
@@ -200,5 +200,8 @@
     "EN": "Dollars",
     "JP": "Yen",
     "KR": "Won"
+  },
+  "Stamp": {
+    "Default": "default"
   }
 }

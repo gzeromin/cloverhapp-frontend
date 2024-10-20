@@ -8,7 +8,7 @@ import { useParams, usePathname } from 'next/navigation';
 
 enum Menu {
   Profile = 'profile',
-  Stamp = 'stamp',
+  Goal = 'goal',
   Statistics = 'statistics',
 }
 
@@ -38,11 +38,11 @@ const SideBarLinks: React.FC = () => {
         {Language.$t.SideBar.Profile}
       </Link>
       <Link
-        className={tabStyle(Menu.Stamp)}
-        href={`/main/${userId}/stamp`}
-        data-cy="stampLink"
+        className={tabStyle(Menu.Goal)}
+        href={`/main/${userId}/goal`}
+        data-cy="goalLink"
       >
-        {Language.$t.SideBar.Stamp}
+        {Language.$t.SideBar.Goal}
       </Link>
       <Link
         className={tabStyle(Menu.Statistics)}

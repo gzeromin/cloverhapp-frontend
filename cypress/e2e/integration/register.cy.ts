@@ -80,7 +80,7 @@ describe('회원가입 페이지', () => {
     cy.get('@commonDialog').should('contain.text', 'A system error has occurred.');
   });
 
-  it('회원가입 성공 후, 일본어 버전', () => {
+  it('회원가입 성공 후', () => {
     //given
     cy.get('[data-cy=localeSelect]').as('localeSelect');
     cy.get('[data-cy=emailInput]').as('emailInput');
@@ -92,10 +92,10 @@ describe('회원가입 페이지', () => {
     cy.get('@localeSelect').click();
     cy.get('@localeSelect').find('li').eq(2).click();
     // when
-    cy.get('@emailInput').type('kkk@kkk.kkk');
-    cy.get('@nicknameInput').type('kkk');
-    cy.get('@passwordInput').type('kkkkkk');
-    cy.get('@passwordConfirmInput').type('kkkkkk');
+    cy.get('@emailInput').type('bbb@bbb.bbb');
+    cy.get('@nicknameInput').type('bbb');
+    cy.get('@passwordInput').type('bbbbbb');
+    cy.get('@passwordConfirmInput').type('bbbbbb');
     // 회원가입 버튼 클릭
     cy.intercept({
       method: 'POST',

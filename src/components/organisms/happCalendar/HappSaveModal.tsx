@@ -77,7 +77,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           setBookPercent(UserStamp.bookPercent);
         }
         setStampStatus(UserStamp.status);
-      });
+      }).catch((error) => { handleError(error); });
     }
   }, [userStampId]);
   useEffect(() => {
@@ -129,7 +129,7 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
           setBook(happ.Book);
           setBookPercent(happ.bookPercent);
         }
-      });
+      }).catch((error) => { handleError(error); });
     }
   }, [happId]);
 
