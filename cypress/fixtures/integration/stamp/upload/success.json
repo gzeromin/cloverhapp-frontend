@@ -1,7 +1,7 @@
 {
   "name": "테스트",
   "description": "This is a test description.",
-  "url": "https://elasticbeanstalk-us-east-1-149536466661.s3.us-east-1.amazonaws.com/cloverhapp/stamp/test-1728916131314-555839967.png",
+  "url": "/images/test.png",
   "droplet": "0",
   "notForSale": true,
   "type": "Happy",

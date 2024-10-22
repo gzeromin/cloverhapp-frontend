@@ -9,11 +9,11 @@ describe('Market Page', () => {
     // 스탬프 데이터를 인터셉트하고 목록 요청을 확인
     cy.intercept({
       method: 'GET',
-      url: '**/stamp?page=1',
+      url: '**/stamp?page=*',
     }, {
       statusCode: 200,
       fixture: 'integration/stamp/list.json',
-    }).as('listRequest');
+    });
 
     // 스탬프 아이템들이 제대로 렌더링되었는지 확인
     cy.get('@marketList').children().should('have.length', 13);
@@ -25,11 +25,11 @@ describe('Market Page', () => {
 
     cy.intercept({
       method: 'GET',
-      url: '**/stamp?page=1',
+      url: '**/stamp?page=*',
     }, {
       statusCode: 200,
       fixture: 'integration/stamp/list.json',
-    }).as('listRequest');
+    });
 
     // 스탬프 아이템들이 제대로 렌더링되었는지 확인
     cy.get('@marketList').children().should('have.length', 5);
@@ -69,11 +69,11 @@ describe('Market Page', () => {
     cy.login();
     cy.intercept({
       method: 'GET',
-      url: '**/stamp?page=1',
+      url: '**/stamp?page=*',
     }, {
       statusCode: 200,
       fixture: 'integration/stamp/list.json',
-    }).as('listRequest');
+    });
 
     // 스탬프 선택
     cy.get('@marketList').children().first().click();
@@ -85,11 +85,11 @@ describe('Market Page', () => {
   it('스탬프 선택 후 다운로드 페이지로 이동 안됨(로그인 안된 경우)', () => {
     cy.intercept({
       method: 'GET',
-      url: '**/stamp?page=1',
+      url: '**/stamp?page=*',
     }, {
       statusCode: 200,
       fixture: 'integration/stamp/list.json',
-    }).as('listRequest');
+    });
 
     // 스탬프 선택
     cy.get('@marketList').children().eq(11).click();
