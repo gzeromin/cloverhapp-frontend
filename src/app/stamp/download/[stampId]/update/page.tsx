@@ -83,7 +83,6 @@ const Update: React.FC<Props> = ({ params }: Props) => {
       setStampStatus(data.status);
       setNotForSale(data.notForSale);
       setTags(data.Tags);
-
     }).catch((error) => {
       handleError(error);
     });
@@ -115,6 +114,8 @@ const Update: React.FC<Props> = ({ params }: Props) => {
         router.back();
       }
     } catch (error: any) {
+      console.log('????');
+      console.log(error);
       Loading.setIsLoading(false);
       handleError(error, setErrors);
     }
@@ -155,7 +156,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             onChange={(e) => setName(e.target.value)}
             error={errors.name}
             marginBottom="mb-1"
-            dataCy='stampNameInput'
+            dataCy='stampUpdate-stampNameInput'
           />
           <div className={cls('flex items-center gap-1')}>
             <CheckHapp
@@ -168,7 +169,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
               onChange={(e) => setNotForSale(e.target.checked)}
               grow={false}
               marginBottom="mb-0"
-              dataCy='notForSaleCheck'
+              dataCy='stampUpdate-notForSaleCheck'
             />
             <InputHapp
               className={cls('w-1/2 flex items-center gap-1')}
@@ -181,7 +182,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
               error={errors.droplet}
               marginBottom="mb-1"
               min="0"
-              dataCy='dropletInput'
+              dataCy='stampUpdate-dropletInput'
             />
           </div>
           <SelectHapp
@@ -194,9 +195,9 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             options={typeOptions}
             selected={type}
             onSelected={setType}
-            dataCy="typeSelect"
             border={true}
             dark={true}
+            dataCy="stampUpdate-typeSelect"
           />
           <SelectHapp
             className={cls(
@@ -208,9 +209,9 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             options={statusOptions}
             selected={stampStatus}
             onSelected={setStampStatus}
-            dataCy="statusSelect"
             border={true}
             dark={true}
+            dataCy="stampUpdate-statusSelect"
           />
           <TextareaHapp
             labelName={Language.$t.Input.Description}
@@ -220,7 +221,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             onChange={(e) => setDescription(e.target.value)}
             error={errors.description}
             marginBottom="mb-1"
-            dataCy='descriptionTextarea'
+            dataCy='stampUpdate-descriptionTextarea'
           />
         </div>
       </div>
@@ -228,7 +229,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
         className={cls('w-2/3')}
         tags={tags}
         setTags={setTags}
-        dataCy='addTagsHapp'
+        dataCy='stampUpdate-addTagsHapp'
       />
       {/* footer */}
       <div className={cls(
@@ -244,6 +245,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             'transition-colors duration-300 ease-in-out'
           )}
           onClick={() => router.back()}
+          data-cy="stampUpdate-cancelButton"
         >
           {Language.$t.Button.Cancel}
         </button>
@@ -256,6 +258,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             'transition-colors duration-300 ease-in-out'
           )}
           onClick={onSubmit}
+          data-cy="stampUpdate-editButton"
         >
           {Language.$t.Button.Edit}
         </button>

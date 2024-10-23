@@ -49,7 +49,6 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
           name: stamp.name,
           description: stamp.description,
         });
-        console.log(res);
         Loading.setIsLoading(false);
         dispatch(AuthActionEnum.SET_DROPLET, res.data?.droplet);
         dispatch(AuthActionEnum.SET_USER_STAMPS, res.data?.userStamps);
@@ -66,8 +65,8 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
     try {
       if (stamp) {
         await api.delete('/stamp/' + stamp.id);
-        router.back();
         Loading.setIsLoading(false);
+        router.back();
       }
     } catch (error: any) {
       Loading.setIsLoading(false);
@@ -94,24 +93,24 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
       </div>
 
       {/* body */}
-      {stamp && (
-        <div className="w-full p-4">
-          {/* 1 열 */}
-          <div className={cls('flex items-center justify-between')}>
-            {/* Icon Image */}
-            <div className={cls('w-1/2 relative')}>
-              {stamp.notForSale && (
-                <p 
-                  className={cls(
-                    'absolute right-0 m-3',
-                    'bg-blue-50 text-blue-700 border border-blue-700',
-                    'rounded-md text-xs px-1 cursor-default',
-                  )}
-                  data-cy='downloadStamp-notForSaleArea'
-                >
-                  {Language.$t.Stamp.Default}
-                </p>
-              )}
+      <div className="w-full p-4">
+        {/* 1 열 */}
+        <div className={cls('flex items-center justify-between')}>
+          {/* Icon Image */}
+          <div className={cls('w-1/2 relative')}>
+            {stamp && stamp.notForSale && (
+              <p 
+                className={cls(
+                  'absolute right-0 m-3',
+                  'bg-blue-50 text-blue-700 border border-blue-700',
+                  'rounded-md text-xs px-1 cursor-default',
+                )}
+                data-cy='downloadStamp-notForSaleArea'
+              >
+                {Language.$t.Stamp.Default}
+              </p>
+            )}
+            {stamp && (
               <Image
                 src={stamp.url}
                 alt={stamp.id}
@@ -120,58 +119,56 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
                 width={250}
                 height={250}
               />
-            </div>
-
-            {/* Info */}
-            <div className={cls('w-1/2 flex flex-col gap-3')}>
-              <p 
-                className="text-4xl font-semibold text-center"
-                data-cy='downloadStamp-stampNameArea'
-              >
-                {stamp.name}
-              </p>
-              <p 
-                className="text-base text-gray-400 text-end"
-                data-cy='downloadStamp-registerArea'
-              >
-                { stamp.Register && stamp.Register.nickname}
-              </p>
-              <div 
-                className="flex items-center pt-6"
-                data-cy='downloadStamp-dropletArea'
-              >
-                <Image
-                  src={`${BUCKET_URL}/public/icons/droplet.png`}
-                  alt="droplet"
-                  className=""
-                  width={40}
-                  height={40}
-                ></Image>
-                <p className="text-2xl">{stamp.droplet}</p>
-              </div>
-              {stamp.description && (
-                <div 
-                  className={cls(
-                    'p-2 rounded-md', 
-                    'border-2 border-gray-100 border-dashed'
-                  )}
-                  data-cy='downloadStamp-descriptionArea'
-                >
-                  {stamp.description}
-                </div>
-              )}
-              <div 
-                className={cls('flex items-center gap-2')}
-                data-cy='downloadStamp-tagsArea'
-              >
-                {tags.map((e) => <TagHapp key={`stamp-${stamp.id} tag-${e.id}`} name={e.name} />)}
-              </div>
-            </div>
+            )}
           </div>
 
-          {/* 2 열 */}
+          {/* Info */}
+          <div className={cls('w-1/2 flex flex-col gap-3')}>
+            <p 
+              className="text-4xl font-semibold text-center"
+              data-cy='downloadStamp-stampNameArea'
+            >
+              {stamp && stamp.name}
+            </p>
+            <p 
+              className="text-base text-gray-400 text-end"
+              data-cy='downloadStamp-registerArea'
+            >
+              { stamp && stamp.Register && stamp.Register.nickname}
+            </p>
+            <div 
+              className="flex items-center pt-6"
+              data-cy='downloadStamp-dropletArea'
+            >
+              <Image
+                src={`${BUCKET_URL}/public/icons/droplet.png`}
+                alt="droplet"
+                className=""
+                width={40}
+                height={40}
+              ></Image>
+              <p className="text-2xl">{stamp && stamp.droplet}</p>
+            </div>
+            {stamp && stamp.description && (
+              <div 
+                className={cls(
+                  'p-2 rounded-md', 
+                  'border-2 border-gray-100 border-dashed'
+                )}
+                data-cy='downloadStamp-descriptionArea'
+              >
+                {stamp.description}
+              </div>
+            )}
+            <div 
+              className={cls('flex items-center gap-2')}
+              data-cy='downloadStamp-tagsArea'
+            >
+              {tags.map((e) => <TagHapp key={`stamp-${stamp && stamp.id} tag-${e.id}`} name={e.name} />)}
+            </div>
+          </div>
         </div>
-      )}
+      </div>
 
       {/* footer */}
       <div className={cls(
