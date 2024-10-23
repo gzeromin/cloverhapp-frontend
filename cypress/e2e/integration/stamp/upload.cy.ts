@@ -62,7 +62,7 @@ describe('Upload Page', () => {
     }, {
       statusCode: 201,
       fixture: 'integration/stamp/upload/success.json',
-    }).as('uploadRequest');
+    });
 
     // 업로드 버튼 클릭
     cy.get('@uploadButton').click();

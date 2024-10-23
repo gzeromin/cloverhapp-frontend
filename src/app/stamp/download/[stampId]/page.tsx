@@ -49,6 +49,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
           name: stamp.name,
           description: stamp.description,
         });
+        console.log(res);
         Loading.setIsLoading(false);
         dispatch(AuthActionEnum.SET_DROPLET, res.data?.droplet);
         dispatch(AuthActionEnum.SET_USER_STAMPS, res.data?.userStamps);
@@ -65,8 +66,11 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
     try {
       if (stamp) {
         await api.delete('/stamp/' + stamp.id);
+        router.back();
+        Loading.setIsLoading(false);
       }
     } catch (error: any) {
+      Loading.setIsLoading(false);
       handleError(error);
     } finally {
       Loading.setIsLoading(false);
@@ -97,11 +101,14 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
             {/* Icon Image */}
             <div className={cls('w-1/2 relative')}>
               {stamp.notForSale && (
-                <p className={cls(
-                  'absolute right-0 m-3',
-                  'bg-blue-50 text-blue-700 border border-blue-700',
-                  'rounded-md text-xs px-1 cursor-default',
-                )}>
+                <p 
+                  className={cls(
+                    'absolute right-0 m-3',
+                    'bg-blue-50 text-blue-700 border border-blue-700',
+                    'rounded-md text-xs px-1 cursor-default',
+                  )}
+                  data-cy='downloadStamp-notForSaleArea'
+                >
                   {Language.$t.Stamp.Default}
                 </p>
               )}
@@ -117,11 +124,22 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
 
             {/* Info */}
             <div className={cls('w-1/2 flex flex-col gap-3')}>
-              <p className="text-4xl font-semibold text-center">{stamp.name}</p>
-              <p className="text-base text-gray-400 text-end">
+              <p 
+                className="text-4xl font-semibold text-center"
+                data-cy='downloadStamp-stampNameArea'
+              >
+                {stamp.name}
+              </p>
+              <p 
+                className="text-base text-gray-400 text-end"
+                data-cy='downloadStamp-registerArea'
+              >
                 { stamp.Register && stamp.Register.nickname}
               </p>
-              <div className="flex items-center pt-6">
+              <div 
+                className="flex items-center pt-6"
+                data-cy='downloadStamp-dropletArea'
+              >
                 <Image
                   src={`${BUCKET_URL}/public/icons/droplet.png`}
                   alt="droplet"
@@ -132,14 +150,20 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
                 <p className="text-2xl">{stamp.droplet}</p>
               </div>
               {stamp.description && (
-                <div className={cls(
-                  'p-2 rounded-md', 
-                  'border-2 border-gray-100 border-dashed'
-                )}>
+                <div 
+                  className={cls(
+                    'p-2 rounded-md', 
+                    'border-2 border-gray-100 border-dashed'
+                  )}
+                  data-cy='downloadStamp-descriptionArea'
+                >
                   {stamp.description}
                 </div>
               )}
-              <div className={cls('flex items-center gap-2')}>
+              <div 
+                className={cls('flex items-center gap-2')}
+                data-cy='downloadStamp-tagsArea'
+              >
                 {tags.map((e) => <TagHapp key={`stamp-${stamp.id} tag-${e.id}`} name={e.name} />)}
               </div>
             </div>
@@ -164,6 +188,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
               'transition-colors duration-300 ease-in-out'
             )}
             onClick={deleteStamp}
+            data-cy='downloadStamp-deleteButton'
           >
             {Language.$t.Button.Delete}
           </button> 
@@ -178,6 +203,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
               'transition-colors duration-300 ease-in-out'
             )}
             onClick={() => router.push('./' + stampId + '/update')}
+            data-cy='downloadStamp-editButton'
           >
             {Language.$t.Button.Edit}
           </button>
@@ -191,6 +217,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
             'transition-colors duration-300 ease-in-out'
           )}
           onClick={() => router.back()}
+          data-cy='downloadStamp-cancelButton'
         >
           {Language.$t.Button.Cancel}
         </button>
@@ -202,7 +229,8 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
             'hover:bg-primary-hover hover:text-primary',
             'transition-colors duration-300 ease-in-out'
           )}
-          onClick={downloadStamp}  
+          onClick={downloadStamp}
+          data-cy='downloadStamp-purchaseButton'
         >
           {Language.$t.Button.Purchase}
         </button>

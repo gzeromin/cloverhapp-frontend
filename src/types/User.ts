@@ -5,7 +5,7 @@ export interface User {
   nickname: string;
   email: string;
   locale: Locale;
-  photoUrl?: string;
+  photoUrl?: string | null;
   droplet: number;
   notifNum: number;
   keyValues: string[];

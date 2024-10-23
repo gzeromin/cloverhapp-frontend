@@ -45,7 +45,7 @@
                 "updatedAt": "2024-10-20T05:01:34.329Z",
                 "name": "요가",
                 "description": "운동은 시간 나서 하는게 아닌, 시간 내서 하는 것!",
-                "url": "/cypress/fixtures/images/test.png",
+                "url": "/images/test.png",
                 "droplet": 7,
                 "notForSale": true,
                 "type": "Exercise",

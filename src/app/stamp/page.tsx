@@ -88,19 +88,24 @@ const Market: React.FC<Props> = () => {
       <div
         className={cls(
           'h-[85vh] overflow-y-auto',
-          'grid grid-cols-4 m-4'
         )}
-        data-cy='marketList'
       >
-        {stamps?.map((stamp, index) => {
-          if (!userStamps.some((e) => e.Stamp.id == stamp.id)) {
-            return <MarketStamp
-              key={`${stamp.id} ${index}`}
-              stamp={stamp}
-              selectStamp={onSelectStamp}
-            />;
-          }
-        })}
+        <div
+          className={cls(
+            'grid grid-cols-4 m-4'
+          )}
+          data-cy='marketList'
+        >
+          {stamps?.map((stamp, index) => {
+            if (!userStamps.some((e) => e.Stamp.id == stamp.id)) {
+              return <MarketStamp
+                key={`${stamp.id} ${index}`}
+                stamp={stamp}
+                selectStamp={onSelectStamp}
+              />;
+            }
+          })}
+        </div>
       </div>
     </div>
   );
