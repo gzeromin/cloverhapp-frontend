@@ -1,6 +1,5 @@
 'use client';
 import { Stamp } from '@/types/Stamp';
-import { BUCKET_URL } from '@/utils/api.util';
 import Image from 'next/image';
 import cls from 'classnames';
 import { Language } from '@/mobx';
@@ -45,7 +44,7 @@ const MarketStamp: React.FC<MarketStampProps> = ({ stamp, selectStamp }) => {
             {stamp.droplet}
           </p>
           <Image
-            src={`${BUCKET_URL}/public/icons/droplet.png`}
+            src={'/images/icons/droplet.png'}
             alt="droplet"
             className={cls('object-cover')}
             width={20}

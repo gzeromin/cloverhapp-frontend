@@ -2,7 +2,7 @@
 import FloatingBubbles from '@/components/organisms/FloatingBubbles';
 import { Language } from '@/mobx';
 import { Happ } from '@/types/Happ';
-import { BUCKET_URL, fetcher } from '@/utils/api.util';
+import { fetcher } from '@/utils/api.util';
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
@@ -59,7 +59,7 @@ const Home: React.FC = () => {
         )}
       >  
         <Image
-          src={`${BUCKET_URL}/public/icons/happystamp.png`}
+          src={'/images/icons/happystamp.png'}
           alt="Happtamp Logo"
           width={70}
           height={70}

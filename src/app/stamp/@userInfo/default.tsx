@@ -5,7 +5,6 @@ import { useAuthState } from '@/context/auth';
 import Image from 'next/image';
 import UserProrile from '@/components/molecules/UserProrile';
 import cls from 'classnames';
-import { BUCKET_URL } from '@/utils/api.util';
 import Link from 'next/link';
 import { PiUploadDuotone } from 'react-icons/pi';
 
@@ -41,7 +40,7 @@ const Shop: React.FC<Props> = () => {
         <div className="w-1/2 flex justify-center">
           <p className="text-3xl text-gray-400">{user && user.droplet}</p>
           <Image
-            src={`${BUCKET_URL}/public/icons/droplet.png`}
+            src={'/images/icons/droplet.png'}
             alt="droplet"
             className="object-cover"
             width={30}

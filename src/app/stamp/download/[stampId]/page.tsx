@@ -1,7 +1,7 @@
 'use client';
 
 import { Language, Loading } from '@/mobx';
-import api, { BUCKET_URL } from '@/utils/api.util';
+import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
@@ -142,7 +142,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
               data-cy='downloadStamp-dropletArea'
             >
               <Image
-                src={`${BUCKET_URL}/public/icons/droplet.png`}
+                src={'/images/icons/droplet.png'}
                 alt="droplet"
                 className=""
                 width={40}

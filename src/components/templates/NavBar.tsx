@@ -6,7 +6,7 @@ import { Locale } from '@/types/User';
 import { Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
-import api, { BUCKET_URL } from '@/utils/api.util';
+import api from '@/utils/api.util';
 import UserProrile from '@/components/molecules/UserProrile';
 import cls from 'classnames';
 import { handleError } from '@/utils/error.util';
@@ -51,7 +51,7 @@ const NavBar: React.FC = () => {
       <div className="flex items-center gap-4">
         <Link className="flex items-center" href="/">
           <Image
-            src={`${BUCKET_URL}/public/icons/happystamp.png`}
+            src={'/images/icons/happystamp.png'}
             alt="Happtamp Logo Outline"
             width={45}
             height={45}

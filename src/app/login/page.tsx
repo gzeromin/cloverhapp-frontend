@@ -3,7 +3,7 @@ import InputHapp from '@/components/atoms/InputHapp';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import api, { BUCKET_URL } from '@/utils/api.util';
+import api from '@/utils/api.util';
 import { AuthActionEnum, useAuthDispatch, useAuthState } from '@/context/auth';
 import { Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
@@ -46,7 +46,7 @@ const Login = () => {
     <div className="flex flex-col items-center justify-center h-screen">
       <Image
         className="mb-3"
-        src={`${BUCKET_URL}/public/icons/happystamp.png`}
+        src={'/images/icons/happystamp.png'}
         alt="Happtamp Logo"
         width={70}
         height={70}

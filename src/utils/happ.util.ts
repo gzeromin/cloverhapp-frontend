@@ -143,7 +143,7 @@ export const getTotalDurationTime = (happList: Happ[]) => {
     const end = new Date(happ.endTime);
     return total + DateUtils.calculateDuration(start, end);
   }, 0);
-  return DateUtils.getFormatHourMinByMinutes(totalMinutes);
+  return DateUtils.getFormatHourMinBy15Minutes(totalMinutes);
 };
 
 export const getTotalMoneyDollar = (happList: Happ[]) => {
@@ -215,7 +215,7 @@ export const getGoalCount = (goalUnit: CounterUnit, list: Happ[], type: StampTyp
 
 export const getGoalNumber = (unit: CounterUnit, goalNumber: string) => {
   if (unit == CounterUnit.Time) {
-    return DateUtils.getFormatHourMinByMinutes(Number(goalNumber));
+    return DateUtils.getFormatHourMinBy15Minutes(Number(goalNumber));
   }
   return goalNumber;
 };
