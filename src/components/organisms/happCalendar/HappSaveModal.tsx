@@ -66,7 +66,6 @@ const HappSaveModal: React.FC<HappSaveModalProps> = ({
       // CREATE
       api.get('/user-stamp/' + userStampId).then((res) => {
         const UserStamp: UserStamp = res.data;
-        console.log(UserStamp);
         setUserStamp(UserStamp);
         const stampType = UserStamp.Stamp.type;
         setOpenMoney(OPEN_MONEY.includes(stampType));

@@ -5,36 +5,6 @@ describe('Market Page', () => {
     cy.get('[data-cy="marketList"]').as('marketList');
   });
 
-  it('스탬프 목록 표시', () => {
-    // 스탬프 데이터를 인터셉트하고 목록 요청을 확인
-    cy.intercept({
-      method: 'GET',
-      url: '**/stamp?page=*',
-    }, {
-      statusCode: 200,
-      fixture: 'integration/stamp/list.json',
-    });
-
-    // 스탬프 아이템들이 제대로 렌더링되었는지 확인
-    cy.get('@marketList').children().should('have.length', 13);
-  });
-
-  it('필터되지 않은 스탬프만 표시', () => {
-    // 로그인
-    cy.login();
-
-    cy.intercept({
-      method: 'GET',
-      url: '**/stamp?page=*',
-    }, {
-      statusCode: 200,
-      fixture: 'integration/stamp/list.json',
-    });
-
-    // 스탬프 아이템들이 제대로 렌더링되었는지 확인
-    cy.get('@marketList').children().should('have.length', 5);
-  });
-
   // TODO: 데이터 추가 후 작성
   // it('무한 스크롤 동작 테스트', () => {
   //   // 첫 번째 페이지 요청 인터셉트

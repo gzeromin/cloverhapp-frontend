@@ -104,7 +104,9 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         goalInterval,
         goalNumber,
       };
-      const res = await api.post('/user-stamp/' + userStamp!.id, updateStampDto);
+      const res = await api.post('/user-stamp/' + userStampId, updateStampDto);
+      Loading.setIsLoading(false);
+      console.log(res);
       // 업데이트 성공 후 페이지 새로 고침
       const dialogResult = await Dialog.openDialog(
         Dialog.SUCCESS,
@@ -114,16 +116,16 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         dispatch(AuthActionEnum.SET_USER_STAMPS, res.data);
       }
     } catch (error: any) {
-      handleError(error);
-    } finally {
       Loading.setIsLoading(false);
+      handleError(error);
     }
   };
 
   const deleteUserStamp = async () => {
     Loading.setIsLoading(true);
     try {
-      const res = await api.delete('/user-stamp/' + userStamp!.id);
+      const res = await api.delete('/user-stamp/' + userStampId);
+      Loading.setIsLoading(false);
       // 업데이트 성공 후 페이지 새로 고침
       const dialogResult = await Dialog.openDialog(
         Dialog.SUCCESS,
@@ -131,12 +133,11 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
       );
       if (dialogResult) {
         dispatch(AuthActionEnum.SET_USER_STAMPS, res.data);
-        router.back();
+        router.push('/stamp');
       }
     } catch (error: any) {
-      handleError(error);
-    } finally {
       Loading.setIsLoading(false);
+      handleError(error);
     }
   };
 
@@ -167,6 +168,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             onChange={(e) => setAlias(e.target.value)}
             marginBottom="mb-1"
             border={true}
+            dataCy='userStamp-alias'
           />
         </div>
         {userStamp &&
@@ -175,7 +177,6 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             alt={`happ modify modal ${userStamp.alias}`}
             className={cls(
               'h-auto object-contain aspect-square',
-              ''
             )}
             width={100}
             height={100}
@@ -197,10 +198,10 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             </label>
             <div className={cls('flex items-center gap-2')}>
               {isDisplay &&          
-                <AiOutlineEye className='text-2xl'/>
+                <AiOutlineEye className='text-2xl' data-cy="userStamp-displayIcon" />
               }
               {!isDisplay &&
-                <AiOutlineEyeInvisible className='text-2xl'/>
+                <AiOutlineEyeInvisible className='text-2xl' data-cy="userStamp-invisibleIcon" />
               }
               <input
                 type="checkbox"
@@ -210,6 +211,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
                 )}
                 checked={isDisplay}
                 onChange={(e) => setIsDisplay(e.target.checked)}
+                data-cy="userStamp-isDisplayCheckBox"
               />
             </div>
           </div>
@@ -225,6 +227,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             onChange={(e) => setDisplayOrder(e.target.value)}
             inputClassName='text-center'
             min="1"
+            dataCy='userStamp-orderNumberInput'
           />
           <SelectHapp
             className={cls(
@@ -239,6 +242,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             border={true}
             dark={true}
             wide={true}
+            dataCy='userStamp-statusSelect'
           ></SelectHapp>
         </div>
         <FieldWrapperHapp
@@ -259,6 +263,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             setGoalInterval={setGoalInterval}
             goalNumber={goalNumber}
             setGoalNumber={setGoalNumber}
+            dataCy='userStamp-cycleCounter'
           />
         </FieldWrapperHapp>
         {((userStamp && userStamp.Stamp.type === StampType.EXPENSE) 
@@ -273,6 +278,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             <AddFriendsHapp 
               friends={friends}
               setFriends={setFriends}
+              dataCy='userStamp-addFriends'
             />
           </FieldWrapperHapp>
         )}
@@ -286,6 +292,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
           border={true}
+          dataCy='userStamp-memoTextarea'
         />
         <FieldWrapperHapp
           labelName={Language.$t.Input.Tag}
@@ -293,10 +300,12 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           className={cls(
             'text-base flex gap-3 items-center'
           )}
+          dataCy='userStamp-addTagsWrapper'
         >
           <AddTagsHapp 
             tags={tags}
             setTags={setTags}
+            dataCy='userStamp-addTags'
           />
         </FieldWrapperHapp>
       </div>
@@ -308,17 +317,21 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         <button
           className="m-1 border rounded-lg bg-danger py-1.5 px-3 text-white text-lg"
           onClick={deleteUserStamp}
+          data-cy="userStamp-deleteButton"
         >
           {Language.$t.Button.Delete}
         </button>
         <button
           className="m-1 border rounded-lg bg-cancel py-1.5 px-3 text-white text-lg"
+          data-cy="userStamp-cancelButton"
+          onClick={() => router.push('/stamp')}
         >
           {Language.$t.Button.Cancel}
         </button>
         <button 
           className="m-1 border rounded-lg bg-primary py-1.5 px-3 text-white text-lg"
           onClick={updateUserStamp}  
+          data-cy="userStamp-saveButton"
         >
           {Language.$t.Button.Save}
         </button>

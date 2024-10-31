@@ -32,6 +32,7 @@ const UserStamps: React.FC = () => {
           'overflow-y-auto',
           'h-[40vh] bg-white'
         )}
+        data-cy="displayUserStampList"
       >
         {displayStamps.map((userStamp) => (
           <UserStampItem
@@ -54,6 +55,7 @@ const UserStamps: React.FC = () => {
           'overflow-y-auto',
           'h-[25vh] bg-gray-50'
         )}
+        data-cy="hiddenUserStampList"
       >
         {hiddenStamps.map((userStamp) => (
           <UserStampItem

@@ -89,6 +89,7 @@ function b64toBlob(b64Data, contentType = '', sliceSize = 512) {
   const blob = new Blob(byteArrays, { type: contentType });
   return blob;
 }
+
 //
 //
 // -- This is a child command --

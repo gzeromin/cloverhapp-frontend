@@ -1,5 +1,5 @@
 describe('Upload Page', () => {
-  const tagName = "test Tag";
+  const tagName = 'test Tag';
 
   beforeEach(() => {
     cy.visit('/stamp/upload'); // 업로드 페이지로 이동

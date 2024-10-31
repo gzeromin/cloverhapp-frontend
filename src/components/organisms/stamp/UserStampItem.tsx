@@ -33,7 +33,7 @@ const UserStampItem: React.FC<Props> = ({
   const getGoalNumber = () => {
     const goalNumber = userStamp.goalNumber;
     if (userStamp.goalUnit == CounterUnit.Time) {
-      return DateUtils.getFormatHourMinByMinutes(Number(goalNumber));
+      return DateUtils.getFormatHourMinBy15Minutes(Number(goalNumber));
     }
     return goalNumber;
   };

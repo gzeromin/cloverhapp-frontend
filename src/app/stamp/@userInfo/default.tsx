@@ -31,7 +31,12 @@ const Shop: React.FC<Props> = () => {
               className="object-cover rounded-full"
             />
           )}
-          <span className="text-gray-600">{user && user.nickname}</span>
+          <span
+            className="text-gray-600"
+            data-cy="stamp-userInfo-nickname"
+          >
+            {user && user.nickname}
+          </span>
         </div>
         <div className="w-1/2 flex justify-center">
           <p className="text-3xl text-gray-400">{user && user.droplet}</p>

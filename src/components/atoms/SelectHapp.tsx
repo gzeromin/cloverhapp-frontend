@@ -164,6 +164,7 @@ const SelectHapp: React.FC<SelectHappProps> = ({
                     {'py-2': wide}
                   )}
                   key={option.id ?? option.value}
+                  data-key={option.id ?? option.value}
                   onClick={() => selectValue(option.value)}
                 >
                   {option.image && (

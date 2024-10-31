@@ -41,11 +41,11 @@ const stamp2 = {
   'notForSale': true,
   'type': 'Study',
   'status': 'Friend',
-  'userId': '89c1d67b-3b97-4558-bfa9-b3836a1a09ef',
+  'userId': 'ac56f045-396e-45a6-87bd-c19058cc46a2',
   'Register': {
-    'id': '89c1d67b-3b97-4558-bfa9-b3836a1a09ef',
-    'nickname': 'bbb',
-    'email': 'bbb@bbb.bbb',
+    'id': 'ac56f045-396e-45a6-87bd-c19058cc46a2',
+    'nickname': 'ddd',
+    'email': 'ddd@ddd.ddd',
     'photoUrl': null,
     'locale': 'KR',
     'droplet': 1000,
@@ -69,12 +69,13 @@ const stamp2 = {
 
 describe('Download Page', () => {
   beforeEach(() => {
+    // 로그인
     cy.intercept({
       method: 'GET',
       url: '**/auth/me',
     }, {
       statusCode: 200,
-      fixture: 'integration/login/success.json',
+      fixture: 'integration/stamp/auth.json',
     });
     cy.visit('/stamp/download/0244137a-841d-4c8c-b139-691661fe9972');
   });
@@ -111,6 +112,10 @@ describe('Download Page', () => {
     });
 
     it('구입 버튼(성공)', () => {
+      // 구매 전, 유저 스탬프 목록에 표시 안됨 확인
+      cy.get('[data-cy="displayUserStampList"]').should('not.contain.text', 'Apple');
+      
+      // 구매 리퀘스트 목업
       cy.intercept({
         method: 'POST',
         url: '**/user-stamp',
@@ -118,8 +123,20 @@ describe('Download Page', () => {
         statusCode: 201,
         fixture: 'integration/stamp/download/success.json',
       });
+      // 유저 스탬프 데이터(페이지 이동 대비)
+      cy.intercept({
+        method: 'GET',
+        url: '**/user-stamp/9db9648e-e886-429c-8ea2-e23bb7693e19',
+      }, {
+        statusCode: 200,
+        fixture: 'integration/stamp/userStamps/getOne.json',
+      });
+
       cy.get('@purchaseButton').click();
-      cy.url().should('not.include', '/stamp/download');
+      cy.url().should('include', '/stamp/9db9648e-e886-429c-8ea2-e23bb7693e19');
+      
+      // 구매 후, 유저 스탬프 목록에 표시됨 확인
+      cy.get('[data-cy="displayUserStampList"]').should('contain.text', 'Apple');
     });
 
     it('구입 버튼(실패)', () => {
@@ -145,7 +162,7 @@ describe('Download Page', () => {
 
     it('취소 버튼', () => {
       cy.get('@cancelButton').click();
-      cy.url().should('not.include', '/stamp/download');
+      cy.url().should('include', '/stamp');
     });
   });
 
@@ -171,7 +188,7 @@ describe('Download Page', () => {
     it('초기 화면 표시 확인', () => {
       cy.get('[data-cy="downloadStamp-notForSaleArea"]').should('exist');
       cy.get('@stampNameArea').should('contain.text', 'Apple');
-      cy.get('@registerArea').should('contain.text', 'bbb');
+      cy.get('@registerArea').should('contain.text', 'ddd');
       cy.get('@dropletArea').should('contain.text', '5');
       cy.get('[data-cy="downloadStamp-descriptionArea"]').should('not.exist');
       cy.get('@tagsArea').should('contain.text', 'Speak');
@@ -192,7 +209,7 @@ describe('Download Page', () => {
         statusCode: 200,
       });
       cy.get('@deleteButton').click();
-      cy.url().should('not.include', '/stamp/download');
+      cy.url().should('include', '/stamp');
     });
 
     it('삭제 버튼(실패)', () => {
@@ -208,7 +225,7 @@ describe('Download Page', () => {
       });
       cy.get('@deleteButton').click();
       cy.get('@commonDialog').should('have.class', 'block');
-      cy.get('@commonDialog').should('contain.text', 'A system error has occurred.');
+      cy.get('@commonDialog').should('contain.text', '시스템 에러가 발생했습니다.');
     });
   });
 });

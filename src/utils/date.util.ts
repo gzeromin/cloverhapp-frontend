@@ -210,6 +210,27 @@ const getFormatHourMinByMinutes = (minutes: number) => {
   }
 };
 
+const getFormatHourMinBy15Minutes = (quarterMinutes: number) => {
+  try {
+    const minutes = 15 * quarterMinutes;
+    const hour = Math.floor(minutes / 60);
+    const minute = minutes % 60;
+    if (hour == 0) {
+      if (minute == 0) {
+        return Language.$t.Time.Minute0;
+      } else {
+        return minute + Language.$t.Time.M;
+      }
+    } else if (minute == 0) {
+      return hour + Language.$t.Time.H;
+    }
+    return hour + Language.$t.Time.H
+      + ' ' + minute + Language.$t.Time.M;
+  } catch (error) {
+    return Language.$t.Time.Minute0;
+  }
+};
+
 const getFormatDuration = (start: Date, end: Date) => {
   const minutes = calculateDuration(start, end);
   return getFormatHourMinByMinutes(minutes);
@@ -255,6 +276,7 @@ const DateUtils = {
   getFormatMin,
   getFullDateString,
   getFormatHourMinByMinutes,
+  getFormatHourMinBy15Minutes,
   getFormatDuration,
   isSaturday: (date: Date) => {
     return date.getDay() === 6;

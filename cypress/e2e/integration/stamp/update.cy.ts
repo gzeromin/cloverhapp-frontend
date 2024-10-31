@@ -54,6 +54,12 @@ describe('Update Page', () => {
   });
 
   it('초기 화면 표시 확인', () => {
+    cy.get('@stampNameInput').should('have.value', 'Apple');
+    cy.get('@descriptionTextarea').should('have.text', '가랑비에 옷 젖듯이, 어때요?');
+    cy.get('@dropletInput').should('have.value', '5');
+    cy.get('@statusSelect').should('contain', 'Friend');
+    cy.get('@notForSaleCheck').should('not.be.checked');
+    cy.get('@addTagsHapp').parent().parent().should('contain.text', 'Speak');
   });
 
   it('수정(성공)', () => {

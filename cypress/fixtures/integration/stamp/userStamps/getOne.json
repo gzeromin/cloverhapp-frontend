@@ -1,0 +1,66 @@
+{
+  "id": "f5a1b27d-339f-463e-92a0-c360f1b02651",
+  "createdAt": "2024-10-26T10:56:06.216Z",
+  "updatedAt": "2024-10-26T10:56:06.216Z",
+  "stampId": "8ad8585e-c214-41df-87f5-4b796bb559c7",
+  "userId": "ac56f045-396e-45a6-87bd-c19058cc46a2",
+  "bookPercent": "0",
+  "alias": "요가",
+  "memo": "운동은 시간 나서 하는게 아닌, 시간 내서 하는 것!",
+  "isDisplay": true,
+  "displayOrder": 1,
+  "deleteFlag": false,
+  "status": "Friend",
+  "existGoal": false,
+  "goalUnit": "Number",
+  "goalInterval": "Week",
+  "goalNumber": "",
+  "Stamp": {
+      "id": "8ad8585e-c214-41df-87f5-4b796bb559c7",
+      "createdAt": "2024-10-20T05:01:34.329Z",
+      "updatedAt": "2024-10-20T05:01:34.329Z",
+      "name": "요가",
+      "description": "운동은 시간 나서 하는게 아닌, 시간 내서 하는 것!",
+      "url": "/images/test.png",
+      "droplet": 7,
+      "notForSale": true,
+      "type": "Exercise",
+      "status": "Friend",
+      "deleteFlag": false,
+      "userId": "0ede41f7-3128-43ef-98bd-b70c39ceda37",
+      "Tags": [
+          {
+              "id": "830d1bb3-c020-431c-9e5e-47d023e8ae8d",
+              "createdAt": "2024-10-20T05:01:34.311Z",
+              "updatedAt": "2024-10-20T05:01:34.311Z",
+              "name": "꾸준히",
+              "enrolledCount": 1
+          },
+          {
+              "id": "b20548f1-3dd0-4de6-a01c-1fbd894a7522",
+              "createdAt": "2024-10-20T05:01:34.311Z",
+              "updatedAt": "2024-10-20T05:01:34.311Z",
+              "name": "체력이 국력",
+              "enrolledCount": 1
+          }
+      ]
+  },
+  "Book": null,
+  "Tags": [
+    {
+        "id": "830d1bb3-c020-431c-9e5e-47d023e8ae8d",
+        "createdAt": "2024-10-20T05:01:34.311Z",
+        "updatedAt": "2024-10-20T05:01:34.311Z",
+        "name": "꾸준히",
+        "enrolledCount": 1
+    },
+    {
+        "id": "b20548f1-3dd0-4de6-a01c-1fbd894a7522",
+        "createdAt": "2024-10-20T05:01:34.311Z",
+        "updatedAt": "2024-10-20T05:01:34.311Z",
+        "name": "체력이 국력",
+        "enrolledCount": 1
+    }
+  ],
+  "Friends": []
+}

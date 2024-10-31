@@ -49,10 +49,11 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
           name: stamp.name,
           description: stamp.description,
         });
+        console.log(res);
         Loading.setIsLoading(false);
         dispatch(AuthActionEnum.SET_DROPLET, res.data?.droplet);
         dispatch(AuthActionEnum.SET_USER_STAMPS, res.data?.userStamps);
-        router.back();
+        router.push('/stamp/' + res.data?.userStampId);
       }
     } catch(error) {
       Loading.setIsLoading(false);
@@ -66,7 +67,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
       if (stamp) {
         await api.delete('/stamp/' + stamp.id);
         Loading.setIsLoading(false);
-        router.back();
+        router.push('/stamp');
       }
     } catch (error: any) {
       Loading.setIsLoading(false);
@@ -88,7 +89,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
       )}>
         <IoArrowUndoCircleOutline
           className="text-6xl text-primary hover:text-primary-hover cursor-pointer"
-          onClick={() => router.back()}
+          onClick={() => router.push('/stamp')}
         />
       </div>
 
@@ -213,7 +214,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
             'hover:bg-gray-100 hover:text-cancel',
             'transition-colors duration-300 ease-in-out'
           )}
-          onClick={() => router.back()}
+          onClick={() => router.push('/stamp')}
           data-cy='downloadStamp-cancelButton'
         >
           {Language.$t.Button.Cancel}
