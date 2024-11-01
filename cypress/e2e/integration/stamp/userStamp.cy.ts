@@ -1,13 +1,7 @@
+import { before } from "node:test";
+
 describe('UserStamp Update Page', () => {
   it('본인 스탬프가 아닌 경우, 에러 메세지 표시', () => {
-    // 로그인
-    cy.intercept({
-      method: 'GET',
-      url: '**/auth/me',
-    }, {
-      statusCode: 200,
-      fixture: 'integration/login/success.json',
-    }).as('getAuthMe');
     // 유저 스탬프 데이터
     cy.intercept({
       method: 'GET',
@@ -22,7 +16,8 @@ describe('UserStamp Update Page', () => {
     });
     // 페이지 방문
     cy.visit('stamp/f5a1b27d-339f-463e-92a0-c360f1b02651');
-    cy.wait('@getAuthMe');
+    // 로그인
+    cy.login();
     // 에러메세지 확인
     cy.get('[data-cy=commonDialog]').as('commonDialog').should('exist');
     cy.get('@commonDialog').should('have.class', 'block');
@@ -31,7 +26,7 @@ describe('UserStamp Update Page', () => {
 
   describe('본인 스탬프인 경우', () => {
     beforeEach(() => {
-      // 로그인
+      // 로그인 사용자 설정
       cy.intercept({
         method: 'GET',
         url: '**/auth/me',
