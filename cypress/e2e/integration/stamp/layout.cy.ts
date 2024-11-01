@@ -1,10 +1,10 @@
 describe('Stamp Page Layout', () => {
-  beforeEach(() => {
-    // 페이지 방문
-    cy.visit('/stamp');
-  });
-
+  
   describe('로그인 안했을 때', () => {
+    beforeEach(() => {
+      // 페이지 방문
+      cy.visit('/stamp');
+    });
     it('유저 섹션 로그인 요청 표시', () => {
       // 로그인 요청 표시
       cy.get('[data-cy="stamp-loginRequestComp"]').should('exist');
@@ -33,6 +33,8 @@ describe('Stamp Page Layout', () => {
         statusCode: 200,
         fixture: 'integration/stamp/auth.json',
       });
+      // 페이지 방문
+      cy.visit('/stamp');
     });
 
     it('스탬프 섹션 목록 표시(유저 정보에 의해 필터 됨)', () => {

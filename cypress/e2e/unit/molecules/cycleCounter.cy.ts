@@ -59,14 +59,14 @@ describe('Cycle Counter Component', () => {
     });
   
     it('목표 간격 선택에 따른 스타일 변화 확인', () => {
-      // goal 활성화
-      cy.get('@existGoalCheck').check();
-  
       // Given
       cy.get(`[data-cy="${dataCy}-goalInterval-month"]`).as('month');
       cy.get(`[data-cy="${dataCy}-goalInterval-week"]`).as('week');
       cy.get(`[data-cy="${dataCy}-goalInterval-day"]`).as('day');
-  
+      
+      // goal 활성화
+      cy.get('@existGoalCheck').check();
+      
       // 초기 확인
       cy.get('@month').children().should('have.class', 'bg-gray-50');
       cy.get('@week').children().should('have.class', 'bg-green-100');
@@ -173,7 +173,7 @@ describe('Cycle Counter Component', () => {
       // Given
       cy.get(`[data-cy="${dataCy}-goalNumberInput"]`).as('goalNumberInput');
       cy.get(`[data-cy="${dataCy}-goalUnitSelect"]`).as('goalUnitSelect');
-      
+
       cy.get('@goalUnitSelect').click();
       cy.get('@goalUnitSelect').find('li').each(($li) => {
         cy.wrap($li).invoke('attr', 'data-key').then((keyValue) => {
