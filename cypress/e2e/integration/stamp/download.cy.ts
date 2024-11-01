@@ -68,18 +68,6 @@ const stamp2 = {
 };
 
 describe('Download Page', () => {
-  beforeEach(() => {
-    // 로그인
-    cy.intercept({
-      method: 'GET',
-      url: '**/auth/me',
-    }, {
-      statusCode: 200,
-      fixture: 'integration/stamp/auth.json',
-    });
-    cy.visit('/stamp/download/0244137a-841d-4c8c-b139-691661fe9972');
-  });
-
   describe('소비자', () => {
     beforeEach(() => {
       cy.intercept({
@@ -89,6 +77,16 @@ describe('Download Page', () => {
         statusCode: 200,
         body: stamp1,
       });
+        // 로그인
+      cy.intercept({
+        method: 'GET',
+        url: '**/auth/me',
+      }, {
+        statusCode: 200,
+        fixture: 'integration/stamp/auth.json',
+      });
+      cy.visit('/stamp/download/0244137a-841d-4c8c-b139-691661fe9972');
+
       cy.get('[data-cy="downloadStamp-stampNameArea"]').as('stampNameArea');
       cy.get('[data-cy="downloadStamp-registerArea"]').as('registerArea');
       cy.get('[data-cy="downloadStamp-dropletArea"]').as('dropletArea');
@@ -175,6 +173,16 @@ describe('Download Page', () => {
         statusCode: 200,
         body: stamp2,
       });
+      // 로그인
+      cy.intercept({
+        method: 'GET',
+        url: '**/auth/me',
+      }, {
+        statusCode: 200,
+        fixture: 'integration/stamp/auth.json',
+      });
+      cy.visit('/stamp/download/0244137a-841d-4c8c-b139-691661fe9972');
+      
       cy.get('[data-cy="downloadStamp-stampNameArea"]').as('stampNameArea');
       cy.get('[data-cy="downloadStamp-registerArea"]').as('registerArea');
       cy.get('[data-cy="downloadStamp-dropletArea"]').as('dropletArea');

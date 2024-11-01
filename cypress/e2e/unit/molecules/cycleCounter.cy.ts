@@ -14,7 +14,7 @@ describe('Cycle Counter Component', () => {
       }, {
         statusCode: 200,
         fixture: 'integration/stamp/auth.json',
-      });
+      }).as('getAuth');
       // 유저 스탬프 데이터
       cy.intercept({
         method: 'GET',
@@ -22,9 +22,11 @@ describe('Cycle Counter Component', () => {
       }, {
         statusCode: 200,
         fixture: 'integration/stamp/userStamps/getOne.json',
-      });
+      }).as('getUserStamp');
       // 페이지 방문
       cy.visit(`stamp/${stampId}`);
+      cy.wait('@getAuth');
+      cy.wait('@getUserStamp');
       // Given
       cy.get(`[data-cy="${dataCy}-existGoalCheck"]`).as('existGoalCheck');
     });
@@ -104,7 +106,7 @@ describe('Cycle Counter Component', () => {
       }, {
         statusCode: 200,
         fixture: 'integration/stamp/auth.json',
-      });
+      }).as('getAuth');
     });
 
     it('StampType.WAKE_UP(,GO_TO_BED)/ Hour', () => {
@@ -119,11 +121,13 @@ describe('Cycle Counter Component', () => {
         }, {
           statusCode: 200,
           body: fixtureData,
-        });
+        }).as('getUserStamp');
       });
 
       // 페이지 방문
       cy.visit(`stamp/${stampId}`);
+      cy.wait('@getAuth');
+      cy.wait('@getUserStamp');
 
       // goal 활성화
       cy.get(`[data-cy="${dataCy}-existGoalCheck"]`).check();
@@ -161,11 +165,13 @@ describe('Cycle Counter Component', () => {
         }, {
           statusCode: 200,
           body: fixtureData,
-        });
+        }).as('getUserStamp');
       });
       
       // 페이지 방문
       cy.visit(`stamp/${stampId}`);
+      cy.wait('@getAuth');
+      cy.wait('@getUserStamp');
 
       // goal 활성화
       cy.get(`[data-cy="${dataCy}-existGoalCheck"]`).check();
@@ -238,11 +244,13 @@ describe('Cycle Counter Component', () => {
         }, {
           statusCode: 200,
           body: fixtureData,
-        });
+        }).as('getUserStamp');
       });
 
       // 페이지 방문
       cy.visit(`stamp/${stampId}`);
+      cy.wait('@getAuth');
+      cy.wait('@getUserStamp');
 
       // goal 활성화
       cy.get(`[data-cy="${dataCy}-existGoalCheck"]`).check();
