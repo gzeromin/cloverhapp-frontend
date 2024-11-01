@@ -11,11 +11,23 @@ const nextConfig = {
   },
   reactStrictMode: true,
   images: {
-    domains: [
-      'elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com', 
-      'elasticbeanstalk-us-east-1-149536466661.s3.us-east-1.amazonaws.com',
-      'source.unsplash.com',
-      'search1.kakaocdn.net',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'elasticbeanstalk-us-east-1-149536466661.s3.us-east-1.amazonaws.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'source.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'search1.kakaocdn.net',
+      },
     ],
   },
 };
