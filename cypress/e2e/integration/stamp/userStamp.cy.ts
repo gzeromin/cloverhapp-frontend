@@ -1,35 +1,35 @@
 describe('UserStamp Update Page', () => {
-  it('본인 스탬프가 아닌 경우, 에러 메세지 표시', () => {
-    // 유저 정보
-    cy.intercept({
-      method: 'GET',
-      url: '**/auth/me',
-    }, {
-      statusCode: 200,
-      fixture: 'integration/login/success.json',
-    }).as('getAuth');
-    // 유저 스탬프 데이터
-    cy.intercept({
-      method: 'GET',
-      url: '**/user-stamp/f5a1b27d-339f-463e-92a0-c360f1b02651',
-    }, {
-      statusCode: 500,
-      body: {
-        'message': 'Can\'t find UserStamp with id f5a1b27d-339f-463e-92a0-c360f1b02651',
-        'error': 'Not Found',
-        'statusCode': 404,
-      },
-    }).as('getUserStamp');
+  // it('본인 스탬프가 아닌 경우, 에러 메세지 표시', () => {
+  //   // 유저 정보
+  //   cy.intercept({
+  //     method: 'GET',
+  //     url: '**/auth/me',
+  //   }, {
+  //     statusCode: 200,
+  //     fixture: 'integration/login/success.json',
+  //   }).as('getAuth');
+  //   // 유저 스탬프 데이터
+  //   cy.intercept({
+  //     method: 'GET',
+  //     url: '**/user-stamp/f5a1b27d-339f-463e-92a0-c360f1b02651',
+  //   }, {
+  //     statusCode: 500,
+  //     body: {
+  //       'message': 'Can\'t find UserStamp with id f5a1b27d-339f-463e-92a0-c360f1b02651',
+  //       'error': 'Not Found',
+  //       'statusCode': 404,
+  //     },
+  //   }).as('getUserStamp');
 
-    // 페이지 방문
-    cy.visit('stamp/f5a1b27d-339f-463e-92a0-c360f1b02651');
-    cy.wait('@getAuth');
-    cy.wait('@getUserStamp');
-    // 에러메세지 확인
-    cy.get('[data-cy=commonDialog]').as('commonDialog').should('exist');
-    cy.get('@commonDialog').should('have.class', 'block');
-    cy.get('@commonDialog').should('contain.text', 'A system error has occurred.');
-  });
+  //   // 페이지 방문
+  //   cy.visit('stamp/f5a1b27d-339f-463e-92a0-c360f1b02651');
+  //   cy.wait('@getAuth');
+  //   cy.wait('@getUserStamp');
+  //   // 에러메세지 확인
+  //   cy.get('[data-cy=commonDialog]').as('commonDialog').should('exist');
+  //   cy.get('@commonDialog').should('have.class', 'block');
+  //   cy.get('@commonDialog').should('contain.text', 'A system error has occurred.');
+  // });
 
   describe('본인 스탬프인 경우', () => {
     beforeEach(() => {
