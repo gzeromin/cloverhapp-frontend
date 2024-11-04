@@ -1,5 +1,17 @@
 describe('UserStamp Update Page', () => {
   it('본인 스탬프가 아닌 경우, 에러 메세지 표시', () => {
+    // 유저 정보
+    cy.intercept({
+      method: 'GET',
+      url: '**/auth/me',
+    }, {
+      statusCode: 200,
+      fixture: 'integration/login/success.json',
+    }).as('getAuth');
+
+    // 페이지 방문
+    cy.visit('stamp/f5a1b27d-339f-463e-92a0-c360f1b02651');
+    cy.wait('@getAuth');
     // 유저 스탬프 데이터
     cy.intercept({
       method: 'GET',
@@ -11,11 +23,8 @@ describe('UserStamp Update Page', () => {
         'error': 'Not Found',
         'statusCode': 404,
       },
-    });
-    // 페이지 방문
-    cy.visit('stamp/f5a1b27d-339f-463e-92a0-c360f1b02651');
-    // 로그인
-    cy.login();
+    }).as('getUserStamp');
+    cy.wait('@getUserStamp');
     // 에러메세지 확인
     cy.get('[data-cy=commonDialog]').as('commonDialog').should('exist');
     cy.get('@commonDialog').should('have.class', 'block');

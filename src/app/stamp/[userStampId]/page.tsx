@@ -106,7 +106,6 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
       };
       const res = await api.post('/user-stamp/' + userStampId, updateStampDto);
       Loading.setIsLoading(false);
-      console.log(res);
       // 업데이트 성공 후 페이지 새로 고침
       const dialogResult = await Dialog.openDialog(
         Dialog.SUCCESS,
