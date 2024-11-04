@@ -8,10 +8,6 @@ describe('UserStamp Update Page', () => {
       statusCode: 200,
       fixture: 'integration/login/success.json',
     }).as('getAuth');
-
-    // 페이지 방문
-    cy.visit('stamp/f5a1b27d-339f-463e-92a0-c360f1b02651');
-    cy.wait('@getAuth');
     // 유저 스탬프 데이터
     cy.intercept({
       method: 'GET',
@@ -24,6 +20,10 @@ describe('UserStamp Update Page', () => {
         'statusCode': 404,
       },
     }).as('getUserStamp');
+
+    // 페이지 방문
+    cy.visit('stamp/f5a1b27d-339f-463e-92a0-c360f1b02651');
+    cy.wait('@getAuth');
     cy.wait('@getUserStamp');
     // 에러메세지 확인
     cy.get('[data-cy=commonDialog]').as('commonDialog').should('exist');
