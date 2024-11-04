@@ -1,5 +1,3 @@
-import { before } from "node:test";
-
 describe('UserStamp Update Page', () => {
   it('본인 스탬프가 아닌 경우, 에러 메세지 표시', () => {
     // 유저 스탬프 데이터
