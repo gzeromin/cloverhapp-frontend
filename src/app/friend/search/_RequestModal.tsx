@@ -7,7 +7,7 @@ import { memo, useEffect, useState } from 'react';
 import { User } from '@/types/User';
 import { observer } from 'mobx-react-lite';
 import UserProrile from '@/components/molecules/UserProrile';
-import InputHapp from '@/components/atoms/InputHapp';
+import InputHapp from '@/components/molecules/InputHapp';
 import TextareaHapp from '@/components/atoms/TextareaHapp';
 
 interface RequestModalProps {
@@ -98,20 +98,20 @@ const _RequestModal: React.FC<RequestModalProps> = ({
               </div>
               <div>
                 <InputHapp
+                  id="requestModal-myAlias"
                   className="grow"
                   labelName={Language.$t.Input.MyAlias}
                   placeholder={Language.$t.Input.MyAlias}
                   value={myAlias}
                   onChange={(e) => setMyAlias(e.target.value)}
-                  marginBottom=""
                 />
                 <InputHapp
+                  id="requestModal-friendAlias"
                   className="grow"
                   labelName={Language.$t.Input.FriendAlias}
                   placeholder={Language.$t.Input.FriendAlias}
                   value={friendAlias}
                   onChange={(e) => setFriendAlias(e.target.value)}
-                  marginBottom="mb-2"
                 />
                 <TextareaHapp
                   labelName={Language.$t.Input.RequestMessage}

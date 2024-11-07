@@ -1,43 +1,41 @@
 'use client';
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
+import LabelHapp from '../atoms/LabelHapp';
+import ErrorMessageHapp from '../atoms/ErrorMessageHapp';
 
-export interface InputHappProps {
-  /** input type */
+interface InputHappProps {
+  id: string;
   type?: string;
   labelName?: string;
   labelClassName?: string;
   placeholder?: string;
   error?: string;
   border?: boolean;
-  marginBottom?: string;
   className?: string;
   inputClassName?: string;
   disable?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  dataCy?: string;
   min?: string;
   max?: string;
   grow?: boolean;
   step?: string;
 }
 
-/** Primary UI component for user interaction */
 const InputHapp: React.FC<InputHappProps> = ({
+  id,
   type = 'text',
   labelName = '',
   labelClassName,
   placeholder = '',
   error,
   border = true,
-  marginBottom = 'mb-3',
   className,
   inputClassName,
   disable = false,
   value = '',
   onChange,
-  dataCy,
   min,
   max,
   grow = true,
@@ -46,20 +44,19 @@ const InputHapp: React.FC<InputHappProps> = ({
   return (
     <div
       className={cls(
-        error ? 'mb-1' : marginBottom,
+        'relative mb-6',
         className,
       )}
     >
-      {labelName && (
-        <label className={cls(
-          'text-sm text-nowrap',
-          labelClassName,
-        )}>
-          {labelName}
-        </label>
-      )}
+      <LabelHapp
+        htmlFor={id}
+        className={labelClassName}
+      >
+        {labelName}
+      </LabelHapp>
       <div className={cls({'grow': grow})}>
         <input
+          id={id}
           type={type}
           min={min}
           max={max}
@@ -81,10 +78,13 @@ const InputHapp: React.FC<InputHappProps> = ({
           disabled={disable}
           onChange={onChange}
           step={step}
-          data-cy={dataCy}
         />
         {error && (
-          <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>
+          <div className="absolute">
+            <ErrorMessageHapp>
+              {error}
+            </ErrorMessageHapp>
+          </div>
         )}
       </div>
     </div>

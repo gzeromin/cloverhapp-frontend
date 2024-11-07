@@ -1,5 +1,5 @@
 'use client';
-import InputHapp from '@/components/atoms/InputHapp';
+import InputHapp from '@/components/molecules/InputHapp';
 import api from '@/utils/api.util';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -57,7 +57,7 @@ const Register = () => {
     <div className="flex flex-col items-center justify-center h-screen">
       <p 
         className={`text-4xl mb-3 ${Language.logoFont}`}
-        data-cy="registLogo"
+        id="registLogo"
       >
         {Language.$t.Logo}
       </p>
@@ -69,7 +69,7 @@ const Register = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={errors.email}
-            dataCy="emailInput"
+            id="register-emailInput"
           />
           <InputHapp
             labelName={Language.$t.Input.Nickname}
@@ -77,7 +77,7 @@ const Register = () => {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             error={errors.nickname}
-            dataCy="nicknameInput"
+            id="register-nicknameInput"
           />
           <InputHapp
             labelName={Language.$t.Input.Password}
@@ -86,7 +86,7 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             error={errors.password}
-            dataCy="passwordInput"
+            id="register-passwordInput"
           />
           <InputHapp
             labelName={Language.$t.Input.PasswordConfirm}
@@ -95,12 +95,12 @@ const Register = () => {
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
             error={errors.passwordConfirm}
-            dataCy="passwordConfirmInput"
+            id="register-passwordConfirmInput"
           />
           <button
             className="w-full py-3 mt-5 mb-2 text-s tracking-wider font-bold text-white uppercase
            bg-primary border hover:bg-primary-hover hover:text-primary rounded"
-            data-cy="signupButton"
+            id="signupButton"
           >
             {Language.$t.Button.Signup}
           </button>
@@ -109,7 +109,7 @@ const Register = () => {
             <Link
               className="ml-1 font-bold hover:text-blue-500 uppercase"
               href="/login"
-              data-cy="loginLink"
+              id="loginLink"
             >
               {Language.$t.Button.Signin}
             </Link>

@@ -1,5 +1,5 @@
 'use client';
-import InputHapp from '@/components/atoms/InputHapp';
+import InputHapp from '@/components/molecules/InputHapp';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -60,7 +60,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={errors.email}
-            dataCy='emailInput'
+            id='login-emailInput'
           />
           <InputHapp
             labelName={Language.$t.Input.Password}
@@ -69,12 +69,12 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             error={errors.password}
-            dataCy='passwordInput'
+            id='login-passwordInput'
           />
           <button
             className="w-full py-3 mt-5 mb-2 text-s tracking-wider font-bold text-white uppercase
            bg-primary border hover:bg-primary-hover hover:text-primary rounded"
-            data-cy="loginButton"
+            id="loginButton"
           >
             {Language.$t.Button.Signin}
           </button>
@@ -83,7 +83,7 @@ const Login = () => {
             <Link
               className="ml-1 font-bold hover:text-blue-500 uppercase"
               href="/register"
-              data-cy="signupLink"
+              id="signupLink"
             >
               {Language.$t.Button.Signup}
             </Link>

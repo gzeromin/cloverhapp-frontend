@@ -19,14 +19,14 @@ interface AddTagsHappProps{
   className?: string;
   tags: Tag[];
   setTags: Dispatch<SetStateAction<Tag[]>>;
-  dataCy?: string;
+  id?: string;
 }
 
 const AddTagsHapp: React.FC<AddTagsHappProps> = ({
   className,
   tags,
   setTags,
-  dataCy,
+  id,
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [showTags, setShowTags] = useState(false);
@@ -109,7 +109,7 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
           'flex flex-wrap gap-1 justify-start',
           'max-h-[90px] overflow-y-auto'
         )}
-        data-cy="tagContainer"
+        id="tagContainer"
       >
         {tags?.map((tag, index) => (
           <div
@@ -121,7 +121,7 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
               'hover:bg-green-100 cursor-pointer'
             )}
             onClick={() => deleteTag(tag)}
-            data-cy={`tag-${index}`}
+            id={`tag-${index}`}
           >
             <TagHapp
               name={tag.name} 
@@ -150,7 +150,7 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
           onKeyDown={handleKeyDown}
           onCompositionStart={() => setIsComposing(true)}   // IME 입력 시작
           onCompositionEnd={handleCompositionEnd}           // IME 입력 완료 시 호출
-          data-cy={dataCy}
+          id={id}
         />
       </div>
     </div>

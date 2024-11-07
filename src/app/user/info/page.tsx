@@ -99,7 +99,7 @@ const Info: React.FC = () => {
         options={languageOptions}
         selected={Language.type}
         onSelected={handleLocale}
-        dataCy="localeSelect"
+        id="localeSelect"
         border={true}
       />
     </div>

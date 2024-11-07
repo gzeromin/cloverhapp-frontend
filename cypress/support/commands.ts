@@ -19,8 +19,8 @@ Cypress.Commands.add('login', (email = 'aaa@aaa.aaa', password = 'aaaaaa') => {
   cy.visit('/login');
 
   // 이메일 및 비밀번호 입력 후 로그인 버튼 클릭
-  cy.get('[data-cy=emailInput]').type(email);
-  cy.get('[data-cy=passwordInput]').type(password);
+  cy.get('[id=login-emailInput]').type(email);
+  cy.get('[id=passwordInput]').type(password);
 
   cy.intercept({
     method: 'POST',
@@ -38,7 +38,7 @@ Cypress.Commands.add('login', (email = 'aaa@aaa.aaa', password = 'aaaaaa') => {
     fixture: 'integration/login/success.json',
   });
   
-  cy.get('[data-cy=loginButton]').click();
+  cy.get('[id=loginButton]').click();
 
   // 로그인 요청이 성공적으로 처리되었는지 확인
   cy.wait('@loginRequest');

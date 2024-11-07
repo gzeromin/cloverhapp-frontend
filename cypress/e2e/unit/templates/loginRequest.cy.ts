@@ -8,7 +8,7 @@ describe('로그인 요청 컴포넌트', () => {
 
   it('로그인 요청 메세지 클릭시 로그인 화면으로 이동', () => {
     // 로그인 요청 메세지 표시
-    cy.get('[data-cy=web-loginRequestComp]').as('loginRequestComp').should('exist');
+    cy.get('[id=web-loginRequestComp]').as('loginRequestComp').should('exist');
 
     // 컴포넌트 안의 링크 클릭
     cy.get('@loginRequestComp').find('a').click();

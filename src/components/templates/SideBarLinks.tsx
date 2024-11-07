@@ -33,21 +33,21 @@ const SideBarLinks: React.FC = () => {
       <Link
         className={tabStyle(Menu.Profile)}
         href={`/main/${userId}/profile`}
-        data-cy="profileLink"
+        id="profileLink"
       >
         {Language.$t.SideBar.Profile}
       </Link>
       <Link
         className={tabStyle(Menu.Goal)}
         href={`/main/${userId}/goal`}
-        data-cy="goalLink"
+        id="goalLink"
       >
         {Language.$t.SideBar.Goal}
       </Link>
       <Link
         className={tabStyle(Menu.Statistics)}
         href={`/main/${userId}/statistics`}
-        data-cy="statisticsLink"
+        id="statisticsLink"
       >
         {Language.$t.SideBar.Statistics}
       </Link>

@@ -11,7 +11,7 @@ interface Props {
   marginBottom?: string;
   className?: string;
   inputClassName?: string;
-  dataCy?: string;
+  id?: string;
 }
 
 const FieldWrapperHapp: React.FC<Props> = ({ 
@@ -23,7 +23,7 @@ const FieldWrapperHapp: React.FC<Props> = ({
   marginBottom = 'mb-3',
   className,
   inputClassName,
-  dataCy,
+  id,
 }) => {
   return (
     <div className={cls(marginBottom, className)}>
@@ -45,7 +45,7 @@ const FieldWrapperHapp: React.FC<Props> = ({
             },
             inputClassName,
           )}
-          data-cy={dataCy}
+          id={id}
         >
           {children}
         </div>

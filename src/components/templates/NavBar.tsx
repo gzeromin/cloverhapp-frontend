@@ -63,7 +63,7 @@ const NavBar: React.FC = () => {
               'text-2xl font-thin text-white tracking-normal',
               Language.logoFont
             )}
-            data-cy='navBarLogo'
+            id='navBarLogo'
           >
             {Language.$t.Logo}
           </p>
@@ -82,7 +82,7 @@ const NavBar: React.FC = () => {
           options={options}
           selected={Language.type}
           onSelected={handleLocale}
-          dataCy="localeSelect"
+          id="localeSelect"
         />
         <div className="text-center">
           {authenticated ? (

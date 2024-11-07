@@ -1,5 +1,5 @@
 'use client';
-import InputHapp from '@/components/atoms/InputHapp';
+import InputHapp from '@/components/molecules/InputHapp';
 import { FormEvent, memo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -155,8 +155,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             error={errors.name}
-            marginBottom="mb-1"
-            dataCy='stampUpdate-stampNameInput'
+            id='stampUpdate-stampNameInput'
           />
           <div className={cls('flex items-center gap-1')}>
             <CheckHapp
@@ -169,10 +168,10 @@ const Update: React.FC<Props> = ({ params }: Props) => {
               onChange={(e) => setNotForSale(e.target.checked)}
               grow={false}
               marginBottom="mb-0"
-              dataCy='stampUpdate-notForSaleCheck'
+              id='stampUpdate-notForSaleCheck'
             />
             <InputHapp
-              className={cls('w-1/2 flex items-center gap-1')}
+              className={cls('w-1/2 flex gap-3 items-center')}
               labelName={Language.$t.Input.Droplet}
               labelClassName={cls('text-xs w-3/4')}
               placeholder={Language.$t.Placeholder.Droplet}
@@ -180,9 +179,8 @@ const Update: React.FC<Props> = ({ params }: Props) => {
               value={droplet}
               onChange={(e) => setDroplet(e.target.value)}
               error={errors.droplet}
-              marginBottom="mb-1"
               min="0"
-              dataCy='stampUpdate-dropletInput'
+              id='stampUpdate-dropletInput'
             />
           </div>
           <SelectHapp
@@ -197,7 +195,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             onSelected={setType}
             border={true}
             dark={true}
-            dataCy="stampUpdate-typeSelect"
+            id="stampUpdate-typeSelect"
           />
           <SelectHapp
             className={cls(
@@ -211,7 +209,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             onSelected={setStampStatus}
             border={true}
             dark={true}
-            dataCy="stampUpdate-statusSelect"
+            id="stampUpdate-statusSelect"
           />
           <TextareaHapp
             labelName={Language.$t.Input.Description}
@@ -221,7 +219,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             onChange={(e) => setDescription(e.target.value)}
             error={errors.description}
             marginBottom="mb-1"
-            dataCy='stampUpdate-descriptionTextarea'
+            id='stampUpdate-descriptionTextarea'
           />
         </div>
       </div>
@@ -229,7 +227,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
         className={cls('w-2/3')}
         tags={tags}
         setTags={setTags}
-        dataCy='stampUpdate-addTagsHapp'
+        id='stampUpdate-addTagsHapp'
       />
       {/* footer */}
       <div className={cls(
@@ -245,7 +243,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             'transition-colors duration-300 ease-in-out'
           )}
           onClick={() => router.back()}
-          data-cy="stampUpdate-cancelButton"
+          id="stampUpdate-cancelButton"
         >
           {Language.$t.Button.Cancel}
         </button>
@@ -258,7 +256,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             'transition-colors duration-300 ease-in-out'
           )}
           onClick={onSubmit}
-          data-cy="stampUpdate-editButton"
+          id="stampUpdate-editButton"
         >
           {Language.$t.Button.Edit}
         </button>

@@ -23,7 +23,7 @@ interface MoneyHappProps {
   disable?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  dataCy?: string;
+  id?: string;
   min?: string;
   max?: string;
   moneyUnit: MoneyUnit;
@@ -41,7 +41,7 @@ const MoneyHapp: React.FC<MoneyHappProps> = ({
   disable = false,
   value = '',
   onChange,
-  dataCy,
+  id,
   min,
   max,
   moneyUnit,
@@ -103,7 +103,7 @@ const MoneyHapp: React.FC<MoneyHappProps> = ({
             value={inputValue}
             disabled={disable}
             onChange={handleChange}
-            data-cy={dataCy}
+            id={id}
           />
           {error && (
             <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>

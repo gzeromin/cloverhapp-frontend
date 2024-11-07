@@ -1,7 +1,7 @@
 import React, { Dispatch, memo, SetStateAction, useEffect, useState } from 'react';
 import cls from 'classnames';
 import CheckHapp from '../atoms/CheckHapp';
-import InputHapp from '../atoms/InputHapp';
+import InputHapp from './InputHapp';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
 import SelectHapp, { OptionType } from '../atoms/SelectHapp';
@@ -10,7 +10,7 @@ import DateUtils from '@/utils/date.util';
 import { StampType } from '@/types/Stamp';
 
 interface Props {
-  dataCy?: string;
+  id?: string;
   type: StampType | undefined;
   existGoal: boolean;
   setExistGoal: Dispatch<SetStateAction<boolean>>;
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const CycleCounter: React.FC<Props> = ({
-  dataCy,
+  id,
   type,
   existGoal,
   setExistGoal,
@@ -145,14 +145,14 @@ const CycleCounter: React.FC<Props> = ({
   return (
     <div
       className={cls('flex items-center justify-between')}
-      data-cy={dataCy}
+      id={id}
     >
       <CheckHapp
         className={cls('mx-3')}
         checked={existGoal}
         onChange={(e) => setExistGoal(e.target.checked)}
         marginBottom='mb-0'
-        dataCy={`${dataCy}-existGoalCheck`}
+        id={`${id}-existGoalCheck`}
       />
       <div
         className={cls(
@@ -161,26 +161,26 @@ const CycleCounter: React.FC<Props> = ({
             'text-gray-400 cursor-not-allowed': !existGoal,
           },
         )}
-        data-cy={`${dataCy}-goalInterval`}
+        id={`${id}-goalInterval`}
       >
         <div
           className={tabStyleDefault}
           onClick={() => setGoalInterval(IntervalUnit.Month)}
-          data-cy={`${dataCy}-goalInterval-month`}
+          id={`${id}-goalInterval-month`}
         >
           <div className={tabStyleSelected(IntervalUnit.Month)}>{Language.$t.Date.Month}</div>
         </div>
         <div
           className={tabStyleDefault}
           onClick={() => setGoalInterval(IntervalUnit.Week)}
-          data-cy={`${dataCy}-goalInterval-week`}
+          id={`${id}-goalInterval-week`}
         >
           <div className={tabStyleSelected(IntervalUnit.Week)}>{Language.$t.Date.Week}</div>
         </div>
         <div
           className={tabStyleDefault}
           onClick={() => setGoalInterval(IntervalUnit.Day)}
-          data-cy={`${dataCy}-goalInterval-day`}
+          id={`${id}-goalInterval-day`}
         >
           <div className={tabStyleSelected(IntervalUnit.Day)}>{Language.$t.Date.Day}</div>
         </div>
@@ -195,7 +195,7 @@ const CycleCounter: React.FC<Props> = ({
             </span>
             <span 
               className={cls('text-xs text-blue-700')}
-              data-cy={`${dataCy}-goalNumberTime`}
+              id={`${id}-goalNumberTime`}
             >
               {DateUtils.getFormatHourMinBy15Minutes(Number(goalNumber))}
             </span>
@@ -216,11 +216,10 @@ const CycleCounter: React.FC<Props> = ({
           inputClassName='text-center'
           min={getMin(goalUnit)}
           max={getMax(goalUnit)}
-          marginBottom='mb-0'
           disable={!existGoal}
           step={getStep(goalUnit)}
           border={CounterUnit.Time !== goalUnit}
-          dataCy={`${dataCy}-goalNumberInput`}
+          id={`${id}-goalNumberInput`}
         />
       </div>
       <SelectHapp
@@ -234,7 +233,7 @@ const CycleCounter: React.FC<Props> = ({
         dark={true}
         wide={true}
         disable={!existGoal}
-        dataCy={`${dataCy}-goalUnitSelect`}
+        id={`${id}-goalUnitSelect`}
       />
     </div>
   );

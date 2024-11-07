@@ -3,10 +3,10 @@ describe('Upload Page', () => {
 
   beforeEach(() => {
     cy.visit('/stamp/upload'); // 업로드 페이지로 이동
-    cy.get('[data-cy="addTagsHapp"]').as('addTagsHapp').should('be.visible');
-    cy.get('[data-cy=localeSelect]').as('localeSelect').should('exist');
-    cy.get('[data-cy="tagContainer"]').as('tagContainer').should('exist');
-    cy.get('[data-cy="commonDialog"]').as('commonDialog');
+    cy.get('[id="addTagsHapp"]').as('addTagsHapp').should('be.visible');
+    cy.get('[id=localeSelect]').as('localeSelect').should('exist');
+    cy.get('[id="tagContainer"]').as('tagContainer').should('exist');
+    cy.get('[id="commonDialog"]').as('commonDialog');
   });
 
   it('태그 추가하고 삭제', () => {
@@ -15,7 +15,7 @@ describe('Upload Page', () => {
 
     // test Tag가 추가되었는지 확인
     cy.get('@tagContainer') // 태그가 담기는 컨테이너 확인
-      .find('[data-cy="tag-0"]').as('addedTag') // 첫 번째로 추가된 태그 확인
+      .find('[id="tag-0"]').as('addedTag') // 첫 번째로 추가된 태그 확인
       .should('contain.text', tagName); // tagName이 포함되어 있는지 확인
 
     // 태그 삭제 테스트
@@ -23,7 +23,7 @@ describe('Upload Page', () => {
 
     // 삭제 후 tagContainer에 tag-0가 존재하지 않는지 확인
     cy.get('@tagContainer')
-      .find('[data-cy="tag-0"]')
+      .find('[id="tag-0"]')
       .should('not.exist');
   });
 
@@ -35,7 +35,7 @@ describe('Upload Page', () => {
     }
 
     // test Tag가 추가되었는지 확인
-    cy.get('@tagContainer').find('[data-cy="tag-7"]').as('newTag');
+    cy.get('@tagContainer').find('[id="tag-7"]').as('newTag');
 
     // 스크롤이 태그 추가로 인해 이동했는지 확인 (visibility check)
     cy.get('@newTag').then(($el) => {

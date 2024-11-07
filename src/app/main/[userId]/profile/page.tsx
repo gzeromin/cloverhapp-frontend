@@ -14,7 +14,7 @@ const Profile: React.FC<Props> = () => {
   const { user } = useAuthState();
 
   return (
-    <div className='py-1' data-cy="profilePage">
+    <div className='py-1' id="profilePage">
       <Link 
         className={cls('flex w-full items-center justify-end h-[18px]')}
         href="/user/photo"

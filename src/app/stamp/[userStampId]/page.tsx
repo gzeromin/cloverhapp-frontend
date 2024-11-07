@@ -1,6 +1,6 @@
 'use client';
 
-import InputHapp from '@/components/atoms/InputHapp';
+import InputHapp from '@/components/molecules/InputHapp';
 import { Dialog, Language, Loading } from '@/mobx';
 import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
@@ -160,14 +160,13 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           )} />
           <InputHapp
             className={cls(
-              'text-base flex gap-3 items-center grow font-bold tracking-wider'
+              'text-base items-center grow font-bold tracking-wider'
             )}
             placeholder={Language.$t.Input.Alias}
             value={alias}
             onChange={(e) => setAlias(e.target.value)}
-            marginBottom="mb-1"
             border={true}
-            dataCy='userStamp-alias'
+            id='userStamp-alias'
           />
         </div>
         {userStamp &&
@@ -197,10 +196,10 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             </label>
             <div className={cls('flex items-center gap-2')}>
               {isDisplay &&          
-                <AiOutlineEye className='text-2xl' data-cy="userStamp-displayIcon" />
+                <AiOutlineEye className='text-2xl' id="userStamp-displayIcon" />
               }
               {!isDisplay &&
-                <AiOutlineEyeInvisible className='text-2xl' data-cy="userStamp-invisibleIcon" />
+                <AiOutlineEyeInvisible className='text-2xl' id="userStamp-invisibleIcon" />
               }
               <input
                 type="checkbox"
@@ -210,7 +209,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
                 )}
                 checked={isDisplay}
                 onChange={(e) => setIsDisplay(e.target.checked)}
-                data-cy="userStamp-isDisplayCheckBox"
+                id="userStamp-isDisplayCheckBox"
               />
             </div>
           </div>
@@ -226,7 +225,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             onChange={(e) => setDisplayOrder(e.target.value)}
             inputClassName='text-center'
             min="1"
-            dataCy='userStamp-orderNumberInput'
+            id='userStamp-orderNumberInput'
           />
           <SelectHapp
             className={cls(
@@ -241,7 +240,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             border={true}
             dark={true}
             wide={true}
-            dataCy='userStamp-statusSelect'
+            id='userStamp-statusSelect'
           ></SelectHapp>
         </div>
         <FieldWrapperHapp
@@ -262,7 +261,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             setGoalInterval={setGoalInterval}
             goalNumber={goalNumber}
             setGoalNumber={setGoalNumber}
-            dataCy='userStamp-cycleCounter'
+            id='userStamp-cycleCounter'
           />
         </FieldWrapperHapp>
         {((userStamp && userStamp.Stamp.type === StampType.EXPENSE) 
@@ -277,7 +276,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             <AddFriendsHapp 
               friends={friends}
               setFriends={setFriends}
-              dataCy='userStamp-addFriends'
+              id='userStamp-addFriends'
             />
           </FieldWrapperHapp>
         )}
@@ -291,7 +290,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
           border={true}
-          dataCy='userStamp-memoTextarea'
+          id='userStamp-memoTextarea'
         />
         <FieldWrapperHapp
           labelName={Language.$t.Input.Tag}
@@ -299,12 +298,12 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           className={cls(
             'text-base flex gap-3 items-center'
           )}
-          dataCy='userStamp-addTagsWrapper'
+          id='userStamp-addTagsWrapper'
         >
           <AddTagsHapp 
             tags={tags}
             setTags={setTags}
-            dataCy='userStamp-addTags'
+            id='userStamp-addTags'
           />
         </FieldWrapperHapp>
       </div>
@@ -316,13 +315,13 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         <button
           className="m-1 border rounded-lg bg-danger py-1.5 px-3 text-white text-lg"
           onClick={deleteUserStamp}
-          data-cy="userStamp-deleteButton"
+          id="userStamp-deleteButton"
         >
           {Language.$t.Button.Delete}
         </button>
         <button
           className="m-1 border rounded-lg bg-cancel py-1.5 px-3 text-white text-lg"
-          data-cy="userStamp-cancelButton"
+          id="userStamp-cancelButton"
           onClick={() => router.push('/stamp')}
         >
           {Language.$t.Button.Cancel}
@@ -330,7 +329,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         <button 
           className="m-1 border rounded-lg bg-primary py-1.5 px-3 text-white text-lg"
           onClick={updateUserStamp}  
-          data-cy="userStamp-saveButton"
+          id="userStamp-saveButton"
         >
           {Language.$t.Button.Save}
         </button>

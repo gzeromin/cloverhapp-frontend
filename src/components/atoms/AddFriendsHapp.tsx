@@ -20,14 +20,14 @@ interface AddFriendsHappProps {
   className?: string;
   friends: Friend[];
   setFriends: Dispatch<SetStateAction<Friend[]>>;
-  dataCy?: string;
+  id?: string;
 }
 
 const AddFriendsHapp: React.FC<AddFriendsHappProps> = ({
   className,
   friends,
   setFriends,
-  dataCy,
+  id,
 }) => {
   const [observedIcon, setObservedIcon] = useState('');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -124,7 +124,7 @@ const AddFriendsHapp: React.FC<AddFriendsHappProps> = ({
           onChange={(e) => setSearchTerm(e.currentTarget.value)}
           onFocus={() => setShowFriends(true)}
           onBlur={() => setTimeout(() => setShowFriends(false), 100)}
-          data-cy={dataCy}
+          id={id}
         />
       </div>
       {showFriends && (
