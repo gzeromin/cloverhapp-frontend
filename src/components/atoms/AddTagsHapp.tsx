@@ -114,7 +114,6 @@ const AddTagsHapp: React.FC<AddTagsHappProps> = ({
         {tags?.map((tag, index) => (
           <div
             key={`tagList ${index}-${tag.name}`}
-            id={`${index}-${tag.name}`}
             className={cls(
               'px-1 flex items-center justify-between', 
               'rounded-full break-all group',

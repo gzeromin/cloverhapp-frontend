@@ -6,7 +6,7 @@ import { Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { Dialog } from '@/mobx';
 import cls from 'classnames';
-import SelectHapp from '@/components/atoms/SelectHapp';
+import SelectHapp from '@/components/molecules/SelectHapp';
 import { Locale } from '@/types/User';
 import FieldWrapperHapp from '@/components/atoms/FieldWrapperHapp';
 import { AiOutlineEdit } from 'react-icons/ai';

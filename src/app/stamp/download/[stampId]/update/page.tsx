@@ -10,7 +10,7 @@ import { observer } from 'mobx-react-lite';
 import { handleError } from '@/utils/error.util';
 import TextareaHapp from '@/components/molecules/TextareaHapp';
 import cls from 'classnames';
-import SelectHapp from '@/components/atoms/SelectHapp';
+import SelectHapp from '@/components/molecules/SelectHapp';
 import { Stamp, StampStatus, StampType } from '@/types/Stamp';
 import Image from 'next/image';
 import AddTagsHapp from '@/components/atoms/AddTagsHapp';
@@ -161,7 +161,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             <CheckHapp
               id='stampUpdate-notForSaleCheck'
               className={cls(
-                'w-1/2 flex items-center',
+                'w-1/2 flex items-center mb-6',
               )}
               labelName={Language.$t.Check.NotForSale}
               labelClassName={cls('text-xs w-2/3 mr-1')}

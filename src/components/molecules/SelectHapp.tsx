@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Language } from '@/mobx/index';
 import { observer } from 'mobx-react-lite';
 import cls from 'classnames';
+import LabelHapp from '../atoms/LabelHapp';
 
 type ImageType = {
   src: string;
@@ -22,7 +23,8 @@ export type OptionType = {
   icon?: JSX.Element;
 };
 
-interface SelectHappProps {
+interface Props {
+  id: string;
   className?: string;
   options: OptionType[];
   selected: string | number;
@@ -31,13 +33,13 @@ interface SelectHappProps {
   border?: boolean;
   labelName?: string;
   labelClassName?: string;
-  id?: string;
   wide?: boolean;
   disable?: boolean;
   grow?: boolean;
 }
 
-const SelectHapp: React.FC<SelectHappProps> = ({
+const SelectHapp: React.FC<Props> = ({
+  id,
   className,
   options,
   selected,
@@ -46,7 +48,6 @@ const SelectHapp: React.FC<SelectHappProps> = ({
   border = false,
   labelName,
   labelClassName,
-  id,
   wide = false,
   disable,
   grow = true,
@@ -78,22 +79,21 @@ const SelectHapp: React.FC<SelectHappProps> = ({
 
   return (
     <div
-      className={cls({
-        'cursor-pointer': !disable,
-        'bg-gray-200 text-gray-400 cursor-not-allowed': disable,
-      }, 
-      className
+      className={cls(
+        {
+          'cursor-pointer': !disable,
+          'bg-gray-200 text-gray-400 cursor-not-allowed': disable,
+        }, 
+        className
       )}
       id={id}
     >
-      {labelName && (
-        <label className={cls(
-          'text-sm text-nowrap',
-          labelClassName,
-        )}>
-          {labelName}
-        </label>
-      )}
+      <LabelHapp
+        htmlFor={id}
+        className={labelClassName}
+      >
+        {labelName}
+      </LabelHapp>
       <div className={cls(
         'relative',
         {'grow': grow}
@@ -138,8 +138,9 @@ const SelectHapp: React.FC<SelectHappProps> = ({
           <div className="ml-1">
             <div
               className={cls(
-                'h-0 border-white-transparent border-x-transparent border-[5px] border-b-0',
-                { 'border-gray-700': dark },
+                'h-0  border-x-transparent border-[5px] border-b-0',
+                { 'border-white-transparent': dark },
+                { 'border-gray-700': !dark },
               )}
             ></div>
           </div>

@@ -22,7 +22,7 @@ import CycleCounter from '@/components/molecules/\bCycleCounter';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { StampStatus, StampType } from '@/types/Stamp';
 import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
-import SelectHapp from '@/components/atoms/SelectHapp';
+import SelectHapp from '@/components/molecules/SelectHapp';
 import { GoPeople } from 'react-icons/go';
 import { AuthActionEnum, useAuthDispatch } from '@/context/auth';
 
@@ -245,7 +245,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         </div>
         <FieldWrapperHapp
           labelName={Language.$t.Input.Goal}
-          labelClassName='w-1/5 font-bold'
+          labelClassName='w-1/5 font-bold mb-6'
           className={cls(
             'text-base flex items-center'
           )}

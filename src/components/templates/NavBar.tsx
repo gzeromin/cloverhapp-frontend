@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import SelectHapp from '@/components/atoms/SelectHapp';
+import SelectHapp from '@/components/molecules/SelectHapp';
 import { Locale } from '@/types/User';
 import { Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';

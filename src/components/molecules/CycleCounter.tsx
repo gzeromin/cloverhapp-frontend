@@ -4,7 +4,7 @@ import CheckHapp from '../atoms/CheckHapp';
 import InputHapp from './InputHapp';
 import { observer } from 'mobx-react-lite';
 import { Language } from '@/mobx';
-import SelectHapp, { OptionType } from '../atoms/SelectHapp';
+import SelectHapp, { OptionType } from './SelectHapp';
 import { CounterUnit, IntervalUnit } from '@/types/UserStamp';
 import DateUtils from '@/utils/date.util';
 import { StampType } from '@/types/Stamp';
@@ -148,7 +148,7 @@ const CycleCounter: React.FC<Props> = ({
       id={id}
     >
       <CheckHapp
-        className={cls('mx-3')}
+        className={cls('mx-3 mb-6')}
         checked={existGoal}
         onChange={(e) => setExistGoal(e.target.checked)}
         marginBottom='mb-0'
@@ -156,7 +156,7 @@ const CycleCounter: React.FC<Props> = ({
       />
       <div
         className={cls(
-          'flex items-center', {
+          'flex items-center mb-6', {
             'cursor-pointer': existGoal,
             'text-gray-400 cursor-not-allowed': !existGoal,
           },
@@ -224,7 +224,7 @@ const CycleCounter: React.FC<Props> = ({
       </div>
       <SelectHapp
         className={cls(
-          'rounded-md text-gray-500 text-base w-1/5',
+          'rounded-md text-gray-500 text-base w-1/5 mb-6',
         )}
         options={options}
         selected={goalUnit}

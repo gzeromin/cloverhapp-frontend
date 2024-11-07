@@ -12,7 +12,7 @@ import TextareaHapp from '@/components/molecules/TextareaHapp';
 import { useDropzone } from 'react-dropzone';
 import { GrAdd } from 'react-icons/gr';
 import cls from 'classnames';
-import SelectHapp from '@/components/atoms/SelectHapp';
+import SelectHapp from '@/components/molecules/SelectHapp';
 import { StampStatus, StampType } from '@/types/Stamp';
 import Image from 'next/image';
 import AddTagsHapp from '@/components/atoms/AddTagsHapp';
@@ -176,7 +176,7 @@ const Upload: React.FC = () => {
             <CheckHapp
               id='notForSaleCheck'
               className={cls(
-                'w-1/2 flex items-center',
+                'w-1/2 flex items-center mb-6',
               )}
               labelName={Language.$t.Check.NotForSale}
               labelClassName={cls('text-xs w-2/3 mr-1')}

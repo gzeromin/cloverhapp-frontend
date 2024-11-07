@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { MoneyUnit } from '@/types/Happ';
 import { FaDollarSign, FaWonSign, FaYenSign } from 'react-icons/fa6';
-import SelectHapp from './SelectHapp';
+import SelectHapp from '../molecules/SelectHapp';
 
 const options = [
   { value: MoneyUnit.Won, icon: <FaWonSign className='text-2xl text-primary'/> },
