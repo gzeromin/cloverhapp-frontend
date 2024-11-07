@@ -6,13 +6,13 @@ import DateUtils from '@/utils/date.util';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { memo, useEffect, useState } from 'react';
 
-interface MiniCalendarProps {
+interface Props {
   className: string;
   startTime: Date;
   setStartTime: (newDate: Date) => void;
 }
 
-const MiniCalendar: React.FC<MiniCalendarProps> = ({
+const MiniCalendarHapp: React.FC<Props> = ({
   className,
   startTime,
   setStartTime,
@@ -148,4 +148,4 @@ const MiniCalendar: React.FC<MiniCalendarProps> = ({
   );
 };
 
-export default memo(observer(MiniCalendar));
+export default memo(observer(MiniCalendarHapp));

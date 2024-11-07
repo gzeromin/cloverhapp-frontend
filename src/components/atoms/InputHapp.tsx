@@ -2,7 +2,8 @@
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-interface InputHappProps {
+export interface InputHappProps {
+  /** input type */
   type?: string;
   labelName?: string;
   labelClassName?: string;
@@ -22,6 +23,7 @@ interface InputHappProps {
   step?: string;
 }
 
+/** Primary UI component for user interaction */
 const InputHapp: React.FC<InputHappProps> = ({
   type = 'text',
   labelName = '',
