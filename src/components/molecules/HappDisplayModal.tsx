@@ -4,7 +4,7 @@ import api, { BASE_URL } from '@/utils/api.util';
 import { useEffect, useState } from 'react';
 import { AiFillCloseSquare } from 'react-icons/ai';
 import { Language } from '@/mobx/index';
-import TextareaHapp from '../atoms/TextareaHapp';
+import TextareaHapp from './TextareaHapp';
 import { observer } from 'mobx-react-lite';
 import cls from 'classnames';
 import { useAuthState } from '@/context/auth';
@@ -61,6 +61,7 @@ const HappDisplayModal: React.FC<HappDisplayModalProps> = ({
         <div className="p-4 max-h-4/5 overflow-y-auto">
           <div className="flex gap-1">
             <TextareaHapp
+              id="happDisplayModal-description"
               placeholder={Language.$t.Placeholder.Description}
               className="grow text-lg"
               rows={2}

@@ -8,7 +8,7 @@ import api from '@/utils/api.util';
 import { Dialog, Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { handleError } from '@/utils/error.util';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 import { useDropzone } from 'react-dropzone';
 import { GrAdd } from 'react-icons/gr';
 import cls from 'classnames';
@@ -163,6 +163,7 @@ const Upload: React.FC = () => {
         {/* Input Zone */}
         <div className={cls('w-[270px]')}>
           <InputHapp
+            id='stampNameInput'
             className={cls('items-center flex gap-1')}
             labelName={Language.$t.Input.StampName}
             labelClassName={cls('text-xs w-1/3')}
@@ -170,10 +171,10 @@ const Upload: React.FC = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             error={errors.name}
-            id='stampNameInput'
           />
           <div className={cls('flex items-center gap-1')}>
             <CheckHapp
+              id='notForSaleCheck'
               className={cls(
                 'w-1/2 flex items-center',
               )}
@@ -183,9 +184,9 @@ const Upload: React.FC = () => {
               onChange={(e) => setNotForSale(e.target.checked)}
               grow={false}
               marginBottom="mb-0"
-              id='notForSaleCheck'
             />
             <InputHapp
+              id='dropletInput'
               className={cls('w-1/2 flex items-center gap-1')}
               labelName={Language.$t.Input.Droplet}
               labelClassName={cls('text-xs w-3/4')}
@@ -195,10 +196,10 @@ const Upload: React.FC = () => {
               onChange={(e) => setDroplet(e.target.value)}
               error={errors.droplet}
               min="0"
-              id='dropletInput'
             />
           </div>
           <SelectHapp
+            id="typeSelect"
             className={cls(
               'flex items-center',
               'rounded-md my-1'
@@ -208,11 +209,11 @@ const Upload: React.FC = () => {
             options={typeOptions}
             selected={type}
             onSelected={setType}
-            id="typeSelect"
             border={true}
             dark={true}
           />
           <SelectHapp
+            id="statusSelect"
             className={cls(
               'flex items-center',
               'rounded-md my-1'
@@ -222,19 +223,17 @@ const Upload: React.FC = () => {
             options={statusOptions}
             selected={stampStatus}
             onSelected={setStampStatus}
-            id="statusSelect"
             border={true}
             dark={true}
           />
           <TextareaHapp
+            id='descriptionTextarea'
             labelName={Language.$t.Input.Description}
             labelClassName={cls('text-xs')}
             placeholder={Language.$t.Placeholder.Description}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             error={errors.description}
-            marginBottom="mb-1"
-            id='descriptionTextarea'
           />
         </div>
       </div>

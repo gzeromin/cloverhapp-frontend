@@ -3,7 +3,7 @@ import { Language, Loading } from '@/mobx';
 import cls from 'classnames';
 import { memo, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import TextareaHapp from './TextareaHapp';
+import TextareaHapp from '../molecules/TextareaHapp';
 import { LuSendHorizonal } from 'react-icons/lu';
 import { User } from '@/types/User';
 import api from '@/utils/api.util';
@@ -74,13 +74,13 @@ const CommentHapp: React.FC<Props> = ({
                 className="rounded-full mt-3 ml-1"
               />
               <TextareaHapp
+                id="commentHapp-memo"
+                className="grow text-base"
                 placeholder={Language.$t.Placeholder.Memo}
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={1}
                 textAreaClassName="bg-transparent"
-                className="grow text-base"
-                marginBottom=""
                 border={false}
                 autoHeight={true}
                 resizable={false}

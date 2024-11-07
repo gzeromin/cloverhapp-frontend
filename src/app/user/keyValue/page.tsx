@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { memo, useEffect, useState } from 'react';
 import cls from 'classnames';
 import KeyValueHapp from '@/components/atoms/KeyValueHapp';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 import { useRouter } from 'next/navigation';
 import { PiShareFat, PiShareFatFill } from 'react-icons/pi';
 import api from '@/utils/api.util';
@@ -82,6 +82,7 @@ const KeyValue: React.FC<Props> = () => {
         </button>
       </div>
       <TextareaHapp
+        id="keyValue-sentence"
         rows={7}
         className={'h-[220px] overflow-y-auto rounded-md w-11/12 border-2 border-amber-600'}
         placeholder={Language.$t.Placeholder.Sentence}
@@ -89,7 +90,6 @@ const KeyValue: React.FC<Props> = () => {
         onChange={(e) => setSentence(e.target.value)}
         autoHeight={true}
         border={false}
-        marginBottom=""
         textAreaClassName={cls(
           'bg-transparent',
           'text-xl tracking-widest text-center',

@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { Friend } from '@/types/Friend';
 import useSWR from 'swr';
 import InputHapp from '@/components/molecules/InputHapp';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 
 interface ChangeAliasModalProps {
   friend: Friend | undefined;
@@ -101,6 +101,7 @@ const _ChangeAliasModal: React.FC<ChangeAliasModalProps> = ({
               onChange={(e) => setMyAlias(e.target.value)}
             />
             <TextareaHapp
+              id="changeAliasModal-message"
               labelName={Language.$t.Input.ChangeAliasMessage}
               rows={3}
               value={requestMessage}

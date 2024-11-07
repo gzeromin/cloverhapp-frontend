@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { memo, useEffect, useState } from 'react';
 import cls from 'classnames';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 import { CounterUnit, IntervalUnit, UserStamp } from '@/types/UserStamp';
 import AddFriendsHapp from '@/components/atoms/AddFriendsHapp';
 import AddTagsHapp from '@/components/atoms/AddTagsHapp';
@@ -214,6 +214,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             </div>
           </div>
           <InputHapp
+            id='userStamp-orderNumberInput'
             labelName={Language.$t.Input.Order}
             labelClassName='font-bold'
             className={cls(
@@ -225,9 +226,9 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             onChange={(e) => setDisplayOrder(e.target.value)}
             inputClassName='text-center'
             min="1"
-            id='userStamp-orderNumberInput'
           />
           <SelectHapp
+            id='userStamp-statusSelect'
             className={cls(
               'flex items-center gap-3 mb-3',
               'rounded-md w-1/4'
@@ -240,7 +241,6 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             border={true}
             dark={true}
             wide={true}
-            id='userStamp-statusSelect'
           ></SelectHapp>
         </div>
         <FieldWrapperHapp
@@ -252,6 +252,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           border={false}
         >
           <CycleCounter
+            id='userStamp-cycleCounter'
             type={userStamp?.Stamp.type}
             existGoal={existGoal}
             setExistGoal={setExistGoal}
@@ -261,7 +262,6 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             setGoalInterval={setGoalInterval}
             goalNumber={goalNumber}
             setGoalNumber={setGoalNumber}
-            id='userStamp-cycleCounter'
           />
         </FieldWrapperHapp>
         {((userStamp && userStamp.Stamp.type === StampType.EXPENSE) 
@@ -281,6 +281,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           </FieldWrapperHapp>
         )}
         <TextareaHapp
+          id='userStamp-memoTextarea'
           labelName={Language.$t.Input.Memo}
           labelClassName='w-1/5 font-bold'
           className={cls(
@@ -290,15 +291,14 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
           border={true}
-          id='userStamp-memoTextarea'
         />
         <FieldWrapperHapp
+          id='userStamp-addTagsWrapper'
           labelName={Language.$t.Input.Tag}
           labelClassName='w-1/5 font-bold'
           className={cls(
             'text-base flex gap-3 items-center'
           )}
-          id='userStamp-addTagsWrapper'
         >
           <AddTagsHapp 
             tags={tags}

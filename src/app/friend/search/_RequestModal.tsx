@@ -8,7 +8,7 @@ import { User } from '@/types/User';
 import { observer } from 'mobx-react-lite';
 import UserProrile from '@/components/molecules/UserProrile';
 import InputHapp from '@/components/molecules/InputHapp';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 
 interface RequestModalProps {
   friendUser: User | undefined;
@@ -114,11 +114,11 @@ const _RequestModal: React.FC<RequestModalProps> = ({
                   onChange={(e) => setFriendAlias(e.target.value)}
                 />
                 <TextareaHapp
+                  id="requestModal-message"
                   labelName={Language.$t.Input.RequestMessage}
                   rows={3}
                   value={requestMessage}
                   onChange={(e) => setRequestMessage(e.target.value)}
-                  marginBottom=""
                   border={true}
                 />
               </div>

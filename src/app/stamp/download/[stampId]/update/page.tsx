@@ -8,7 +8,7 @@ import api from '@/utils/api.util';
 import { Dialog, Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { handleError } from '@/utils/error.util';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 import cls from 'classnames';
 import SelectHapp from '@/components/atoms/SelectHapp';
 import { Stamp, StampStatus, StampType } from '@/types/Stamp';
@@ -148,6 +148,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
         {/* Input Zone */}
         <div className={cls('w-[270px]')}>
           <InputHapp
+            id='stampUpdate-stampNameInput'
             className={cls('flex items-center gap-1')}
             labelName={Language.$t.Input.StampName}
             labelClassName={cls('text-xs w-1/3')}
@@ -155,10 +156,10 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             error={errors.name}
-            id='stampUpdate-stampNameInput'
           />
           <div className={cls('flex items-center gap-1')}>
             <CheckHapp
+              id='stampUpdate-notForSaleCheck'
               className={cls(
                 'w-1/2 flex items-center',
               )}
@@ -168,9 +169,9 @@ const Update: React.FC<Props> = ({ params }: Props) => {
               onChange={(e) => setNotForSale(e.target.checked)}
               grow={false}
               marginBottom="mb-0"
-              id='stampUpdate-notForSaleCheck'
             />
             <InputHapp
+              id='stampUpdate-dropletInput'
               className={cls('w-1/2 flex gap-3 items-center')}
               labelName={Language.$t.Input.Droplet}
               labelClassName={cls('text-xs w-3/4')}
@@ -180,10 +181,10 @@ const Update: React.FC<Props> = ({ params }: Props) => {
               onChange={(e) => setDroplet(e.target.value)}
               error={errors.droplet}
               min="0"
-              id='stampUpdate-dropletInput'
             />
           </div>
           <SelectHapp
+            id="stampUpdate-typeSelect"
             className={cls(
               'flex items-center',
               'rounded-md my-1'
@@ -195,9 +196,9 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             onSelected={setType}
             border={true}
             dark={true}
-            id="stampUpdate-typeSelect"
           />
           <SelectHapp
+            id="stampUpdate-statusSelect"
             className={cls(
               'flex items-center',
               'rounded-md my-1'
@@ -209,17 +210,15 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             onSelected={setStampStatus}
             border={true}
             dark={true}
-            id="stampUpdate-statusSelect"
           />
           <TextareaHapp
+            id='stampUpdate-descriptionTextarea'
             labelName={Language.$t.Input.Description}
             labelClassName={cls('text-xs')}
             placeholder={Language.$t.Placeholder.Description}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             error={errors.description}
-            marginBottom="mb-1"
-            id='stampUpdate-descriptionTextarea'
           />
         </div>
       </div>

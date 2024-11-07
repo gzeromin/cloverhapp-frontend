@@ -1,6 +1,6 @@
 'use client';
 import { Dispatch, memo, SetStateAction } from 'react';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 import FileUploadHapp from '@/components/atoms/FileUploadHapp';
 import AddFriendsHapp from '@/components/atoms/AddFriendsHapp';
 import AddTagsHapp from '@/components/atoms/AddTagsHapp';
@@ -146,13 +146,13 @@ const InputArea: React.FC<Props> = ({
       />
       {setMemo && (
         <TextareaHapp
+          id="inputArea-memo"
           className={`${openMemo ? 'block' : 'hidden'} text-lg`}
           placeholder={Language.$t.Placeholder.Memo}
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
           autoHeight={true}
           border={true}
-          marginBottom=""
           textAreaClassName='border-dashed border-2 border-gray-100 min-h-[50px]'
         />
       )}

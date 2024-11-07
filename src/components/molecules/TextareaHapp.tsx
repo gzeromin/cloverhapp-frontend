@@ -1,16 +1,17 @@
 'use client';
 import cls from 'classnames';
 import { TextareaHTMLAttributes, useEffect, useRef } from 'react';
+import LabelHapp from '../atoms/LabelHapp';
+import ErrorMessageHapp from '../atoms/ErrorMessageHapp';
 
-interface TextareaHappProps
-  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  id: string;
   labelName?: string;
   labelClassName?: string;
   placeholder?: string;
   error?: string;
   rows?: number;
   border?: boolean;
-  marginBottom?: string;
   className?: string;
   textAreaClassName?: string;
   disable?: boolean;
@@ -19,17 +20,16 @@ interface TextareaHappProps
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   grow?: boolean;
-  id?: string;
 }
 
-const TextareaHapp: React.FC<TextareaHappProps> = ({
+const TextareaHapp: React.FC<Props> = ({
+  id,
   labelName = '',
   labelClassName,
   placeholder = '',
   error,
   rows = 2,
   border = true,
-  marginBottom = 'mb-3',
   className,
   textAreaClassName,
   disable = false,
@@ -38,7 +38,6 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
   value = '',
   onChange,
   grow = true,
-  id,
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null!);
 
@@ -63,20 +62,19 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
   return (
     <div
       className={cls(
-        error ? 'mb-1' : marginBottom,
+        'relative mb-6',
         className,
       )}
     >
-      {labelName && (
-        <label className={cls(
-          'text-sm text-nowrap',
-          labelClassName
-        )}>
-          {labelName}
-        </label>
-      )}
+      <LabelHapp
+        htmlFor={id}
+        className={labelClassName}
+      >
+        {labelName}
+      </LabelHapp>
       <div className={cls({'grow': grow})}>
         <textarea
+          id={id}
           style={{ minWidth: 120 }}
           className={cls(
             'w-full p-2 mt-1 rounded focus:outline-none',
@@ -95,10 +93,13 @@ const TextareaHapp: React.FC<TextareaHappProps> = ({
           value={value}
           ref={textareaRef}
           onChange={handleChange}
-          id={id}
         />
         {error && (
-          <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>
+          <div className="absolute">
+            <ErrorMessageHapp>
+              {error}
+            </ErrorMessageHapp>
+          </div>
         )}
       </div>
     </div>
