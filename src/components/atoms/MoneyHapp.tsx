@@ -80,6 +80,7 @@ const MoneyHapp: React.FC<MoneyHappProps> = ({
       )}
       <div className={cls('flex items-center')}>
         <SelectHapp
+          id="moneyHapp-unit"
           options={options}
           selected={moneyUnit}
           onSelected={setMoneyUnit}

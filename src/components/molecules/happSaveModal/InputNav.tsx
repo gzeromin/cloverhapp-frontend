@@ -110,6 +110,7 @@ const InputNav: React.FC<Props> = ({
   return (
     <div className="flex gap-3 justify-end items-center bg-primary-hover rounded p-2 mb-2">
       <SelectHapp
+        id="inputNav-stampStatus"
         className='text-base grow'
         options={statusOptions}
         selected={stampStatus}

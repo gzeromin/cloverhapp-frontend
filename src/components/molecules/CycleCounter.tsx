@@ -223,6 +223,7 @@ const CycleCounter: React.FC<Props> = ({
         />
       </div>
       <SelectHapp
+        id={`${id}-goalUnitSelect`}
         className={cls(
           'rounded-md text-gray-500 text-base w-1/5 mb-6',
         )}
@@ -233,7 +234,6 @@ const CycleCounter: React.FC<Props> = ({
         dark={true}
         wide={true}
         disable={!existGoal}
-        id={`${id}-goalUnitSelect`}
       />
     </div>
   );

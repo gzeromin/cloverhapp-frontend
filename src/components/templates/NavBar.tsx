@@ -79,10 +79,10 @@ const NavBar: React.FC = () => {
 
       <div className="flex items-center gap-3">
         <SelectHapp
+          id="localeSelect"
           options={options}
           selected={Language.type}
           onSelected={handleLocale}
-          id="localeSelect"
         />
         <div className="text-center">
           {authenticated ? (

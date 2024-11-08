@@ -93,13 +93,13 @@ const Info: React.FC = () => {
         </div>
       </FieldWrapperHapp>
       <SelectHapp
+        id="localeSelect"
         labelName={Language.$t.Select.Language}
         className={cls('flex items-center mb-3')}
         labelClassName={cls('w-1/3')}
         options={languageOptions}
         selected={Language.type}
         onSelected={handleLocale}
-        id="localeSelect"
         border={true}
       />
     </div>
