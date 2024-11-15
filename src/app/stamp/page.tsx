@@ -94,7 +94,7 @@ const Market: React.FC<Props> = () => {
           className={cls(
             'grid grid-cols-4 m-4'
           )}
-          data-cy='marketList'
+          id='marketList'
         >
           {stamps?.map((stamp, index) => {
             if (!userStamps.some((e) => e.Stamp.id == stamp.id)) {

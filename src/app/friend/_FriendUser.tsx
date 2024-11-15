@@ -59,12 +59,14 @@ const FriendUser: React.FC<FriendUserProps> = ({
       id={friend.id}
     >
       {friend.Friend && (
-        <UserProrile
-          user={friend.Friend}
-          alt={`friend list ${friend.Friend.id}`}
-          size={50}
-          className="h-auto w-auto mx-auto object-contain aspect-square"
-        />
+        <div className={cls('w-[80px] h-[80px] mx-auto flex items-center')}>
+          <UserProrile
+            user={friend.Friend}
+            alt={`friend list ${friend.Friend.id}`}
+            size={50}
+            className="h-auto w-auto object-cover aspect-square rounded-full"
+          />
+        </div>
       )}
       <div className="flex justify-center items-center py-1 gap-1 text-gray-400 group-hover:text-gray-600">
         <p className="text-black">{friend.alias}</p>
@@ -85,7 +87,7 @@ const FriendUser: React.FC<FriendUserProps> = ({
       >
         <BsCalendarHeart
           className="hover:text-primary"
-          onClick={() => router.push('/c/' + friend.friendId)}
+          onClick={() => router.push('/c/' + friend.friendId + '/profile')}
         />
         <BsPersonSlash className="hover:text-primary" onClick={deleteFriend} />
       </div>

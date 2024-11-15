@@ -1,5 +1,6 @@
 'use client';
 import FloatingBubbles from '@/components/organisms/FloatingBubbles';
+import { useAuthState } from '@/context/auth';
 import { Language } from '@/mobx';
 import { Happ } from '@/types/Happ';
 import { fetcher } from '@/utils/api.util';
@@ -15,9 +16,10 @@ const size = 'pattern-size-32';
 const opacity = 'pattern-opacity-40';
   
 const Home: React.FC = () => {
+  const { user } = useAuthState();
   const getKey = (pageIndex: number, previousPageData: Happ[]) => {
     if (previousPageData && !previousPageData.length) return null;
-    return `/happ/list/user?page=${pageIndex}`;
+    return `/happ/list/${user?.id}?page=${pageIndex}`;
   };
 
   const {
@@ -34,7 +36,10 @@ const Home: React.FC = () => {
       <div
         className={`${pattern} ${color} ${size} ${opacity} pattern-bg-white fixed top-0 left-0 right-0 bottom-0`}
       />
-      <FloatingBubbles happs={happs} />
+      <FloatingBubbles
+        className='hidden md:block'
+        happs={happs} 
+      />
       {/* Clover Happ Message */}
       <div
         className={cls('absolute right-8 top-24 text-2xl',
@@ -53,7 +58,7 @@ const Home: React.FC = () => {
       </div>
       <div
         className={cls(
-          'z-50 flex absolute flex-col items-center gap-4',
+          'z-40 flex absolute flex-col items-center gap-4',
           'text-3xl text-gray-700',
           Language.logoFont,
         )}

@@ -6,8 +6,8 @@ import { memo, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Friend } from '@/types/Friend';
 import useSWR from 'swr';
-import InputHapp from '@/components/atoms/InputHapp';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import InputHapp from '@/components/molecules/InputHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 
 interface ChangeAliasModalProps {
   friend: Friend | undefined;
@@ -85,27 +85,27 @@ const _ChangeAliasModal: React.FC<ChangeAliasModalProps> = ({
         {friend && (
           <div className="px-4 flex flex-col justify-center">
             <InputHapp
+              id="changeAliasModal-friendAlias"
               className="grow"
               labelName={Language.$t.Input.FriendAlias}
               placeholder={Language.$t.Input.FriendAlias}
               value={friendAlias}
               onChange={(e) => setFriendAlias(e.target.value)}
-              marginBottom="mb-2"
             />
             <InputHapp
+              id="changeAliasModal-myAlias"
               className="grow"
               labelName={Language.$t.Input.MyAlias}
               placeholder={Language.$t.Input.MyAlias}
               value={myAlias}
               onChange={(e) => setMyAlias(e.target.value)}
-              marginBottom=""
             />
             <TextareaHapp
+              id="changeAliasModal-message"
               labelName={Language.$t.Input.ChangeAliasMessage}
               rows={3}
               value={requestMessage}
               onChange={(e) => setRequestMessage(e.target.value)}
-              marginBottom=""
               border={true}
             />
           </div>

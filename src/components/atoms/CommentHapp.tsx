@@ -3,7 +3,7 @@ import { Language, Loading } from '@/mobx';
 import cls from 'classnames';
 import { memo, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import TextareaHapp from './TextareaHapp';
+import TextareaHapp from '../molecules/TextareaHapp';
 import { LuSendHorizonal } from 'react-icons/lu';
 import { User } from '@/types/User';
 import api from '@/utils/api.util';
@@ -11,10 +11,11 @@ import { Comment } from '@/types/Comment';
 import DateUtils from '@/utils/date.util';
 import { FaCommentAlt } from 'react-icons/fa';
 import UserProrile from '../molecules/UserProrile';
+import { handleError } from '@/utils/error.util';
 
 interface Props {
   className?: string;
-  happId: string;
+  happId: string | null;
   user: User | undefined;
   Comments: Comment[] | undefined;
 }
@@ -48,7 +49,7 @@ const CommentHapp: React.FC<Props> = ({
       }
       setComment('');
     } catch (error: any) {
-      console.log(error);
+      handleError(error);
     } finally {
       Loading.setIsLoading(false);
     }
@@ -63,39 +64,41 @@ const CommentHapp: React.FC<Props> = ({
         <FaCommentAlt className={cls({ 'text-primary-100': show })} />{' '}
         {commentList && commentList.length} Comments
       </div>
-      {show && (
-        <>
-          {user && (
-            <div className="flex items-start justify-between gap-1 pr-1 bg-gray-100 rounded-md">
-              <UserProrile
-                user={user}
-                alt={`comment ${happId} ${user.id}`}
-                size={40}
-                className="rounded-full mt-3 ml-1"
-              />
-              <TextareaHapp
-                placeholder={Language.$t.Placeholder.Memo}
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                rows={1}
-                textAreaClassName="bg-transparent"
-                className="grow text-base"
-                marginBottom=""
-                border={false}
-                autoHeight={true}
-                resizable={false}
-              />
-              <LuSendHorizonal
-                className={
-                  'mt-3 mr-1 p-1 text-3xl text-gray-700 cursor-point rounded-full hover:bg-gray-200'
-                }
-                onClick={onCreateComment}
-              />
-            </div>
-          )}
+      <div className={cls(
+        'transition-all duration-500 ease-in-out relative',
+        `${!show ? 'max-h-0 opacity-0': 'max-h-[300px] opacity-100'}`
+      )}>
+        {user && (
+          <div className="flex items-start justify-between gap-1 pr-1 bg-gray-100 rounded-md">
+            <UserProrile
+              user={user}
+              alt={`comment ${happId} ${user.id}`}
+              size={40}
+              className="rounded-full mt-3 ml-1 aspect-square object-cover"
+            />
+            <TextareaHapp
+              id="commentHapp-comment"
+              className="grow text-base"
+              placeholder={Language.$t.Placeholder.Comment}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              rows={1}
+              textAreaClassName="bg-transparent"
+              border={false}
+              autoHeight={true}
+              resizable={false}
+            />
+            <LuSendHorizonal
+              className={
+                'mt-3 mr-1 p-1 text-3xl text-gray-700 cursor-point rounded-full hover:bg-gray-200'
+              }
+              onClick={onCreateComment}
+            />
+          </div>
+        )}
 
-          <div className="max-h-[200px] overflow-y-scroll rounded">
-            {commentList &&
+        <div className="max-h-[200px] overflow-y-scroll rounded">
+          {commentList &&
               commentList.map((comment, i) => (
                 <div
                   className="flex items-start gap-3 my-2"
@@ -105,7 +108,7 @@ const CommentHapp: React.FC<Props> = ({
                     user={comment.User}
                     alt={`comment ${comment.id} ${comment.User.id}`}
                     size={40}
-                    className="rounded-full my-1 ml-1"
+                    className="rounded-full my-1 ml-1 aspect-square object-cover"
                   />
                   <span className="flex flex-col gap-1">
                     <span className="flex gap-2 items-end">
@@ -124,9 +127,8 @@ const CommentHapp: React.FC<Props> = ({
                   </span>
                 </div>
               ))}
-          </div>
-        </>
-      )}
+        </div>
+      </div>
     </div>
   );
 };

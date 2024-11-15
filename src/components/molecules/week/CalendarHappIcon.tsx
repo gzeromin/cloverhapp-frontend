@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { useAuthState } from '@/context/auth';
 import Image from 'next/image';
 import { useDrag } from 'react-dnd';
-import HappDisplayModal from '../HappDisplayModal';
+import HappDisplayModalBak from '../../organisms/HappDisplayModal.bak';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import api from '@/utils/api.util';
 import { handleError } from '@/utils/error.util';
@@ -153,7 +153,7 @@ const CalendarHappIcon: React.FC<CalendarHappIconProps> = ({ happ }) => {
 
       {/* Happ Display Modal */}
       {showDisplayModal && (
-        <HappDisplayModal
+        <HappDisplayModalBak
           happId={happ.id}
           closeModal={() => setShowDisplayModal(false)}
         />

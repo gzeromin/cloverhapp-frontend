@@ -32,7 +32,7 @@ const Shop: React.FC<Props> = () => {
           )}
           <span
             className="text-gray-600"
-            data-cy="stamp-userInfo-nickname"
+            id="stamp-userInfo-nickname"
           >
             {user && user.nickname}
           </span>

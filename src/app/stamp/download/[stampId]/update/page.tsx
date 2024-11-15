@@ -1,5 +1,5 @@
 'use client';
-import InputHapp from '@/components/atoms/InputHapp';
+import InputHapp from '@/components/molecules/InputHapp';
 import { FormEvent, memo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -8,9 +8,9 @@ import api from '@/utils/api.util';
 import { Dialog, Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { handleError } from '@/utils/error.util';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 import cls from 'classnames';
-import SelectHapp from '@/components/atoms/SelectHapp';
+import SelectHapp from '@/components/molecules/SelectHapp';
 import { Stamp, StampStatus, StampType } from '@/types/Stamp';
 import Image from 'next/image';
 import AddTagsHapp from '@/components/atoms/AddTagsHapp';
@@ -148,6 +148,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
         {/* Input Zone */}
         <div className={cls('w-[270px]')}>
           <InputHapp
+            id='stampUpdate-stampNameInput'
             className={cls('flex items-center gap-1')}
             labelName={Language.$t.Input.StampName}
             labelClassName={cls('text-xs w-1/3')}
@@ -155,11 +156,10 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             error={errors.name}
-            marginBottom="mb-1"
-            dataCy='stampUpdate-stampNameInput'
           />
           <div className={cls('flex items-center gap-1')}>
             <CheckHapp
+              id='stampUpdate-notForSaleCheck'
               className={cls(
                 'w-1/2 flex items-center',
               )}
@@ -169,10 +169,10 @@ const Update: React.FC<Props> = ({ params }: Props) => {
               onChange={(e) => setNotForSale(e.target.checked)}
               grow={false}
               marginBottom="mb-0"
-              dataCy='stampUpdate-notForSaleCheck'
             />
             <InputHapp
-              className={cls('w-1/2 flex items-center gap-1')}
+              id='stampUpdate-dropletInput'
+              className={cls('w-1/2 flex gap-3 items-center')}
               labelName={Language.$t.Input.Droplet}
               labelClassName={cls('text-xs w-3/4')}
               placeholder={Language.$t.Placeholder.Droplet}
@@ -180,12 +180,12 @@ const Update: React.FC<Props> = ({ params }: Props) => {
               value={droplet}
               onChange={(e) => setDroplet(e.target.value)}
               error={errors.droplet}
-              marginBottom="mb-1"
               min="0"
-              dataCy='stampUpdate-dropletInput'
+              marginBottom='mb-0'
             />
           </div>
           <SelectHapp
+            id="stampUpdate-typeSelect"
             className={cls(
               'flex items-center',
               'rounded-md my-1'
@@ -197,9 +197,9 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             onSelected={setType}
             border={true}
             dark={true}
-            dataCy="stampUpdate-typeSelect"
           />
           <SelectHapp
+            id="stampUpdate-statusSelect"
             className={cls(
               'flex items-center',
               'rounded-md my-1'
@@ -211,17 +211,15 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             onSelected={setStampStatus}
             border={true}
             dark={true}
-            dataCy="stampUpdate-statusSelect"
           />
           <TextareaHapp
+            id='stampUpdate-descriptionTextarea'
             labelName={Language.$t.Input.Description}
             labelClassName={cls('text-xs')}
             placeholder={Language.$t.Placeholder.Description}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             error={errors.description}
-            marginBottom="mb-1"
-            dataCy='stampUpdate-descriptionTextarea'
           />
         </div>
       </div>
@@ -229,7 +227,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
         className={cls('w-2/3')}
         tags={tags}
         setTags={setTags}
-        dataCy='stampUpdate-addTagsHapp'
+        id='stampUpdate-addTagsHapp'
       />
       {/* footer */}
       <div className={cls(
@@ -245,7 +243,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             'transition-colors duration-300 ease-in-out'
           )}
           onClick={() => router.back()}
-          data-cy="stampUpdate-cancelButton"
+          id="stampUpdate-cancelButton"
         >
           {Language.$t.Button.Cancel}
         </button>
@@ -258,7 +256,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             'transition-colors duration-300 ease-in-out'
           )}
           onClick={onSubmit}
-          data-cy="stampUpdate-editButton"
+          id="stampUpdate-editButton"
         >
           {Language.$t.Button.Edit}
         </button>

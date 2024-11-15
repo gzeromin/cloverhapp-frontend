@@ -5,7 +5,7 @@ import { handleError } from '@/utils/error.util';
 import { Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { Dialog } from '@/mobx';
-import InputHapp from '@/components/atoms/InputHapp';
+import InputHapp from '@/components/molecules/InputHapp';
 import { useAuthState } from '@/context/auth';
 
 const Password: React.FC = () => {
@@ -50,6 +50,7 @@ const Password: React.FC = () => {
     <div className="w-10/12 mx-auto md:w-96">
       <form onSubmit={onSubmit}>
         <InputHapp
+          id="password-password"
           labelName={Language.$t.Input.Password}
           placeholder={Language.$t.Placeholder.Password}
           type="password"
@@ -58,6 +59,7 @@ const Password: React.FC = () => {
           error={errors.oldPassword}
         />
         <InputHapp
+          id="password-newPassword"
           labelName={Language.$t.Input.NewPassword}
           placeholder={Language.$t.Placeholder.NewPassword}
           type="password"
@@ -66,6 +68,7 @@ const Password: React.FC = () => {
           error={errors.password}
         />
         <InputHapp
+          id="password-passwordConfirm"
           labelName={Language.$t.Input.PasswordConfirm}
           placeholder={Language.$t.Placeholder.PasswordConfirm}
           type="password"

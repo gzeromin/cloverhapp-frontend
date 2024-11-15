@@ -2,16 +2,16 @@ describe('Upload Page', () => {
   beforeEach(() => {
     cy.visit('/stamp/upload'); // 업로드 페이지로 이동
 
-    cy.get('[data-cy="dropZone"]').as('dropZone');
-    cy.get('[data-cy="stampNameInput"]').as('stampNameInput');
-    cy.get('[data-cy="notForSaleCheck"]').as('notForSaleCheck');
-    cy.get('[data-cy="dropletInput"]').as('dropletInput');
-    cy.get('[data-cy="typeSelect"]').as('typeSelect');
-    cy.get('[data-cy="statusSelect"]').as('statusSelect');
-    cy.get('[data-cy="descriptionTextarea"]').as('descriptionTextarea');
-    cy.get('[data-cy="addTagsHapp"]').as('addTagsHapp');
-    cy.get('[data-cy="uploadButton"]').as('uploadButton');
-    cy.get('[data-cy="commonDialog"]').as('commonDialog');
+    cy.get('[id="dropZone"]').as('dropZone');
+    cy.get('[id="stampNameInput"]').as('stampNameInput');
+    cy.get('[id="notForSaleCheck"]').as('notForSaleCheck');
+    cy.get('[id="dropletInput"]').as('dropletInput');
+    cy.get('[id="typeSelect"]').as('typeSelect');
+    cy.get('[id="statusSelect"]').as('statusSelect');
+    cy.get('[id="descriptionTextarea"]').as('descriptionTextarea');
+    cy.get('[id="addTagsHapp"]').as('addTagsHapp');
+    cy.get('[id="uploadButton"]').as('uploadButton');
+    cy.get('[id="commonDialog"]').as('commonDialog');
   });
 
   it('초기 화면 표시 확인', () => {
@@ -69,7 +69,7 @@ describe('Upload Page', () => {
 
     // 성공 다이얼로그가 나타나는지 확인
     cy.get('@commonDialog').should('have.class', 'block');
-    cy.get('[data-cy="commonDialog-ok"]').click();
+    cy.get('[id="commonDialog-ok"]').click();
     cy.get('@commonDialog').should('have.class', 'hidden');
 
     // 검증: 필드 초기화 여부

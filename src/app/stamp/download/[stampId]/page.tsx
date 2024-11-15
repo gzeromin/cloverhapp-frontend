@@ -48,8 +48,8 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
           droplet: stamp.droplet,
           name: stamp.name,
           description: stamp.description,
+          Tags: stamp.Tags,
         });
-        console.log(res);
         Loading.setIsLoading(false);
         dispatch(AuthActionEnum.SET_DROPLET, res.data?.droplet);
         dispatch(AuthActionEnum.SET_USER_STAMPS, res.data?.userStamps);
@@ -106,7 +106,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
                   'bg-blue-50 text-blue-700 border border-blue-700',
                   'rounded-md text-xs px-1 cursor-default',
                 )}
-                data-cy='downloadStamp-notForSaleArea'
+                id='downloadStamp-notForSaleArea'
               >
                 {Language.$t.Stamp.Default}
               </p>
@@ -127,19 +127,19 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
           <div className={cls('w-1/2 flex flex-col gap-3')}>
             <p 
               className="text-4xl font-semibold text-center"
-              data-cy='downloadStamp-stampNameArea'
+              id='downloadStamp-stampNameArea'
             >
               {stamp && stamp.name}
             </p>
             <p 
               className="text-base text-gray-400 text-end"
-              data-cy='downloadStamp-registerArea'
+              id='downloadStamp-registerArea'
             >
               { stamp && stamp.Register && stamp.Register.nickname}
             </p>
             <div 
               className="flex items-center pt-6"
-              data-cy='downloadStamp-dropletArea'
+              id='downloadStamp-dropletArea'
             >
               <Image
                 src={'/images/icons/droplet.png'}
@@ -156,14 +156,14 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
                   'p-2 rounded-md', 
                   'border-2 border-gray-100 border-dashed'
                 )}
-                data-cy='downloadStamp-descriptionArea'
+                id='downloadStamp-descriptionArea'
               >
                 {stamp.description}
               </div>
             )}
             <div 
               className={cls('flex items-center gap-2')}
-              data-cy='downloadStamp-tagsArea'
+              id='downloadStamp-tagsArea'
             >
               {tags.map((e) => <TagHapp key={`stamp-${stamp && stamp.id} tag-${e.id}`} name={e.name} />)}
             </div>
@@ -186,7 +186,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
               'transition-colors duration-300 ease-in-out'
             )}
             onClick={deleteStamp}
-            data-cy='downloadStamp-deleteButton'
+            id='downloadStamp-deleteButton'
           >
             {Language.$t.Button.Delete}
           </button> 
@@ -201,7 +201,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
               'transition-colors duration-300 ease-in-out'
             )}
             onClick={() => router.push('./' + stampId + '/update')}
-            data-cy='downloadStamp-editButton'
+            id='downloadStamp-editButton'
           >
             {Language.$t.Button.Edit}
           </button>
@@ -215,7 +215,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
             'transition-colors duration-300 ease-in-out'
           )}
           onClick={() => router.push('/stamp')}
-          data-cy='downloadStamp-cancelButton'
+          id='downloadStamp-cancelButton'
         >
           {Language.$t.Button.Cancel}
         </button>
@@ -228,7 +228,7 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
             'transition-colors duration-300 ease-in-out'
           )}
           onClick={downloadStamp}
-          data-cy='downloadStamp-purchaseButton'
+          id='downloadStamp-purchaseButton'
         >
           {Language.$t.Button.Purchase}
         </button>

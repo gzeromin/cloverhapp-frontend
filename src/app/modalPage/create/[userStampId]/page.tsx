@@ -17,7 +17,7 @@ import InputNav, { OPEN_MONEY } from '@/components/molecules/happSaveModal/Input
 import Image from 'next/image';
 import { FaExclamation } from 'react-icons/fa';
 import { handleError } from '@/utils/error.util';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 import InputArea from '@/components/molecules/happSaveModal/InputArea';
 
 
@@ -141,13 +141,13 @@ const CreateHappPage: React.FC<Props> = () => {
 
       {/* Body  */}
       <TextareaHapp
+        id="createHapp-memo"
         className={'text-lg'}
         placeholder={Language.$t.Placeholder.Memo}
         value={memo}
         onChange={(e) => setMemo(e.target.value)}
         autoHeight={true}
         border={true}
-        marginBottom=""
         textAreaClassName={cls('border-dashed border-2 border-gray-100 min-h-[50px]')}
       />
 

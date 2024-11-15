@@ -1,18 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import InputHapp from '@/components/atoms/InputHapp';
+import InputHapp from '@/components/molecules/InputHapp';
+import { fn } from '@storybook/test';
 
 const meta = {
-  title: 'Components/InputHapp',
+  title: 'Molecules/InputHapp',
   component: InputHapp,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
+    id: { control: 'text' },
     type: { control: 'text' },
     labelName: { control: 'text' },
+    labelClassName: { control: 'text' },
     placeholder: { control: 'text' },
     error: { control: 'text' },
+    border: { control: 'boolean' },
+    className: { control: 'text' },
+    inputClassName: { control: 'text' },
     disable: { control: 'boolean' },
     value: { control: 'text' },
     min: { control: 'text' },
@@ -20,6 +26,7 @@ const meta = {
     grow: { control: 'boolean' },
     step: { control: 'text' },
   },
+  args: { onChange: fn() },
 } as Meta<typeof InputHapp>;
 
 export default meta;
@@ -33,6 +40,13 @@ export const Default: Story = {
     border: true,
     grow: true,
   },
+  decorators: [
+    (Story) => (
+      <div className='w-full'>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const WithError: Story = {
@@ -40,6 +54,17 @@ export const WithError: Story = {
     labelName: 'Error Input',
     placeholder: 'Enter text...',
     error: 'This field is required',
+  },
+};
+
+export const LabelRow: Story = {
+  args: {
+    labelName: 'Label Row Input',
+    className: 'flex gap-3 items-center',
+    placeholder: 'Enter text...',
+    value: '',
+    border: true,
+    grow: true,
   },
 };
 
@@ -60,22 +85,5 @@ export const NumberInput: Story = {
     min: '1',
     max: '100',
     step: '1',
-  },
-};
-
-export const DateInput: Story = {
-  args: {
-    labelName: 'Date Input',
-    type: 'datetime-local',
-    placeholder: 'Select date and time...',
-  },
-};
-
-export const WithCustomClassNames: Story = {
-  args: {
-    labelName: 'Custom Class Input',
-    placeholder: 'Custom styles here...',
-    className: 'bg-blue-100 p-4 rounded-lg',
-    inputClassName: 'border-blue-500 focus:border-blue-700',
   },
 };

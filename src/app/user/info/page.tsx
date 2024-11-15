@@ -6,7 +6,7 @@ import { Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { Dialog } from '@/mobx';
 import cls from 'classnames';
-import SelectHapp from '@/components/atoms/SelectHapp';
+import SelectHapp from '@/components/molecules/SelectHapp';
 import { Locale } from '@/types/User';
 import FieldWrapperHapp from '@/components/atoms/FieldWrapperHapp';
 import { AiOutlineEdit } from 'react-icons/ai';
@@ -93,13 +93,13 @@ const Info: React.FC = () => {
         </div>
       </FieldWrapperHapp>
       <SelectHapp
+        id="localeSelect"
         labelName={Language.$t.Select.Language}
         className={cls('flex items-center mb-3')}
         labelClassName={cls('w-1/3')}
         options={languageOptions}
         selected={Language.type}
         onSelected={handleLocale}
-        dataCy="localeSelect"
         border={true}
       />
     </div>

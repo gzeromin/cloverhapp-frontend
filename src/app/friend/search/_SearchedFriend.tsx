@@ -22,7 +22,7 @@ const SearchedFriend: React.FC<SearchedFriendProps> = ({
           user={friendUser}
           alt={friendUser.id}
           size={110}
-          className="rounded-full mx-auto pt-4 object-contain aspect-square"
+          className="rounded-full mx-auto p-2 object-cover aspect-square"
         />
       )}
       <div className="text-center">

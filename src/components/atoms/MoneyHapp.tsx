@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { MoneyUnit } from '@/types/Happ';
 import { FaDollarSign, FaWonSign, FaYenSign } from 'react-icons/fa6';
-import SelectHapp from './SelectHapp';
+import SelectHapp from '../molecules/SelectHapp';
 
 const options = [
   { value: MoneyUnit.Won, icon: <FaWonSign className='text-2xl text-primary'/> },
@@ -23,7 +23,7 @@ interface MoneyHappProps {
   disable?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  dataCy?: string;
+  id?: string;
   min?: string;
   max?: string;
   moneyUnit: MoneyUnit;
@@ -41,7 +41,7 @@ const MoneyHapp: React.FC<MoneyHappProps> = ({
   disable = false,
   value = '',
   onChange,
-  dataCy,
+  id,
   min,
   max,
   moneyUnit,
@@ -80,6 +80,7 @@ const MoneyHapp: React.FC<MoneyHappProps> = ({
       )}
       <div className={cls('flex items-center')}>
         <SelectHapp
+          id="moneyHapp-unit"
           options={options}
           selected={moneyUnit}
           onSelected={setMoneyUnit}
@@ -103,7 +104,7 @@ const MoneyHapp: React.FC<MoneyHappProps> = ({
             value={inputValue}
             disabled={disable}
             onChange={handleChange}
-            data-cy={dataCy}
+            id={id}
           />
           {error && (
             <div className="mt-2 font-light text-red-500 text-xs">⚠ {error}</div>

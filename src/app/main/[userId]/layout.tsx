@@ -34,15 +34,15 @@ const DashboardLayout = observer((props: {
               <div className="p-2 border border-white border-dashed rounded-lg bg-primary">
                 <div className="h-[600px] border-2 rounded-lg bg-white">
                   <div className="flex h-full">
-                    <div className="w-full lg:mr-1 lg:w-9/12" data-cy='happCalendarSection'>
+                    <div className="w-full lg:mr-1 lg:w-9/12" id='happCalendarSection'>
                       {props.happCalendar}
                     </div>
-                    <div className="hidden w-3/12 ml-1 lg:block" data-cy='sideBarSection'>
+                    <div className="hidden w-3/12 ml-1 lg:block" id='sideBarSection'>
                       {/*  로그인 안했을 때 */}
-                      { !user && <LoginRequest dataCy="web-loginRequestComp"/> }
+                      { !user && <LoginRequest id="web-loginRequestComp"/> }
                       {/* 로그인 했을 때 */}
                       { user &&
-                        <div data-cy="SideBarMenu">
+                        <div id="SideBarMenu">
                           <SideBarLinks />
                           {/* 사이드바 페이지 */}
                           <div className="relative w-full h-[540px]">
@@ -61,10 +61,10 @@ const DashboardLayout = observer((props: {
             {/* Mobile */}
             <div 
               className="block md:hidden pt-14 h-screen"
-              data-cy='dayLogSection'
+              id='dayLogSection'
             >
               {/*  로그인 안했을 때 */}
-              { !user && <LoginRequest dataCy="mobile-loginRequestComp"/> }
+              { !user && <LoginRequest id="mobile-loginRequestComp"/> }
               {/* 로그인 했을 때 */}
               { user && (
                 props.dayLog

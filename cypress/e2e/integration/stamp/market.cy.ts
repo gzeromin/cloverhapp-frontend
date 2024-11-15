@@ -2,7 +2,7 @@ describe('Market Page', () => {
   beforeEach(() => {
     // 페이지 방문
     cy.visit('/stamp');
-    cy.get('[data-cy="marketList"]').as('marketList');
+    cy.get('[id="marketList"]').as('marketList');
   });
 
   // TODO: 데이터 추가 후 작성
@@ -28,7 +28,7 @@ describe('Market Page', () => {
   //   cy.get('@marketList').children().should('have.length', 13);
 
   //   // 스크롤을 마지막 아이템까지 내려서 두 번째 페이지 로드 트리거
-  //   cy.get('[data-cy="market-list"]').scrollTo('bottom');
+  //   cy.get('[id="market-list"]').scrollTo('bottom');
 
   //   // 스탬프 아이템들이 제대로 렌더링되었는지 확인
   //   cy.get('@marketList').children().should('have.length', 26);
@@ -65,6 +65,6 @@ describe('Market Page', () => {
     cy.get('@marketList').children().eq(11).click();
 
     // 에러메세지 확인
-    cy.get('[data-cy=commonDialog]').should('contain.text', '로그인 해주세요.');
+    cy.get('[id=commonDialog]').should('contain.text', '로그인 해주세요.');
   });
 });

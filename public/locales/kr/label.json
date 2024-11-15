@@ -119,6 +119,7 @@
   "SideBar": {
     "Profile": "프로필",
     "Statistics": "통계",
+    "Friend": "친구",
     "Goal": "목표"
   },
   "Weeks": ["월", "화", "수", "목", "금", "토", "일"],

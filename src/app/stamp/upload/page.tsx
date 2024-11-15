@@ -1,5 +1,5 @@
 'use client';
-import InputHapp from '@/components/atoms/InputHapp';
+import InputHapp from '@/components/molecules/InputHapp';
 import { FormEvent, memo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -8,11 +8,11 @@ import api from '@/utils/api.util';
 import { Dialog, Language, Loading } from '@/mobx';
 import { observer } from 'mobx-react-lite';
 import { handleError } from '@/utils/error.util';
-import TextareaHapp from '@/components/atoms/TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 import { useDropzone } from 'react-dropzone';
 import { GrAdd } from 'react-icons/gr';
 import cls from 'classnames';
-import SelectHapp from '@/components/atoms/SelectHapp';
+import SelectHapp from '@/components/molecules/SelectHapp';
 import { StampStatus, StampType } from '@/types/Stamp';
 import Image from 'next/image';
 import AddTagsHapp from '@/components/atoms/AddTagsHapp';
@@ -141,7 +141,7 @@ const Upload: React.FC = () => {
           className={`border-2 border-dashed p-8 text-center cursor-pointer ${
             isDragActive ? 'border-happ-focus' : 'border-gray-300'
           }`}
-          data-cy="dropZone"
+          id="dropZone"
         >
           <input {...getInputProps()} />
           {uploadedImage ? (
@@ -163,18 +163,18 @@ const Upload: React.FC = () => {
         {/* Input Zone */}
         <div className={cls('w-[270px]')}>
           <InputHapp
-            className={cls('flex items-center gap-1')}
+            id='stampNameInput'
+            className={cls('items-center flex gap-1')}
             labelName={Language.$t.Input.StampName}
             labelClassName={cls('text-xs w-1/3')}
             placeholder={Language.$t.Placeholder.StampName}
             value={name}
             onChange={(e) => setName(e.target.value)}
             error={errors.name}
-            marginBottom="mb-1"
-            dataCy='stampNameInput'
           />
           <div className={cls('flex items-center gap-1')}>
             <CheckHapp
+              id='notForSaleCheck'
               className={cls(
                 'w-1/2 flex items-center',
               )}
@@ -184,9 +184,9 @@ const Upload: React.FC = () => {
               onChange={(e) => setNotForSale(e.target.checked)}
               grow={false}
               marginBottom="mb-0"
-              dataCy='notForSaleCheck'
             />
             <InputHapp
+              id='dropletInput'
               className={cls('w-1/2 flex items-center gap-1')}
               labelName={Language.$t.Input.Droplet}
               labelClassName={cls('text-xs w-3/4')}
@@ -195,12 +195,12 @@ const Upload: React.FC = () => {
               value={droplet}
               onChange={(e) => setDroplet(e.target.value)}
               error={errors.droplet}
-              marginBottom="mb-1"
               min="0"
-              dataCy='dropletInput'
+              marginBottom='mb-0'
             />
           </div>
           <SelectHapp
+            id="typeSelect"
             className={cls(
               'flex items-center',
               'rounded-md my-1'
@@ -210,11 +210,11 @@ const Upload: React.FC = () => {
             options={typeOptions}
             selected={type}
             onSelected={setType}
-            dataCy="typeSelect"
             border={true}
             dark={true}
           />
           <SelectHapp
+            id="statusSelect"
             className={cls(
               'flex items-center',
               'rounded-md my-1'
@@ -224,19 +224,17 @@ const Upload: React.FC = () => {
             options={statusOptions}
             selected={stampStatus}
             onSelected={setStampStatus}
-            dataCy="statusSelect"
             border={true}
             dark={true}
           />
           <TextareaHapp
+            id='descriptionTextarea'
             labelName={Language.$t.Input.Description}
             labelClassName={cls('text-xs')}
             placeholder={Language.$t.Placeholder.Description}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             error={errors.description}
-            marginBottom="mb-1"
-            dataCy='descriptionTextarea'
           />
         </div>
       </div>
@@ -244,7 +242,7 @@ const Upload: React.FC = () => {
         className={cls('w-2/3')}
         tags={tags}
         setTags={setTags}
-        dataCy='addTagsHapp'
+        id='addTagsHapp'
       />
       <button
         className={cls(
@@ -254,7 +252,7 @@ const Upload: React.FC = () => {
           'hover:bg-primary-hover hover:text-primary rounded'
         )}
         onClick={onSubmit}
-        data-cy='uploadButton'
+        id='uploadButton'
       >
         {Language.$t.Button.Upload}
       </button>

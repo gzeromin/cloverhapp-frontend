@@ -3,7 +3,7 @@ const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
   'value'
 )?.set;
 describe('Cycle Counter Component', () => {
-  const dataCy = 'userStamp-cycleCounter';
+  const id = 'userStamp-cycleCounter';
   const stampId = 'f5a1b27d-339f-463e-92a0-c360f1b02651';
   describe('각 필드 공통 확인', () => {
     beforeEach(() => {
@@ -28,18 +28,18 @@ describe('Cycle Counter Component', () => {
       cy.wait('@getAuth');
       cy.wait('@getUserStamp');
       // Given
-      cy.get(`[data-cy="${dataCy}-existGoalCheck"]`).as('existGoalCheck');
+      cy.get(`[id="${id}-existGoalCheck"]`).as('existGoalCheck');
     });
     
     it('컴포넌트 존재 확인', () => {
-      cy.get(`[data-cy="${dataCy}"]`).should('exist');
+      cy.get(`[id="${id}"]`).should('exist');
     });
   
     it('목표설정 체크 활성화 확인', () => {
       // Given
-      cy.get(`[data-cy="${dataCy}-goalInterval"]`).as('goalInterval');
-      cy.get(`[data-cy="${dataCy}-goalNumberInput"]`).as('goalNumberInput');
-      cy.get(`[data-cy="${dataCy}-goalUnitSelect"]`).as('goalUnitSelect');
+      cy.get(`[id="${id}-goalInterval"]`).as('goalInterval');
+      cy.get(`[id="${id}-goalNumberInput"]`).as('goalNumberInput');
+      cy.get(`[id="${id}-goalUnitSelect"]`).as('goalUnitSelect');
   
       // 체크 활성화
       cy.get('@existGoalCheck').check();
@@ -62,9 +62,9 @@ describe('Cycle Counter Component', () => {
   
     it('목표 간격 선택에 따른 스타일 변화 확인', () => {
       // Given
-      cy.get(`[data-cy="${dataCy}-goalInterval-month"]`).as('month');
-      cy.get(`[data-cy="${dataCy}-goalInterval-week"]`).as('week');
-      cy.get(`[data-cy="${dataCy}-goalInterval-day"]`).as('day');
+      cy.get(`[id="${id}-goalInterval-month"]`).as('month');
+      cy.get(`[id="${id}-goalInterval-week"]`).as('week');
+      cy.get(`[id="${id}-goalInterval-day"]`).as('day');
       
       // goal 활성화
       cy.get('@existGoalCheck').check();
@@ -130,11 +130,11 @@ describe('Cycle Counter Component', () => {
       cy.wait('@getUserStamp');
 
       // goal 활성화
-      cy.get(`[data-cy="${dataCy}-existGoalCheck"]`).check();
+      cy.get(`[id="${id}-existGoalCheck"]`).check();
 
       // Given
-      cy.get(`[data-cy="${dataCy}-goalNumberInput"]`).as('goalNumberInput');
-      cy.get(`[data-cy="${dataCy}-goalUnitSelect"]`).as('goalUnitSelect');
+      cy.get(`[id="${id}-goalNumberInput"]`).as('goalNumberInput');
+      cy.get(`[id="${id}-goalUnitSelect"]`).as('goalUnitSelect');
 
       cy.get('@goalUnitSelect').click();
       cy.get('@goalUnitSelect').find('li').each(($li) => {
@@ -174,11 +174,11 @@ describe('Cycle Counter Component', () => {
       cy.wait('@getUserStamp');
 
       // goal 활성화
-      cy.get(`[data-cy="${dataCy}-existGoalCheck"]`).check();
+      cy.get(`[id="${id}-existGoalCheck"]`).check();
 
       // Given
-      cy.get(`[data-cy="${dataCy}-goalNumberInput"]`).as('goalNumberInput');
-      cy.get(`[data-cy="${dataCy}-goalUnitSelect"]`).as('goalUnitSelect');
+      cy.get(`[id="${id}-goalNumberInput"]`).as('goalNumberInput');
+      cy.get(`[id="${id}-goalUnitSelect"]`).as('goalUnitSelect');
 
       cy.get('@goalUnitSelect').click();
       cy.get('@goalUnitSelect').find('li').each(($li) => {
@@ -207,7 +207,7 @@ describe('Cycle Counter Component', () => {
       cy.get('@goalNumberInput').invoke('attr', 'type').should('equal', 'range');
       cy.get('@goalNumberInput').invoke('attr', 'step').should('equal', '1');
 
-      cy.get(`[data-cy="${dataCy}-goalNumberTime"]`).as('goalNumberTime').should('exist');
+      cy.get(`[id="${id}-goalNumberTime"]`).as('goalNumberTime').should('exist');
       cy.get('@goalNumberInput').should('have.value', '3');
       cy.get('@goalNumberTime').should('contain.text', '45');
       
@@ -253,11 +253,11 @@ describe('Cycle Counter Component', () => {
       cy.wait('@getUserStamp');
 
       // goal 활성화
-      cy.get(`[data-cy="${dataCy}-existGoalCheck"]`).check();
+      cy.get(`[id="${id}-existGoalCheck"]`).check();
 
       // Given
-      cy.get(`[data-cy="${dataCy}-goalNumberInput"]`).as('goalNumberInput');
-      cy.get(`[data-cy="${dataCy}-goalUnitSelect"]`).as('goalUnitSelect');
+      cy.get(`[id="${id}-goalNumberInput"]`).as('goalNumberInput');
+      cy.get(`[id="${id}-goalUnitSelect"]`).as('goalUnitSelect');
 
       cy.get('@goalUnitSelect').click();
       cy.get('@goalUnitSelect').find('li').each(($li) => {

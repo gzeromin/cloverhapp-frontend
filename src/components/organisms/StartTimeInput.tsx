@@ -10,12 +10,14 @@ interface StartEndTimeInputProps {
   className?: string;
   startTime: Date;
   setStartTime: Dispatch<SetStateAction<Date>>;
+  setEndTime?: Dispatch<SetStateAction<Date | undefined>>;
 }
 
 const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
   className,
   startTime,
   setStartTime,
+  setEndTime,
 }) => {
   // Helper function to add minutes to a Date object
   const addMinutes = (date: Date, minutes: number) => {
@@ -28,6 +30,9 @@ const StartEndTimeInput: React.FC<StartEndTimeInputProps> = ({
   const handleStartTimeChange = (newTime: Date) => {
     if (setStartTime) {
       setStartTime(newTime);
+    }
+    if (setEndTime) {
+      setEndTime(newTime);
     }
   };
 

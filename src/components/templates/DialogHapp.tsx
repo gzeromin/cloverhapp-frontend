@@ -7,7 +7,7 @@ import { VscWarning } from 'react-icons/vsc';
 import { VscInfo } from 'react-icons/vsc';
 import { FaQuestion } from 'react-icons/fa';
 import { TfiPencilAlt } from 'react-icons/tfi';
-import InputHapp from '../atoms/InputHapp';
+import InputHapp from '../molecules/InputHapp';
 import { FormEvent, useEffect, useState } from 'react';
 import { handleError } from '@/utils/error.util';
 
@@ -53,7 +53,7 @@ const DialogHapp: React.FC = () => {
   };
 
   return (
-    <div className={Dialog.show ? 'block' : 'hidden'} data-cy="commonDialog">
+    <div className={Dialog.show ? 'block' : 'hidden'} id="commonDialog">
       <div className="fixed z-50 inset-0 w-full h-full flex flex-col items-center justify-center">
         <div className="fixed inset-0 w-full h-full bg-black opacity-50">
           {/* Background opacity */}
@@ -75,6 +75,7 @@ const DialogHapp: React.FC = () => {
             {Dialog.type === Dialog.INPUT && (
               <form id="input-form" onSubmit={onSubmit}>
                 <InputHapp
+                  id="dialog-labelName"
                   labelName={Dialog.labelName}
                   placeholder={Dialog.placeholder}
                   type={Dialog.inputType}
@@ -108,7 +109,7 @@ const DialogHapp: React.FC = () => {
               <button
                 className="m-1 border rounded-lg bg-primary py-1.5 px-3 text-white font-extralight text-lg"
                 onClick={() => Dialog.closeDialog(true)}
-                data-cy="commonDialog-ok"
+                id="commonDialog-ok"
               >
                 {Language.$t.Button.Ok}
               </button>

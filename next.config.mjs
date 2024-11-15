@@ -14,11 +14,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'elasticbeanstalk-us-east-1-149536466661.s3.amazonaws.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'elasticbeanstalk-us-east-1-149536466661.s3.us-east-1.amazonaws.com',
+        hostname: 'cloverhapp-s3.s3.ap-northeast-2.amazonaws.com',
       },
       {
         protocol: 'https',
@@ -31,5 +27,4 @@ const nextConfig = {
     ],
   },
 };
-
 export default nextConfig;

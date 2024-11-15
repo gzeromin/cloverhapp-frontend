@@ -27,6 +27,7 @@ const RequestToMe: React.FC<RequestToMeProps> = ({ notif, mutate }) => {
         myAlias: notif.property1,
         friendAlias: notif.property2,
       });
+      Loading.setIsLoading(false);
       const dialogReulst = await Dialog.openDialog(
         Dialog.SUCCESS,
         Language.$t.Success.Accept,
@@ -35,9 +36,8 @@ const RequestToMe: React.FC<RequestToMeProps> = ({ notif, mutate }) => {
         mutate();
       }
     } catch (error) {
-      //TODO
-    } finally {
       Loading.setIsLoading(false);
+      //TODO
     }
   };
 
@@ -46,17 +46,17 @@ const RequestToMe: React.FC<RequestToMeProps> = ({ notif, mutate }) => {
 
     try {
       await api.post('/notif/deny-request', { notifId: notif.id });
+      Loading.setIsLoading(false);
       const dialogReulst = await Dialog.openDialog(
         Dialog.SUCCESS,
-        Language.$t.Success.Dney,
+        Language.$t.Success.Deny,
       );
       if (dialogReulst) {
         mutate();
       }
     } catch (error) {
-      //TODO
-    } finally {
       Loading.setIsLoading(false);
+      //TODO
     }
   };
 
@@ -80,7 +80,7 @@ const RequestToMe: React.FC<RequestToMeProps> = ({ notif, mutate }) => {
             user={friendUser}
             alt={friendUser.id}
             size={110}
-            className="rounded-full object-contain aspect-square"
+            className="rounded-full object-cover aspect-square p-2"
           />
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">

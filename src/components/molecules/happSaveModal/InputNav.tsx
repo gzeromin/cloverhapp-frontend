@@ -10,7 +10,7 @@ import { StampStatus, StampType } from '@/types/Stamp';
 import { WiTime7 } from 'react-icons/wi';
 import { BsCheckCircle } from 'react-icons/bs';
 import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
-import SelectHapp from '@/components/atoms/SelectHapp';
+import SelectHapp from '@/components/molecules/SelectHapp';
 import { RiLinksLine } from 'react-icons/ri';
 import { BiBook } from 'react-icons/bi';
 
@@ -110,6 +110,7 @@ const InputNav: React.FC<Props> = ({
   return (
     <div className="flex gap-3 justify-end items-center bg-primary-hover rounded p-2 mb-2">
       <SelectHapp
+        id="inputNav-stampStatus"
         className='text-base grow'
         options={statusOptions}
         selected={stampStatus}

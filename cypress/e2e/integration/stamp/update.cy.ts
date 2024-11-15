@@ -40,16 +40,16 @@ describe('Update Page', () => {
       body: stamp,
     });
     cy.visit('/stamp/download/0244137a-841d-4c8c-b139-691661fe9972/update');
-    cy.get('[data-cy="stampUpdate-stampNameInput"]').as('stampNameInput');
-    cy.get('[data-cy="stampUpdate-notForSaleCheck"]').as('notForSaleCheck');
-    cy.get('[data-cy="stampUpdate-dropletInput"]').as('dropletInput');
-    cy.get('[data-cy="stampUpdate-typeSelect"]').as('typeSelect');
-    cy.get('[data-cy="stampUpdate-statusSelect"]').as('statusSelect');
-    cy.get('[data-cy="stampUpdate-descriptionTextarea"]').as('descriptionTextarea');
-    cy.get('[data-cy="stampUpdate-addTagsHapp"]').as('addTagsHapp');
-    cy.get('[data-cy="stampUpdate-cancelButton"]').as('cancelButton');
-    cy.get('[data-cy="stampUpdate-editButton"]').as('editButton');
-    cy.get('[data-cy=commonDialog]').as('commonDialog').should('exist');
+    cy.get('[id="stampUpdate-stampNameInput"]').as('stampNameInput');
+    cy.get('[id="stampUpdate-notForSaleCheck"]').as('notForSaleCheck');
+    cy.get('[id="stampUpdate-dropletInput"]').as('dropletInput');
+    cy.get('[id="stampUpdate-typeSelect"]').as('typeSelect');
+    cy.get('[id="stampUpdate-statusSelect"]').as('statusSelect');
+    cy.get('[id="stampUpdate-descriptionTextarea"]').as('descriptionTextarea');
+    cy.get('[id="stampUpdate-addTagsHapp"]').as('addTagsHapp');
+    cy.get('[id="stampUpdate-cancelButton"]').as('cancelButton');
+    cy.get('[id="stampUpdate-editButton"]').as('editButton');
+    cy.get('[id=commonDialog]').as('commonDialog').should('exist');
     cy.get('@commonDialog').should('have.class', 'hidden');
   });
 
@@ -103,7 +103,7 @@ describe('Update Page', () => {
     cy.get('@editButton').click();
     cy.get('@commonDialog').should('have.class', 'block');
     cy.get('@commonDialog').should('contain.text', 'Stamp was successfully edited.');
-    cy.get('[data-cy="commonDialog-ok"]').click();
+    cy.get('[id="commonDialog-ok"]').click();
     cy.url().should('not.include', '/update');
   });
 

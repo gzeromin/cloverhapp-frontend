@@ -31,7 +31,7 @@ const Goal: React.FC = ({}) => {
         </button>
       </div>
       <div className={cls(
-        'h-[520px] overflow-y-auto'
+        'h-[510px] overflow-y-auto'
       )}>
         {userStamps?.map((userStamp) => {
           if (userStamp.isDisplay && userStamp.existGoal) {
