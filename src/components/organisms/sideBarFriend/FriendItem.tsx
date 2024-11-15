@@ -1,5 +1,4 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import { BsCalendarHeart } from 'react-icons/bs';
 import cls from 'classnames';
 import { observer } from 'mobx-react-lite';
@@ -15,8 +14,6 @@ interface Props {
 const FriendItem: React.FC<Props> = ({
   friend,
 }) => {
-  const router = useRouter();
-
   return (
     <div className={cls(
       'flex items-center justify-between m-1 p-1',

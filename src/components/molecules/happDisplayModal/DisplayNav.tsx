@@ -2,7 +2,7 @@
 import { memo, useEffect, useState } from 'react';
 import { TbPhoto } from 'react-icons/tb';
 import cls from 'classnames';
-import { StampStatus, StampType } from '@/types/Stamp';
+import { StampStatus } from '@/types/Stamp';
 import { RxLockClosed, RxLockOpen2 } from 'react-icons/rx';
 import { GoChevronDown, GoChevronUp, GoPeople } from 'react-icons/go';
 import { TfiPencilAlt } from 'react-icons/tfi';
