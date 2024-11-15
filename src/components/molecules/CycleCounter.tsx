@@ -82,7 +82,6 @@ const CycleCounter: React.FC<Props> = ({
           labelLevel2: v,
         }));
     setOptions(options);
-    setGoalNumber('0');
   }, [type]);
 
   const tabStyleDefault = 'rounded-full p-2 mx-1 w-10 h-10 text-center';
@@ -148,7 +147,7 @@ const CycleCounter: React.FC<Props> = ({
       id={id}
     >
       <CheckHapp
-        className={cls('mx-3 mb-6')}
+        className={cls('mx-3')}
         checked={existGoal}
         onChange={(e) => setExistGoal(e.target.checked)}
         marginBottom='mb-0'
@@ -156,7 +155,7 @@ const CycleCounter: React.FC<Props> = ({
       />
       <div
         className={cls(
-          'flex items-center mb-6', {
+          'flex items-center', {
             'cursor-pointer': existGoal,
             'text-gray-400 cursor-not-allowed': !existGoal,
           },
@@ -220,12 +219,13 @@ const CycleCounter: React.FC<Props> = ({
           step={getStep(goalUnit)}
           border={CounterUnit.Time !== goalUnit}
           id={`${id}-goalNumberInput`}
+          marginBottom='mb-0'
         />
       </div>
       <SelectHapp
         id={`${id}-goalUnitSelect`}
         className={cls(
-          'rounded-md text-gray-500 text-base w-1/5 mb-6',
+          'rounded-md text-gray-500 text-base w-1/5',
         )}
         options={options}
         selected={goalUnit}

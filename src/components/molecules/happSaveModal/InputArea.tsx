@@ -120,6 +120,7 @@ const InputArea: React.FC<Props> = ({
           className={`${openTime ? 'block' : 'hidden'}`}
           startTime={startTime}
           setStartTime={setStartTime}
+          setEndTime={setEndTime}
         />
       )}
       <WaterHapp
@@ -154,6 +155,7 @@ const InputArea: React.FC<Props> = ({
           autoHeight={true}
           border={true}
           textAreaClassName='border-dashed border-2 border-gray-100 min-h-[50px]'
+          marginBottom='mb-0'
         />
       )}
       <FileUploadHapp

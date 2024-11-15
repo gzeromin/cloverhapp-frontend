@@ -161,7 +161,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
             <CheckHapp
               id='stampUpdate-notForSaleCheck'
               className={cls(
-                'w-1/2 flex items-center mb-6',
+                'w-1/2 flex items-center',
               )}
               labelName={Language.$t.Check.NotForSale}
               labelClassName={cls('text-xs w-2/3 mr-1')}
@@ -181,6 +181,7 @@ const Update: React.FC<Props> = ({ params }: Props) => {
               onChange={(e) => setDroplet(e.target.value)}
               error={errors.droplet}
               min="0"
+              marginBottom='mb-0'
             />
           </div>
           <SelectHapp

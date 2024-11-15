@@ -9,7 +9,7 @@ import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { observer } from 'mobx-react-lite';
 import { Dialog, Language, Loading } from '@/mobx';
 import Image from 'next/image';
-import HappDisplayModal from './HappDisplayModal';
+import HappDisplayModalBak from '../organisms/HappDisplayModal.bak';
 
 interface Props {
   happ: Happ;
@@ -131,7 +131,7 @@ const HappFeed: React.FC<Props> = ({
 
       {/* Happ Display Modal */}
       {showDisplayModal && (
-        <HappDisplayModal
+        <HappDisplayModalBak
           happId={happ.id}
           closeModal={() => setShowDisplayModal(false)}
         />

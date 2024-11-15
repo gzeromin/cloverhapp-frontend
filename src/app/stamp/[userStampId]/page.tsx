@@ -167,6 +167,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             onChange={(e) => setAlias(e.target.value)}
             border={true}
             id='userStamp-alias'
+            marginBottom='mb-0'
           />
         </div>
         {userStamp &&
@@ -184,9 +185,10 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
 
       {/* body */}
       <div className="w-full p-4">
+        {/* Display */}
         <div className={cls('flex items-center justify-between')}>
           <div className={cls(
-            'mb-3 w-1/3 flex justify-between gap-3',
+            'mb-3 w-1/3 flex justify-between gap-3 items-center',
             'text-base'
           )}>
             <label className={cls(
@@ -226,6 +228,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
             onChange={(e) => setDisplayOrder(e.target.value)}
             inputClassName='text-center'
             min="1"
+            marginBottom='mb-3'
           />
           <SelectHapp
             id='userStamp-statusSelect'
@@ -245,7 +248,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
         </div>
         <FieldWrapperHapp
           labelName={Language.$t.Input.Goal}
-          labelClassName='w-1/5 font-bold mb-6'
+          labelClassName='w-1/5 font-bold'
           className={cls(
             'text-base flex items-center'
           )}
@@ -291,6 +294,7 @@ const UserStampUpdatePage = ({ params }: UserStampUpdatePageProps) => {
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
           border={true}
+          marginBottom='mb-3'
         />
         <FieldWrapperHapp
           id='userStamp-addTagsWrapper'

@@ -61,7 +61,7 @@ const KeyValueList: React.FC<Props> = () => {
       notoSans.className
     )}>
       <div className={cls(
-        'flex sticky top-0 z-10 p-2 gap-2 text-2xl mb-6',
+        'flex sticky top-0 z-10 p-2 gap-2 text-2xl',
         Language.logoFont
       )}>
         <div className='bg-white bg-opacity-50'>

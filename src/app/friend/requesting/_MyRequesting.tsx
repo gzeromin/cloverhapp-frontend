@@ -47,7 +47,7 @@ const MyRequesting: React.FC<MyRequestingProps> = ({ notif, mutate }) => {
           user={friendUser}
           alt={friendUser.id}
           size={110}
-          className="rounded-full object-contain aspect-square"
+          className="rounded-full object-cover aspect-square p-2"
         />
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">

@@ -1,6 +1,8 @@
 const SYMBOLS = {
   X: 'x',
   TILDE: '~',
+  OPEN_PAREN: '(',
+  CLOSE_PAREN: ')',
 };
 
 const UNIT = {

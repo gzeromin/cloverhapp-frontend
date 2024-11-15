@@ -17,7 +17,8 @@
     "AddFriend": "add friends, please.",
     "AddTag": "add tags, please.",
     "FileUpload": "Drag & drop or click to upload an image",
-    "Sentence": "Write a sentence that best describes yourself."
+    "Sentence": "Write a sentence that best describes yourself.",
+    "Comment": "Please leave a comment."
   },
   "Success": {
     "ChangePassword": "Password was successfully changed.",

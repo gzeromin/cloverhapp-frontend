@@ -4,21 +4,23 @@ import api, { BASE_URL } from '@/utils/api.util';
 import { useEffect, useState } from 'react';
 import { AiFillCloseSquare } from 'react-icons/ai';
 import { Language } from '@/mobx/index';
-import TextareaHapp from './TextareaHapp';
+import TextareaHapp from '@/components/molecules/TextareaHapp';
 import { observer } from 'mobx-react-lite';
 import cls from 'classnames';
 import { useAuthState } from '@/context/auth';
-import UserProrile from './UserProrile';
+import UserProrile from '@/components/molecules/UserProrile';
 import { useRouter } from 'next/navigation';
 import CarouselHapp from '@/components/atoms/CarouselHapp';
 import CommentHapp from '@/components/atoms/CommentHapp';
+import { handleError } from '@/utils/error.util';
+import Image from 'next/image';
 
 interface HappDisplayModalProps {
-  happId: string;
+  happId: string | null;
   closeModal: () => void;
 }
 
-const HappDisplayModal: React.FC<HappDisplayModalProps> = ({
+const HappDisplayModalBak: React.FC<HappDisplayModalProps> = ({
   happId,
   closeModal,
 }) => {
@@ -29,7 +31,7 @@ const HappDisplayModal: React.FC<HappDisplayModalProps> = ({
   useEffect(() => {
     api.get('/happ/' + happId).then((res) => {
       setHapp(res.data);
-    });
+    }).catch((error) => { handleError(error); });
   }, [happId]);
 
   return (
@@ -42,45 +44,52 @@ const HappDisplayModal: React.FC<HappDisplayModalProps> = ({
       </div>
       <div className="z-50 box-border shadow-lg min-w-[500px] max-w-[600px] bg-white border border-light-black rounded-lg text-2xl">
         {/* header */}
-        <div className="flex justify-between items-center border-b border-light-gray p-3">
-        
-          {/* <Image
-            src={BASE_URL + '/' + userStamp.Stamp.url}
-            alt={`stamp modify modal ${userStamp.Stamp.id}`}
-            className="h-auto object-contain aspect-square"
-            width={50}
-            height={50}
-          /> */}
+        <div className="relative flex p-3 pb-0">
+          {happ && happ.User && (
+            <div className="flex items-center justify-center gap-2">
+              <UserProrile
+                user={happ.User}
+                alt={`happ feed profile image ${happ.id}`}
+                size={40}
+                className="m-1 rounded-full cursor-pointer hover:bg-primary-hover"
+                onClickProfile={() => router.push('/c/' + happ.User.id)}
+              />
+              <span className="text-sm font-normal">{happ.User.nickname}</span>
+            </div>
+          )}
           <AiFillCloseSquare
-            className="text-primary cursor-pointer text-3xl mr-2 hover:text-primary-hover"
+            className={cls(
+              'text-primary cursor-pointer text-3xl', 
+              'mr-2 hover:text-primary-hover',
+              'absolute right-0'
+            )}
             onClick={closeModal}
           />
         </div>
 
         {/* body */}
         <div className="p-4 max-h-4/5 overflow-y-auto">
-          <div className="flex gap-1">
-            <TextareaHapp
-              id="happDisplayModal-description"
-              placeholder={Language.$t.Placeholder.Description}
-              className="grow text-lg"
-              rows={2}
-              value={happ && happ.memo}
-              border={false}
-              resizable={false}
-              autoHeight={true}
-              disable={true}
-            />
-            {happ && happ.User && (
-              <div className="flex flex-col items-center justify-center">
-                <UserProrile
-                  user={happ.User}
-                  alt={`happ feed profile image ${happ.id}`}
-                  size={110}
-                  className="mr-1 rounded-full cursor-pointer hover:bg-primary-hover"
-                  onClickProfile={() => router.push('/c/' + happ.User.id)}
+          <div className="flex gap-3">
+            {happ && (
+              <div className={cls('flex items-center w-full gap-2')}>
+                <Image
+                  src={happ.UserStamp.Stamp.url}
+                  alt={`happ display modal ${happ.id}`}
+                  className="h-auto object-contain aspect-square"
+                  width={90}
+                  height={90}
                 />
-                <span className="text-sm font-thin">{happ.User.nickname}</span>
+                <TextareaHapp
+                  id="happDisplayModal-description"
+                  className="grow text-lg"
+                  placeholder={Language.$t.Placeholder.Memo}
+                  value={happ.memo}
+                  border={true}
+                  textAreaClassName={cls('border-dashed border-2 border-gray-100')}
+                  resizable={false}
+                  disable={true}
+                  marginBottom='mb-0'
+                />
               </div>
             )}
           </div>
@@ -118,4 +127,4 @@ const HappDisplayModal: React.FC<HappDisplayModalProps> = ({
   );
 };
 
-export default observer(HappDisplayModal);
+export default observer(HappDisplayModalBak);

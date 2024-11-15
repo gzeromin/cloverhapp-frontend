@@ -20,6 +20,7 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   grow?: boolean;
+  marginBottom?: string;
 }
 
 const TextareaHapp: React.FC<Props> = ({
@@ -38,6 +39,7 @@ const TextareaHapp: React.FC<Props> = ({
   value = '',
   onChange,
   grow = true,
+  marginBottom = 'mb-6',
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null!);
 
@@ -62,7 +64,8 @@ const TextareaHapp: React.FC<Props> = ({
   return (
     <div
       className={cls(
-        'relative mb-6',
+        'relative',
+        marginBottom,
         className,
       )}
     >

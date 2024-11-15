@@ -20,7 +20,7 @@ Cypress.Commands.add('login', (email = 'aaa@aaa.aaa', password = 'aaaaaa') => {
 
   // 이메일 및 비밀번호 입력 후 로그인 버튼 클릭
   cy.get('[id=login-emailInput]').type(email);
-  cy.get('[id=passwordInput]').type(password);
+  cy.get('[id=login-passwordInput]').type(password);
 
   cy.intercept({
     method: 'POST',

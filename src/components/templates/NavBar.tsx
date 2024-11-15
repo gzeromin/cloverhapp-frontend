@@ -94,8 +94,8 @@ const NavBar: React.FC = () => {
                 <UserProrile
                   user={user}
                   alt={`user logout button${user?.id}`}
-                  size={25}
-                  className="mr-1 rounded-full"
+                  size={20}
+                  className="mr-1 object-cover aspect-square rounded-full"
                 />
               )}
               {Language.$t.Button.Logout}

@@ -21,6 +21,7 @@ interface InputHappProps {
   max?: string;
   grow?: boolean;
   step?: string;
+  marginBottom?: string;
 }
 
 const InputHapp: React.FC<InputHappProps> = ({
@@ -40,11 +41,13 @@ const InputHapp: React.FC<InputHappProps> = ({
   max,
   grow = true,
   step,
+  marginBottom = 'mb-6',
 }) => {
   return (
     <div
       className={cls(
-        'relative mb-6',
+        'relative',
+        marginBottom,
         className,
       )}
     >

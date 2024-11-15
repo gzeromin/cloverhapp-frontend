@@ -45,7 +45,6 @@ const BookHapp: React.FC<BookHappProps> = ({
       .concat(...data)
     : [];
   
-  console.log(bookList);
   useEffect(() => {
     if (!bookList || bookList.length === 0) return;
     const id = bookList[bookList.length - 1].isbn;

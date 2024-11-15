@@ -48,8 +48,8 @@ const StampDownloadPage: React.FC<Props> = ({ params }: Props) => {
           droplet: stamp.droplet,
           name: stamp.name,
           description: stamp.description,
+          Tags: stamp.Tags,
         });
-        console.log(res);
         Loading.setIsLoading(false);
         dispatch(AuthActionEnum.SET_DROPLET, res.data?.droplet);
         dispatch(AuthActionEnum.SET_USER_STAMPS, res.data?.userStamps);

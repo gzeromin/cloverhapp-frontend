@@ -119,6 +119,7 @@
   "SideBar": {
     "Profile": "Profile",
     "Goal": "Goal",
+    "Friend": "Friend",
     "Statistics": "Statistics"
   },
   "Weeks": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],

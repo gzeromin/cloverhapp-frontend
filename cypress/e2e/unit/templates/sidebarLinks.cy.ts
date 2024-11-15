@@ -11,11 +11,13 @@ describe('사이드바 링크 컴포넌트', () => {
   it('로그인 했을 때, 사이드바 링크 표시', () => {
     cy.get('[id="profileLink"]').as('profileLink').should('exist');
     cy.get('[id="goalLink"]').as('goalLink').should('exist');
+    cy.get('[id="friendLink"]').as('friendLink').should('exist');
     cy.get('[id="statisticsLink"]').as('statisticsLink').should('exist');
 
     // 초기 선택된 탭 CSS 확인
     cy.get('@profileLink').should('have.class', 'bg-gray-100');
     cy.get('@goalLink').should('have.class', 'bg-gray-50');
+    cy.get('@friendLink').should('have.class', 'bg-gray-50');
     cy.get('@statisticsLink').should('have.class', 'bg-gray-50');
   });
 
@@ -33,6 +35,7 @@ describe('사이드바 링크 컴포넌트', () => {
     cy.url().should('include', '/goal');
     cy.get('[id="profileLink"]').should('have.class', 'bg-gray-50');
     cy.get('@goalLink').should('have.class', 'bg-gray-100');
+    cy.get('[id="friendLink"]').should('have.class', 'bg-gray-50');
     cy.get('[id="statisticsLink"]').should('have.class', 'bg-gray-50');
   });
 
